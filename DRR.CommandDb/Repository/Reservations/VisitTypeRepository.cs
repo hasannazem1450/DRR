@@ -1,0 +1,55 @@
+﻿using DRR.Application.Contracts.Repository.Reservations;
+using DRR.CommandDB;
+using DRR.Domain.Reservations;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DRR.CommandDb.Repository.Reservations
+{
+    class VisitTypeRepository : BaseRepository, IVisitTypeRepository
+    {
+        public VisitTypeRepository(BaseProjectCommandDb db) : base(db)
+        {
+        }
+
+        public async Task<VisitType> ReadVisitTypeById(int id)
+        {
+            var result = await _Db.VisitTypes.FirstOrDefaultAsync(c => c.Id == id);
+
+            return result;
+        }
+
+       
+        public async Task Create(VisitType VisitType)
+        {
+            await _Db.VisitTypes.AddAsync(VisitType);
+            await _Db.SaveChangesAsync();
+        }
+        public async Task Update(Domain.Reservations.VisitType VisitType)
+        {
+            var result = await this.ReadVisitTypeById(VisitType.Id);
+
+
+            result.Id = VisitType.Id;
+           
+
+            _Db.VisitTypes.Update(result);
+
+            await _Db.SaveChangesAsync();
+        }
+        public async Task Delete(int id)
+        {
+            var result = await _Db.VisitTypes.FirstOrDefaultAsync(n => n.Id == id);
+
+            _Db.VisitTypes.Remove(result);
+
+            await _Db.SaveChangesAsync();
+        }
+
+    }
+
+}
