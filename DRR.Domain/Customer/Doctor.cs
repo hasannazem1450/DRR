@@ -8,6 +8,8 @@ using DRR.Domain.TreatmentCenters;
 using System;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
+using DRR.Domain.BaseInfo;
+using System.Xml.Linq;
 
 
 
@@ -15,14 +17,13 @@ namespace DRR.Domain.Customer
 {
     public class Doctor : Entity<int>
     {
-        public Doctor(string doctorName, string doctorFamily, int nationalId, int codeNezam, int specialistId, int? supperspecialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public Doctor(string doctorName, string doctorFamily, int nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
             NationalId = nationalId;
             SpecialistId = specialistId;
             CodeNezam = codeNezam;
-            SupperspecialistId = supperspecialistId;
             DocExperiance = docExperiance;
             DocInstaLink = docInstaLink;
             Mobile = mobile;
@@ -37,18 +38,14 @@ namespace DRR.Domain.Customer
         public int NationalId { get; set; }
         public int SpecialistId { get; set; }
         public int CodeNezam {  get; set; }
-        public int? SupperspecialistId { get; set; }
         public string DocExperiance { get; set; }
         public string DocInstaLink { get; set; }
         public string Mobile { get; set; }
         public string Desc { get; set; }
        
 
-
-
-
         public Specialist Specialist { get; set; }
-       
+   
 
         public Guid? PersonalPhotoFileId { get; protected set; }
         public DRRFile? PersonalPhotoFile { get; protected set; }
@@ -60,15 +57,29 @@ namespace DRR.Domain.Customer
 
 
 
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
+        public int SmeProfileId { get; set; }
+        public SmeProfile SmeProfile { get; set; }
         public ICollection<PatientReservation> PatientReservations { get; set; }
         public ICollection<CommentReply> CommentReplys { get; set; }
         public ICollection<Article> Articles { get; set; }
 
 
-
-
+        public void Update(string doctorName, string doctorFamily, int nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        {
+            DoctorName = doctorName;
+            DoctorFamily = doctorFamily;
+            NationalId = nationalId;
+            SpecialistId = specialistId;
+            CodeNezam = codeNezam;
+            DocExperiance = docExperiance;
+            DocInstaLink = docInstaLink;
+            Mobile = mobile;
+            Desc = desc;
+        }
+        public void SetIsDeleted(bool isDeleted)
+        {
+            IsDeleted = isDeleted;
+        }
 
     }
 

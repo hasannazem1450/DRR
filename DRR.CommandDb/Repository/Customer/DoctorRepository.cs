@@ -45,7 +45,6 @@ namespace DRR.CommandDb.Repository.Customer
             result.NationalId = Doctor.NationalId;
             result.SpecialistId = Doctor.SpecialistId;
             result.CodeNezam = Doctor.CodeNezam;
-            result.SupperspecialistId = Doctor.SupperspecialistId;
             result.DocExperiance = Doctor.DocExperiance;
             result.DocInstaLink = Doctor.DocInstaLink;
             result.Mobile = Doctor.Mobile;

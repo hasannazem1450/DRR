@@ -20,7 +20,12 @@ namespace DRR.CommandDb.EntitiesConfigurations.Customer
                 .HasForeignKey(x => x.SpecialistId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-          
+            builder.HasOne(x => x.SmeProfile)
+               .WithMany(x => x.Doctors)
+               .HasForeignKey(x => x.SmeProfileId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+
         }
     }
 

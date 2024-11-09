@@ -6,10 +6,10 @@ namespace DRR.Domain.Comments
 {
     public class Comment : Entity<int>
     {
-        public Comment(string desc, int userId, int doctorId, string commentDate, bool isAccept)
+        public Comment(string desc, int smeProfileId, int doctorId, string commentDate, bool isAccept)
         {
             Desc = desc;
-            UserId = userId;
+            SmeProfileId = smeProfileId;
             DoctorId = doctorId;
             CommentDate = commentDate;
             IsAccept = isAccept;
@@ -17,16 +17,11 @@ namespace DRR.Domain.Comments
 
         public int Id { get; set; }
         public string Desc { get; set; }
-        public int UserId { get; set; }
         public int DoctorId { get; set; }
         public string CommentDate { get; set; }
         public bool IsAccept { get; set; }
-
-
-        public UserProfile UserProfile { get; set; }
-
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
+        public int SmeProfileId { get; set; }
+        public SmeProfile SmeProfile { get; set; }
         
 
     }

@@ -53,12 +53,12 @@ public static class ConfigureServicesExtension
         services.AddSettings(configuration);
         services.AddScoped<BaseProjectDbContextSaveChangesInterceptor>();
         //services.AddScoped<DefaultDataInitializer>();
-        //services.AddHttpClient();
+        services.AddHttpClient();
         services.AddHttpContextAccessor();
         services.AddCommandsDBContext(conn);
         services.AddWithContract();
         //services.AddAuthenticationSettings();
-        //services.AddCors();
+        services.AddCors();
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
     }
 

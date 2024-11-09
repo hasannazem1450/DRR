@@ -1,4 +1,5 @@
 ﻿using DRR.Domain.BaseInfo;
+using DRR.Domain.Customer;
 using DRR.Domain.Event;
 using DRR.Domain.SiteMessenger;
 using DRR.Framework.Contracts.Abstracts;
@@ -80,6 +81,7 @@ public class SmeProfile : Entity<int>
     public ICollection<UserProfile> UserProfiles { get; protected set; }
     public ICollection<MessagingGroupSmeProfile> MessagingGroupSmeProfiles { get; protected set; }
     public ICollection<SiteMessageReciver> SiteMessageRecivers { get; protected set; }
+    public ICollection<Doctor> Doctors { get; protected set; }
 
     public void SetIsDeleted(bool isDeleted)
     {

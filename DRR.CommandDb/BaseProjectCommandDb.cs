@@ -58,9 +58,9 @@ public sealed class BaseProjectCommandDb : IdentityDbContext<ApplicationUser>
     public DbSet<ClinicType> ClinicTypes { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<SystemMessage> SystemMessages { get; set; }
-    public DbSet<City> Cities { get; set; }
-    public DbSet<Province> Provinces { get; set; }
     public DbSet<Country> Countries { get; set; }
+    public DbSet<Province> Provinces { get; set; }
+    public DbSet<City> Cities { get; set; }
     public DbSet<Clinic> Clinics { get; set; }
     public DbSet<SmeProfile> SmeProfiles { get; set; }
     public DbSet<SmeRank> SmeRanks { get; set; }

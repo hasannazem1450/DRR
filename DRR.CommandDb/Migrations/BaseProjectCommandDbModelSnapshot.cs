@@ -97,45 +97,6 @@ namespace DRR.CommandDb.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("DRR.Domain.BaseInfo.IndustrialPark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("Code")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.ToTable("IndustrialParks");
-                });
 
             modelBuilder.Entity("DRR.Domain.BaseInfo.Province", b =>
                 {
@@ -435,163 +396,6 @@ namespace DRR.CommandDb.Migrations
                     b.HasIndex("SmeProfileId");
 
                     b.ToTable("News");
-                });
-
-            modelBuilder.Entity("DRR.Domain.ProductBase.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BuildMethod")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CustomizationDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DeliveryDaysForMinimumOrder")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dimensions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FactorBasedOn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("FreeSample")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("HsCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("IsicCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MadeIn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("MainPhotoFileId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("MinimumOrder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PackageDimensions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PackageType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PackageWeight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RawMaterials")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SampleAmount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingMethod")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SmeProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StandardIssuer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StandardType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SupplyCapacity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Usage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Weight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MainPhotoFileId");
-
-                    b.HasIndex("SmeProfileId");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("DRR.Domain.ProductBase.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ImageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("DRR.Domain.Profile.FollowProfile.FollowProfile", b =>
@@ -1424,16 +1228,6 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("Province");
                 });
 
-            modelBuilder.Entity("DRR.Domain.BaseInfo.IndustrialPark", b =>
-                {
-                    b.HasOne("DRR.Domain.BaseInfo.Province", "Province")
-                        .WithMany("IndustrialParks")
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Province");
-                });
 
             modelBuilder.Entity("DRR.Domain.BaseInfo.Province", b =>
                 {
@@ -1487,42 +1281,6 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("SmeProfile");
                 });
 
-            modelBuilder.Entity("DRR.Domain.ProductBase.Product", b =>
-                {
-                    b.HasOne("DRR.Domain.FileManagement.DRRFile", "MainPhotoFile")
-                        .WithMany("Products")
-                        .HasForeignKey("MainPhotoFileId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("DRR.Domain.Profile.SmeProfile", "SmeProfile")
-                        .WithMany("Products")
-                        .HasForeignKey("SmeProfileId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("MainPhotoFile");
-
-                    b.Navigation("SmeProfile");
-                });
-
-            modelBuilder.Entity("DRR.Domain.ProductBase.ProductImage", b =>
-                {
-                    b.HasOne("DRR.Domain.FileManagement.DRRFile", "Image")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DRR.Domain.ProductBase.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-
-                    b.Navigation("Product");
-                });
 
             modelBuilder.Entity("DRR.Domain.Profile.SmeMember", b =>
                 {
@@ -1733,18 +1491,12 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("Provinces");
                 });
 
-            modelBuilder.Entity("DRR.Domain.BaseInfo.IndustrialPark", b =>
-                {
-                    b.Navigation("SmeProfiles");
-                });
 
             modelBuilder.Entity("DRR.Domain.BaseInfo.Province", b =>
                 {
                     b.Navigation("Cities");
 
                     b.Navigation("EventsInfos");
-
-                    b.Navigation("IndustrialParks");
                 });
 
             modelBuilder.Entity("DRR.Domain.Event.EventInfo", b =>
@@ -1766,10 +1518,6 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("UserProfiles");
                 });
 
-            modelBuilder.Entity("DRR.Domain.ProductBase.Product", b =>
-                {
-                    b.Navigation("ProductImages");
-                });
 
             modelBuilder.Entity("DRR.Domain.Profile.Member.Position", b =>
                 {
@@ -1783,8 +1531,6 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("MessagingGroupSmeProfiles");
 
                     b.Navigation("News");
-
-                    b.Navigation("Products");
 
                     b.Navigation("SiteMessageRecivers");
 
