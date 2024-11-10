@@ -14,7 +14,7 @@ namespace DRR.Domain.Finance
             Shebanumber = shebanumber;
             Accountnumber = accountnumber;
             TerminalId = terminalId;
-            IP = ip;
+            Ip = ip;
             Pass = pass;
             URL = uRL;
             GateName =gateName;
@@ -32,7 +32,7 @@ namespace DRR.Domain.Finance
         public string Shebanumber { get; set; }
         public string Accountnumber { get; set; }
         public int TerminalId { get; set; }
-        public string IP { get; set; }
+        public string Ip { get; set; }
         public string Pass { get; set; }
         public string URL { get; set; }
         public string GateName { get; set; }
@@ -45,7 +45,7 @@ namespace DRR.Domain.Finance
         public Doctor Doctor { get; set; }
         
 
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
+
 
 
     }

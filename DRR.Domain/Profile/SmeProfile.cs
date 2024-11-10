@@ -13,7 +13,7 @@ public class SmeProfile : Entity<int>
     public SmeProfile(string smeName, string nationalCode, string? businessCode, string? managerName,
         string? registerNumber, string? economyCode, string? permitNo, string managerPhoneNumber, string managerEmail,
         string aboutUs, string tellNumber, string activitySubject, string smeEmail, string smeWebsite, string address,
-        int cityId, int? smeRankId, int? industrialParkId, bool status, string logo, string headerpic, string postalcode,
+        int cityId, int? smeRankId, bool status, string logo, string headerpic, string postalcode,
         SmeType smeType)
     {
         CheckGuard();
@@ -34,7 +34,6 @@ public class SmeProfile : Entity<int>
         SmeWebsite = smeWebsite;
         Address = address;
         CityId = cityId;
-        IndustrialParkId = industrialParkId;
         Status = status;
         Logo = logo;
         Headerpic = headerpic;
@@ -69,8 +68,6 @@ public class SmeProfile : Entity<int>
 
     public int? SmeRankId { get; protected set; }
     public SmeRank SmeRank { get; protected set; }
-
-    public int? IndustrialParkId { get; protected set; }
 
 
     public ICollection<SmeMember> SmeMembers { get; protected set; }
@@ -111,7 +108,6 @@ public class SmeProfile : Entity<int>
         Address = address;
         CityId = cityId;
         SmeRankId = smeRankId;
-        IndustrialParkId = industrialParkId;
         Status = status;
         Logo = logo;
         Headerpic = headerpic;

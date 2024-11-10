@@ -11,7 +11,7 @@ namespace DRR.Application.Contracts.Repository.Comments
     public interface ICommentRepository : IRepository
     {
         Task<Comment> ReadCommentById(int id);
-        Task<List<Comment>> ReadCommentByUserId(int id);
+        Task<List<Comment>> ReadCommentBySmeProfileId(int id);
         Task<List<Comment>> ReadCommentByDoctorId(int id);
 
         Task Delete(int id);

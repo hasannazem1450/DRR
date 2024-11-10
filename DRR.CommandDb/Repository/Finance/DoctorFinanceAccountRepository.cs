@@ -42,7 +42,7 @@ namespace DRR.CommandDb.Repository.Finance
             result.Shebanumber = DoctorFinanceAccount.Shebanumber;
             result.Accountnumber = DoctorFinanceAccount.Accountnumber;
             result.TerminalId = DoctorFinanceAccount.TerminalId;
-            result.IP = DoctorFinanceAccount.IP;
+            result.Ip = DoctorFinanceAccount.Ip;
             result.Pass = DoctorFinanceAccount.Pass;
             result.URL = DoctorFinanceAccount.URL;
             result.GateName = DoctorFinanceAccount.GateName;

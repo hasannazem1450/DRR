@@ -23,15 +23,15 @@ namespace DRR.CommandDb.Repository.Comments
             return result;
         }
 
-        public async Task<List<Comment>> ReadCommentByUserId(int id)
+        public async Task<List<Comment>> ReadCommentBySmeProfileId(int SmeprofileId)
         {
-            var result = await _Db.Comments.Where(c => c.SmeProfileId == id).ToListAsync();
+            var result = await _Db.Comments.Where(c => c.SmeProfileId == SmeprofileId).ToListAsync();
 
             return result;
         }
-        public async Task<List<Comment>> ReadCommentByDoctorId(int id)
+        public async Task<List<Comment>> ReadCommentByDoctorId(int DoctorId)
         {
-            var result = await _Db.Comments.Where(c => c.DoctorId == id).ToListAsync();
+            var result = await _Db.Comments.Where(c => c.DoctorId == DoctorId).ToListAsync();
 
             return result;
         }

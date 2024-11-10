@@ -24,7 +24,7 @@ public class CreateSmeProfileCommandHandler : CommandHandler<CreateSmeProfileCom
             command.ManagerName, command.RegisterNumber, command.EconomyCode, command.PermitNo,
             command.ManagerPhoneNumber, command.ManagerEmail, command.AboutUs, command.TellNumber,
             command.ActivitySubject, command.SmeEmail, command.SmeWebsite, command.Address, command.CityId, command.SmeRankId,
-            command.IndustrialParkId, command.Status, command.Logo, command.Headerpic, command.Postalcode,
+            command.Status, command.Logo, command.Headerpic, command.Postalcode,
             (SmeType) command.SmeType);
 
         await _smeProfileRepository.Create(smeProfile);

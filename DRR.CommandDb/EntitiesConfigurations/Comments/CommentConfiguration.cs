@@ -14,8 +14,7 @@ namespace DRR.CommandDb.EntitiesConfigurations.Comments
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(x => x.Id);
-
-        
+                
         }
 
     }

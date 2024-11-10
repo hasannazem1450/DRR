@@ -13,7 +13,7 @@ namespace DRR.Domain.TreatmentCenters
         {
             Name = name;
             Address = address;
-            GLId = glId;
+            GlId = glId;
             Phone = phone;
             CityId = cityId;
             PostalCode = postalCode;
@@ -24,7 +24,7 @@ namespace DRR.Domain.TreatmentCenters
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int GLId { get; set; }
+        public int GlId { get; set; }
         public string Phone { get; set; }
         public int CityId { get; set; }
         public string PostalCode { get; set; }
@@ -35,9 +35,6 @@ namespace DRR.Domain.TreatmentCenters
         public City City { get; set; }
         public OfficeType OfficeType { get; set; }
 
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
         
     }
 

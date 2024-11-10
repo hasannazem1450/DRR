@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\BaseInfo\Province\IProvinceService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.10" />
@@ -19,6 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\DRR.Domain\DRR.Domain.csproj" />
     <ProjectReference Include="..\DRR.Framework.Contracs\DRR.Framework.Contracs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\BaseInfo\Province\" />
   </ItemGroup>
 
 </Project>

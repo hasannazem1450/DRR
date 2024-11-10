@@ -22,12 +22,12 @@ namespace DRR.CommandDb.Repository.Articles
             return result;
         }
 
-        public async Task<List<Article>> ReadArticleByUserId(int id)
-        {
-            var result = await _Db.Articles.Where(c => c.UserId == id).ToListAsync();
+        //public async Task<List<Article>> ReadArticleByUserId(int id)
+        //{
+        //    var result = await _Db.Articles.Where(c => c.SmeProfileId == id).ToListAsync();
 
-            return result;
-        }
+        //    return result;
+        //}
         public async Task<List<Article>> ReadArticleByArticleTypeId(int id)
         {
             var result = await _Db.Articles.Where(c => c.ArticleTypeId == id).ToListAsync();
@@ -47,7 +47,6 @@ namespace DRR.CommandDb.Repository.Articles
             result.Title = Article.Title;
             result.Desc = Article.Desc;
             result.ArticleTypeId = Article.ArticleTypeId;
-            result.UserId = Article.UserId;
             result.Link = Article.Link;
             result.DRRFileId = Article.DRRFileId;
             result.Authors = Article.Authors;
