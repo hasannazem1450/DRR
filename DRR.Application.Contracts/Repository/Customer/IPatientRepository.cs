@@ -11,6 +11,8 @@ namespace DRR.Application.Contracts.Repository.Customer
     public interface IPatientRepository : IRepository
     {
         Task<Patient> ReadPatientById(int id);
+
+        Task<List<Patient>> ReadPatientBySmeProfileId(int id);
         Task<List<Patient>> ReadPatientByCityId(int id);
 
         Task Delete(int id);

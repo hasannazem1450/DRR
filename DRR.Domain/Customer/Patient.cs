@@ -9,7 +9,7 @@ namespace DRR.Domain.Customer
 {
     public class Patient : Entity<int>
     {
-        public Patient(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, int? glId, string patientPhone, string necessaryPhone, string? email, bool gender)
+        public Patient(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, int? glId, string patientPhone, string necessaryPhone, string? email, bool gender, int smeProfileId)
         {
             PatientName = patientName;
             PatientFamily = patientFamily;
@@ -22,6 +22,7 @@ namespace DRR.Domain.Customer
             NecessaryPhone = necessaryPhone;
             Email = email;
             Gender = gender;
+            SmeProfileId = smeProfileId;
         }
 
         public int Id { get; set; }
@@ -34,23 +35,14 @@ namespace DRR.Domain.Customer
         public int? GlId { get; set; }
         public string PatientPhone { get; set; }
         public string NecessaryPhone { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; }
         public bool Gender { get; set; }
+        public int SmeProfileId { get; set; }
 
 
 
         public City City { get; set; }
-        
-
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
-        public ICollection<PatientReservation> PatientReservations { get; set; }
-        public ICollection<Comment> Comments { get; set; }
-        public ICollection<PatientFavorite> PatientFavorite { get; set; }
-
-
-
-
+        public SmeProfile SmeProfile { get; set; }
 
 
     }
