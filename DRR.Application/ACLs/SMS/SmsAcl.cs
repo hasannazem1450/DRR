@@ -27,13 +27,14 @@ public class SmsAcl : ISmsAcl
 
         var request = new RestRequest(_smsSetting.ResourceUrl, Method.Post);
 
-        request.AddHeader("cache-control", "no-cache");
-        request.AddHeader("accept", "application/json");
+        //request.AddHeader("cache-control", "no-cache");
+        //request.AddHeader("accept", "application/json");
 
-        request.AddParameter("senders", _smsSetting.Sender);
-        request.AddParameter("messages", model.Message);
-        request.AddParameter("recipients", model.Receiver);
+        request.AddParameter("sender", _smsSetting.Sender);
+        request.AddParameter("message", model.Message);
+        request.AddParameter("receptor", model.Receiver);
 
+        //var response = await client.ExecuteAsync(request);
         var response = await client.ExecuteAsync(request);
         var responseModel = JsonConvert.DeserializeObject<SendResponseModel>(response.Content ?? "");
 
