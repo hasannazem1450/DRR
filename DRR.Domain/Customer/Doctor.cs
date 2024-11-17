@@ -17,7 +17,7 @@ namespace DRR.Domain.Customer
 {
     public class Doctor : Entity<int>
     {
-        public Doctor(string doctorName, string doctorFamily, int nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public Doctor(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
@@ -35,7 +35,7 @@ namespace DRR.Domain.Customer
         public int Id { get; set; }
         public string DoctorName { get; set; }
         public string DoctorFamily { get; set; }
-        public int NationalId { get; set; }
+        public string NationalId { get; set; }
         public int SpecialistId { get; set; }
         public int CodeNezam {  get; set; }
         public string DocExperiance { get; set; }
@@ -64,7 +64,7 @@ namespace DRR.Domain.Customer
         public ICollection<Article> Articles { get; set; }
 
 
-        public void Update(string doctorName, string doctorFamily, int nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
