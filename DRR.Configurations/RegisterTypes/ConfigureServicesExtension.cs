@@ -80,7 +80,7 @@ public static class ConfigureServicesExtension
             options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         });
         ;
-        var key = Encoding.ASCII.GetBytes("@#MY_BIG_SECRET_KEY@#");
+        var key = Encoding.ASCII.GetBytes("@#MY_BIG_SECRET_KEYMY_BIG_SECRET_KEYMY_BIG_SECRET_KEYMY_BIG_SECRET_KEY@#");
 
         services.AddAuthentication(options =>
         {

@@ -48,7 +48,7 @@ namespace DRR
                 .AddDefaultTokenProviders()
                 .AddErrorDescriber<PersianIdentityErrorDescriber>();
 
-            var key = Encoding.ASCII.GetBytes("@#MY_BIG_SECRET_KEY@#");
+            var key = Encoding.ASCII.GetBytes("@#MY_BIG_SECRET_KEYMY_BIG_SECRET_KEYMY_BIG_SECRET_KEYMY_BIG_SECRET_KEY@#");
 
 
             services.AddSwaggerGen(c =>
