@@ -1,4 +1,6 @@
-﻿using DRR.Domain.BaseInfo;
+﻿using DRR.Domain.Articles;
+using DRR.Domain.BaseInfo;
+using DRR.Domain.Comments;
 using DRR.Domain.Customer;
 using DRR.Domain.Event;
 using DRR.Domain.SiteMessenger;
@@ -79,6 +81,9 @@ public class SmeProfile : Entity<int>
     public ICollection<MessagingGroupSmeProfile> MessagingGroupSmeProfiles { get; protected set; }
     public ICollection<SiteMessageReciver> SiteMessageRecivers { get; protected set; }
     public ICollection<Doctor> Doctors { get; protected set; }
+    public ICollection<Article> Articles { get; protected set; }
+    public ICollection<ArticleComment> ArticleComments { get; protected set; }
+
 
     public void SetIsDeleted(bool isDeleted)
     {

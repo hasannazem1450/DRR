@@ -7,24 +7,22 @@ namespace DRR.Domain.Comments
 {
     public class ArticleComment : Entity<int>
     {
-        public ArticleComment(string desc, int userId, int articleId, string commentDate, bool isAccept)
+        public ArticleComment(string desc, int articleId, string commentDate, bool isAccept, int smeProfileId)
         {
             Desc = desc;
-            UserId = userId;
             ArticleId = articleId;
             CommentDate = commentDate;
             IsAccept = isAccept;
+            SmeProfileId = smeProfileId;
         }
 
-        public int Id { get; set; }
         public string Desc { get; set; }
-        public int UserId { get; set; }
         public int ArticleId { get; set; }
         public string CommentDate { get; set; }
         public bool IsAccept { get; set; }
 
 
-        public int SmeProfileId { get; protected set; }
+        public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; protected set; }
         public Article Article { get; set; }
 

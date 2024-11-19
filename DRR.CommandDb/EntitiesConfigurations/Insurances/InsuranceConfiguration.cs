@@ -15,7 +15,10 @@ namespace DRR.CommandDb.EntitiesConfigurations.Insurances
         {
             builder.HasKey(x => x.Id);
 
-            
+            builder.HasOne(x => x.InsuranceType)
+                   .WithMany(x => x.Insurances)
+                   .HasForeignKey(x => x.InsuranceTypeId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

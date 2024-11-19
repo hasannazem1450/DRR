@@ -15,21 +15,21 @@ namespace DRR.CommandDb.EntitiesConfigurations.Insurances
         {
             builder.HasKey(x => x.Id);
 
-            //builder.HasOne(x => x.Doctor)
-            //    .WithMany(x => x.DoctorInsurances)
-            //    .HasForeignKey(x => x.DoctorId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.Doctor)
+                .WithMany(x => x.DoctorInsurances)
+                .HasForeignKey(x => x.DoctorId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            //builder.HasOne(x => x.Insurance)
-            //    .WithMany(x => x.DoctorInsurances)
-            //    .HasForeignKey(x => x.InsuranceId)
-            //    .OnDelete(DeleteBehavior.NoAction)
-            //    .IsRequired (false);
+            builder.HasOne(x => x.Insurance)
+                .WithMany(x => x.DoctorInsurances)
+                .HasForeignKey(x => x.InsuranceId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired(false);
 
-            //builder.HasOne(x => x.VisitCost)
-            //    .WithMany(x => x.DoctorInsurances)
-            //    .HasForeignKey(x => x.VisitCostId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.VisitCost)
+                .WithMany(x => x.DoctorInsurances)
+                .HasForeignKey(x => x.VisitCostId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

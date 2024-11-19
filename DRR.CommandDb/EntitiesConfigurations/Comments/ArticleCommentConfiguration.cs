@@ -15,16 +15,16 @@ namespace DRR.CommandDb.EntitiesConfigurations.Comments
         {
             builder.HasKey(x => x.Id);
 
-            //builder.HasOne(x => x.SmeProfile)
-            //    .WithMany(x => x.ArticleComments)
-            //    .HasForeignKey(x => x.UserId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.SmeProfile)
+                .WithMany(x => x.ArticleComments)
+                .HasForeignKey(x => x.SmeProfileId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            //builder
-            //  .HasOne(x => x.Article)
-            //  .WithMany(x => x.ArticleComments)
-            //  .HasForeignKey(x => x.ArticleId)
-            //  .OnDelete(DeleteBehavior.NoAction);
+            builder
+              .HasOne(x => x.Article)
+              .WithMany(x => x.ArticleComments)
+              .HasForeignKey(x => x.ArticleId)
+              .OnDelete(DeleteBehavior.NoAction);
 
         }
 

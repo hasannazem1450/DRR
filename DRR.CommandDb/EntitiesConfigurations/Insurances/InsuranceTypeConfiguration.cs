@@ -15,7 +15,7 @@ namespace DRR.CommandDb.EntitiesConfigurations.Insurances
         {
             builder.HasKey(x => x.Id);
 
-            
+
         }
 
     }

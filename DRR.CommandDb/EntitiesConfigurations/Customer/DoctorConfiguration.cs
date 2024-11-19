@@ -25,6 +25,8 @@ namespace DRR.CommandDb.EntitiesConfigurations.Customer
                .HasForeignKey(x => x.SmeProfileId)
                .OnDelete(DeleteBehavior.NoAction);
 
+          
+
 
         }
     }

@@ -37,7 +37,7 @@ namespace DRR.CommandDb.Repository.Insurances
         }
         public async Task<List<PatientInsurance>> ReadPatientInsuranceByInsuranceTypeId(int? id)
         {
-            var result = await _Db.PatientInsurances.Where(c => c.InsuranceTypeId == id).ToListAsync();
+            var result = await _Db.PatientInsurances.Where(c => c.Insurance.InsuranceTypeId == id).ToListAsync();
 
             return result;
         }
@@ -51,7 +51,7 @@ namespace DRR.CommandDb.Repository.Insurances
             var result = await this.ReadPatientInsuranceById(PatientInsurance.Id);
 
             result.PatientId = PatientInsurance.PatientId;
-            result.InsuranceTypeId = PatientInsurance.InsuranceTypeId;
+            result.Insurance.InsuranceTypeId = PatientInsurance.Insurance.InsuranceTypeId;
             result.InsuranceId = PatientInsurance.InsuranceId;
 
 

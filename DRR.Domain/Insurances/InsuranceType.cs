@@ -15,11 +15,10 @@ namespace DRR.Domain.Insurances
             
         }
 
-        public int Id { get; set; }
       
         public string Type { get; set; }
         
-        public ICollection<PatientInsurance> Insurances { get; set; }
+        public ICollection<Insurance> Insurances { get; set; }
 
 
     }

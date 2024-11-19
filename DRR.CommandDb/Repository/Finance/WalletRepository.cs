@@ -25,7 +25,7 @@ namespace DRR.CommandDb.Repository.Finance
 
         public async Task<List<Wallet>> ReadWalletByUserId(int id)
         {
-            var result = await _Db.Wallets.Where(c => c.UserId == id).ToListAsync();
+            var result = await _Db.Wallets.Where(c => c.SmeProfileId == id).ToListAsync();
 
             return result;
         }
@@ -38,7 +38,7 @@ namespace DRR.CommandDb.Repository.Finance
         {
             var result = await this.ReadWalletById(Wallet.Id);
 
-            result.UserId = Wallet.UserId;
+            result.SmeProfileId = Wallet.SmeProfileId;
             result.Amount = Wallet.Amount;
 
 

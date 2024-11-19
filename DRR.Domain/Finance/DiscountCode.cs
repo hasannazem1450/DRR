@@ -17,17 +17,9 @@ namespace DRR.Domain.Finance
 
         }
 
-        public int Id { get; set; }
         public string  Code { get; set; }
         public decimal DiscountPercent { get; set; }
         public bool IsUsed { get; set; }
-
-
-
-
-        
-
-
 
 
     }

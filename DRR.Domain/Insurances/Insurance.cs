@@ -9,18 +9,21 @@ namespace DRR.Domain.Insurances
 {
     public class Insurance : Entity<int>
     {
-        public Insurance(string name)
+        public Insurance(string name,int insuranceTypeId)
         {
+            InsuranceTypeId = insuranceTypeId;
             Name = name;
            
         }
 
-        public int Id { get; set; }
+        public int InsuranceTypeId { get; set; }
         public string Name { get; set; }
-        
-      
-        
+
+        public InsuranceType InsuranceType { get; set; }
+
+
         public ICollection<PatientInsurance> Insurances { get; set; }
+        public ICollection<DoctorInsurance> DoctorInsurances { get; set; }
 
 
     }

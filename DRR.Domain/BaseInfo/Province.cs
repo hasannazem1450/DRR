@@ -14,7 +14,6 @@ namespace DRR.Domain.BaseInfo
             CountryId = countryId;
         }
 
-        public int Id { get; protected set; }
         public string Name { get; protected set; }
         public int? Code { get; protected set; }
 

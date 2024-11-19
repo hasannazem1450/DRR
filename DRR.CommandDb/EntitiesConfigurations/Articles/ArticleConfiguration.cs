@@ -11,7 +11,10 @@ namespace DRR.CommandDb.EntitiesConfigurations.Articles
         {
             builder.HasKey(x => x.Id);
 
-
+            builder.HasOne(x => x.SmeProfile)
+               .WithMany(x => x.Articles)
+               .HasForeignKey(x => x.SmeProfileId)
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 

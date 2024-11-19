@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Domain.BaseInfo;
 using System.Xml.Linq;
+using DRR.Domain.Insurances;
 
 
 
@@ -59,9 +60,12 @@ namespace DRR.Domain.Customer
 
         public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; set; }
-        public ICollection<PatientReservation> PatientReservations { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public ICollection<CommentReply> CommentReplys { get; set; }
         public ICollection<Article> Articles { get; set; }
+        public ICollection<DoctorInsurance> DoctorInsurances { get; set; }
+
 
 
         public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)

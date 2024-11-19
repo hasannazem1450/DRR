@@ -1,4 +1,5 @@
-﻿using DRR.Framework.Contracts.Abstracts;
+﻿using DRR.Domain.Insurances;
+using DRR.Framework.Contracts.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ namespace DRR.Domain.Reservations
 
         }
 
-        public int Id { get; set; }
         public int DoctorId { get; set; }
         public int VisitTypeId { get; set; }
         public decimal Price { get; set; }
@@ -27,6 +27,7 @@ namespace DRR.Domain.Reservations
 
              
         public ICollection<PatientReservation> PatientReservations { get; set; }
+        public ICollection<DoctorInsurance> DoctorInsurances { get; set; }
 
 
 

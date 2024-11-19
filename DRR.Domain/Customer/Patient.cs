@@ -4,6 +4,7 @@ using DRR.Domain.Reservations;
 using DRR.Domain.Comments;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
+using DRR.Domain.Event;
 
 namespace DRR.Domain.Customer
 {
@@ -44,7 +45,7 @@ namespace DRR.Domain.Customer
         public City City { get; set; }
         public SmeProfile SmeProfile { get; set; }
 
-
+        public ICollection<PatientFavorite> PatientFavorites { get; protected set; }
     }
 
 }

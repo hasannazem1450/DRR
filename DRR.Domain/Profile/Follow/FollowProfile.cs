@@ -15,20 +15,20 @@ namespace DRR.Domain.Profile.Follow
             //TODO:Create Guard
             //UserId = userid;
         }
-        public FollowProfile(int followprofileid, int myprofileid, string followprofilelogo, string followprofilename)
+        public FollowProfile(int followSmeprofileid, int myprofileid, string followprofilelogo, string followprofilename)
         { 
             //TODO:Create Guard
-            FollowProfileId = followprofileid;
-            MyProfileId = myprofileid;
+            FollowSmeProfileId = followSmeprofileid;
+            MySmeProfileId = myprofileid;
             FollowProfileLogo = followprofilelogo;
             FollowProfileName = followprofilename;
         }
 
-        public int Id { get; set; }
-        public int FollowProfileId { get; set; }
-        public int MyProfileId { get; set; }
+        public int FollowSmeProfileId { get; set; }
+        public int MySmeProfileId { get; set; }
         public string FollowProfileLogo { get; set; }
         public string FollowProfileName { get; set; }
+        public SmeProfile SmeProfile { get; set; }
 
     }
 }

@@ -14,7 +14,11 @@ namespace DRR.CommandDb.EntitiesConfigurations.Comments
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.HasKey(x => x.Id);
-                
+
+            builder.HasOne(x => x.Doctor)
+                   .WithMany(x => x.Comments)
+                   .HasForeignKey(x => x.DoctorId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

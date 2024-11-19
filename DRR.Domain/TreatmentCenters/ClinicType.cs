@@ -12,8 +12,6 @@ namespace DRR.Domain.TreatmentCenters
 
         }
 
-        public int Id { get; set; }
-
         public string Type { get; set; }
 
         public ICollection<Clinic> Clinics { get; set; }

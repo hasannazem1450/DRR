@@ -14,10 +14,8 @@ namespace DRR.Domain.Specialists
            
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
        
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
 
 

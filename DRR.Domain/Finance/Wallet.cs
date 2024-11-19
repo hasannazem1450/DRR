@@ -5,23 +5,23 @@ namespace DRR.Domain.Finance
 {
     public class Wallet : Entity<int>
     {
-        public Wallet(int userId, decimal amount)
+        public Wallet(int? parentId ,int smeProfileId, decimal amount)
         {
-
-            UserId = userId;
+            ParentId = parentId;
+            SmeProfileId = smeProfileId;
             Amount = amount;
             
         }
 
-        public int Id { get; set; }
 
-        public int UserId { get; set; }
+        public int? ParentId { get; set; }
         public decimal Amount { get; set; }
-        
 
 
-        public UserProfile UserProfile { get; set; }
-        
+
+        public int SmeProfileId { get; set; }
+        public SmeProfile SmeProfile { get; protected set; }
+
 
 
     }

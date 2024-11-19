@@ -7,25 +7,24 @@ namespace DRR.Domain.Comments
 {
     public class CommentReply : Entity<int>
     {
-        public CommentReply(string desc, int userId, int commentId, string commentDat)
+        public CommentReply(string desc, int smeProfileId, int doctorId, int commentId, string commentDate)
         {
             Desc = desc;
-            UserId = userId;
+            SmeProfileId = smeProfileId;
+            DoctorId = doctorId;
             CommentId = commentId;
-            CommentDat = commentDat;
+            CommentDate = commentDate;
         }
 
-        public int Id { get; set; }
         public string Desc { get; set; }
-        public int UserId { get; set; }
+        public int SmeProfileId { get; set; }
         public int CommentId { get; set; }
-        public string CommentDat { get; set; }
+        public string CommentDate { get; set; }
 
-
+        public int DoctorId { get; set; }
+        public Comment Comment { get; set; }
         public Doctor Doctor { get; set; }
-
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
+        public SmeProfile SmeProfile { get; set; }
 
 
     }

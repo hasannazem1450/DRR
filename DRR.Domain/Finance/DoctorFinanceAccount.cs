@@ -26,7 +26,6 @@ namespace DRR.Domain.Finance
 
         }
 
-        public int Id { get; set; }
 
         public int DoctorId { get; set; }
         public string Shebanumber { get; set; }

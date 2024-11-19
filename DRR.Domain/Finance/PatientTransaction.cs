@@ -17,8 +17,6 @@ namespace DRR.Domain.Finance
             PatientReservationId = patientReservationId;
         }
 
-        public int Id { get; set; }
-
         public int PatientId { get; set; }
         public string TransactionDate { get; set; }
         public int PaymentNumber { get; set; }

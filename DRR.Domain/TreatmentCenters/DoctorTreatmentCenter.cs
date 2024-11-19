@@ -3,6 +3,7 @@ using DRR.Domain.Customer;
 using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
+using DRR.Domain.Reservations;
 
 namespace DRR.Domain.TreatmentCenters
 {
@@ -27,8 +28,11 @@ namespace DRR.Domain.TreatmentCenters
         public Office Office { get; set; }
         public Clinic Clinic { get; set; }
 
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
+       
+
+
 
     }
 

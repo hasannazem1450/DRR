@@ -17,7 +17,6 @@ namespace DRR.Domain.Customer
             ArticleId = articleId;
         }
 
-        public int Id { get; set; }
 
         public int PatientId { get; set; }
         public int? DoctorId { get; set; }
@@ -27,8 +26,6 @@ namespace DRR.Domain.Customer
         public Doctor Doctor { get; set; }
         public Patient Patient { get; set; }
 
-
-        public ICollection<SmeProfile> SmeProfiles { get; set; }
 
 
 

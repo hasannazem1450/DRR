@@ -10,7 +10,6 @@ public class SmeRater : Entity<int>
         RaterName = raterName;
     }
 
-    public int Id { get; protected set; }
     public string RaterName { get; protected set; }
     public ICollection<SmeProfile> SmeProfiles { get; set; }
 }

@@ -25,7 +25,7 @@ namespace DRR.CommandDb.Repository.Comments
 
         public async Task<List<ArticleComment>> ReadArticleCommentByUserId(int id)
         {
-            var result = await _Db.ArticleComments.Where(c => c.UserId == id).ToListAsync();
+            var result = await _Db.ArticleComments.Where(c => c.SmeProfileId == id).ToListAsync();
 
             return result;
         }
@@ -45,7 +45,7 @@ namespace DRR.CommandDb.Repository.Comments
             var result = await this.ReadArticleCommentById(ArticleComment.Id);
 
             result.Desc = ArticleComment.Desc;
-            result.UserId = ArticleComment.UserId;
+            result.SmeProfileId = ArticleComment.SmeProfileId;
             result.ArticleId = ArticleComment.ArticleId;
             result.CommentDate = ArticleComment.CommentDate;
             result.IsAccept = ArticleComment.IsAccept;

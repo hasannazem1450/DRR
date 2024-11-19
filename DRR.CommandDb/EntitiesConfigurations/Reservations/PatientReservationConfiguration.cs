@@ -15,26 +15,7 @@ namespace DRR.CommandDb.EntitiesConfigurations.Reservations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Patient)
-                .WithMany(x => x.PatientReservations)
-                .HasForeignKey(x => x.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            //builder.HasOne(x => x.Reservation)
-            //    .WithMany(x => x.PatientReservations)
-            //    .HasForeignKey(x => x.ReservationId)
-            //    .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(x => x.VisitCost)
-                .WithMany(x => x.PatientReservations)
-                .HasForeignKey(x => x.VisitCostId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            //builder.HasOne(x => x.DiscountCode)
-            //    .WithMany(x => x.PatientReservations)
-            //    .HasForeignKey(x => x.DiscountCodeId)
-            //    .OnDelete(DeleteBehavior.NoAction)
-            //    .IsRequired (false);
+           
         }
 
     }

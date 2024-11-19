@@ -47,7 +47,6 @@ namespace DRR.CommandDb.Repository.Reservations
 
             result.PatientId = PatientReservation.PatientId;
             result.ReservationId = PatientReservation.ReservationId;
-            result.VisitCostId = PatientReservation.VisitCostId;
             result.DiscountCodeId = PatientReservation.DiscountCodeId;
 
           

@@ -14,11 +14,7 @@ namespace DRR.CommandDb.EntitiesConfigurations.Comments
         public void Configure(EntityTypeBuilder<CommentReply> builder)
         {
             builder.HasKey(x => x.Id);
-
-            //builder.HasOne(x => x.Comment)
-            //    .WithMany(x => x.CommentReplies)
-            //    .HasForeignKey(x => x.CommentId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+                        
         }
 
     }

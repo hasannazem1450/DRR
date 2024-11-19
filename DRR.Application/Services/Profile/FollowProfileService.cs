@@ -27,8 +27,8 @@ namespace DRR.Application.Services.Profile
                 var dto = new FollowProfileDto()
                 {
                     Id = item.Id,
-                    FollowProfileId = item.FollowProfileId,
-                    MyProfileId = item.MyProfileId,
+                    FollowProfileId = item.FollowSmeProfileId,
+                    MyProfileId = item.MySmeProfileId,
                     FollowProfileLogo = item.FollowProfileLogo,
                     FollowProfileName = item.FollowProfileName,
 
@@ -47,8 +47,8 @@ namespace DRR.Application.Services.Profile
             var dto = new FollowProfileDto()
             {
                 Id = result.Id,
-                FollowProfileId = result.FollowProfileId,
-                MyProfileId = result.MyProfileId,
+                FollowProfileId = result.FollowSmeProfileId,
+                MyProfileId = result.MySmeProfileId,
                 FollowProfileLogo = result.FollowProfileLogo,
                 FollowProfileName = result.FollowProfileName,
 
