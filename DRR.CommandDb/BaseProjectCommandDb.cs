@@ -67,7 +67,7 @@ public sealed class BaseProjectCommandDb : IdentityDbContext<ApplicationUser>
     public DbSet<SmeRater> SmeRaters { get; set; }
     public DbSet<SmeMember> SmeMembers { get; set; }
     public DbSet<Position> Positions { get; set; }
-    public DbSet<News> News { get; set; }
+    public DbSet<Ads> Ads { get; set; }
     public DbSet<EventInfo> EventInfos { get; set; }
     public DbSet<EventAttender> EventAttenders { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }

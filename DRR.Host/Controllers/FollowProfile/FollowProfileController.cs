@@ -15,7 +15,7 @@ namespace DRR.Host.Controllers.FollowProfile
         }
 
         [HttpGet("read-FollowProfile")]
-        public async Task<IActionResult> ReadSmeProfileNews([FromQuery] ReadFollowProfileQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadSmeProfileAds([FromQuery] ReadFollowProfileQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadFollowProfileQuery, ReadFollowProfileQueryResponse>(query, cancellationToken);
 
@@ -23,7 +23,7 @@ namespace DRR.Host.Controllers.FollowProfile
         }
 
         [HttpPost("create-FollowProfile")]
-        public async Task<IActionResult> CreateNews(CreateFollowProfileCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateAds(CreateFollowProfileCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateFollowProfileCommand, CreateFollowProfileCommandResponse>(command, cancellationToken);
 
@@ -33,7 +33,7 @@ namespace DRR.Host.Controllers.FollowProfile
 
 
         [HttpPut("update-FollowProfile")]
-        public async Task<IActionResult> UpdateNews(UpdateFollowProfileCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateAds(UpdateFollowProfileCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<UpdateFollowProfileCommand, UpdateFollowProfileCommandResponse>(command, cancellationToken);
 
@@ -41,7 +41,7 @@ namespace DRR.Host.Controllers.FollowProfile
         }
 
         [HttpDelete("delete-FollowProfile")]
-        public async Task<IActionResult> DeleteNews(DeleteFollowProfileCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteAds(DeleteFollowProfileCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<DeleteFollowProfileCommand, DeleteFollowProfileCommandResponse>(command, cancellationToken);
 

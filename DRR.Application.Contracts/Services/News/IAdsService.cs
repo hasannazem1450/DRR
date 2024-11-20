@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Services.News
 {
-    public interface INewsService : IService
+    public interface IAdsService : IService
     {
-        Task<NewsDto> ReadById(int id);
+        Task<AdsDto> ReadById(int id);
         //Task<List<NewsDto>> Read();
-        Task<List<NewsDto>> ReadNewsBySmeProfileId(int SmeProfileId);
+        Task<List<AdsDto>> ReadAdsBySmeProfileId(int SmeProfileId);
     }
 }

@@ -12,22 +12,22 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.CommandHandlers.News
 {
-    public class DeleteNewsCommandHandler : CommandHandler<DeleteNewsCommand, DeleteNewsCommandResponse>
+    public class DeleteAdsCommandHandler : CommandHandler<DeleteAdsCommand, DeleteAdsCommandResponse>
     {
 
-        private readonly INewsRepository _newsRepository;
+        private readonly IAdsRepository _adsRepository;
 
 
-        public DeleteNewsCommandHandler(INewsRepository newsRepository)
+        public DeleteAdsCommandHandler(IAdsRepository adsRepository)
         {
-            _newsRepository = newsRepository;
+            _adsRepository = adsRepository;
         }
 
-        public override async Task<DeleteNewsCommandResponse> Executor(DeleteNewsCommand command)
+        public override async Task<DeleteAdsCommandResponse> Executor(DeleteAdsCommand command)
         {
-            await _newsRepository.Delete(command.Id);
+            await _adsRepository.Delete(command.Id);
 
-            return new DeleteNewsCommandResponse();
+            return new DeleteAdsCommandResponse();
         }
     }
 }

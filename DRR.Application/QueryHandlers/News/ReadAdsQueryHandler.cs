@@ -12,24 +12,24 @@ using DRR.Framework.Contracts.Markers;
 
 namespace DRR.Application.QueryHandlers.News
 {
-    public class ReadNewsQueryHandler : IQueryHandler<ReadSmeProfileNewsQuery, ReadNewsQueryResponse>
+    public class ReadAdsQueryHandler : IQueryHandler<ReadSmeProfileAdsQuery, ReadAdsQueryResponse>
     {
-        private readonly INewsService _newsService;
+        private readonly IAdsService _adsService;
 
 
-        public ReadNewsQueryHandler(INewsService newsService)
+        public ReadAdsQueryHandler(IAdsService adsService)
         {
-            _newsService = newsService;
+            _adsService = adsService;
         }
 
-        public async Task<ReadNewsQueryResponse> Execute(ReadSmeProfileNewsQuery query,
+        public async Task<ReadAdsQueryResponse> Execute(ReadSmeProfileAdsQuery query,
             CancellationToken cancellationToken)
         {
-            var newsDtos = await _newsService.ReadNewsBySmeProfileId(query.SmeProfileId);
+            var adsDtos = await _adsService.ReadAdsBySmeProfileId(query.SmeProfileId);
 
-            var result = new ReadNewsQueryResponse()
+            var result = new ReadAdsQueryResponse()
             {
-                List = newsDtos,
+                List = adsDtos,
             };
 
             return result;

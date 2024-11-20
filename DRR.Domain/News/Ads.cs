@@ -8,9 +8,9 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Domain.News
 {
-    public class News : Entity<int>
+    public class Ads : Entity<int>
     {
-        public News(string title, string headLine, string description, string photo)
+        public Ads(string title, string headLine, string description, string photo)
         {
             Title = title;
             HeadLine = headLine;

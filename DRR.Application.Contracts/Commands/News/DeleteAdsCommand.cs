@@ -7,12 +7,12 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.News
 {
-    public class DeleteNewsCommand : Command
+    public class DeleteAdsCommand : Command
     {
         public int Id { get; set; }
     }
 
-    public class DeleteNewsCommandResponse : CommandResponse
+    public class DeleteAdsCommandResponse : CommandResponse
     {
     }
 }

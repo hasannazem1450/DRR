@@ -26,7 +26,6 @@ namespace DRR.Domain.Customer
             SmeProfileId = smeProfileId;
         }
 
-        public int Id { get; set; }
         public string PatientName { get; set; }
         public string PatientFamily { get; set; }
         public string NationalId { get; set; }
@@ -46,6 +45,7 @@ namespace DRR.Domain.Customer
         public SmeProfile SmeProfile { get; set; }
 
         public ICollection<PatientFavorite> PatientFavorites { get; protected set; }
+        public ICollection<PatientReservation> PatientReservations { get; protected set; }
     }
 
 }

@@ -7,9 +7,8 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.News
 {
-    public class UpdateNewsCommand : Command
+    public class CreateAdsCommand : Command
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string HeadLine { get; set; }
         public string Description { get; set; }
@@ -17,7 +16,7 @@ namespace DRR.Application.Contracts.Commands.News
         public int SmeProfileId { get; set; }
     }
 
-    public class UpdateNewsCommandResponse : CommandResponse
+    public class CreateAdsCommandResponse : CommandResponse
     {
     }
 }

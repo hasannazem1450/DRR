@@ -74,7 +74,7 @@ public class SmeProfile : Entity<int>
 
     public ICollection<SmeMember> SmeMembers { get; protected set; }
 
-    public ICollection<News.News> News { get; protected set; }
+    public ICollection<News.Ads> Ads { get; protected set; }
     public ICollection<EventAttender> AttendedEvents { get; protected set; }
 
     public ICollection<UserProfile> UserProfiles { get; protected set; }
@@ -83,6 +83,7 @@ public class SmeProfile : Entity<int>
     public ICollection<Doctor> Doctors { get; protected set; }
     public ICollection<Article> Articles { get; protected set; }
     public ICollection<ArticleComment> ArticleComments { get; protected set; }
+    public ICollection<Comment> Comments { get; protected set; }
 
 
     public void SetIsDeleted(bool isDeleted)

@@ -9,28 +9,28 @@ using DRR.Application.Contracts.Services.News;
 
 namespace DRR.Application.Services.News
 {
-    public class NewsService : INewsService
+    public class AdsService : IAdsService
     {
 
-        private readonly INewsRepository _newsRepository;
+        private readonly IAdsRepository _adsRepository;
 
-        public NewsService(INewsRepository newsRepository)
+        public AdsService(IAdsRepository adsRepository)
         {
-            _newsRepository = newsRepository;
+            _adsRepository = adsRepository;
         }
 
-        public async Task<NewsDto> ReadById(int id)
+        public async Task<AdsDto> ReadById(int id)
         {
-            var news = await _newsRepository.ReadById(id);
+            var ads = await _adsRepository.ReadById(id);
 
-            return new NewsDto()
+            return new AdsDto()
             {
-                Id = news.Id,
-                Title = news.Title,
-                HeadLine = news.HeadLine,
-                Description = news.Description,
-                Photo = news.Photo,
-                SmeProfile = news.SmeProfile,
+                Id = ads.Id,
+                Title = ads.Title,
+                HeadLine = ads.HeadLine,
+                Description = ads.Description,
+                Photo = ads.Photo,
+                SmeProfile = ads.SmeProfile,
             };
         }
 
@@ -58,15 +58,15 @@ namespace DRR.Application.Services.News
         //    return result;
         //}
 
-        public async Task<List<NewsDto>> ReadNewsBySmeProfileId(int SmeProfileId)
+        public async Task<List<AdsDto>> ReadAdsBySmeProfileId(int SmeProfileId)
         {
-            var news = await _newsRepository.ReadNewsBySmeProfileId(SmeProfileId);
+            var ads = await _adsRepository.ReadAdsBySmeProfileId(SmeProfileId);
 
-            var result = new List<NewsDto>();
+            var result = new List<AdsDto>();
 
-            foreach (var item in news)
+            foreach (var item in ads)
             {
-                var dto = new NewsDto()
+                var dto = new AdsDto()
                 {
                     Id = item.Id,
                     Title = item.Title,

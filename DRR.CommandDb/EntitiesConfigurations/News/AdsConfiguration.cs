@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DRR.CommandDb.EntitiesConfigurations.News
 {
-    public class EventConfiguration : IEntityTypeConfiguration<Domain.News.News>
+    public class EventConfiguration : IEntityTypeConfiguration<Domain.News.Ads>
     {
-        public void Configure(EntityTypeBuilder<Domain.News.News> builder)
+        public void Configure(EntityTypeBuilder<Domain.News.Ads> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.SmeProfile)
-                .WithMany(x => x.News)
+                .WithMany(x => x.Ads)
                 .HasForeignKey(x => x.SmeProfileId)
                 .OnDelete(DeleteBehavior.NoAction);
         }

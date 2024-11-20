@@ -10,18 +10,18 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.News
 {
-    public class ReadSmeProfileNewsQuery : Query
+    public class ReadSmeProfileAdsQuery : Query
     {
         public int SmeProfileId { get; set; }
     }
 
-    public class ReadNewsQueryResponse : QueryResponse
+    public class ReadAdsQueryResponse : QueryResponse
     {
-        public ReadNewsQueryResponse()
+        public ReadAdsQueryResponse()
         {
-            List = new List<NewsDto>();
+            List = new List<AdsDto>();
         }
-        public List<NewsDto> List { get; set; }
+        public List<AdsDto> List { get; set; }
     }
 
 }

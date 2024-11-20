@@ -19,6 +19,10 @@ namespace DRR.CommandDb.EntitiesConfigurations.Comments
                    .WithMany(x => x.Comments)
                    .HasForeignKey(x => x.DoctorId)
                    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.SmeProfile)
+                   .WithMany(x => x.Comments)
+                   .HasForeignKey(x => x.SmeProfileId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
 
     }
