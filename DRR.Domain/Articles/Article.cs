@@ -33,6 +33,23 @@ namespace DRR.Domain.Articles
         public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; set; }
 
+        public void Update(string title, string desc, string shortDesc, int articleTypeId, string link, Guid? dRRFileId, string authors, int smeProfileId)
+        {
+            Title = title;
+            Desc = desc;
+            ShortDesc = shortDesc;
+            ArticleTypeId = articleTypeId;
+            Link = link;
+            DRRFileId = dRRFileId;
+            Authors = authors;
+            SmeProfileId = smeProfileId;
+        }
+
+        public void SetIsDeleted(bool isDeleted)
+        {
+            IsDeleted = isDeleted;
+        }
+
         public ICollection<ArticleComment> ArticleComments { get; protected set; }
 
 

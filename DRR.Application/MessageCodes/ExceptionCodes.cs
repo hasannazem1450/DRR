@@ -43,4 +43,8 @@ public class ExceptionCodes
     {
         public static ApplicationExceptionMessageCode MessageReciversIsEmpty = 70;
     }
+    public class Article
+    {
+        public static ApplicationExceptionMessageCode ArticleNotFound = 80;
+    }
 }
