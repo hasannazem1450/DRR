@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Application.CommandHandlers.Event.Exceptions;
 using DRR.Application.Contracts.Commands.Customer;
+using DRR.Application.Contracts.Commands.Event;
+using DRR.Application.Contracts.Commands.Jornal;
+using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Services.Customer;
+using DRR.Utilities.Extensions;
 
 namespace DRR.Application.Services.Customer
 {
@@ -66,6 +71,51 @@ namespace DRR.Application.Services.Customer
 
                 result.Add(dto);
             }
+
+            return result;
+        }
+
+        public async Task<List<PatientDto>> FilterByName(List<PatientDto> patients, string name)
+        {
+            var result = patients.Where(w => w.PatientName.Contains(name) || w.PatientFamily.Contains(name)).ToList();
+
+            return result;
+        }
+        public async Task<List<PatientDto>> FilterByProvince(List<PatientDto> patients, int provinceId)
+        {
+            var result = patients.Where(w => w.City.Province.Id == provinceId).ToList();
+
+            return result;
+        }
+        public async Task<List<PatientDto>> FinalFilter(List<PatientDto> patients, ReadPatientQueryFilters filters)
+        {
+           
+
+            var result = patients;
+
+            if (filters.PatientName.IsNotNullOrEmpty())
+                result = result.Where(w => w.PatientName.Contains(filters.PatientName)).ToList();
+
+            if (filters.PatientFamily.IsNotNullOrEmpty())
+                result = result.Where(w => w.PatientFamily.Contains(filters.PatientFamily)).ToList();
+
+            if (filters.ProvinceId.HasValue)
+                result = result.Where(w => w.City.ProvinceId == filters.ProvinceId.Value).ToList();
+
+            if (filters.NationalId.IsNotNullOrEmpty())
+                result = result.Where(w => w.NationalId.Contains(filters.NationalId)).ToList();
+
+            //if (filters.BirthNumber >0)
+            //    result = result.Where(w => w.BirthNumber == filters.BirthNumber)).ToList();
+
+            //if (filters.BirthDate.IsNotNullOrEmpty())
+            //    result = result.Where(w => w.ActivityTypes?.Any(a => filters.ActivityTypeIds.Contains(a.Value)) ?? true).ToList();
+
+            //if (filters.FromPrice.HasValue)
+            //    result = result.Where(w => filters.FromPrice.Value <= w.Price).ToList();
+
+            //if (filters.ToPrice.HasValue)
+            //    result = result.Where(w => w.Price <= filters.ToPrice.Value).ToList();
 
             return result;
         }

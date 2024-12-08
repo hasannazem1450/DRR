@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Application.Contracts.Commands.Event;
 using DRR.Application.Contracts.Commands.Jornal;
 using DRR.Application.Contracts.Services.FileManagment;
 using DRR.Application.Contracts.Services.Jornal;
@@ -54,6 +55,13 @@ namespace DRR.Application.Services.Jornal
                 ImageFile = await _dRRFileService.ConvertToImageFileDto(Article.PhotoFile),
                 SmeProfileDto =  await _smeProfileService.ConvertToDto(Article.SmeProfile) 
             };
+
+            return result;
+        }
+
+        public async Task<List<ArticleDto>> FilterByTitle(List<ArticleDto> articles, string title)
+        {
+            var result = articles.Where(w => w.Title.Contains(title)).ToList();
 
             return result;
         }
