@@ -11,7 +11,8 @@ namespace DRR.Application.Contracts.Repository.Articles
     public interface IArticleRepository : IRepository
     {
         Task<Article> ReadArticleById(int id);
-        //Task<List<Article>> ReadArticleByUserId(int id);
+        Task<List<Article>> Search(string title, string ShortDesc,string desc);
+
         Task<List<Article>> ReadArticleByArticleTypeId(int id);
 
         Task Delete(int id);

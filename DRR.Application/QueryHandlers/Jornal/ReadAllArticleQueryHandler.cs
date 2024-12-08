@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DRR.Application.Contracts.Queries.Jornal;
 using DRR.Application.Contracts.Repository.Articles;
+using DRR.Application.Contracts.Services.Jornal;
 using DRR.Framework.Contracts.Markers;
 
 namespace DRR.Application.QueryHandlers.Jornal
@@ -24,11 +25,11 @@ namespace DRR.Application.QueryHandlers.Jornal
         public async Task<ReadAllArticleQueryResponse> Execute(ReadAllArticleQuery query,
             CancellationToken cancellationToken)
         {
-            var articleList = await _articleRepository.Read(query.Title ?? "", query.HeadLine ?? "");
+            var articleList = await _articleRepository.Search(query.Title ?? "", query.ShortDesc ?? "", query.Desc ?? "");
 
             var result = new ReadAllArticleQueryResponse
             {
-                List = await _articleService.OrederDesc(await _articleService.ConvertTo(articleList))
+                List = await _articleService.OrderDesc(await _articleService.ConvertTo(articleList))
             };
 
             return result;

@@ -36,8 +36,4 @@
     <ProjectReference Include="..\DRR.Framework.Contracs\DRR.Framework.Contracs.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Jornal\" />
-  </ItemGroup>
-
 </Project>
