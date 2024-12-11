@@ -12,7 +12,7 @@ namespace DRR.Application.Contracts.Commands.Customer
         public int Id { get; set; }
         public string DoctorName { get; set; }
         public string DoctorFamily { get; set; }
-        public int NationalId { get; set; }
+        public string NationalId { get; set; }
         public int SpecialistId { get; set; }
         public int CodeNezam { get; set; }
         public string DocExperiance { get; set; }

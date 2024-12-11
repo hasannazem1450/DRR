@@ -5,39 +5,39 @@ namespace DRR.Framework.Contracts.Common.Enums;
 public enum SmeType
 {
     /// <summary>
-    /// تولیدی
+    /// بیمار
     /// </summary>
-    [Description("تولیدی")]
+    [Description("بیمار")]
     Productive = 1,
 
     /// <summary>
-    /// خدمات کسب‌و‌کار
+    /// مرکز درمانی
     /// </summary>
-    [Description("خدمات کسب‌و‌کار")]
+    [Description("مرکز درمانی")]
     Business = 2,
 
     /// <summary>
-    /// خدمات فنی مهندسی
+    /// دکتر
     /// </summary>
-    [Description("خدمات فنی مهندسی")]
+    [Description("دکتر")]
     Technical = 3,
 
     /// <summary>
-    /// تولیدی - خدمات کسب‌و‌کار
+    /// دندانپزشک
     /// </summary>
-    [Description("تولیدی - خدمات کسب‌و‌کار")]
+    [Description("دندانپزشک")]
     ProductiveBusiness = 4,
 
     /// <summary>
     /// تولیدی - خدمات فنی مهندسی
     /// </summary>
-    [Description("تولیدی - خدمات فنی مهندسی")]
+    [Description("روانشناس")]
     ProductiveTechnical = 5,
 
     /// <summary>
-    /// خدمات کسب‌و‌کار - خدمات فنی مهندسی
+    /// داروخانه
     /// </summary>
-    [Description("خدمات کسب‌و‌کار - خدمات فنی مهندسی")]
+    [Description("داروخانه")]
     BusinessTechnical = 6,
 
     /// <summary>

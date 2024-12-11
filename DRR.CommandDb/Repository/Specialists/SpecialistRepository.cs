@@ -1,4 +1,5 @@
-﻿using DRR.Application.Contracts.Repository.Specialists;
+﻿using DRR.Application.Contracts.Commands.Specialist;
+using DRR.Application.Contracts.Repository.Specialists;
 using DRR.CommandDB;
 using DRR.Domain.Specialists;
 using System;
@@ -16,7 +17,7 @@ namespace DRR.CommandDb.Repository.Specialists
         {
         }
 
-        public async Task<Specialist> ReadSpecialistById(int id)
+        public async Task<Domain.Specialists.Specialist> ReadSpecialistById(int id)
         {
             var result = await _Db.Specialists.FirstOrDefaultAsync(c => c.Id == id);
 

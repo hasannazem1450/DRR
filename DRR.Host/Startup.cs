@@ -75,6 +75,7 @@ namespace DRR
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger();
+                app.UseSwaggerUI();
 
                 //app.ConfigureSystemMessages(serviceProvider, assemblies);
 
@@ -88,6 +89,7 @@ namespace DRR
             }
 
             app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.SwaggerConfigure();
 

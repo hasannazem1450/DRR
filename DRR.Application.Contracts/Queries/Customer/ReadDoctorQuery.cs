@@ -14,6 +14,11 @@ namespace DRR.Application.Contracts.Queries.Customer
         public int SmeProfileId {  get; set; }
     }
 
+    public class SearchDoctorsQuery : Query
+    {
+        public ReadDoctorQueryFilters? Filters { get; set; }
+    }
+
     public class ReadDoctorQueryResponse : QueryResponse
     {
         public ReadDoctorQueryResponse()
@@ -21,5 +26,17 @@ namespace DRR.Application.Contracts.Queries.Customer
             List = new List<DoctorDto>();
         }
         public List<DoctorDto> List { get; set; }
+    }
+
+    public class ReadDoctorQueryFilters
+    {
+        public int? ProvinceId { get; set; }
+        public string Name { get; set; }
+
+        public string speciality { get; set; }
+
+        public string bimeh { get; set; }
+        public string cityname { get; set; }
+
     }
 }

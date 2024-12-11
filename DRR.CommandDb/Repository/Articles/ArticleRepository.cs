@@ -1,6 +1,7 @@
 ﻿using DRR.Application.Contracts.Repository.Articles;
 using DRR.CommandDB;
 using DRR.Domain.Articles;
+using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -20,6 +21,25 @@ namespace DRR.CommandDb.Repository.Articles
             var result = await _Db.Articles.FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
+        }
+
+        public async Task<List<Article>> Search(string title, string ShortDesc, string desc)
+        {
+            var query = _Db.Articles
+                .Include(x => x.SmeProfile)
+                .Include(x => x.PhotoFile)
+                .AsQueryable();
+
+            if (title.IsNotNullOrEmpty())
+                query = query.Where(q => q.Title.Contains(title));
+
+            if (ShortDesc.IsNotNullOrEmpty())
+                query = query.Where(q => q.ShortDesc.Contains(ShortDesc));
+
+            if (desc.IsNotNullOrEmpty())
+                query = query.Where(q => q.Desc.Contains(desc));
+
+            return await query.ToListAsync();
         }
 
         //public async Task<List<Article>> ReadArticleByUserId(int id)
