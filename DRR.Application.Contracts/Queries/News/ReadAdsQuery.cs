@@ -10,6 +10,9 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.News
 {
+    public class ReadAdsQuery : Query
+    {
+    }
     public class ReadSmeProfileAdsQuery : Query
     {
         public int SmeProfileId { get; set; }

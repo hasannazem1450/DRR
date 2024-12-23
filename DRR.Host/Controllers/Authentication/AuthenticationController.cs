@@ -9,6 +9,7 @@ using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.Authentication
 {
@@ -18,7 +19,7 @@ namespace DRR.Host.Controllers.Authentication
         public AuthenticationController(IDistributor distributor) : base(distributor)
         {
         }
-
+        [SwaggerOperation(Summary = "ثبت کاربری در سایت")]
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpCommand query, CancellationToken cancellationToken)
         {
@@ -26,7 +27,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ورود به سایت")]
         [HttpPut("sign-in")]
         public async Task<IActionResult> SignIn(SignInCommand query, CancellationToken cancellationToken)
         {
@@ -34,7 +35,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "خروج از سایت")]
         [HttpGet("sign-out")]
         public async Task<IActionResult> SignOut(CancellationToken cancellationToken)
         {
@@ -42,7 +43,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ایجاد کد تایید")]
         [HttpPost("generate-registration-code")]
         public async Task<IActionResult> GenerateRegistrationCode(GenerateRegistrationCodeCommand command, CancellationToken cancellationToken)
         {
@@ -50,7 +51,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "فعال کردن کاربر با کد تایید")]
         [HttpPost("activating-registration")]
         public async Task<IActionResult> ActivatingRegistration(ActivatingRegistrationCommand command, CancellationToken cancellationToken)
         {
@@ -58,7 +59,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "فراموشی کلمه عبور")]
         [HttpPost("forget-password")]
         public async Task<IActionResult> ForgetPassword(ForgetPasswordCommand command, CancellationToken cancellationToken)
         {
@@ -66,7 +67,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ارسال کد به موبایل برای ریست کردن پسورد")]
         [HttpPost("reseting-password")]
         public async Task<IActionResult> ResetingPassword(ResetingPasswordCommand command, CancellationToken cancellationToken)
         {
@@ -74,6 +75,7 @@ namespace DRR.Host.Controllers.Authentication
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "ریست کردن پسورد در صورت صحت کد ارسالی ")]
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordCommand command, CancellationToken cancellationToken)
         {

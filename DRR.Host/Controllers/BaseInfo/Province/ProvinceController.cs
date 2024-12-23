@@ -6,6 +6,7 @@ using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.BaseInfo.Province
 {
@@ -16,6 +17,7 @@ namespace DRR.Host.Controllers.BaseInfo.Province
         }
 
         [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن نام استان ها")]
         [HttpGet("read-province")]
         public async Task<IActionResult> ReadProvince(CancellationToken cancellationToken)
         {
@@ -24,7 +26,7 @@ namespace DRR.Host.Controllers.BaseInfo.Province
             return OkApiResult(result);
         }
 
-
+        [SwaggerOperation(Summary = "ایجاد استان جدید")]
         [HttpPost("create-province")]
         public async Task<IActionResult> CreateProvince(SignInCommand query, CancellationToken cancellationToken)
         {
@@ -32,7 +34,7 @@ namespace DRR.Host.Controllers.BaseInfo.Province
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "حذف استان ها")]
         [HttpDelete("delete-province")]
         public async Task<IActionResult> DeleteProvince(CancellationToken cancellationToken)
         {
@@ -41,7 +43,7 @@ namespace DRR.Host.Controllers.BaseInfo.Province
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ویرایش نام استان ها")]
         [HttpPut("update-province")]
         public async Task<IActionResult> UpdateProvince(CancellationToken cancellationToken)
         {

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using DRR.Application.Contracts.Queries.Reservation;
 using DRR.Application.Contracts.Commands.Reserv;
+using DRR.Application.Contracts.Commands;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.Reservation
 {
@@ -15,7 +17,7 @@ namespace DRR.Host.Controllers.Reservation
         public ReservationController(IDistributor distributor) : base(distributor)
         {
         }
-
+        [SwaggerOperation(Summary = "خواندن وقت های خالی برای ویزیت یک دکتر ")]
         [HttpGet("read-doctor-reservation")]
         public async Task<IActionResult> RereservationmeProfilereservation([FromQuery] ReadDoctorReservationQuery query, CancellationToken cancellationToken)
         {
@@ -23,7 +25,7 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ایجاد وقت خالی برای ویزیت یک دکتر ")]
         [HttpPost("create-reservation")]
         public async Task<IActionResult> Createreservation(CreateReservationCommand command, CancellationToken cancellationToken)
         {
@@ -32,8 +34,8 @@ namespace DRR.Host.Controllers.Reservation
             return OkApiResult(result);
         }
 
-        
 
+        [SwaggerOperation(Summary = "ویرایش وقت خالی برای ویزیت یک دکتر ")]
         [HttpPut("update-reservation")]
         public async Task<IActionResult> Updatereservation(UpdateReservationCommand command, CancellationToken cancellationToken)
         {
@@ -41,7 +43,7 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "حذف وقت خالی برای ویزیت یک دکتر ")]
         [HttpDelete("delete-reservation")]
         public async Task<IActionResult> Deletereservation(DeleteReservationCommand command, CancellationToken cancellationToken)
         {
