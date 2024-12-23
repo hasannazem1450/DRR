@@ -11,8 +11,12 @@ namespace DRR.Domain.TreatmentCenters
             Type = type;
 
         }
+        public void Update(string type)
+        {
+            Type = type;
 
-        public int Id { get; set; }
+        }
+
 
         public string Type { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Application.Contracts.Commands.Event;
 using DRR.Application.Contracts.Commands.News;
 using DRR.Application.Contracts.Repository.News;
 using DRR.Application.Contracts.Repository.Profile.Member;
@@ -24,10 +25,9 @@ namespace DRR.Application.CommandHandlers.News
 
         public override async Task<UpdateAdsCommandResponse> Executor(UpdateAdsCommand command)
         {
-            var ads = new Domain.News.Ads(command.Title, command.HeadLine, command.Description, command.Photo)
-            {
-                SmeProfileId = command.SmeProfileId
-            };
+            var ads = await _adsRepository.ReadById(command.Id);
+
+            ads.Update(command.Title, command.HeadLine, command.Description, command.Photo);
 
             await _adsRepository.Update(ads);
 

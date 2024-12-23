@@ -13,6 +13,11 @@ namespace DRR.Domain.Specialists
             Name = name;
            
         }
+        public void Update(string name)
+        {
+            Name = name;
+
+        }
 
         public string Name { get; set; }
        

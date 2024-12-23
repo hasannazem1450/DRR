@@ -44,5 +44,53 @@ namespace DRR.Host.Controllers.Customer
 
             return OkApiResult(result);
         }
+
+        [HttpGet("read-insurances-doctor")]
+        public async Task<IActionResult> ReadInsurancesDoctors([FromQuery] ReadInsurancesDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadInsurancesDoctorQuery, ReadInsurancesDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+
+        [HttpGet("read-visittype-doctor")]
+        public async Task<IActionResult> ReadVisitTypeDoctors([FromQuery] ReadVisitTypeDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadVisitTypeDoctorQuery, ReadVisitTypeDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+
+        //[HttpGet("read-nearest-doctor")]
+        //public async Task<IActionResult> ReadNearestDoctors([FromQuery] ReadNearestDoctorQuery query, CancellationToken cancellationToken)
+        //{
+        //    var result = await Distributor.Send<ReadNearestDoctorQuery, ReadNearestDoctorQueryResponse>(query, cancellationToken);
+        //    return OkApiResult(result);
+        //}
+
+        [HttpGet("read-nextreserves-doctor")]
+        public async Task<IActionResult> ReadReservesDoctor([FromQuery] ReadNextReservesDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadNextReservesDoctorQuery, ReadNextReservesDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+
+        [HttpGet("read-all-reserves-doctor")]
+        public async Task<IActionResult> ReadAllReservesDoctor([FromQuery] ReadReservesDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadReservesDoctorQuery, ReadReservesDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [HttpGet("read-patients-doctor")]
+        public async Task<IActionResult> ReadPatientsDoctor([FromQuery] ReadPatientsDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadPatientsDoctorQuery, ReadPatientsDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+
+        [HttpGet("search-doctors")]
+        public async Task<IActionResult> ReadSearchDoctors([FromQuery] SearchDoctorsQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<SearchDoctorsQuery, SearchDoctorsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
     }
 }

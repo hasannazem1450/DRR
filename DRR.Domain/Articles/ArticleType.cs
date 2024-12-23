@@ -17,6 +17,8 @@ namespace DRR.Domain.Articles
 
 
         public string Type { get; set; }
+        public void Update(string type)
+        { Type = type; }
 
         public ICollection<Article> Articles { get; set; }
 

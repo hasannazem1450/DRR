@@ -17,6 +17,14 @@ namespace DRR.Domain.Customer
             ArticleId = articleId;
         }
 
+        public void Update(int patientId, int? doctorId, int? articleId)
+        {
+
+            PatientId = patientId;
+            DoctorId = doctorId;
+            ArticleId = articleId;
+        }
+
 
         public int PatientId { get; set; }
         public int? DoctorId { get; set; }

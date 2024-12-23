@@ -11,10 +11,10 @@ namespace DRR.Application.Contracts.Queries.Customer
 {
     public class ReadDoctorQuery : Query
     {
-        public int SmeProfileId {  get; set; }
+        public int SmeProfileId {  get; set; } 
     }
 
-    public class SearchDoctorsQuery : Query
+    public class ReadDoctorDoctorsQuery : Query
     {
         public ReadDoctorQueryFilters? Filters { get; set; }
     }

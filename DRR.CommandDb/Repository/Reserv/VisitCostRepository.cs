@@ -1,6 +1,6 @@
-﻿using DRR.Application.Contracts.Repository.VisitCosts;
+﻿using DRR.Application.Contracts.Repository.Reserv;
 using DRR.CommandDB;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -41,7 +41,7 @@ namespace DRR.CommandDb.Repository.VisitCosts
             await _Db.VisitCosts.AddAsync(VisitCost);
             await _Db.SaveChangesAsync();
         }
-        public async Task Update(Domain.Reservations.VisitCost VisitCost)
+        public async Task Update(VisitCost VisitCost)
         {
             var result = await this.ReadVisitCostById(VisitCost.Id);
 

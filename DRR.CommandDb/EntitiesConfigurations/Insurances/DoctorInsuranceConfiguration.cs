@@ -26,10 +26,6 @@ namespace DRR.CommandDb.EntitiesConfigurations.Insurances
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired(false);
 
-            builder.HasOne(x => x.VisitCost)
-                .WithMany(x => x.DoctorInsurances)
-                .HasForeignKey(x => x.VisitCostId)
-                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

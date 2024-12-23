@@ -25,6 +25,15 @@ namespace DRR.Domain.Comments
         public SmeProfile SmeProfile { get; set; }
         
 
+        public void Update(string desc, int smeProfileId, int doctorId, string commentDate, bool isAccept)
+        {
+            Desc = desc;
+            SmeProfileId = smeProfileId;
+            DoctorId = doctorId;
+            CommentDate = commentDate;
+            IsAccept = isAccept;
+        }
+
     }
 
 }

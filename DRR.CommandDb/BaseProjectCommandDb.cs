@@ -13,7 +13,7 @@ using DRR.Domain.Profile;
 using DRR.Domain.Profile.Follow;
 using DRR.Domain.Profile.Member;
 using DRR.Domain.Project;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using DRR.Domain.SiteMessenger;
 using DRR.Domain.Sms;
 using DRR.Domain.Specialists;

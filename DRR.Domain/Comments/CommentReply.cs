@@ -16,6 +16,15 @@ namespace DRR.Domain.Comments
             CommentDate = commentDate;
         }
 
+        public void Update(string desc, int smeProfileId, int doctorId, int commentId, string commentDate)
+        {
+            Desc = desc;
+            SmeProfileId = smeProfileId;
+            DoctorId = doctorId;
+            CommentId = commentId;
+            CommentDate = commentDate;
+        }
+
         public string Desc { get; set; }
         public int SmeProfileId { get; set; }
         public int CommentId { get; set; }

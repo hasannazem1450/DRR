@@ -52,7 +52,7 @@ namespace DRR.CommandDb.Repository.Customer
             result.BirthNumber = Patient.BirthNumber;
             result.BirthDate = Patient.BirthDate;
             result.CityId = Patient.CityId;
-            result.GlId = Patient.GlId;
+            result.Geoloc = Patient.Geoloc;
             result.PatientPhone = Patient.PatientPhone;
             result.NecessaryPhone = Patient.NecessaryPhone;
             result.Email = Patient.Email;

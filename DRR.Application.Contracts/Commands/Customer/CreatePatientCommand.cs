@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace DRR.Application.Contracts.Commands.Customer
         public int BirthNumber { get; set; }
         public string BirthDate { get; set; }
         public int CityId { get; set; }
-        public int GlId { get; set; }
+        public DbGeography Geoloc { get; set; }
         public string PatientPhone { get; set; }
         public string NecessaryPhone { get; set; }
         public string Email { get; set; }

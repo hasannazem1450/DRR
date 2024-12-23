@@ -13,6 +13,14 @@ namespace DRR.Domain.Finance
             
         }
 
+        public void Update(int? parentId, int smeProfileId, decimal amount)
+        {
+            ParentId = parentId;
+            SmeProfileId = smeProfileId;
+            Amount = amount;
+
+        }
+
 
         public int? ParentId { get; set; }
         public decimal Amount { get; set; }

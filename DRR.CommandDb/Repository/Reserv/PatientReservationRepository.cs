@@ -1,6 +1,6 @@
-﻿using DRR.Application.Contracts.Repository.Reservations;
+﻿using DRR.Application.Contracts.Repository.Reserv;
 using DRR.CommandDB;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.CommandDb.Repository.Reservations
+namespace DRR.CommandDb.Repository.Reserv
 {
     class PatientReservationRepository : BaseRepository, IPatientReservationRepository
     {
@@ -40,7 +40,7 @@ namespace DRR.CommandDb.Repository.Reservations
             await _Db.PatientReservations.AddAsync(PatientReservation);
             await _Db.SaveChangesAsync();
         }
-        public async Task Update(Domain.Reservations.PatientReservation PatientReservation)
+        public async Task Update(Domain.Reserv.PatientReservation PatientReservation)
         {
             var result = await this.ReadPatientReservationById(PatientReservation.Id);
 

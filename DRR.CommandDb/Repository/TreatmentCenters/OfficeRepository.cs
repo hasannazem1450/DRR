@@ -57,7 +57,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
             result.Name = Office.Name;
             result.Address = Office.Address;
-            result.GlId = Office.GlId;
+            result.Geoloc = Office.Geoloc;
             result.Phone = Office.Phone;
             result.CityId = Office.CityId;
             result.PostalCode = Office.PostalCode;

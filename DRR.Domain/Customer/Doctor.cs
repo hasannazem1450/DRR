@@ -1,7 +1,7 @@
 ﻿using DRR.Domain.Comments;
 using DRR.Domain.Articles;
 using DRR.Domain.Profile;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using DRR.Domain.FileManagement;
 using DRR.Domain.Specialists;
 using DRR.Domain.TreatmentCenters;

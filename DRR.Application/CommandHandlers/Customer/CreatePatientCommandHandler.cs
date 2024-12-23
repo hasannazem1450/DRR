@@ -22,7 +22,7 @@ namespace DRR.Application.CommandHandlers.Customer
 
         public override async Task<CreatePatientCommandResponse> Executor(CreatePatientCommand command)
         {
-            var patient = new Patient(command.PatientName, command.PatientFamily, command.NationalId, command.BirthNumber, command.BirthDate, command.CityId, command.GlId, command.PatientPhone, command.NecessaryPhone, command.Email, command.Gender, command.SmeProfileId);
+            var patient = new Patient(command.PatientName, command.PatientFamily, command.NationalId, command.BirthNumber, command.BirthDate, command.CityId, command.Geoloc, command.PatientPhone, command.NecessaryPhone, command.Email, command.Gender, command.SmeProfileId);
 
 
             await _patientRepository.Create(patient);

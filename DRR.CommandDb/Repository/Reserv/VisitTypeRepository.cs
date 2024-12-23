@@ -1,6 +1,6 @@
-﻿using DRR.Application.Contracts.Repository.Reservations;
+﻿using DRR.Application.Contracts.Repository.Reserv;
 using DRR.CommandDB;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -29,7 +29,7 @@ namespace DRR.CommandDb.Repository.Reservations
             await _Db.VisitTypes.AddAsync(VisitType);
             await _Db.SaveChangesAsync();
         }
-        public async Task Update(Domain.Reservations.VisitType VisitType)
+        public async Task Update(VisitType VisitType)
         {
             var result = await this.ReadVisitTypeById(VisitType.Id);
 

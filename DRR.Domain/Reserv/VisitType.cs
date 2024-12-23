@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Domain.Reservations
+namespace DRR.Domain.Reserv
 {
     public class VisitType : Entity<int>
     {
@@ -13,6 +13,12 @@ namespace DRR.Domain.Reservations
         {
             VisitTypeName = visitTypeName;
             
+        }
+
+        public void Update(string visitTypeName)
+        {
+            VisitTypeName = visitTypeName;
+
         }
 
         public int Id { get; set; }
@@ -23,12 +29,7 @@ namespace DRR.Domain.Reservations
 
 
         public ICollection<VisitCost> visitCosts { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
-        public ICollection<PatientReservation> PatientReservations{ get; set; }
-
-
-
-
+        
     }
 
 }

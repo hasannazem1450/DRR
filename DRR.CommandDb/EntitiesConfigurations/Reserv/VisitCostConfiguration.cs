@@ -1,4 +1,4 @@
-﻿using DRR.Domain.Reservations;
+﻿using DRR.Domain.Reserv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
