@@ -6,11 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Domain.Reservations
+namespace DRR.Domain.Reserv
 {
     public class VisitCost : Entity<int>
     {
         public VisitCost( int doctorId, int visitTypeId, decimal price)
+        {
+            DoctorId = doctorId;
+            VisitTypeId = visitTypeId;
+            Price = price;
+
+        }
+
+        public void Update(int doctorId, int visitTypeId, decimal price)
         {
             DoctorId = doctorId;
             VisitTypeId = visitTypeId;
@@ -26,8 +34,7 @@ namespace DRR.Domain.Reservations
 
 
              
-        public ICollection<PatientReservation> PatientReservations { get; set; }
-        public ICollection<DoctorInsurance> DoctorInsurances { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
 
 
 

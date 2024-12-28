@@ -1,4 +1,4 @@
-﻿using DRR.Domain.Reservations;
+﻿using DRR.Domain.Reserv;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Application.Contracts.Repository.Reservations
+namespace DRR.Application.Contracts.Repository.Reserv
 {
     public interface IPatientReservationRepository : IRepository
     {
@@ -17,9 +17,9 @@ namespace DRR.Application.Contracts.Repository.Reservations
 
         Task Delete(int id);
 
-        Task Update(Domain.Reservations.PatientReservation patientReservation);
+        Task Update(PatientReservation patientReservation);
 
-        Task Create(Domain.Reservations.PatientReservation patientReservation);
+        Task Create(PatientReservation patientReservation);
     }
 
 }

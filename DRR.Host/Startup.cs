@@ -53,6 +53,7 @@ namespace DRR
 
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DRR.Host", Version = "v1" });
             });
 

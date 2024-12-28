@@ -1,4 +1,4 @@
-﻿using DRR.Domain.Reservations;
+﻿using DRR.Domain.Reserv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -15,15 +15,6 @@ namespace DRR.CommandDb.EntitiesConfigurations.Reservations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Doctor)
-                .WithMany(x => x.Reservations)
-                .HasForeignKey(x => x.DoctorId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(x => x.VisitType)
-                .WithMany(x => x.Reservations)
-                .HasForeignKey(x => x.VisitTypeId)
-                .OnDelete(DeleteBehavior.NoAction);
 
 
         }

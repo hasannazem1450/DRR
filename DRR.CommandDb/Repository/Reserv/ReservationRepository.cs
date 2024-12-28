@@ -1,6 +1,6 @@
-﻿using DRR.Application.Contracts.Repository.Reservations;
+﻿using DRR.Application.Contracts.Repository.Reserv;
 using DRR.CommandDB;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.CommandDb.Repository.Reservations
+namespace DRR.CommandDb.Repository.Reserv
 {
-    class ReservationRepository : BaseRepository, IReservationRepository
+    public class ReservationRepository : BaseRepository, IReservationRepository
     {
         public ReservationRepository(BaseProjectCommandDb db) : base(db)
         {
@@ -25,7 +25,7 @@ namespace DRR.CommandDb.Repository.Reservations
 
         public async Task<List<Reservation>> ReadReservationByDoctorId(int id)
         {
-            var result = await _Db.Reservations.Where(c => c.DoctorId == id).ToListAsync();
+            var result = await _Db.Reservations.Where(c => c.DoctorTreatmentCenter.DoctorId == id).ToListAsync();
 
             return result;
         }
@@ -41,16 +41,16 @@ namespace DRR.CommandDb.Repository.Reservations
 
             return result;
         }
-        public async Task Create(Reservation Reservation)
+        public async Task Create(Reservation reservation)
         {
-            await _Db.Reservations.AddAsync(Reservation);
+            await _Db.Reservations.AddAsync(reservation);
             await _Db.SaveChangesAsync();
         }
-        public async Task Update(Domain.Reservations.Reservation Reservation)
+        public async Task Update(Reservation Reservation)
         {
             var result = await this.ReadReservationById(Reservation.Id);
 
-            result.DoctorId = Reservation.DoctorId;
+            result.DoctorTreatmentCenter.DoctorId = Reservation.DoctorTreatmentCenter.DoctorId;
             result.ReservationDate = Reservation.ReservationDate;
             result.VisitTypeId = Reservation.VisitTypeId;
             result.DoctorTreatmentCenterId = Reservation.DoctorTreatmentCenterId;
