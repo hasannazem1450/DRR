@@ -13,6 +13,14 @@ namespace DRR.Host.Controllers.Comment
        public CommentController(IDistributor distributor) :base(distributor) 
         {
         }
+
+        [HttpGet("read-all-Comment")]
+        public async Task<IActionResult> ReadAllComment([FromQuery] ReadAllCommentQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllCommentQuery, ReadAllCommentQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
         [HttpGet("read-smeprofile-Comment")]
         public async Task<IActionResult> ReadSmeProfileComment([FromQuery] ReadSmeProfileCommentQuery query, CancellationToken cancellationToken)
         {
@@ -24,7 +32,14 @@ namespace DRR.Host.Controllers.Comment
         [HttpGet("read-doctor-Comment")]
         public async Task<IActionResult> ReadDoctorComment([FromQuery] ReadDoctorCommentQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadDoctorCommentQuery, ReadSmeProfileCommentQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadDoctorCommentQuery, ReadDoctorCommentQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [HttpGet("read-article-Comment")]
+        public async Task<IActionResult> ReadArticleComment([FromQuery] ReadArticleCommentQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadArticleCommentQuery, ReadArticleCommentQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }
