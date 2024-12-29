@@ -16,7 +16,13 @@ namespace DRR.Domain.Finance
             IsUsed = isUsed;
 
         }
+        public void Update(string code, decimal discountPercent, bool isUsed)
+        {
+            Code = code;
+            DiscountPercent = discountPercent;
+            IsUsed = isUsed;
 
+        }
         public string  Code { get; set; }
         public decimal DiscountPercent { get; set; }
         public bool IsUsed { get; set; }

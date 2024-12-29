@@ -15,7 +15,13 @@ namespace DRR.Domain.Insurances
             
         }
 
-      
+        public void Update(string type)
+        {
+            Type = type;
+
+        }
+
+
         public string Type { get; set; }
         
         public ICollection<Insurance> Insurances { get; set; }

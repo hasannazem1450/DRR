@@ -16,6 +16,13 @@ namespace DRR.Domain.Insurances
             InsuranceId = insuranceId;
         }
 
+        public void Update(int patientId, int insuranceId)
+        {
+
+            PatientId = patientId;
+            InsuranceId = insuranceId;
+        }
+
         public int Id { get; set; }
        
         public int PatientId { get; set; }

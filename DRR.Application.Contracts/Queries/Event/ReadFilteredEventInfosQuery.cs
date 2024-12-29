@@ -16,6 +16,6 @@ public class ReadFilteredEventInfosQuery : Query
 }
 
 public class ReadFilteredEventInfosQueryResponse : QueryResponse
-{
+{ 
     public List<EventInfoDto> List { get; set; }
 }

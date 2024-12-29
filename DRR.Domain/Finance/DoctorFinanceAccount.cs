@@ -26,6 +26,25 @@ namespace DRR.Domain.Finance
 
         }
 
+        public void Update(int doctorId, string shebanumber, string accountnumber, int terminalId, string ip, string pass, string uRL, string gateName, int gateId, decimal doctorPortion, decimal centerPortion, bool directToAccout, bool prePayment)
+        {
+
+            DoctorId = doctorId;
+            Shebanumber = shebanumber;
+            Accountnumber = accountnumber;
+            TerminalId = terminalId;
+            Ip = ip;
+            Pass = pass;
+            URL = uRL;
+            GateName = gateName;
+            GateId = gateId;
+            DoctorPortion = doctorPortion;
+            CenterPortion = centerPortion;
+            DirectToAccout = directToAccout;
+            PrePayment = prePayment;
+
+        }
+
 
         public int DoctorId { get; set; }
         public string Shebanumber { get; set; }

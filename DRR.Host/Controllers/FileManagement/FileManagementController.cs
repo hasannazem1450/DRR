@@ -7,6 +7,7 @@ using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Controllers.FileManagement;
 
@@ -17,6 +18,7 @@ public class FileManagementController : MainController
     }
 
     [AllowAnonymous]
+    [SwaggerOperation(Summary = "  خواندن فایهای سایت با ایدی")]
     [HttpGet("read-file")]
     public async Task<IActionResult> ReadFile([FromQuery] ReadFileQuery query, CancellationToken cancellationToken)
     {
@@ -28,6 +30,7 @@ public class FileManagementController : MainController
     }
 
     [AllowAnonymous]
+    [SwaggerOperation(Summary = "  نمایش فایل های سایت")]
     [HttpGet("read-file-info")]
     public async Task<IActionResult> ReadFileInfo([FromQuery] ReadFileInfoQuery query, CancellationToken cancellationToken)
     {
@@ -36,7 +39,7 @@ public class FileManagementController : MainController
 
         return OkApiResult(result);
     }
-
+    [SwaggerOperation(Summary = "  آپلود فایل های سایت")]
     [HttpPost("upload")]
     public async Task<IActionResult> Upload(IFormFile file, CancellationToken cancellationToken)
     {
@@ -47,6 +50,7 @@ public class FileManagementController : MainController
         return OkApiResult(result);
     }
 [AllowAnonymous]
+    [SwaggerOperation(Summary = "  آپلود چند فایل به سایت")]
     [HttpPost("upload-batch")]
     public async Task<IActionResult> UploadBatch(IFormFile[] files, CancellationToken cancellationToken)
     {
@@ -56,7 +60,7 @@ public class FileManagementController : MainController
 
         return OkApiResult(result);
     }
-
+    [SwaggerOperation(Summary = "  نمایش فایل های کوچک بیس64 سایت")]
     [HttpPost("upload-base64")]
     public async Task<IActionResult> UploadBase64(UploadBase64FileCommand command, CancellationToken cancellationToken)
     {

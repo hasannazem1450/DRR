@@ -6,6 +6,7 @@ using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.Event;
 
@@ -15,7 +16,7 @@ public class EventInfoController : MainController
     public EventInfoController(IDistributor distributor) : base(distributor)
     {
     }
-
+    [SwaggerOperation(Summary = " ایجاد یک همایش یا نمایشگاه")]
     [HttpPost("create-event")]
     public async Task<IActionResult> Createevent(CreateEventInfoCommand command, CancellationToken cancellationToken)
     {
@@ -24,7 +25,7 @@ public class EventInfoController : MainController
 
         return OkApiResult(result);
     }
-
+    [SwaggerOperation(Summary = " ویرایش یک همایش یا نمایشگاه")]
     [HttpPut("update-event")]
     public async Task<IActionResult> Updateevent(UpdateEventInfoCommand command, CancellationToken cancellationToken)
     {
@@ -33,7 +34,7 @@ public class EventInfoController : MainController
 
         return OkApiResult(result);
     }
-
+    [SwaggerOperation(Summary = " حذف یک همایش یا نمایشگاه")]
     [HttpDelete("delete-event")]
     public async Task<IActionResult> Deleteevent(DeleteEventInfoCommand command, CancellationToken cancellationToken)
     {
@@ -42,7 +43,7 @@ public class EventInfoController : MainController
 
         return OkApiResult(result);
     }
-
+    [SwaggerOperation(Summary = " خواندن جزیات یک همایش یا نمایشگاه")]
     [HttpGet("read-event")]
     public async Task<IActionResult> ReadEvent([FromQuery] ReadEventInfoQuery query,
         CancellationToken cancellationToken)
@@ -53,6 +54,7 @@ public class EventInfoController : MainController
     }
 
     [AllowAnonymous]
+    [SwaggerOperation(Summary = "  خواندن کل همایش یا نمایشگاه های سایت")]
     [HttpGet("read-events")]
     public async Task<IActionResult> ReadEvents([FromQuery] ReadEventInfosQuery query,
         CancellationToken cancellationToken)
@@ -63,6 +65,7 @@ public class EventInfoController : MainController
     }
 
     [AllowAnonymous]
+    [SwaggerOperation(Summary = "  خواندن  همایش یا نمایشگاه های صفحه اول سایت")]
     [HttpGet("read-upcoming-events")]
     public async Task<IActionResult> ReadUpcomingEvents([FromQuery] ReadUpcomingEventInfosQuery query,
         CancellationToken cancellationToken)
@@ -75,6 +78,7 @@ public class EventInfoController : MainController
     }
 
     [AllowAnonymous]
+    [SwaggerOperation(Summary = "  جستجو در کل همایش یا نمایشگاه های سایت")]
     [HttpPost("read-filtered-events")]
     public async Task<IActionResult> ReadFilteredEvents([FromBody] ReadFilteredEventInfosQuery query,
         CancellationToken cancellationToken)

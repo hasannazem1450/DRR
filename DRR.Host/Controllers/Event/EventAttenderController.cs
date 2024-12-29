@@ -6,6 +6,7 @@ using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.Event;
 
@@ -15,7 +16,7 @@ public class EventAttenderController : MainController
     public EventAttenderController(IDistributor distributor) : base(distributor)
     {
     }
-
+    [SwaggerOperation(Summary = " ویرایش یک همایش یا نمایشگاه")]
     [HttpPost("create")]
     public async Task<IActionResult> Create(CreateEventAttenderCommand command, CancellationToken cancellationToken)
     {

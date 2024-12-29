@@ -8,6 +8,7 @@ using DRR.Application.Contracts.Queries.Jornal;
 using DRR.Application.Contracts.Commands.News;
 using DRR.Application.Contracts.Commands.Jornal;
 using DRR.Application.Contracts.Commands.BaseInfo.City;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.Jornal
 {
@@ -16,6 +17,7 @@ namespace DRR.Host.Controllers.Jornal
         public ArticleController(IDistributor distributor) : base(distributor)
         {
         }
+        [SwaggerOperation(Summary = "  نمایش مقالات یک کاربر")]
         [HttpGet("read-smeprofile-articles")]
         public async Task<IActionResult> ReadSmeProfileArticle([FromQuery] ReadSmeProfileArticleQuery query, CancellationToken cancellationToken)
         {
@@ -23,6 +25,7 @@ namespace DRR.Host.Controllers.Jornal
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "  نمایش کل مقالات ")]
         [HttpGet("read-all-articles")]
         public async Task<IActionResult> ReadAllArticle([FromQuery] ReadAllArticleQuery query, CancellationToken cancellationToken)
         {
@@ -30,6 +33,7 @@ namespace DRR.Host.Controllers.Jornal
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "  ایجاد یک مقالات ")]
         [HttpPost("create-articles")]
         public async Task<IActionResult> CreateArticle(CreateArticleCommand command, CancellationToken cancellationToken)
         {
@@ -37,7 +41,7 @@ namespace DRR.Host.Controllers.Jornal
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "  حذف یک مقالات ")]
         [HttpDelete("delete-articles")]
         public async Task<IActionResult> DeleteArticle(CancellationToken cancellationToken)
         {
@@ -46,6 +50,7 @@ namespace DRR.Host.Controllers.Jornal
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "  ویرایش یک مقالات ")]
         [HttpPut("update-articles")]
         public async Task<IActionResult> UpdateArticle(CancellationToken cancellationToken)
         {

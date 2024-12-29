@@ -18,7 +18,14 @@ namespace DRR.Domain.News
             Photo = photo;
         }
 
-        public int Id { get; set; }
+        public void Update(string title, string headLine, string description, string photo)
+        {
+            Title = title;
+            HeadLine = headLine;
+            Description = description;
+            Photo = photo;
+        }
+
         public string Title { get; set; }
         public string HeadLine { get; set; }
         public string Description { get; set; }

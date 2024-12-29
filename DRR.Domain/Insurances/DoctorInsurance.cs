@@ -1,6 +1,6 @@
 ﻿using DRR.Domain.Profile;
 using DRR.Domain.Customer;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 
@@ -10,6 +10,16 @@ namespace DRR.Domain.Insurances
     public class DoctorInsurance : Entity<int>
     {
         public DoctorInsurance(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId)
+        {
+
+            DoctorId = doctorId;
+            InsuranceId = insuranceId;
+            ContractSituation = contractSituation;
+            InsurancePercent = insurancePercent;
+            VisitCostId = visitCostId;
+
+        }
+        public void Update(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId)
         {
 
             DoctorId = doctorId;

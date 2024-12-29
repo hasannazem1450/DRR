@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Repository.News
 {
     public interface IAdsRepository : IRepository
     {
-        Task<Domain.News.Ads> ReadById(int id);
+        Task<Domain.News.Ads> ReadById(int id); 
 
         Task<List<Domain.News.Ads>> Read(AdsDto adsDto);
 

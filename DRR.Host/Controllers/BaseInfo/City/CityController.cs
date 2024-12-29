@@ -7,6 +7,7 @@ using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.BaseInfo.City
 {
@@ -17,6 +18,7 @@ namespace DRR.Host.Controllers.BaseInfo.City
         }
 
         [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن شهرها بر اساس استان")]
         [HttpPost("read-city")]
         public async Task<IActionResult> ReadCity([FromBody]ReadCityQuery query, CancellationToken cancellationToken)
         {
@@ -26,6 +28,7 @@ namespace DRR.Host.Controllers.BaseInfo.City
         }
 
         //TODO:Complete The City CRUD
+        [SwaggerOperation(Summary = "ایجاد شهر جدید در استان")]
         [HttpPost("create-city")]
         public async Task<IActionResult> CreateCity(CreateCityCommand query, CancellationToken cancellationToken)
         {
@@ -33,7 +36,7 @@ namespace DRR.Host.Controllers.BaseInfo.City
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "حذف یک شهر")]
         [HttpDelete("delete-city")]
         public async Task<IActionResult> DeleteCity(CancellationToken cancellationToken)
         {
@@ -42,7 +45,7 @@ namespace DRR.Host.Controllers.BaseInfo.City
 
             return OkApiResult(result);
         }
-
+        [SwaggerOperation(Summary = "ویرایش نام یک شهر")]
         [HttpPut("update-city")]
         public async Task<IActionResult> UpdateCity(CancellationToken cancellationToken)
         {

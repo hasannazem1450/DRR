@@ -62,7 +62,7 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
 
             result.Name = Clinic.Name;
             result.Address = Clinic.Address;
-            result.GlId = Clinic.GlId;
+            result.Geoloc = Clinic.Geoloc;
             result.Phone = Clinic.Phone;
             result.CityId = Clinic.CityId;
             result.SiamCode = Clinic.SiamCode;

@@ -3,7 +3,7 @@ using DRR.Domain.Customer;
 using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
-using DRR.Domain.Reservations;
+using DRR.Domain.Reserv;
 
 namespace DRR.Domain.TreatmentCenters
 {
@@ -16,8 +16,14 @@ namespace DRR.Domain.TreatmentCenters
             OfficeId = officeId;
             Desc = desc;
         }
+        public void Update(int doctorId, int? clinicId, int? officeId, string desc)
+        {
+            DoctorId = doctorId;
+            ClinicId = clinicId;
+            OfficeId = officeId;
+            Desc = desc;
+        }
 
-        public int Id { get; set; }
         public int DoctorId { get; set; }
         public int? ClinicId { get; set; }
         public int? OfficeId { get; set; }
