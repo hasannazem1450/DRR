@@ -19,7 +19,7 @@ namespace DRR.Application.Contracts.Queries.Comment
     {
         public ReadSmeProfileCommentQueryResponse()
         {
-            List = new List<CommentDto>();
+            List = new List<CommentDto>(); 
         }
         public List<CommentDto> List { get; set; }
     }

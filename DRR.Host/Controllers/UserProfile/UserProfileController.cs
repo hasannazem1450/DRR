@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using DRR.Application.Contracts.Queries.Profile.SmeTypeReturn;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace DRR.Host.Controllers.UserProfile
 {
@@ -16,7 +15,7 @@ namespace DRR.Host.Controllers.UserProfile
         public UserProfileController(IDistributor distributor) : base(distributor)
         {
         }
-        [SwaggerOperation(Summary = " ایجاد یک کاربر مرکز درمانی ")]
+
         [HttpPost("create-sme-profile")]
         public async Task<IActionResult> CreateUserProfile(CreateUserProfileCommand query, CancellationToken cancellationToken)
         {
@@ -26,7 +25,6 @@ namespace DRR.Host.Controllers.UserProfile
         }
 
         [AllowAnonymous]
-        [SwaggerOperation(Summary = " خواندن همه کاربران مرکز درمانی ")]
         [HttpGet("read-all-userprofiles")]
         public async Task<IActionResult> ReadAllUserProfile([FromQuery] ReadAllUserProfileQuery query, CancellationToken cancellationToken)
         {
@@ -34,7 +32,7 @@ namespace DRR.Host.Controllers.UserProfile
 
             return OkApiResult(result);
         }
-        [SwaggerOperation(Summary = " جستجو همه کاربران مرکز درمانی ")]
+
         [HttpPost("read-all-userprofiles-filter")]
         public async Task<IActionResult> ReadAllUserProfilesFilter([FromQuery] ReadAllUserProfilesFilterQuery query, CancellationToken cancellationToken)
         {
@@ -42,7 +40,7 @@ namespace DRR.Host.Controllers.UserProfile
 
             return OkApiResult(result);
         }
-        [SwaggerOperation(Summary = " خواندن کاربر مرکز درمانی ")]
+
         [HttpGet("read-userprofiles")]
         public async Task<IActionResult> ReadUserProfileByUserId([FromQuery] ReadUserProfileQuery query, CancellationToken cancellationToken)
         {
@@ -51,7 +49,6 @@ namespace DRR.Host.Controllers.UserProfile
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = " خواندن نوع کاربری یک کاربر ")]
         [HttpGet("read-userprofiles-type")]
         public async Task<IActionResult> ReadUserProfileByUserId([FromQuery] ReadAllSmeTypesQuery query, CancellationToken cancellationToken)
         {
