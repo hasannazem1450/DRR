@@ -9,7 +9,7 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadPatientQuery : Query
+    public class ReadPatientQuery : Query 
     {
     }
     public class ReadPatientQueryResponse : QueryResponse

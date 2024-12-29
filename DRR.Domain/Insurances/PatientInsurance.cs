@@ -9,24 +9,26 @@ namespace DRR.Domain.Insurances
 {
     public class PatientInsurance : Entity<int>
     {
-        public PatientInsurance( int patientId,int insuranceId)
+        public PatientInsurance( int patientId,int insuranceId, string expiredate)
         {
             
             PatientId = patientId;
             InsuranceId = insuranceId;
+            Expiredate = expiredate;
         }
 
-        public void Update(int patientId, int insuranceId)
+        public void Update(int patientId, int insuranceId, string expiredate)
         {
 
             PatientId = patientId;
             InsuranceId = insuranceId;
+            Expiredate = expiredate;
         }
 
-        public int Id { get; set; }
-       
+           
         public int PatientId { get; set; }
         public int InsuranceId { get; set; }
+        public string Expiredate { get; set; }
                 
         public Insurance Insurance { get; set; }
         public Patient Patient { get; set; }

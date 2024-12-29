@@ -1,4 +1,5 @@
 ﻿using DRR.Application.Contracts.Commands.Customer;
+using DRR.Domain.Insurances;
 using DRR.Framework.Contracts.Abstracts;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadInsurancesDoctorQuery:Query
+    public class ReadInsurancesPatientQuery : Query
     {
-        public int DoctorId { get; set; }
+        public int PatientId { get; set; }
     }
-    public class ReadInsurancesDoctorQueryResponse : QueryResponse
+    public class ReadInsurancesPatientQueryResponse : QueryResponse
     {
-        public List<DoctorInsuranceDto> List { get; set; }
+        public List<PatientInsuranceDto> List { get; set; }
     }
 }

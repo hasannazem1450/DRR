@@ -42,6 +42,11 @@ namespace DRR.Domain.Customer
             Gender = gender;
             SmeProfileId = smeProfileId;
         }
+
+        public void SetIsDeleted(bool isDeleted)
+        {
+            IsDeleted = isDeleted;
+        }
         public string PatientName { get; set; }
         public string PatientFamily { get; set; }
         public string NationalId { get; set; }

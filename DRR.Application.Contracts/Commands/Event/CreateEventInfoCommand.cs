@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Commands.Event
     public class CreateEventInfoCommand : Command
     {
         public string Name { get; set; }
-        public string Photo { get; set; }
+        public string Photo { get; set; } 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Periority { get; set; }

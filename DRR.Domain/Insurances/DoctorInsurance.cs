@@ -9,7 +9,7 @@ namespace DRR.Domain.Insurances
 {
     public class DoctorInsurance : Entity<int>
     {
-        public DoctorInsurance(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId)
+        public DoctorInsurance(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId, bool isActive)
         {
 
             DoctorId = doctorId;
@@ -17,9 +17,10 @@ namespace DRR.Domain.Insurances
             ContractSituation = contractSituation;
             InsurancePercent = insurancePercent;
             VisitCostId = visitCostId;
+            IsActive = isActive;
 
         }
-        public void Update(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId)
+        public void Update(int doctorId, int insuranceId, string contractSituation, decimal insurancePercent, int visitCostId,bool isActive)
         {
 
             DoctorId = doctorId;
@@ -27,7 +28,7 @@ namespace DRR.Domain.Insurances
             ContractSituation = contractSituation;
             InsurancePercent = insurancePercent;
             VisitCostId = visitCostId;
-
+            IsActive = isActive;
         }
 
         public int DoctorId { get; set; }
@@ -35,7 +36,7 @@ namespace DRR.Domain.Insurances
         public string ContractSituation { get; set; }
         public decimal InsurancePercent { get; set; }
         public int VisitCostId { get; set; }
-
+        public bool IsActive { get; set; }
 
         public Insurance Insurance { get; set; }
         public Doctor Doctor { get; set; }

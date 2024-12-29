@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Services.Customer
 {
     public interface IPatientService : IService
     {
-        Task<PatientDto> ReadById(int id);
+        Task<PatientDto> ReadById(int id); 
         Task<List<PatientDto>> ReadPatientBySmeProfileId(int SmeProfileId);
     }
 }
