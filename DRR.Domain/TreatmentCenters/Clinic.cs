@@ -5,6 +5,7 @@ using DRR.Domain.Customer;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using System.Data.Entity.Spatial;
+using System.Drawing;
 
 
 namespace DRR.Domain.TreatmentCenters
@@ -12,22 +13,24 @@ namespace DRR.Domain.TreatmentCenters
 
     public class Clinic : Entity<int>
     {
-        public Clinic(string name, string address, DbGeography geoloc, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
+        public Clinic(string name, string address, double geolon, double geolat, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
         {
             Name = name;
             Address = address;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             Phone = phone;
             CityId = cityId;
             SiamCode = siamCode;
             Desc = desc;
             ClinicTypeId = clinicTypeId;
         }
-        public void Update(string name, string address, DbGeography geoloc, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
+        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
         {
             Name = name;
             Address = address;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             Phone = phone;
             CityId = cityId;
             SiamCode = siamCode;
@@ -37,8 +40,8 @@ namespace DRR.Domain.TreatmentCenters
 
         public string Name { get; set; }
         public string Address { get; set; }
-        public DbGeography Geoloc { get; set; }
-    
+        public double Geolon { get; set; }
+        public double Geolat { get; set; }
         public string Phone { get; set; }
         public int CityId { get; set; }
         public string SiamCode { get; set; }

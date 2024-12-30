@@ -52,7 +52,8 @@ namespace DRR.CommandDb.Repository.Customer
             result.BirthNumber = Patient.BirthNumber;
             result.BirthDate = Patient.BirthDate;
             result.CityId = Patient.CityId;
-            result.Geoloc = Patient.Geoloc;
+            result.Geolat = Patient.Geolat;
+            result.Geolon = Patient.Geolon;
             result.PatientPhone = Patient.PatientPhone;
             result.NecessaryPhone = Patient.NecessaryPhone;
             result.Email = Patient.Email;

@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Domain.Event;
 using System.Data.Entity.Spatial;
+using System.Drawing;
 
 namespace DRR.Domain.Customer
 {
     public class Patient : Entity<int>
     {
-        public Patient(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, DbGeography? geoloc, string patientPhone, string necessaryPhone, string? email, bool gender, int smeProfileId)
+        public Patient(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, double geolon, double geolat, string patientPhone, string necessaryPhone, string? email, bool gender, int smeProfileId)
         {
             PatientName = patientName;
             PatientFamily = patientFamily;
@@ -19,7 +20,8 @@ namespace DRR.Domain.Customer
             BirthNumber = birthNumber;
             BirthDate = birthDate;
             CityId = cityId;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             PatientPhone = patientPhone;
             NecessaryPhone = necessaryPhone;
             Email = email;
@@ -27,7 +29,7 @@ namespace DRR.Domain.Customer
             SmeProfileId = smeProfileId;
         }
 
-        public void Update(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, DbGeography? geoloc, string patientPhone, string necessaryPhone, string? email, bool gender, int smeProfileId)
+        public void Update(string patientName, string patientFamily, string nationalId, int birthNumber, string birthDate, int cityId, double geolon, double geolat, string patientPhone, string necessaryPhone, string? email, bool gender, int smeProfileId)
         {
             PatientName = patientName;
             PatientFamily = patientFamily;
@@ -35,7 +37,8 @@ namespace DRR.Domain.Customer
             BirthNumber = birthNumber;
             BirthDate = birthDate;
             CityId = cityId;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             PatientPhone = patientPhone;
             NecessaryPhone = necessaryPhone;
             Email = email;
@@ -53,7 +56,8 @@ namespace DRR.Domain.Customer
         public int BirthNumber { get; set; }
         public string BirthDate { get; set; }
         public int CityId { get; set; }
-        public DbGeography? Geoloc { get; set; }
+        public double Geolon { get; set; }
+        public double Geolat { get; set; }
         public string PatientPhone { get; set; }
         public string NecessaryPhone { get; set; }
         public string Email { get; set; }

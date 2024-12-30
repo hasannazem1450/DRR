@@ -4,28 +4,31 @@ using DRR.Domain.Reserv;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
+using System.Drawing;
 
 
 namespace DRR.Domain.TreatmentCenters
 {
     public class Office : Entity<int>
     {
-        public Office(string name, string address, DbGeography geoloc ,string phone, int cityId, string postalCode, int officeTypeId)
+        public Office(string name, string address, double geolon , double geolat, string phone, int cityId, string postalCode, int officeTypeId)
         {
             Name = name;
             Address = address;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             Phone = phone;
             CityId = cityId;
             PostalCode = postalCode;
             OfficeTypeId = officeTypeId;
 
         }
-        public void Update(string name, string address, DbGeography geoloc, string phone, int cityId, string postalCode, int officeTypeId)
+        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string postalCode, int officeTypeId)
         {
             Name = name;
             Address = address;
-            Geoloc = geoloc;
+            Geolon = geolon;
+            Geolat = geolat;
             Phone = phone;
             CityId = cityId;
             PostalCode = postalCode;
@@ -35,7 +38,8 @@ namespace DRR.Domain.TreatmentCenters
 
         public string Name { get; set; }
         public string Address { get; set; }
-        public DbGeography Geoloc { get; set; }
+        public double Geolon { get; set; }
+        public double Geolat { get; set; }
         public string Phone { get; set; }
         public int CityId { get; set; }
         public string PostalCode { get; set; }

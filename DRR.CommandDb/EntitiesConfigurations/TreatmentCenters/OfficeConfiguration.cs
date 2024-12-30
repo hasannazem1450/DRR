@@ -15,10 +15,11 @@ namespace DRR.CommandDb.EntitiesConfigurations.TreatmentCenters
         {
             builder.HasKey(x => x.Id);
 
-            //builder.HasOne(x => x.City)
-            //    .WithMany(x => x.Offices)
-            //    .HasForeignKey(x => x.CityId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+           
+            builder.HasOne(x => x.City)
+                .WithMany(x => x.Offices)
+                .HasForeignKey(x => x.CityId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.OfficeType)
                 .WithMany(x => x.Offices)

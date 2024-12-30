@@ -29,12 +29,7 @@ namespace DRR.CommandDb.Repository.VisitCosts
 
             return result;
         }
-        public async Task<List<VisitCost>> ReadVisitCostByVisitTypeId(int id)
-        {
-            var result = await _Db.VisitCosts.Where(c => c.VisitTypeId == id).ToListAsync();
-
-            return result;
-        }
+        
         
         public async Task Create(VisitCost VisitCost)
         {
@@ -46,7 +41,6 @@ namespace DRR.CommandDb.Repository.VisitCosts
             var result = await this.ReadVisitCostById(VisitCost.Id);
 
             result.DoctorId = VisitCost.DoctorId;
-            result.VisitTypeId = VisitCost.VisitTypeId;
             result.Price = VisitCost.Price;
 
             

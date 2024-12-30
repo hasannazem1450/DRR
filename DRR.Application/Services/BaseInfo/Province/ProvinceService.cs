@@ -62,24 +62,24 @@ namespace DRR.Application.Services.BaseInfo.Province
             return result;
         }
 
-        public async Task<List<ProvinceDtoDropdown>> ReadForDropdown()
-        {
-            var province = await _provinceRepository.Read();
+        //public async Task<List<ProvinceDtoDropdown>> ReadForDropdown()
+        //{
+        //    var province = await _provinceRepository.Read();
 
-            var result = new List<ProvinceDtoDropdown>();
+        //    var result = new List<ProvinceDtoDropdown>();
 
-            foreach (var item in province)
-            {
-                var dto = new ProvinceDtoDropdown()
-                {
-                    Value = item.Id,
-                    Label = item.Name,
-                };
+        //    foreach (var item in province)
+        //    {
+        //        var dto = new ProvinceDtoDropdown()
+        //        {
+        //            Value = item.Id,
+        //            Label = item.Name,
+        //        };
 
-                result.Add(dto);
-            }
+        //        result.Add(dto);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

@@ -31,7 +31,7 @@ namespace DRR.Host.Controllers.FollowProfile
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = "  افزودن مقاله به علاقه مندی ")]
-        [HttpPost("create-FollowProfile")]
+        [HttpPost("create-FollowArticle")]
         public async Task<IActionResult> CreateArticleFollow(CreateFollowProfileCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateFollowProfileCommand, CreateFollowProfileCommandResponse>(command, cancellationToken);

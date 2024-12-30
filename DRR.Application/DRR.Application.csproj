@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="QueryHandlers\BaseInfo\Province\ReadProvinceQueryHandler.cs" />
-    <Compile Remove="Services\BaseInfo\Province\ProvinceService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml.user" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml.user" />
   </ItemGroup>
@@ -32,11 +27,6 @@
     <ProjectReference Include="..\DRR.CommandDb\DRR.CommandDb.csproj" />
     <ProjectReference Include="..\DRR.Framework.Contracs\DRR.Framework.Contracs.csproj" />
     <ProjectReference Include="..\DRR.Settings\DRR.Settings.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="QueryHandlers\BaseInfo\Province\" />
-    <Folder Include="Services\BaseInfo\Province\" />
   </ItemGroup>
 
 </Project>

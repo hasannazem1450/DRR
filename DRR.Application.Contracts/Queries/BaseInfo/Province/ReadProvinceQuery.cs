@@ -13,7 +13,7 @@ namespace DRR.Application.Contracts.Queries.BaseInfo.Province
 
     }
 
-    public class ReadProvinceDropdownQuery : Query
+    public class ReadProvinceDropdownQuery : Query 
     {
         public ReadProvinceDropdownQuery()
         {

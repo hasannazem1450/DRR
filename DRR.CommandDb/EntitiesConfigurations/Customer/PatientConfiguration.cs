@@ -14,11 +14,11 @@ namespace DRR.CommandDb.EntitiesConfigurations.Customer
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
             builder.HasKey(x => x.Id);
-
-            //builder.HasOne(x => x.City)
-            //    .WithMany(x => x.Patients)
-            //    .HasForeignKey(x => x.CityId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+           
+            builder.HasOne(x => x.City)
+                .WithMany(x => x.Patients)
+                .HasForeignKey(x => x.CityId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

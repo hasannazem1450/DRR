@@ -13,7 +13,6 @@ namespace DRR.Application.Contracts.Repository.Reserv
 
         Task<VisitCost> ReadVisitCostById(int id);
         Task<List<VisitCost>> ReadVisitCostByDoctorId(int id);
-        Task<List<VisitCost>> ReadVisitCostByVisitTypeId(int id);
         
 
         Task Delete(int id);

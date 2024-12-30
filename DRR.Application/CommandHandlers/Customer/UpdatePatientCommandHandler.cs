@@ -24,7 +24,7 @@ namespace DRR.Application.CommandHandlers.Customer
         {
             var patient = await _patientRepository.ReadPatientById(command.Id);
 
-            patient.Update(command.PatientName, command.PatientFamily, command.NationalId, command.BirthNumber, command.BirthDate, command.CityId, command.Geoloc, command.PatientPhone, command.NecessaryPhone, command.Email, command.Gender, command.SmeProfileId);
+            patient.Update(command.PatientName, command.PatientFamily, command.NationalId, command.BirthNumber, command.BirthDate, command.CityId, command.Geolat, command.Geolon, command.PatientPhone, command.NecessaryPhone, command.Email, command.Gender, command.SmeProfileId);
 
             await _patientRepository.Update(patient);
 

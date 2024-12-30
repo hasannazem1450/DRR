@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DRR.CommandDb.Migrations
 {
     [DbContext(typeof(BaseProjectCommandDb))]
-    [Migration("20241120054207_init")]
+    [Migration("20241230090700_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -78,6 +78,8 @@ namespace DRR.CommandDb.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleTypeId");
+
+                    b.HasIndex("DRRFileId");
 
                     b.HasIndex("DoctorId");
 
@@ -483,8 +485,11 @@ namespace DRR.CommandDb.Migrations
                     b.Property<bool>("Gender")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("GlId")
-                        .HasColumnType("int");
+                    b.Property<double>("Geolat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Geolon")
+                        .HasColumnType("float");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -985,6 +990,9 @@ namespace DRR.CommandDb.Migrations
                     b.Property<decimal>("InsurancePercent")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1088,6 +1096,9 @@ namespace DRR.CommandDb.Migrations
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Expiredate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("InsuranceId")
                         .HasColumnType("int");
@@ -1496,7 +1507,7 @@ namespace DRR.CommandDb.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.PatientReservation", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.PatientReservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1528,10 +1539,7 @@ namespace DRR.CommandDb.Migrations
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VisitCostId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VisitTypeId")
+                    b.Property<int>("TurnId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1542,14 +1550,12 @@ namespace DRR.CommandDb.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.HasIndex("VisitCostId");
-
-                    b.HasIndex("VisitTypeId");
+                    b.HasIndex("TurnId");
 
                     b.ToTable("PatientReservations");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.Reservation", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1566,7 +1572,7 @@ namespace DRR.CommandDb.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<int>("DoctorTreatmentCenterId")
@@ -1584,6 +1590,12 @@ namespace DRR.CommandDb.Migrations
                     b.Property<string>("ReservationDate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ReservationTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VisitCostId")
+                        .HasColumnType("int");
+
                     b.Property<int>("VisitTypeId")
                         .HasColumnType("int");
 
@@ -1593,12 +1605,57 @@ namespace DRR.CommandDb.Migrations
 
                     b.HasIndex("DoctorTreatmentCenterId");
 
+                    b.HasIndex("VisitCostId");
+
                     b.HasIndex("VisitTypeId");
 
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.VisitCost", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.Turn", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Etime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GradeIsDone")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Stime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TurnNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Turn");
+                });
+
+            modelBuilder.Entity("DRR.Domain.Reserv.VisitCost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1627,7 +1684,7 @@ namespace DRR.CommandDb.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("VisitTypeId")
+                    b.Property<int?>("VisitTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1637,7 +1694,7 @@ namespace DRR.CommandDb.Migrations
                     b.ToTable("VisitCosts");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.VisitType", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.VisitType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2045,8 +2102,11 @@ namespace DRR.CommandDb.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GlId")
-                        .HasColumnType("int");
+                    b.Property<double>("Geolat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Geolon")
+                        .HasColumnType("float");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -2172,8 +2232,11 @@ namespace DRR.CommandDb.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("GlId")
-                        .HasColumnType("int");
+                    b.Property<double>("Geolat")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Geolon")
+                        .HasColumnType("float");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -2377,6 +2440,10 @@ namespace DRR.CommandDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DRR.Domain.FileManagement.DRRFile", "PhotoFile")
+                        .WithMany()
+                        .HasForeignKey("DRRFileId");
+
                     b.HasOne("DRR.Domain.Customer.Doctor", null)
                         .WithMany("Articles")
                         .HasForeignKey("DoctorId");
@@ -2388,6 +2455,8 @@ namespace DRR.CommandDb.Migrations
                         .IsRequired();
 
                     b.Navigation("ArticleType");
+
+                    b.Navigation("PhotoFile");
 
                     b.Navigation("SmeProfile");
                 });
@@ -2525,7 +2594,7 @@ namespace DRR.CommandDb.Migrations
                     b.HasOne("DRR.Domain.BaseInfo.City", "City")
                         .WithMany("Patients")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("DRR.Domain.Profile.SmeProfile", "SmeProfile")
@@ -2611,7 +2680,7 @@ namespace DRR.CommandDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DRR.Domain.Reservations.PatientReservation", "PatientReservation")
+                    b.HasOne("DRR.Domain.Reserv.PatientReservation", "PatientReservation")
                         .WithMany()
                         .HasForeignKey("PatientReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2646,10 +2715,10 @@ namespace DRR.CommandDb.Migrations
                         .HasForeignKey("InsuranceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("DRR.Domain.Reservations.VisitCost", "VisitCost")
-                        .WithMany("DoctorInsurances")
+                    b.HasOne("DRR.Domain.Reserv.VisitCost", "VisitCost")
+                        .WithMany()
                         .HasForeignKey("VisitCostId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -2772,7 +2841,7 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.PatientReservation", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.PatientReservation", b =>
                 {
                     b.HasOne("DRR.Domain.Finance.DiscountCode", "DiscountCode")
                         .WithMany()
@@ -2784,34 +2853,32 @@ namespace DRR.CommandDb.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DRR.Domain.Reservations.Reservation", "Reservation")
+                    b.HasOne("DRR.Domain.Reserv.Reservation", "Reservation")
                         .WithMany()
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DRR.Domain.Reservations.VisitCost", null)
-                        .WithMany("PatientReservations")
-                        .HasForeignKey("VisitCostId");
-
-                    b.HasOne("DRR.Domain.Reservations.VisitType", null)
-                        .WithMany("PatientReservations")
-                        .HasForeignKey("VisitTypeId");
+                    b.HasOne("DRR.Domain.Reserv.Turn", "Turn")
+                        .WithMany()
+                        .HasForeignKey("TurnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DiscountCode");
 
                     b.Navigation("Patient");
 
                     b.Navigation("Reservation");
+
+                    b.Navigation("Turn");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.Reservation", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.Reservation", b =>
                 {
-                    b.HasOne("DRR.Domain.Customer.Doctor", "Doctor")
+                    b.HasOne("DRR.Domain.Customer.Doctor", null)
                         .WithMany("Reservations")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("DRR.Domain.TreatmentCenters.DoctorTreatmentCenter", "DoctorTreatmentCenter")
                         .WithMany("Reservations")
@@ -2819,26 +2886,30 @@ namespace DRR.CommandDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DRR.Domain.Reservations.VisitType", "VisitType")
+                    b.HasOne("DRR.Domain.Reserv.VisitCost", "VisitCost")
                         .WithMany("Reservations")
-                        .HasForeignKey("VisitTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("VisitCostId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Doctor");
+                    b.HasOne("DRR.Domain.Reserv.VisitType", "VisitType")
+                        .WithMany()
+                        .HasForeignKey("VisitTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DoctorTreatmentCenter");
+
+                    b.Navigation("VisitCost");
 
                     b.Navigation("VisitType");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.VisitCost", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.VisitCost", b =>
                 {
-                    b.HasOne("DRR.Domain.Reservations.VisitType", null)
+                    b.HasOne("DRR.Domain.Reserv.VisitType", null)
                         .WithMany("visitCosts")
-                        .HasForeignKey("VisitTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VisitTypeId");
                 });
 
             modelBuilder.Entity("DRR.Domain.SiteMessenger.MessagingGroupSmeProfile", b =>
@@ -2968,7 +3039,7 @@ namespace DRR.CommandDb.Migrations
                     b.HasOne("DRR.Domain.BaseInfo.City", "City")
                         .WithMany("Offices")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("DRR.Domain.TreatmentCenters.OfficeType", "OfficeType")
@@ -3153,19 +3224,13 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("SmeProfiles");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.VisitCost", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.VisitCost", b =>
                 {
-                    b.Navigation("DoctorInsurances");
-
-                    b.Navigation("PatientReservations");
+                    b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Reservations.VisitType", b =>
+            modelBuilder.Entity("DRR.Domain.Reserv.VisitType", b =>
                 {
-                    b.Navigation("PatientReservations");
-
-                    b.Navigation("Reservations");
-
                     b.Navigation("visitCosts");
                 });
 

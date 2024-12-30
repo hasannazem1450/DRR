@@ -9,24 +9,22 @@ namespace DRR.Domain.Reserv
 {
     public class Turn : Entity<int>
     {
-        public Turn (int turnNumber,string stime ,string etime ,bool isFree, int gradeIsDone ,int reservationId)
+        public Turn (int turnNumber,string stime ,string etime ,bool isFree, int gradeIsDone)
         {
             this.TurnNumber = turnNumber;
             this.Stime = stime;
             this.Etime = etime;
             this.IsFree = isFree;
             this.GradeIsDone = gradeIsDone;
-            this.ReservationId = reservationId;
 
         }
-        public void Update(int turnNumber, string stime, string etime, bool isFree, int gradeIsDone, int reservationId)
+        public void Update(int turnNumber, string stime, string etime, bool isFree, int gradeIsDone)
         {
             this.TurnNumber = turnNumber;
             this.Stime = stime;
             this.Etime = etime;
             this.IsFree = isFree;
             this.GradeIsDone = gradeIsDone;
-            this.ReservationId = reservationId;
 
         }
 
@@ -35,7 +33,5 @@ namespace DRR.Domain.Reserv
         public string Etime { get; set; }
         public bool IsFree { get; set; }
         public int GradeIsDone { get; set; }
-        public int ReservationId { get; set; }
-        public Reservation Reservation { get; set; }
     }
 }
