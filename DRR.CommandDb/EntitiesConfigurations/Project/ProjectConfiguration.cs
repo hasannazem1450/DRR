@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Project
 {
-    class ProjectConfiguration
+    public class ProjectConfiguration
     {
     }
 }

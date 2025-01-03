@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Comments
 {
-    class CommentConfiguration : IEntityTypeConfiguration<Comment>
+    public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {

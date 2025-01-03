@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Reservations
 {
-    class VisitCostConfiguration : IEntityTypeConfiguration<VisitCost>
+    public class VisitCostConfiguration : IEntityTypeConfiguration<VisitCost>
     {
         public void Configure(EntityTypeBuilder<VisitCost> builder)
         {

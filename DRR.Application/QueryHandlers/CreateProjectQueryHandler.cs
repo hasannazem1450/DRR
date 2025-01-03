@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers
 {
-    internal class CreateProjectQueryHandler
+    public class CreateProjectQueryHandler
     {
     }
 }

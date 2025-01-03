@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.Finance;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Finance
 {
-    class DiscountCodeRepository : BaseRepository, IDiscountCodeRepository
+    public class DiscountCodeRepository : BaseRepository, IDiscountCodeRepository
     {
         public DiscountCodeRepository(BaseProjectCommandDb db) : base(db)
         {

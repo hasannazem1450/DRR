@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Identity.Exceptions
 {
-    class IdentitySignOutExceptionConfiguration
+    public class IdentitySignOutExceptionConfiguration
     {
     }
 }

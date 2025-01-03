@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.TreatmentCenters
 {
-    class DoctorTreatmentCenterConfiguration : IEntityTypeConfiguration<DoctorTreatmentCenter>
+    public class DoctorTreatmentCenterConfiguration : IEntityTypeConfiguration<DoctorTreatmentCenter>
     {
         public void Configure(EntityTypeBuilder<DoctorTreatmentCenter> builder)
         {

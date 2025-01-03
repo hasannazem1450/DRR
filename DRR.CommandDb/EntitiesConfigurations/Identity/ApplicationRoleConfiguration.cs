@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Identity
 {
-    class ApplicationRoleConfiguration
+    public class ApplicationRoleConfiguration
     {
     }
 }

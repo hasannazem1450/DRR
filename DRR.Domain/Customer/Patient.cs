@@ -5,7 +5,6 @@ using DRR.Domain.Comments;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Domain.Event;
-using System.Data.Entity.Spatial;
 using System.Drawing;
 
 namespace DRR.Domain.Customer

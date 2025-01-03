@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.CommandHandlers.Authentication
 {
-    internal class ResetPasswordCommandHandler : CommandHandler<ResetPasswordCommand, ResetPasswordCommandResponse>
+    public class ResetPasswordCommandHandler : CommandHandler<ResetPasswordCommand, ResetPasswordCommandResponse>
     {
         private readonly SignInManager<DRR.Domain.Identity.ApplicationUser> _signInManager;
         private readonly UserManager<DRR.Domain.Identity.ApplicationUser> _userManager;

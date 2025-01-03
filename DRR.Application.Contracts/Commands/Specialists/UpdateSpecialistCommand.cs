@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using DRR.Framework.Contracts.Abstracts;
 
-namespace DRR.Application.Contracts.Commands.Specialist
+namespace DRR.Application.Contracts.Commands.Specialists
 {
   
     public class UpdateSpecialistCommand : Command
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
     public class UpdateSpecialistCommandResponse : CommandResponse

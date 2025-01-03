@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.CommandHandlers.Insurances
 {
-    internal class CreateDoctorInsuranceCommandHandler : CommandHandler<CreateDoctorInsuranceCommand, CreateDoctorInsuranceCommandResponse>
+    public class CreateDoctorInsuranceCommandHandler : CommandHandler<CreateDoctorInsuranceCommand, CreateDoctorInsuranceCommandResponse>
     {
         private readonly IDoctorInsuranceRepository _doctorinsuranceRepository;
     public CreateDoctorInsuranceCommandHandler(IDoctorInsuranceRepository doctorinsuranceRepository)

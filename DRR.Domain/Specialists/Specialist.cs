@@ -1,5 +1,4 @@
-﻿using DRR.Domain.Profile;
-using DRR.Domain.Customer;
+﻿using DRR.Domain.Customer;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 
@@ -8,6 +7,11 @@ namespace DRR.Domain.Specialists
     
     public class Specialist : Entity<int>
     {
+        public Specialist()
+        {
+          
+
+        }
         public Specialist(string name)
         {
             Name = name;

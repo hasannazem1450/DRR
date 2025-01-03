@@ -4,14 +4,14 @@ using DRR.Domain.Articles;
 using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Articles
 {
-    class ArticleRepository : BaseRepository, IArticleRepository
+    public class ArticleRepository : BaseRepository, IArticleRepository
     {
         public ArticleRepository(BaseProjectCommandDb db) : base(db)
         {

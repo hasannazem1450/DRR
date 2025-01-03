@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DRR.Application.Contracts.Commands.Specialist;
+using DRR.Application.Contracts.Commands.Event;
+using DRR.Application.Contracts.Commands.Specialists;
 using DRR.Framework.Contracts.Abstracts;
 
-namespace DRR.Application.Contracts.Specialist
+namespace DRR.Application.Contracts.Queries.Specialists
 {
     public class ReadSpecialistQuery : Query
     {
@@ -11,10 +12,6 @@ namespace DRR.Application.Contracts.Specialist
     }
     public class ReadSpecialistQueryResponse : QueryResponse
     {
-        public ReadSpecialistQueryResponse()
-        {
-            List = new List<SpecialistDto>();
-        }
-        public List<SpecialistDto> List { get; set; }
+        public SpecialistDto Data { get; set; }
     }
 }

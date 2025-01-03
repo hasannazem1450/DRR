@@ -3,7 +3,6 @@ using DRR.Domain.Profile;
 using DRR.Domain.Reserv;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
-using System.Data.Entity.Spatial;
 using System.Drawing;
 
 

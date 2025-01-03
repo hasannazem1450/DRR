@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Comment
 {
-    public  class ReadSmeProfileCommentQuery : Query
+    public class ReadSmeProfileCommentQuery : Query
     {
         public int SmeProfileId { get; set; }
     }

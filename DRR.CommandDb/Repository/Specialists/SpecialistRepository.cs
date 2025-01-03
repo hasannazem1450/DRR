@@ -1,27 +1,33 @@
-﻿using DRR.Application.Contracts.Commands.Specialist;
+﻿
 using DRR.Application.Contracts.Repository.Specialists;
 using DRR.CommandDB;
 using DRR.Domain.Specialists;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+
+
 
 namespace DRR.CommandDb.Repository.Specialists
 {
-    class SpecialistRepository : BaseRepository, ISpecialistRepository
+    public class SpecialistRepository : BaseRepository, ISpecialistRepository
     {
         public SpecialistRepository(BaseProjectCommandDb db) : base(db)
         {
         }
 
-        public async Task<Domain.Specialists.Specialist> ReadSpecialistById(int id)
+        public async Task<Specialist> ReadSpecialistById(int id)
         {
             var result = await _Db.Specialists.FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
+        }
+
+        public async Task<List<Specialist>> ReadSpecialists()
+        {
+            var query = await _Db.Specialists.ToListAsync();
+
+            return query;
         }
 
         public async Task Create(Specialist Specialist)

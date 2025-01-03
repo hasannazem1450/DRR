@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.SiteMessenger
 {
-    internal class SiteMessageSmeProfileConfiguration : IEntityTypeConfiguration<SiteMessageReciver>
+    public class SiteMessageSmeProfileConfiguration : IEntityTypeConfiguration<SiteMessageReciver>
     {
         public void Configure(EntityTypeBuilder<SiteMessageReciver> builder)
         {

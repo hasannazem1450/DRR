@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Finance
 {
-    class PatientTransactionConfiguration : IEntityTypeConfiguration<PatientTransaction>
+    public class PatientTransactionConfiguration : IEntityTypeConfiguration<PatientTransaction>
     {
         public void Configure(EntityTypeBuilder<PatientTransaction> builder)
         {

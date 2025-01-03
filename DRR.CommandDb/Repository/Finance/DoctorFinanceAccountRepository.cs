@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.Finance;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Finance
 {
-    class DoctorFinanceAccountRepository : BaseRepository, IDoctorFinanceAccountRepository
+    public class DoctorFinanceAccountRepository : BaseRepository, IDoctorFinanceAccountRepository
     {
         public DoctorFinanceAccountRepository(BaseProjectCommandDb db) : base(db)
         {

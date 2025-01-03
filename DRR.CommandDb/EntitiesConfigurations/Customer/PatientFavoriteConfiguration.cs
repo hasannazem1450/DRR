@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Customer
 {
-    class PatientFavoriteConfiguration : IEntityTypeConfiguration<PatientFavorite>
+    public class PatientFavoriteConfiguration : IEntityTypeConfiguration<PatientFavorite>
     {
         public void Configure(EntityTypeBuilder<PatientFavorite> builder)
         {

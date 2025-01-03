@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Articles
 {
-    class ArticleTypeConfiguration: IEntityTypeConfiguration<ArticleType>
+    public class ArticleTypeConfiguration: IEntityTypeConfiguration<ArticleType>
     {
         public void Configure(EntityTypeBuilder<ArticleType> builder)
         {

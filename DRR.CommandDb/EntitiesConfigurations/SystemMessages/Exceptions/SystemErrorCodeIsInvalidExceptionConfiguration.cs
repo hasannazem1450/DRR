@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.SystemMessages.Exceptions
 {
-    class SystemErrorCodeIsInvalidExceptionConfiguration
+    public class SystemErrorCodeIsInvalidExceptionConfiguration
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DRR.Framework.Contracts.Abstracts;
 
-namespace DRR.Application.Contracts.Commands.Specialist
+namespace DRR.Application.Contracts.Commands.Specialists
 {
   
     public class DeleteSpecialistCommand : Command

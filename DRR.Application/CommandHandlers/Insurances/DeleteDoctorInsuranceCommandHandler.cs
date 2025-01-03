@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.CommandHandlers.Insurances
 {
-    internal class DeleteDoctorInsuranceCommandHandler
+    public class DeleteDoctorInsuranceCommandHandler
     {
     }
 }

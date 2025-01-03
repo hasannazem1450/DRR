@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.TreatmentCenters
 {
-    class OfficeConfiguration : IEntityTypeConfiguration<Office>
+    public class OfficeConfiguration : IEntityTypeConfiguration<Office>
     {
         public void Configure(EntityTypeBuilder<Office> builder)
         {

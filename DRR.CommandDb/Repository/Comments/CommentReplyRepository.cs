@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.Comments;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Comments
 {
-    class CommentReplyRepository : BaseRepository, ICommentReplyRepository
+    public class CommentReplyRepository : BaseRepository, ICommentReplyRepository
     {
         public CommentReplyRepository(BaseProjectCommandDb db) : base(db)
         {

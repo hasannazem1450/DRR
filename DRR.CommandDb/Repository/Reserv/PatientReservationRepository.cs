@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Reserv
 {
-    class PatientReservationRepository : BaseRepository, IPatientReservationRepository
+    public class PatientReservationRepository : BaseRepository, IPatientReservationRepository
     {
         public PatientReservationRepository(BaseProjectCommandDb db) : base(db)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.SystemMessages
 {
-    class SystemMessageConfiguration
+    public class SystemMessageConfiguration
     {
     }
 }

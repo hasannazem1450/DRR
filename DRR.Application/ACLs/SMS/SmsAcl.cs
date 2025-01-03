@@ -42,7 +42,7 @@ public class SmsAcl : ISmsAcl
             {IsSuccess = response.IsSuccessful && responseModel.status == _smsSetting.SuccessCode};
     }
 
-    internal class SendResponseModel
+    public class SendResponseModel
     {
         public int status { get; set; }
         public List<object> messages { get; set; }

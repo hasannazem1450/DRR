@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Jornal
 {
-    internal class ReadSmeProfileArticleQueryHandler
+    public class ReadSmeProfileArticleQueryHandler
     {
     }
 }

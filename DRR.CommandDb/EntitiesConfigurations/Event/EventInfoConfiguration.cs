@@ -14,7 +14,7 @@ namespace DRR.CommandDb.EntitiesConfigurations.Event
             builder.HasOne(x => x.Province)
                 .WithMany(x => x.EventsInfos)
                 .HasForeignKey(x => x.ProvinceId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.NoAction);  
         }
     }
 }

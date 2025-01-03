@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Finance
 {
-    class WalletConfiguration : IEntityTypeConfiguration<Wallet>
+    public class WalletConfiguration : IEntityTypeConfiguration<Wallet>
     {
         public void Configure(EntityTypeBuilder<Wallet> builder)
         {

@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DRR.CommandDb.Repository
 {
-    internal class SystemMessageRepository : BaseRepository, ISystemMessageRepository
+    public class SystemMessageRepository : BaseRepository, ISystemMessageRepository
     {
 
         public SystemMessageRepository(BaseProjectCommandDb db, UserManager<ApplicationUser> userManager) : base(db)

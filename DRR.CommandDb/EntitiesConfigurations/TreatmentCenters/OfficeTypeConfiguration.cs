@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.TreatmentCenters
 {
-    class OfficeTypeConfiguration
+    public class OfficeTypeConfiguration
     {
     }
 }

@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.Insurances;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.Insurances
 {
-    class DoctorInsuranceRepository : BaseRepository, IDoctorInsuranceRepository
+    public class DoctorInsuranceRepository : BaseRepository, IDoctorInsuranceRepository
     {
         public DoctorInsuranceRepository(BaseProjectCommandDb db) : base(db)
         {

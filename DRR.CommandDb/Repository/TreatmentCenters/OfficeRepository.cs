@@ -5,14 +5,14 @@ using DRR.Domain.TreatmentCenters;
 using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
-    class OfficeRepository : BaseRepository, IOfficeRepository
+    public class OfficeRepository : BaseRepository, IOfficeRepository
     {
         public OfficeRepository(BaseProjectCommandDb db) : base(db)
         {

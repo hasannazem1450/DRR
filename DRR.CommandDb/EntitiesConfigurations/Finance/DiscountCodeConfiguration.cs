@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.Finance 
 {
-    class DiscountCodeConfiguration : IEntityTypeConfiguration<DiscountCode>
+    public class DiscountCodeConfiguration : IEntityTypeConfiguration<DiscountCode>
     {
         public void Configure(EntityTypeBuilder<DiscountCode> builder)
         {

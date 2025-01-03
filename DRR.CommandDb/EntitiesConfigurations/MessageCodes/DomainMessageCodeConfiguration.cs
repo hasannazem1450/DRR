@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DRR.CommandDb.EntitiesConfigurations.MessageCodes
 {
-    class DomainMessageCodeConfiguration
+    public class DomainMessageCodeConfiguration
     {
     }
 }

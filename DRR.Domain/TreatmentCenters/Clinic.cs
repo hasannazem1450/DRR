@@ -4,7 +4,6 @@ using DRR.Domain.Reserv;
 using DRR.Domain.Customer;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
-using System.Data.Entity.Spatial;
 using System.Drawing;
 
 

@@ -3,14 +3,14 @@ using DRR.CommandDB;
 using DRR.Domain.TreatmentCenters;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
-    class ClinicTypeRepository : BaseRepository, IClinicTypeRepository
+    public class ClinicTypeRepository : BaseRepository, IClinicTypeRepository
     {
         public ClinicTypeRepository(BaseProjectCommandDb db) : base(db)
         {

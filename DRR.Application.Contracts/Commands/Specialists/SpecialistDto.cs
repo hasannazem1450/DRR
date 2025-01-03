@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Application.Contracts.Commands.Specialist
+namespace DRR.Application.Contracts.Commands.Specialists
 {
     public class SpecialistDto
     {
