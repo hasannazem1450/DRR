@@ -18,18 +18,18 @@ namespace DRR.Domain.Customer
 {
     public class Doctor : Entity<int>
     {
-        public Doctor(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public Doctor(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc, int smeProfileId)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
             NationalId = nationalId;
-            SpecialistId = specialistId;
             CodeNezam = codeNezam;
+            SpecialistId = specialistId;
             DocExperiance = docExperiance;
             DocInstaLink = docInstaLink;
             Mobile = mobile;
             Desc = desc;
-           
+            SmeProfileId= smeProfileId;
 
         }
 
@@ -37,8 +37,8 @@ namespace DRR.Domain.Customer
         public string DoctorName { get; set; }
         public string DoctorFamily { get; set; }
         public string NationalId { get; set; }
+        public int CodeNezam { get; set; }
         public int SpecialistId { get; set; }
-        public int CodeNezam {  get; set; }
         public string DocExperiance { get; set; }
         public string DocInstaLink { get; set; }
         public string Mobile { get; set; }
@@ -65,20 +65,22 @@ namespace DRR.Domain.Customer
         public ICollection<CommentReply> CommentReplys { get; set; }
         public ICollection<Article> Articles { get; set; }
         public ICollection<DoctorInsurance> DoctorInsurances { get; set; }
+        public ICollection<DoctorTreatmentCenter> DoctorTreatmentCenters { get; set; }
 
 
 
-        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc,int smeProfileId)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
             NationalId = nationalId;
-            SpecialistId = specialistId;
             CodeNezam = codeNezam;
+            SpecialistId = specialistId;
             DocExperiance = docExperiance;
             DocInstaLink = docInstaLink;
             Mobile = mobile;
             Desc = desc;
+            SmeProfileId = smeProfileId;
         }
         public void SetIsDeleted(bool isDeleted)
         {

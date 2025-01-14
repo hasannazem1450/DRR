@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Domain.Event;
 using System.Drawing;
+using DRR.Domain.Insurances;
 
 namespace DRR.Domain.Customer
 {
@@ -70,6 +71,7 @@ namespace DRR.Domain.Customer
 
         public ICollection<PatientFavorite> PatientFavorites { get; protected set; }
         public ICollection<PatientReservation> PatientReservations { get; protected set; }
+        public ICollection<PatientInsurance> PatientInsurances { get; set; }
     }
 
 }

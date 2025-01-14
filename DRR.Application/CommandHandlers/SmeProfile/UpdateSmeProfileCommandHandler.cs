@@ -1,6 +1,8 @@
 ﻿using DRR.Application.CommandHandlers.SmeProfile.Exceptions;
+using DRR.Application.CommandHandlers.Specialists.Exceptions;
 using DRR.Application.Contracts.Commands.Profile.SmeProfile;
 using DRR.Application.Contracts.Repository.Profile;
+using DRR.Application.Contracts.Services.Profile;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Framework.Contracts.Common.Enums;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ public class UpdateSmeProfileCommandHandler : CommandHandler<UpdateSmeProfileCom
 {
     private readonly ISmeProfileRepository _smeProfileRepository;
     private readonly ISmeRaterRepository _smeRaterRepository;
+    private readonly ISmeProfileService _smeProfileService;
 
     public UpdateSmeProfileCommandHandler(ISmeProfileRepository smeProfileRepository,
         ISmeRaterRepository smeRaterRepository)
@@ -26,14 +29,25 @@ public class UpdateSmeProfileCommandHandler : CommandHandler<UpdateSmeProfileCom
         if (smeProfile == null)
             throw new SmeProfileNotExistException();
 
-        smeProfile.Update(command.SmeName, command.NationalCode, command.BusinessCode, command.ManagerName,
-            command.RegisterNumber, command.EconomyCode, command.PermitNo, command.ManagerPhoneNumber,
-            command.ManagerEmail, command.AboutUs, command.TellNumber, command.ActivitySubject, command.SmeEmail,
-            command.SmeWebsite, command.Address, command.CityId, command.SmeRankId, command.IndustrialParkId, command.Status, command.Logo,
-            command.Headerpic, command.Postalcode, (SmeType) command.SmeType);
+        var size = await _smeProfileService.GetFileSizeKb(command.Logo);
 
-        await _smeProfileRepository.Update(smeProfile);
+        if (size < 30)
+        {
+            smeProfile.Update(command.SmeName, command.NationalCode, command.BusinessCode, command.ManagerName,
+          command.RegisterNumber, command.EconomyCode, command.PermitNo, command.ManagerPhoneNumber,
+          command.ManagerEmail, command.AboutUs, command.TellNumber, command.ActivitySubject, command.SmeEmail,
+          command.SmeWebsite, command.Address, command.CityId, command.SmeRankId, command.IndustrialParkId, command.Status, command.Logo,
+          command.Headerpic, command.Postalcode, (SmeType)command.SmeType);
 
-        return new UpdateSmeProfileCommandResponse();
+            await _smeProfileRepository.Update(smeProfile);
+
+            return new UpdateSmeProfileCommandResponse();
+        }
+        else
+        {
+            throw new SpecialistException();
+        }
+
+
     }
 }

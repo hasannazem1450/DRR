@@ -13,4 +13,5 @@ public interface ISmeProfileService : IService
 
     Task<List<PreSmeProfileDto>> ConvertToPreDto(List<SmeProfile> smeProfiles);
     Task<PreSmeProfileDto> ConvertToPreDto(SmeProfile smeProfile);
+    Task<int> GetFileSizeKb(string base64);
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.CommandHandlers.Customer
 {
-    public class CreateDoctorCommandHandler :CommandHandler<CreateDoctorCommand, CreateDoctorCommandResponse>
+    public class CreateDoctorCommandHandler : CommandHandler<CreateDoctorCommand, CreateDoctorCommandResponse>
     {
         private readonly IDoctorRepository _doctorRepository;
 
@@ -22,7 +22,7 @@ namespace DRR.Application.CommandHandlers.Customer
 
         public override async Task<CreateDoctorCommandResponse> Executor(CreateDoctorCommand command)
         {
-            var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.SpecialistId, command.CodeNezam ,command.DocExperiance , command.DocInstaLink, command.Mobile,command.Desc)
+            var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.CodeNezam, command.SpecialistId,  command.DocExperiance, command.DocInstaLink, command.Mobile, command.Desc, command.SmeProfileId)
             {
                 SmeProfileId = command.SmeProfileId
             };

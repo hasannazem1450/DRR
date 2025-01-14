@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DRR.Application.MessageCodes.ExceptionCodes;
 
 namespace DRR.Application.Services.Specialists
 {
@@ -16,7 +17,9 @@ namespace DRR.Application.Services.Specialists
             var result = specialists.Select(s => new SpecialistDto
             {
                 Id = s.Id,
-               Name = s.Name,
+                Name = s.Name,
+                Maxa = s.Maxa,
+                LogoFile = s.LogoFile,
             }).ToList();
 
             return result;
@@ -28,8 +31,32 @@ namespace DRR.Application.Services.Specialists
             {
                 Id = specialist.Id,
                 Name = specialist.Name,
-               
+                Maxa = specialist.Maxa,
+                LogoFile = specialist.LogoFile,
+
             };
+
+            return result;
+        }
+
+        public async Task<int> GetFileSizeKb(string base64)
+        {
+            var result = 0;
+
+            try
+            {
+                var token = ";base64,";
+
+                var stringLength = base64.Split(token).LastOrDefault().Length;
+
+                var sizeInBytes = 4 * Math.Ceiling((double)(stringLength / 3)) * 0.5624896334383812;
+                var sizeInKb = sizeInBytes / 1000;
+
+                result = (int)sizeInKb;
+            }
+            catch (Exception)
+            {
+            }
 
             return result;
         }

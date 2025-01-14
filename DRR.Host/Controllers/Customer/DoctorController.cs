@@ -15,11 +15,32 @@ namespace DRR.Host.Controllers.Customer
         {
 
         }
+        [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها")]
+        [HttpGet("read-all-doctors")]
+        public async Task<IActionResult> ReadAllDoctors([FromQuery] ReadAllDoctorsQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllDoctorsQuery, ReadDoctorsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = "خواندن پروفایل یک دکتر ")]
+        [HttpGet("read-doctor-byid")]
+        public async Task<IActionResult> ReadDoctor([FromQuery] ReadDoctorQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorQuery, ReadDoctorQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
         [SwaggerOperation(Summary = "خواندن پروفایل دکتر بر حسب فرد وارد شونده حقیقی یا حقوقی")]
         [HttpGet("read-smeprofile-doctors")]
-        public async Task<IActionResult> ReadSmeProfileDoctors([FromQuery]ReadDoctorQuery query , CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadSmeProfileDoctors([FromQuery]ReadDoctorsBySmeprofileQuery query , CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadDoctorQuery, ReadDoctorQueryResponse> (query , cancellationToken);
+            var result = await Distributor.Send<ReadDoctorsBySmeprofileQuery, ReadDoctorsQueryResponse> (query , cancellationToken);
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها بر حسب تخصص")]
+        [HttpGet("read-doctors-byspeciality")]
+        public async Task<IActionResult> ReadDoctorsBySpeciality([FromQuery] ReadDoctorsBySpecialityQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorsBySpecialityQuery, ReadDoctorsQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = "ایجاد یک دکتر")]

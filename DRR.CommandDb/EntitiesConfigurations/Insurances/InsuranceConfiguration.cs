@@ -19,6 +19,9 @@ namespace DRR.CommandDb.EntitiesConfigurations.Insurances
                    .WithMany(x => x.Insurances)
                    .HasForeignKey(x => x.InsuranceTypeId)
                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasIndex(u => u.Name).IsUnique();
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(450);
         }
 
     }

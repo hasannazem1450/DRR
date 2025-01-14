@@ -15,10 +15,16 @@ namespace DRR.Host.Controllers.Customer
         {
 
         }
-        [HttpGet("read-smeprofile-patients")]
-        public async Task<IActionResult> ReadSmeProfilePatients([FromQuery] ReadPatientQuery query, CancellationToken cancellationToken)
+        [HttpGet("read-all-patients")]
+        public async Task<IActionResult> ReadAllPatients([FromQuery] ReadAllPatientQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadPatientQuery, ReadPatientQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadAllPatientQuery, ReadPatientsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [HttpGet("read-smeprofile-patients")]
+        public async Task<IActionResult> ReadSmeProfilePatients([FromQuery] ReadPatientBySmeProfileIdQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadPatientBySmeProfileIdQuery, ReadPatientsQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
 

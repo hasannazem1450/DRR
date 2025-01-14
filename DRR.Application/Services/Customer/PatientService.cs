@@ -10,6 +10,7 @@ using DRR.Application.Contracts.Commands.Jornal;
 using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Services.Customer;
+using DRR.Domain.Customer;
 using DRR.Utilities.Extensions;
 
 namespace DRR.Application.Services.Customer
@@ -117,6 +118,53 @@ namespace DRR.Application.Services.Customer
 
             //if (filters.ToPrice.HasValue)
             //    result = result.Where(w => w.Price <= filters.ToPrice.Value).ToList();
+
+            return result;
+        }
+
+        public async Task<List<PatientDto>> ConvertToDto(List<Patient> patients)
+        {
+            var result = patients.Select(s => new PatientDto
+            {
+                Id = s.Id,
+                PatientName = s.PatientName,
+                PatientFamily = s.PatientFamily,
+                NationalId = s.NationalId,
+                BirthNumber = s.BirthNumber,
+                BirthDate = s.BirthDate,
+                City = s.City,
+                Geolat = s.Geolat,
+                Geolon = s.Geolon,
+                PatientPhone = s.PatientPhone,
+                NecessaryPhone = s.NecessaryPhone,
+                Email = s.Email,
+                Gender = s.Gender,
+                SmeProfileId = s.SmeProfileId,
+                
+            }).ToList();
+
+            return result;
+        }
+
+        public async Task<PatientDto> ConvertToDto(Patient patient)
+        {
+            var result = new PatientDto
+            {
+                Id = patient.Id,
+                PatientName = patient.PatientName,
+                PatientFamily = patient.PatientFamily,
+                NationalId = patient.NationalId,
+                BirthNumber = patient.BirthNumber,
+                BirthDate = patient.BirthDate,
+                City = patient.City,
+                Geolat = patient.Geolat,
+                Geolon = patient.Geolon,
+                PatientPhone = patient.PatientPhone,
+                NecessaryPhone = patient.NecessaryPhone,
+                Email = patient.Email,
+                Gender = patient.Gender,
+                SmeProfileId = patient.SmeProfileId,
+            };
 
             return result;
         }

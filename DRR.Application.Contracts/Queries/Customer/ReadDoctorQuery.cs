@@ -9,19 +9,37 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadDoctorQuery : Query
+    public class ReadDoctorsBySmeprofileQuery : Query
     {
         public int SmeProfileId {  get; set; } 
     }
+    public class ReadDoctorsBySpecialityQuery : Query
+    {
+        public int SpecialistId { get; set; }
+    }
+    public class ReadDoctorQuery : Query
+    {
+        public int Id { get; set; }
+    }
+    public class ReadAllDoctorsQuery : Query
+    {
+        
+    }
+   
+    public class ReadDoctorQueryResponse : QueryResponse
+    {
+        public DoctorDto Data { get; set; }
+    }
+
 
     public class ReadDoctorDoctorsQuery : Query
     {
         public ReadDoctorQueryFilters? Filters { get; set; }
     }
 
-    public class ReadDoctorQueryResponse : QueryResponse
+    public class ReadDoctorsQueryResponse : QueryResponse
     {
-        public ReadDoctorQueryResponse()
+        public ReadDoctorsQueryResponse()
         {
             List = new List<DoctorDto>();
         }
@@ -30,13 +48,13 @@ namespace DRR.Application.Contracts.Queries.Customer
 
     public class ReadDoctorQueryFilters
     {
-        public int? ProvinceId { get; set; }
-        public string Name { get; set; }
+        public string DoctorName { get; set; }
+        public string DoctorFamily { get; set; }
 
-        public string speciality { get; set; }
+        public string NationalId { get; set; }
 
-        public string bimeh { get; set; }
-        public string cityname { get; set; }
+        public string Bimeh { get; set; }
+        public string CityName { get; set; }
 
     }
 }

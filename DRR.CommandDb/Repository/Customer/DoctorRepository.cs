@@ -15,14 +15,24 @@ namespace DRR.CommandDb.Repository.Customer
         public DoctorRepository(BaseProjectCommandDb db) : base(db)
         {
         }
+        public async Task<List<Doctor>> ReadAllDoctors()
+        {
+            var result = await _Db.Doctors.ToListAsync();
 
+            return result;
+        }
         public async Task<Doctor> ReadDoctorById(int id)
         {
             var result = await _Db.Doctors.FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
+        public async Task<List<Doctor>> ReadDoctorBySmeProfileId(int smeProfileId)
+        {
+            var result = await _Db.Doctors.Where(c => c.SmeProfileId == smeProfileId).ToListAsync();
 
+            return result;
+        }
         public async Task<List<Doctor>> ReadDoctorBySpecialistId(int id)
         {
             var result = await _Db.Doctors.Where(c => c.SpecialistId == id).ToListAsync();

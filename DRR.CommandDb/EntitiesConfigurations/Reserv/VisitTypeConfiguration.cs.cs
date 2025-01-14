@@ -14,7 +14,8 @@ namespace DRR.CommandDb.EntitiesConfigurations.Reservations
         public void Configure(EntityTypeBuilder<VisitType> builder)
         {
             builder.HasKey(x => x.Id);
-
+            builder.HasIndex(u => u.VisitTypeName).IsUnique();
+            builder.Property(x => x.VisitTypeName).IsRequired().HasMaxLength(450);
         }
 
     }

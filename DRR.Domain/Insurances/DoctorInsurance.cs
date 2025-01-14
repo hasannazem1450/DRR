@@ -43,6 +43,7 @@ namespace DRR.Domain.Insurances
         public VisitCost VisitCost { get; set; }
 
 
+
     }
 
 }

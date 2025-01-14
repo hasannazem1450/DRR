@@ -4,6 +4,7 @@ using DRR.CommandDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DRR.CommandDb.Migrations
 {
     [DbContext(typeof(BaseProjectCommandDb))]
-    partial class BaseProjectCommandDbModelSnapshot : ModelSnapshot
+    [Migration("20250110153454_imagebase64")]
+    partial class imagebase64
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1067,16 +1070,11 @@ namespace DRR.CommandDb.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InsuranceTypeId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Insurances");
                 });
@@ -1747,14 +1745,9 @@ namespace DRR.CommandDb.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("VisitTypeName")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("VisitTypeName")
-                        .IsUnique();
 
                     b.ToTable("VisitTypes");
                 });
@@ -2008,6 +2001,9 @@ namespace DRR.CommandDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -2020,11 +2016,6 @@ namespace DRR.CommandDb.Migrations
                     b.Property<string>("LogoFile")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Maxa")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
@@ -2034,15 +2025,10 @@ namespace DRR.CommandDb.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(450)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Maxa")
-                        .IsUnique();
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Specialists");
                 });

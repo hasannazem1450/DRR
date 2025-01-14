@@ -9,12 +9,25 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadPatientQuery : Query 
+    public class ReadPatientQuery : Query
     {
+        public int Id { get; set; }
+    }
+    public class ReadAllPatientQuery : Query
+    {
+        
+    }
+    public class ReadPatientBySmeProfileIdQuery : Query
+    {
+        public int SmeProfileIdId { get; set; }
+    }
+    public class ReadPatientsQueryResponse : QueryResponse
+    {
+        public List<PatientDto> List { get; set; }
     }
     public class ReadPatientQueryResponse : QueryResponse
     {
-        public List<PatientDto> List { get; set; }
+        public PatientDto Data { get; set; }
     }
 
     public class SearchPatientQuery : Query

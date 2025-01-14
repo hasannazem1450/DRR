@@ -10,7 +10,10 @@ namespace DRR.Application.Contracts.Repository.Customer
 {
     public interface IDoctorRepository : IRepository
     {
+        Task<List<Doctor>> ReadAllDoctors();
         Task<Doctor> ReadDoctorById(int id);
+        Task<List<Doctor>> ReadDoctorBySmeProfileId(int id);
+
         Task<List<Doctor>> ReadDoctorBySpecialistId(int id);
 
         Task Delete(int id);

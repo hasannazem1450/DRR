@@ -41,6 +41,8 @@ namespace DRR.CommandDb.Repository.Specialists
 
 
             result.Name = Specialist.Name;
+            result.Maxa = Specialist.Maxa;
+            result.LogoFile = Specialist.LogoFile;
             
 
             _Db.Specialists.Update(result);

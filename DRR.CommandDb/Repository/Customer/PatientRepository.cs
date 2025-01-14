@@ -23,6 +23,13 @@ namespace DRR.CommandDb.Repository.Customer
             return result;
         }
 
+        public async Task<List<Patient>> ReadPatients()
+        {
+            var result = await _Db.Patients.ToListAsync();
+
+            return result;
+        }
+
         public async Task<List<Patient>> ReadPatientBySmeProfileId(int id)
         {
             var result = await _Db.Patients.Where(c => c.SmeProfileId == id).ToListAsync();

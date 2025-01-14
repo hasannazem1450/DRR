@@ -12,5 +12,6 @@ namespace DRR.Application.Contracts.Services.Specialists
     {
         Task<List<SpecialistDto>> ConvertToDto(List<Domain.Specialists.Specialist> Specialists);
         Task<SpecialistDto> ConvertToDto(Domain.Specialists.Specialist Specialist);
+        Task<int> GetFileSizeKb(string base64);
     }
 }

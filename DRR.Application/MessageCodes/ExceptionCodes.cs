@@ -47,4 +47,8 @@ public class ExceptionCodes
     {
         public static ApplicationExceptionMessageCode ArticleNotFound = 80;
     }
+    public class Specialist
+    {
+        public static ApplicationExceptionMessageCode LongFileSizeForBase64 = 90;
+    }
 }

@@ -19,6 +19,12 @@ namespace DRR.CommandDb.EntitiesConfigurations.Customer
                 .WithMany(x => x.Patients)
                 .HasForeignKey(x => x.CityId)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(u => u.PatientName).HasMaxLength(450);
+            builder.Property(u => u.PatientFamily).HasMaxLength(450);
+
+
+            builder.HasIndex(u => u.NationalId).IsUnique();
+            builder.Property(u => u.NationalId).HasMaxLength(10);
         }
 
     }

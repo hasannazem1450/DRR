@@ -15,6 +15,8 @@ namespace DRR.CommandDb.EntitiesConfigurations.BaseInfo
                 .WithMany(x => x.Provinces)
                 .HasForeignKey(x => x.CountryId)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.HasIndex(u => u.Name).IsUnique();
+            builder.Property(u => u.Name).HasMaxLength(450);
         }
     }
 }
