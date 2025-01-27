@@ -19,12 +19,15 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
         public ClinicRepository(BaseProjectCommandDb db) : base(db)
         {
         }
+        public async Task<List<Clinic>> ReadClinics()
+        {
+            var result = await _Db.Clinics.ToListAsync();
+
+            return result;
+        }
         public async Task<List<Clinic>> ReadClinicByDto(ClinicDto ClinicDto)
         {
             var query = _Db.Clinics.AsQueryable();
-            if (ClinicDto.ClinicCode != null)
-                query = query.Where(q => q.SiamCode == ClinicDto.ClinicCode);
-
             if (!ClinicDto.ClinicName.IsNotNullOrEmpty())
                 query = query.Where(q => q.Name == ClinicDto.ClinicName);
 

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Customer
 {
-    internal class ReadAllDoctorsQueryHandler : IQueryHandler<ReadAllDoctorsQuery, ReadDoctorsQueryResponse>
+    public class ReadAllDoctorsQueryHandler : IQueryHandler<ReadAllDoctorsQuery, ReadDoctorsQueryResponse>
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDoctorService _doctorService;

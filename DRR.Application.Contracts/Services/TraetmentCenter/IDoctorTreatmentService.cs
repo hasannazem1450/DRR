@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Application.QueryHandlers.Customer
+namespace DRR.Application.Contracts.Services.TraetmentCenter
 {
-    public class ReadPatientFavoratesQueryHandler
+    public interface IDoctorTreatmentService
     {
     }
 }

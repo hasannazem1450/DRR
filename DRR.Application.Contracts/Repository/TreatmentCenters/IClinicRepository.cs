@@ -11,6 +11,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
 {
     public interface IClinicRepository : IRepository
     {
+        Task<List<Clinic>> ReadClinics();
         Task<List<Clinic>> ReadClinicByDto(ClinicDto ClinicDto);
         Task<Clinic> ReadClinicById(int id);
         Task<List<Clinic>> ReadClinicByCityId(int id);
