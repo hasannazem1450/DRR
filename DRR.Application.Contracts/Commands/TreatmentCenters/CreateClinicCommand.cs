@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.TreatmentCenters
 {
-    public class ClinicDto
+    public class CreateClinicCommand : Command
     {
 
-        public int Id { get; set; }
-        public string ClinicName { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         public double Geolon { get; set; }
         public double Geolat { get; set; }
         public string Phone { get; set; }
-        public string CityName { get; set; }
-        public string ProvinceName { get; set; }
+        public int CityId { get; set; }
         public string SiamCode { get; set; }
         public string Desc { get; set; }
-        public string ClinicTypeName { get; set; }
-               
+        public int ClinicTypeId { get; set; }
+    }
+
+    public class CreateClinicCommandResponse : CommandResponse
+    {
     }
 }

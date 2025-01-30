@@ -69,7 +69,7 @@ namespace DRR.Domain.Customer
 
 
 
-        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc,int smeProfileId)
+        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
@@ -80,7 +80,7 @@ namespace DRR.Domain.Customer
             DocInstaLink = docInstaLink;
             Mobile = mobile;
             Desc = desc;
-            SmeProfileId = smeProfileId;
+            //SmeProfileId = smeProfileId;
         }
         public void SetIsDeleted(bool isDeleted)
         {
