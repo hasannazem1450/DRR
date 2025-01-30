@@ -16,7 +16,7 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
 
     public class ReadOfficeTypeQueryResponse : QueryResponse
     {
-        public OfficeType Data { get; set; }
+        public OfficeTypeDto Data { get; set; }
     }
 }
 

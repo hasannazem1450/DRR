@@ -9,7 +9,7 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
     public class ClinicDto
     {
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string ClinicName { get; set; }
         public string Address { get; set; }
         public double Geolon { get; set; }

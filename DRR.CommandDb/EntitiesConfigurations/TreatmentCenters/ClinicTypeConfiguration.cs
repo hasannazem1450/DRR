@@ -14,8 +14,8 @@ namespace DRR.CommandDb.EntitiesConfigurations.TreatmentCenters
         public void Configure(EntityTypeBuilder<ClinicType> builder)
         {
             builder.HasKey(x => x.Id);
+            
 
-           
         }
 
     }

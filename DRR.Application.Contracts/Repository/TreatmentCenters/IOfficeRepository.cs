@@ -11,13 +11,13 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
 {
     public interface IOfficeRepository : IRepository
     {
-        Task<List<Office>> ReadOfficeByDto(OfficeDto OfficeDto);
-        Task<Office> ReadOfficeById(int id);
+        Task<List<Office>> ReadOffices();
+        Task<Office> ReadOfficeById(Guid id);
         Task<List<Office>> ReadOfficeByCityId(int id);
         Task<List<Office>> ReadOfficeByOfficeTypeId(int id);
 
 
-        Task Delete(int id);
+        Task Delete(Guid id);
 
         Task Update(Domain.TreatmentCenters.Office office);
 

@@ -13,12 +13,12 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
     {
         Task<List<Clinic>> ReadClinics();
         Task<List<Clinic>> ReadClinicByDto(ClinicDto ClinicDto);
-        Task<Clinic> ReadClinicById(int id);
+        Task<Clinic> ReadClinicById(Guid id);
         Task<List<Clinic>> ReadClinicByCityId(int id);
         Task<List<Clinic>> ReadClinicByClinicTypeId(int id);
 
 
-        Task Delete(int id);
+        Task Delete(Guid id);
 
         Task Update(Domain.TreatmentCenters.Clinic clinic);
 

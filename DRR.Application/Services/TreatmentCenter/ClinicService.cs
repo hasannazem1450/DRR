@@ -15,9 +15,9 @@ namespace DRR.Application.Services.TreatmentCenter
 {
     public class ClinicService : IClinicService
     {
-        public async Task<List<ClinicDto>> ConvertToDto(List<Clinic> Clinics)
+        public async Task<List<ClinicDto>> ConvertToDto(List<Clinic> clinics)
         {
-            var result = Clinics.Select(s => new ClinicDto
+            var result = clinics.Select(s => new ClinicDto
             {
                 Id = s.Id,
                 ClinicName = s.Name,
@@ -35,21 +35,21 @@ namespace DRR.Application.Services.TreatmentCenter
             return result;
         }
 
-        public async Task<ClinicDto> ConvertToDto(Clinic Clinic)
+        public async Task<ClinicDto> ConvertToDto(Clinic clinic)
         {
             var result = new ClinicDto
             {
-                Id = Clinic.Id,
-                ClinicName = Clinic.Name,
-                Address = Clinic.Address,
-                Geolon = Clinic.Geolon,
-                Geolat = Clinic.Geolat,
-                Phone = Clinic.Phone,
-                CityName = Clinic.City.Name,
-                ProvinceName = Clinic.City.Province.Name,
-                SiamCode = Clinic.SiamCode,
-                Desc = Clinic.Desc,
-                ClinicTypeName = Clinic.ClinicType.Type
+                Id = clinic.Id,
+                ClinicName = clinic.Name,
+                Address = clinic.Address,
+                Geolon = clinic.Geolon,
+                Geolat = clinic.Geolat,
+                Phone = clinic.Phone,
+                CityName = clinic.City.Name,
+                ProvinceName = clinic.City.Province.Name,
+                SiamCode = clinic.SiamCode,
+                Desc = clinic.Desc,
+                ClinicTypeName = clinic.ClinicType.Type
             };
 
             return result;

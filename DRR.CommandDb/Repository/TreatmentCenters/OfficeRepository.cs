@@ -18,16 +18,13 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         {
         }
 
-        public async Task<List<Office>> ReadOfficeByDto(OfficeDto OfficeDto)
+        public async Task<List<Office>> ReadOffices()
         {
             var query = _Db.Offices.AsQueryable();
-            if (OfficeDto.CityName != null)
-                query = query.Where(q => q.City.Name == OfficeDto.CityName);
-
-
+           
             return await query.ToListAsync();
         }
-        public async Task<Office> ReadOfficeById(int id)
+        public async Task<Office> ReadOfficeById(Guid id)
         {
             var result = await _Db.Offices.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -69,7 +66,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
             await _Db.SaveChangesAsync();
         }
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             var result = await _Db.Offices.FirstOrDefaultAsync(n => n.Id == id);
 

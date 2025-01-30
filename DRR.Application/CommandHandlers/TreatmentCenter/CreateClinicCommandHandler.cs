@@ -24,6 +24,7 @@ namespace DRR.Application.CommandHandlers.TreatmentCenter
 
         public override async Task<CreateClinicCommandResponse> Executor(CreateClinicCommand command)
         {
+
             var ev = new Clinic(command.Name, command.Address, command.Geolon, command.Geolat, command.Phone,
                 command.CityId, command.SiamCode, command.Desc, command.ClinicTypeId);
 

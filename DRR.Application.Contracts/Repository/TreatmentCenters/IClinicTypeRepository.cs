@@ -10,15 +10,15 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
 {
     public interface IClinicTypeRepository : IRepository
     {
-
+        Task<List<ClinicType>> ReadClinicTypes();
         Task<ClinicType> ReadClinicTypeById(int id);
 
 
         Task Delete(int id);
 
-        Task Update(Domain.TreatmentCenters.ClinicType clinicType);
+        Task Update(ClinicType clinicType);
 
-        Task Create(Domain.TreatmentCenters.ClinicType clinicType);
+        Task Create(ClinicType clinicType);
     }
 
 }

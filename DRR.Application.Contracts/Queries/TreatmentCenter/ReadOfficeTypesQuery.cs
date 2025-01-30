@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DRR.Application.Contracts.Commands.TreatmentCenters;
+using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.TreatmentCenter
 {
-    public class ReadOfficeQuery : Query
+    public class ReadOfficeTypesQuery : Query
     {
-        public Guid Id { get; set; }
     }
 
-    public class ReadOfficeQueryResponse : QueryResponse
+    public class ReadOfficeTypesQueryResponse : QueryResponse
     {
-        public OfficeDto Data { get; set; }
+        public List<OfficeTypeDto> List { get; set; }
     }
 }
 

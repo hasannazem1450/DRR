@@ -27,9 +27,9 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-DoctorTreatmentCenters")]
-        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadDoctorTreatmentCenterQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadDoctorTreatmentCenterQuery, ReadDoctorTreatmentCenterQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadDoctorTreatmentCentersQuery, ReadDoctorTreatmentCentersQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = " تخصیص یک مرکزدرمانی/مطب به دکتر ")]

@@ -9,7 +9,7 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
 {
     public class DeleteClinicCommand : Command
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 
     public class DeleteClinicCommandResponse : CommandResponse

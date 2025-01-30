@@ -24,9 +24,9 @@ namespace DRR.Application.CommandHandlers.TreatmentCenter
 
         public override async Task<CreateClinicTypeCommandResponse> Executor(CreateClinicTypeCommand command)
         {
-            var ev = new ClinicType(command.Type);
+            var ct = new ClinicType(command.Type);
 
-            await _clinicTypeRepository.Create(ev);
+            await _clinicTypeRepository.Create(ct);
 
             return new CreateClinicTypeCommandResponse();
         }

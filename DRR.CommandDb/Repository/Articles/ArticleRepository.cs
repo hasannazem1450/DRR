@@ -2,7 +2,6 @@
 using DRR.CommandDB;
 using DRR.Domain.Articles;
 using DRR.Utilities.Extensions;
-using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

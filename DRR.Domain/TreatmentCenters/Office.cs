@@ -2,16 +2,18 @@
 using DRR.Domain.Profile;
 using DRR.Domain.Reserv;
 using DRR.Framework.Contracts.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 
 namespace DRR.Domain.TreatmentCenters
 {
-    public class Office : Entity<int>
+    public class Office : Entity<Guid>
     {
         public Office(string name, string address, double geolon , double geolat, string phone, int cityId, string postalCode, int officeTypeId)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Address = address;
             Geolon = geolon;

@@ -35,7 +35,7 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
 
         }
 
-        public async Task<Clinic> ReadClinicById(int id)
+        public async Task<Clinic> ReadClinicById(Guid id)
         {
             var result = await _Db.Clinics.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -78,7 +78,7 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
 
             await _Db.SaveChangesAsync();
         }
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             var result = await _Db.Clinics.FirstOrDefaultAsync(n => n.Id == id);
 

@@ -26,9 +26,9 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-OfficeTypes")]
-        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadOfficeTypeQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadOfficeTypesQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadOfficeTypeQuery, ReadOfficeTypeQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadOfficeTypesQuery, ReadOfficeTypesQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = " ایجاد یک نوع مطب ")]

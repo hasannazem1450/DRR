@@ -8,14 +8,12 @@ using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Queries.TreatmentCenter
 {
-    public class ReadOfficeQuery : Query
+    public class ReadDoctorTreatmentCentersQuery : Query
     {
-        public Guid Id { get; set; }
     }
 
-    public class ReadOfficeQueryResponse : QueryResponse
+    public class ReadDoctorTreatmentCentersQueryResponse : QueryResponse
     {
-        public OfficeDto Data { get; set; }
+        public List<DoctorTreatmentCenterDto> List { get; set; }
     }
 }
-

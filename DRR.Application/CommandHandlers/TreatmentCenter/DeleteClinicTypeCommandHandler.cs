@@ -14,17 +14,17 @@ namespace DRR.Application.CommandHandlers.TreatmentCenter
     public class DeleteClinicTypeCommandHandler : CommandHandler<DeleteClinicTypeCommand, DeleteClinicTypeCommandResponse>
     {
 
-        private readonly IClinicTypeRepository _clinicRepository;
+        private readonly IClinicTypeRepository _clinicTypeRepository;
 
 
-        public DeleteClinicTypeCommandHandler(IClinicTypeRepository clinicRepository)
+        public DeleteClinicTypeCommandHandler(IClinicTypeRepository clinicTypeRepository)
         {
-            _clinicRepository = clinicRepository;
+            _clinicTypeRepository = clinicTypeRepository;
         }
 
         public override async Task<DeleteClinicTypeCommandResponse> Executor(DeleteClinicTypeCommand command)
         {
-            await _clinicRepository.Delete(command.Id);
+            await _clinicTypeRepository.Delete(command.Id);
 
             return new DeleteClinicTypeCommandResponse();
         }

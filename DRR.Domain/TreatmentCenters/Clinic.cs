@@ -5,15 +5,17 @@ using DRR.Domain.Customer;
 using System.Collections.Generic;
 using DRR.Framework.Contracts.Abstracts;
 using System.Drawing;
+using System;
 
 
 namespace DRR.Domain.TreatmentCenters
 {
 
-    public class Clinic : Entity<int>
+    public class Clinic : Entity<Guid>
     {
         public Clinic(string name, string address, double geolon, double geolat, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Address = address;
             Geolon = geolon;

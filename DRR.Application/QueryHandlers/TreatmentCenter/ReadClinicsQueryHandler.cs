@@ -14,24 +14,24 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.TreatmentCenter
 {
-    public class ReadClinicQueryHandler : IQueryHandler<ReadClinicQuery, ReadClinicQueryResponse>
+    public class ReadClinicsQueryHandler : IQueryHandler<ReadClinicsQuery, ReadClinicsQueryResponse>
     {
         private readonly IClinicRepository _clinicRepository;
         private readonly IClinicService _clinicService;
 
-        public ReadClinicQueryHandler(IClinicRepository clinicRepository, IClinicService clinicService)
+        public ReadClinicsQueryHandler(IClinicRepository clinicRepository, IClinicService clinicService)
         {
             _clinicRepository = clinicRepository;
             _clinicService = clinicService;
         }
 
-        public async Task<ReadClinicQueryResponse> Execute(ReadClinicQuery query, CancellationToken cancellationToken)
+        public async Task<ReadClinicsQueryResponse> Execute(ReadClinicsQuery query, CancellationToken cancellationToken)
         {
-            var clinic = await _clinicRepository.ReadClinicById(query.Id);
+            var clinics = await _clinicRepository.ReadClinics();
 
-            var result = new ReadClinicQueryResponse
+            var result = new ReadClinicsQueryResponse
             {
-                Data = await _clinicService.ConvertToDto(clinic)
+                List = await _clinicService.ConvertToDto(clinics)
             };
 
             return result;

@@ -1,12 +1,10 @@
 ﻿using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.CommandDB;
 using DRR.Domain.TreatmentCenters;
-using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
@@ -14,6 +12,15 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
     {
         public ClinicTypeRepository(BaseProjectCommandDb db) : base(db)
         {
+        }
+
+        public async Task<List<ClinicType>> ReadClinicTypes()
+        {
+            var q = _Db.Clinics.AsQueryable();
+            var q1 = q.ToListAsync();
+            var result = await _Db.ClinicTypes.ToListAsync();
+
+            return result;
         }
 
         public async Task<ClinicType> ReadClinicTypeById(int id)

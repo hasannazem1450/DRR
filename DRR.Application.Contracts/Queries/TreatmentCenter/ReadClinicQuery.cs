@@ -11,7 +11,7 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
 {
     public class ReadClinicQuery : Query
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 
     public class ReadClinicQueryResponse : QueryResponse

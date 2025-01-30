@@ -11,6 +11,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
     public interface IOfficeTypeRepository : IRepository
     {
 
+        Task<List<OfficeType>> ReadOfficeTypes();
         Task<OfficeType> ReadOfficeTypeById(int id);
 
 
