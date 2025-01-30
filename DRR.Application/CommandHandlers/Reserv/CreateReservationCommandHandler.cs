@@ -21,7 +21,7 @@ namespace DRR.Application.CommandHandlers.Reserv
 
         public override async Task<CreateReservationCommandResponse> Executor(CreateReservationCommand command)
         {
-            var reserve = new Domain.Reserv.Reservation(command.ReservationDate, command.ReservationTime, command.VisitTypeId, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration);
+            var reserve = new Domain.Reserv.Reservation(command.ReservationDate, command.ReservationTime, command.VisitTypeId, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration,command.TotalTurnCount);
 
             await _reservationRepository.Create(reserve);
 

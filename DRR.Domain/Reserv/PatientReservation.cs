@@ -9,33 +9,29 @@ namespace DRR.Domain.Reserv
 {
     public class PatientReservation : Entity<int>
     {
-        public PatientReservation(int patientId, int reservationId,int turnId, int? discountCodeId)
+        public PatientReservation(int patientId, int reservationId,int? discountCodeId,int turnId)
         {
             PatientId = patientId;
-            ReservationId = reservationId;
-            TurnId = turnId;
             DiscountCodeId = discountCodeId;
+            TurnId = turnId;
 
         }
 
 
-        public void Update(int patientId, int reservationId, int turnId, int? discountCodeId)
+        public void Update(int patientId, int? discountCodeId,int turnId)
         {
             PatientId = patientId;
-            ReservationId = reservationId;
-            TurnId = turnId;
             DiscountCodeId = discountCodeId;
+            TurnId = turnId ;
 
         }
 
         public int PatientId { get; set; }
         public int ReservationId { get; set; }
-        public int TurnId {  get; set; }
         public int? DiscountCodeId { get; set; }
-
-        public Reservation Reservation { get; set; }
-        public Patient Patient { get; set; }
+        public int TurnId { get; set; }
         public Turn Turn { get; set; }
+        public Patient Patient { get; set; }
         public DiscountCode DiscountCode { get; set; }
 
 

@@ -1,4 +1,5 @@
 ﻿using DRR.Domain.Customer;
+using DRR.Domain.Event;
 using DRR.Domain.Profile;
 using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Abstracts;
@@ -8,7 +9,7 @@ namespace DRR.Domain.Reserv
 {
     public class Reservation : Entity<int>
     {
-        public Reservation(string reservationDate, string reservationTime, int visitTypeId, int doctorTreatmentCenterId, int cancleTimeDuration ,int visitCostId)
+        public Reservation(string reservationDate, string reservationTime, int visitTypeId, int doctorTreatmentCenterId, int cancleTimeDuration ,int visitCostId , int totalTurnCount)
         {
             ReservationDate = reservationDate;
             ReservationTime = reservationTime;
@@ -16,8 +17,9 @@ namespace DRR.Domain.Reserv
             DoctorTreatmentCenterId = doctorTreatmentCenterId;
             CancleTimeDuration = cancleTimeDuration;
             VisitCostId = visitCostId;
+            TotalTurnCount = totalTurnCount;
         }
-        public void Update(string reservationDate, string reservationTime, int visitTypeId, int doctorTreatmentCenterId, int cancleTimeDuration, int visitCostId)
+        public void Update(string reservationDate, string reservationTime, int visitTypeId, int doctorTreatmentCenterId, int cancleTimeDuration, int visitCostId , int totalTurnCount)
         {
             ReservationDate = reservationDate;
             ReservationTime = reservationTime;
@@ -25,6 +27,7 @@ namespace DRR.Domain.Reserv
             DoctorTreatmentCenterId = doctorTreatmentCenterId;
             CancleTimeDuration = cancleTimeDuration;
             VisitCostId = visitCostId;
+            TotalTurnCount = totalTurnCount;
         }
 
         public string ReservationDate { get; set; }
@@ -33,10 +36,12 @@ namespace DRR.Domain.Reserv
         public int CancleTimeDuration { get; set; }
         public string ReservationTime { get; set; }
         public int VisitCostId { get; set; }
-
+        public int TotalTurnCount { get; set; }
         public VisitType VisitType { get; set; }
         public DoctorTreatmentCenter DoctorTreatmentCenter { get; set; }
         public VisitCost VisitCost { get; set; }
+        public ICollection<Turn> Turns { get; protected set; }
+
 
 
     }

@@ -15,8 +15,6 @@ namespace DRR.CommandDb.EntitiesConfigurations.Reservations
         {
             builder.HasKey(x => x.Id);
 
-
-
         }
 
     }

@@ -15,6 +15,7 @@ namespace DRR.Application.Contracts.Commands.Reserv
         public int CancleTimeDuration { get; set; }
         public string ReservationTime { get; set; }
         public int VisitCostId { get; set; }
+        public int TotalTurnCount { get; set; }
 
 
     }
