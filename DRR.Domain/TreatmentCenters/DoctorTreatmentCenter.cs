@@ -4,19 +4,20 @@ using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
 using DRR.Domain.Reserv;
+using System;
 
 namespace DRR.Domain.TreatmentCenters
 {
     public class DoctorTreatmentCenter : Entity<int>
     {
-        public DoctorTreatmentCenter(int doctorId, int? clinicId, int? officeId, string desc)
+        public DoctorTreatmentCenter(int doctorId, Guid? clinicId, Guid? officeId, string desc)
         {
             DoctorId = doctorId;
             ClinicId = clinicId;
             OfficeId = officeId;
             Desc = desc;
         }
-        public void Update(int doctorId, int? clinicId, int? officeId, string desc)
+        public void Update(int doctorId, Guid? clinicId, Guid? officeId, string desc)
         {
             DoctorId = doctorId;
             ClinicId = clinicId;
@@ -25,8 +26,8 @@ namespace DRR.Domain.TreatmentCenters
         }
 
         public int DoctorId { get; set; }
-        public int? ClinicId { get; set; }
-        public int? OfficeId { get; set; }
+        public Guid? ClinicId { get; set; }
+        public Guid? OfficeId { get; set; }
         public string Desc { get; set; }
 
 

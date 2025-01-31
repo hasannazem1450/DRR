@@ -36,12 +36,13 @@ public class SmeProfile : Entity<int>
         SmeWebsite = smeWebsite;
         Address = address;
         CityId = cityId;
+        SmeRankId = (int)smeRankId;
         Status = status;
         Logo = logo;
         Headerpic = headerpic;
         Postalcode = postalcode;
         SmeType = smeType;
-        SmeRankId = (int)smeRankId;
+        
     }
 
     public string SmeName { get; protected set; }
@@ -91,11 +92,11 @@ public class SmeProfile : Entity<int>
         IsDeleted = isDeleted;
     }
 
-    public void Update(string smeName, string nationalCode, string businessCode, string managerName,
-        string registerNumber, string economyCode, string permitNo, string managerPhoneNumber, string managerEmail,
+    public void Update(string smeName, string nationalCode, string? businessCode, string? managerName,
+        string? registerNumber, string? economyCode, string? permitNo, string managerPhoneNumber, string managerEmail,
         string aboutUs, string tellNumber, string activitySubject, string smeEmail, string smeWebsite, string address,
-        int cityId, int smeRankId, int industrialParkId, bool status, string logo,
-        string headerpic, string postalcode, SmeType smeType)
+        int cityId, int? smeRankId, bool status, string logo, string headerpic, string postalcode,
+        SmeType smeType)
     {
         SmeName = smeName;
         NationalCode = nationalCode;

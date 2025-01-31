@@ -25,15 +25,13 @@ namespace DRR.Application.Contracts.Commands.Profile.SmeProfile
         public string SmeEmail { get; set; }
         public string SmeWebsite { get; set; }
         public string Address { get; set; }
-        public bool Status { get; set; }
-
         public int CityId { get; set; }
-        public int SmeType { get; set; }
-        public int? IndustrialParkId { get; set; }
+        public int SmeRankId { get; set; }
+        public bool Status { get; set; }
         public string Logo { get; set; }
         public string Headerpic { get; set; }
         public string Postalcode { get; set; }
-        public int SmeRankId { get; set; }
+        public int SmeType { get; set; }
 
     }
 

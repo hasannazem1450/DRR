@@ -11,5 +11,7 @@ namespace DRR.Framework.Contracts.Abstracts
     {
         public Guid UserId { get; set; } = Guid.NewGuid();
         public string UserName { get; set; } = "test";
+        public int SmeProfileId { get; set; } = 0;
+
     }
 }

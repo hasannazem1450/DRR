@@ -18,7 +18,7 @@ namespace DRR.Domain.Profile
         }
 
         public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; set; }

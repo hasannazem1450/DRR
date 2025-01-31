@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using DRR.Application.CommandHandlers.Authentication.Exceptions;
 using DRR.Application.CommandHandlers.Exceptions;
 using DRR.Application.Contracts.Commands.Authentication;
+using DRR.Application.Contracts.Repository.Profile;
+using DRR.CommandDb.Repository.Profile;
 using DRR.Domain.Identity.Exceptions;
 using DRR.Framework.Contracts.Abstracts;
 using DRR.Framework.Contracts.Common.Enums;
@@ -25,12 +27,14 @@ namespace DRR.Application.CommandHandlers.Authentication
         private readonly SignInManager<DRR.Domain.Identity.ApplicationUser> _signInManager;
         private readonly UserManager<DRR.Domain.Identity.ApplicationUser> _userManager;
         private readonly JwtSetting JwtSetting;
+        private readonly IUserProfileRepository _userRepository;
 
-        public SignInCommandHandler(SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, UserManager<DRR.Domain.Identity.ApplicationUser> userManager, IOptions<JwtSetting> options)
+        public SignInCommandHandler(SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, UserManager<DRR.Domain.Identity.ApplicationUser> userManager, IOptions<JwtSetting> options, IUserProfileRepository userRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             JwtSetting = options.Value;
+            _userRepository = userRepository;
         }
 
 
@@ -80,12 +84,19 @@ namespace DRR.Application.CommandHandlers.Authentication
                 var newRefreshToken = await _userManager.GenerateUserTokenAsync(userExist, "Default", tokenString);
                 await _userManager.SetAuthenticationTokenAsync(userExist, userExist.UserName, "Authorization", tokenString);
 
+                int smeProfileid = 0;
+                var smer = _userRepository.ReadByUserId(new Guid(userExist.Id));
+                if (smer != null)
+                    smeProfileid = smer.Result.FirstOrDefault().SmeProfileId;
+
+
                 return new SignInCommandResponse()
                 {
                     Token = $"Bearer {tokenString}",
                     ExpiredAt = JwtSetting.Time,
                     RefreshToken = $"Bearer {tokenString}",
-                    UserFullname = userExist.Fullname ?? ""
+                    UserFullname = userExist.Fullname ?? "",
+                    SmeprofileId = smeProfileid,
                 };
             }
             //TODO:FindByPhoneNumber
@@ -137,6 +148,7 @@ namespace DRR.Application.CommandHandlers.Authentication
                     Token = $"Bearer {tokenString}",
                     ExpiredAt = JwtSetting.Time,
                     RefreshToken = $"Bearer {tokenString}",
+                    SmeprofileId = 0
                 };
             }
         }

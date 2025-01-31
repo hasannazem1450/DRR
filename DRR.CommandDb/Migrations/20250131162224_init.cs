@@ -294,7 +294,9 @@ namespace DRR.CommandDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    Maxa = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    LogoFile = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -326,34 +328,12 @@ namespace DRR.CommandDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Turn",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TurnNumber = table.Column<int>(type: "int", nullable: false),
-                    Stime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Etime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsFree = table.Column<bool>(type: "bit", nullable: false),
-                    GradeIsDone = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Turn", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "VisitTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VisitTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VisitTypeName = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -504,7 +484,7 @@ namespace DRR.CommandDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     Code = table.Column<int>(type: "int", nullable: true),
                     CountryId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -530,7 +510,7 @@ namespace DRR.CommandDb.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InsuranceTypeId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -687,8 +667,7 @@ namespace DRR.CommandDb.Migrations
                 name: "Clinics",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Geolon = table.Column<double>(type: "float", nullable: false),
@@ -723,8 +702,7 @@ namespace DRR.CommandDb.Migrations
                 name: "Offices",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Geolon = table.Column<double>(type: "float", nullable: false),
@@ -804,13 +782,13 @@ namespace DRR.CommandDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ShortDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ArticleTypeId = table.Column<int>(type: "int", nullable: false),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DRRFileId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Authors = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Authors = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     SmeProfileId = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -949,11 +927,11 @@ namespace DRR.CommandDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DoctorFamily = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecialistId = table.Column<int>(type: "int", nullable: false),
+                    DoctorName = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    DoctorFamily = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    NationalId = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     CodeNezam = table.Column<int>(type: "int", nullable: false),
+                    SpecialistId = table.Column<int>(type: "int", nullable: false),
                     DocExperiance = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DocInstaLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1001,8 +979,8 @@ namespace DRR.CommandDb.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
-                    ClinicId = table.Column<int>(type: "int", nullable: true),
-                    OfficeId = table.Column<int>(type: "int", nullable: true),
+                    ClinicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    OfficeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1043,6 +1021,7 @@ namespace DRR.CommandDb.Migrations
                     CancleTimeDuration = table.Column<int>(type: "int", nullable: false),
                     ReservationTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VisitCostId = table.Column<int>(type: "int", nullable: false),
+                    TotalTurnCount = table.Column<int>(type: "int", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1074,6 +1053,35 @@ namespace DRR.CommandDb.Migrations
                         name: "FK_Reservations_VisitTypes_VisitTypeId",
                         column: x => x.VisitTypeId,
                         principalTable: "VisitTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Turn",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TurnNumber = table.Column<int>(type: "int", nullable: false),
+                    Stime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Etime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsFree = table.Column<bool>(type: "bit", nullable: false),
+                    GradeIsDone = table.Column<int>(type: "int", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Turn", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Turn_Reservations_ReservationId",
+                        column: x => x.ReservationId,
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1214,8 +1222,8 @@ namespace DRR.CommandDb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientId = table.Column<int>(type: "int", nullable: false),
                     ReservationId = table.Column<int>(type: "int", nullable: false),
-                    TurnId = table.Column<int>(type: "int", nullable: false),
                     DiscountCodeId = table.Column<int>(type: "int", nullable: true),
+                    TurnId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -1231,12 +1239,6 @@ namespace DRR.CommandDb.Migrations
                         principalTable: "DiscountCodes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientReservations_Reservations_ReservationId",
-                        column: x => x.ReservationId,
-                        principalTable: "Reservations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_PatientReservations_Turn_TurnId",
                         column: x => x.TurnId,
                         principalTable: "Turn",
@@ -1250,9 +1252,9 @@ namespace DRR.CommandDb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PatientFamily = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PatientName = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    PatientFamily = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    NationalId = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     BirthNumber = table.Column<int>(type: "int", nullable: false),
                     BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: false),
@@ -1533,6 +1535,13 @@ namespace DRR.CommandDb.Migrations
                 column: "SmeProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Articles_Title",
+                table: "Articles",
+                column: "Title",
+                unique: true,
+                filter: "[Title] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -1647,6 +1656,13 @@ namespace DRR.CommandDb.Migrations
                 column: "LicancePhotoFileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Doctors_NationalId",
+                table: "Doctors",
+                column: "NationalId",
+                unique: true,
+                filter: "[NationalId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_PersonalPhotoFileId",
                 table: "Doctors",
                 column: "PersonalPhotoFileId");
@@ -1700,6 +1716,12 @@ namespace DRR.CommandDb.Migrations
                 name: "IX_Insurances_InsuranceTypeId",
                 table: "Insurances",
                 column: "InsuranceTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Insurances_Name",
+                table: "Insurances",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_MessagingGroupSmeProfiles_MessagingGroupId",
@@ -1757,11 +1779,6 @@ namespace DRR.CommandDb.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientReservations_ReservationId",
-                table: "PatientReservations",
-                column: "ReservationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PatientReservations_TurnId",
                 table: "PatientReservations",
                 column: "TurnId");
@@ -1770,6 +1787,13 @@ namespace DRR.CommandDb.Migrations
                 name: "IX_Patients_CityId",
                 table: "Patients",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_NationalId",
+                table: "Patients",
+                column: "NationalId",
+                unique: true,
+                filter: "[NationalId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_SmeProfileId",
@@ -1790,6 +1814,13 @@ namespace DRR.CommandDb.Migrations
                 name: "IX_Provinces_CountryId",
                 table: "Provinces",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Provinces_Name",
+                table: "Provinces",
+                column: "Name",
+                unique: true,
+                filter: "[Name] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_DoctorId",
@@ -1872,9 +1903,26 @@ namespace DRR.CommandDb.Migrations
                 column: "SmeRaterId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Specialists_Maxa",
+                table: "Specialists",
+                column: "Maxa",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Specialists_Name",
+                table: "Specialists",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SystemDataMessage_SystemMessageId",
                 table: "SystemDataMessage",
                 column: "SystemMessageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Turn_ReservationId",
+                table: "Turn",
+                column: "ReservationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_SmeProfileId",
@@ -1890,6 +1938,12 @@ namespace DRR.CommandDb.Migrations
                 name: "IX_VisitCosts_VisitTypeId",
                 table: "VisitCosts",
                 column: "VisitTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VisitTypes_VisitTypeName",
+                table: "VisitTypes",
+                column: "VisitTypeName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Wallets_SmeProfileId",
@@ -2205,10 +2259,10 @@ namespace DRR.CommandDb.Migrations
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Reservations");
+                name: "Turn");
 
             migrationBuilder.DropTable(
-                name: "Turn");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "VisitCosts");

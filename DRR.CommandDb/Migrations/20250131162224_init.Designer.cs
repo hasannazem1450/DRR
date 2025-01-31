@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DRR.CommandDb.Migrations
 {
     [DbContext(typeof(BaseProjectCommandDb))]
-    [Migration("20250130165204_reservchange")]
-    partial class reservchange
+    [Migration("20250131162224_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2137,11 +2137,9 @@ namespace DRR.CommandDb.Migrations
 
             modelBuilder.Entity("DRR.Domain.TreatmentCenters.Clinic", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -2233,8 +2231,8 @@ namespace DRR.CommandDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ClinicId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ClinicId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -2257,8 +2255,8 @@ namespace DRR.CommandDb.Migrations
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("OfficeId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("OfficeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -2273,11 +2271,9 @@ namespace DRR.CommandDb.Migrations
 
             modelBuilder.Entity("DRR.Domain.TreatmentCenters.Office", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");

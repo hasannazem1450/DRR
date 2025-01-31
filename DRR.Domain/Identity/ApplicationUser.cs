@@ -7,8 +7,10 @@ namespace DRR.Domain.Identity;
 
 public class ApplicationUser : IdentityUser
 {
+    public ApplicationUser()
+        { }
     public string Fullname { get; set; }
 
-    public ICollection<UserProfile> UserProfiles { get; protected set; }
+    public virtual ICollection<UserProfile> UserProfiles { get; protected set; }
     public ICollection<SiteMessage> SiteMessages { get; protected set; }
 }

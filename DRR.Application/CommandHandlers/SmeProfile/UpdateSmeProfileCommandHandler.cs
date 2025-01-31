@@ -36,7 +36,7 @@ public class UpdateSmeProfileCommandHandler : CommandHandler<UpdateSmeProfileCom
             smeProfile.Update(command.SmeName, command.NationalCode, command.BusinessCode, command.ManagerName,
           command.RegisterNumber, command.EconomyCode, command.PermitNo, command.ManagerPhoneNumber,
           command.ManagerEmail, command.AboutUs, command.TellNumber, command.ActivitySubject, command.SmeEmail,
-          command.SmeWebsite, command.Address, command.CityId, command.SmeRankId, command.IndustrialParkId, command.Status, command.Logo,
+          command.SmeWebsite, command.Address, command.CityId, command.SmeRankId, command.Status, command.Logo,
           command.Headerpic, command.Postalcode, (SmeType)command.SmeType);
 
             await _smeProfileRepository.Update(smeProfile);

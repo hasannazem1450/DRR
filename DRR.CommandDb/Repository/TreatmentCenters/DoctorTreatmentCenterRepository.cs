@@ -29,13 +29,13 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
             return result;
         }
-        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByOfficeId(int? id)
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByOfficeId(Guid? id)
         {
             var result = await _Db.DoctorTreatmentCenters.Where(c => c.OfficeId == id).ToListAsync();
 
             return result;
         }
-        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(int? id)
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(Guid? id)
         {
             var result = await _Db.DoctorTreatmentCenters.Where(c => c.ClinicId == id).ToListAsync();
 
