@@ -24,6 +24,7 @@ using DRR.Application.Contracts.Repository.Sms;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace DRR.Application.CommandHandlers.Authentication
 {
@@ -104,6 +105,74 @@ namespace DRR.Application.CommandHandlers.Authentication
         //todo
         public override async Task<SignUpCommandResponse> Executor(SignUpCommand command)
         {
+            ////
+            ///halat sabtnam va vorood ba code paiamaki
+            ///
+            ///
+
+            if (command.UserName.Length == 11)
+            {
+                var usertemp = new ApplicationUser
+                {
+                    UserName = command.UserName,
+                    PhoneNumber = command.UserName.ConvertToValidMobile(),
+                    Fullname = command.Fullname,
+                    
+                };
+                var usertempExist = await _userManager.Users.FirstOrDefaultAsync(l => l.UserName == command.UserName);
+
+                if (usertempExist == null)
+                { //throw new UserNotExistException();
+                    var usertempCreate = await _userManager.CreateAsync(usertemp, "String123456");
+                    if (usertempCreate.Succeeded)
+                    {
+                        if (command.UserName.IsNullOrEmptyExtension())
+                            throw new UserNameAndPasswordAreNullException();
+
+                        //////////////////////////////////////////////////sms
+                        var activationCode = new Random().Next(10000, 99999).ToString();
+                        var message = _smsSetting.ActivatingRegistrationMessage.Replace("{activationCode}", activationCode);
+                        var receiverMobile = command.UserName.RemoveMobilePrefix();
+
+                        var smsAclOutputModel = await _smsAcl.Send(new SmsAclInputModel { Message = message, Receiver = receiverMobile });
+                        if (!smsAclOutputModel.IsSuccess)
+                            throw new ActivatingCodeNotSendedException();
+
+                        var smsInfo = new SmsInfo(_smsSetting.Sender, receiverMobile.ConvertToValidMobile(), message, activationCode,
+                            SmsType.ActivatingRegistration);
+
+                        await _smsInfoRepository.Create(smsInfo);
+                        /////////////
+                        return null;
+
+                    }
+                }else
+                {
+                    var activationCode = new Random().Next(10000, 99999).ToString();
+                    var message = _smsSetting.ActivatingRegistrationMessage.Replace("{activationCode}", activationCode);
+                    var receiverMobile = command.UserName.RemoveMobilePrefix();
+
+                    var smsAclOutputModel = await _smsAcl.Send(new SmsAclInputModel { Message = message, Receiver = receiverMobile });
+                    if (!smsAclOutputModel.IsSuccess)
+                        throw new ActivatingCodeNotSendedException();
+
+                    var smsInfo = new SmsInfo(_smsSetting.Sender, receiverMobile.ConvertToValidMobile(), message, activationCode,
+                        SmsType.ActivatingRegistration);
+
+                    await _smsInfoRepository.Create(smsInfo);
+                    /////////////
+                    return null;
+                }
+                
+            }
+
+
+
+
+            ////
+            ///halat sabtnam va vorood ba ramz sabet
+            ///
+            ///
             if (command.PhoneNumber.Length != 13 && command.UserName.Length != 10)
                 throw new UserNameOrPhoneNumberIsNotValidException();
             if (!command.UserName.IsNationalCodeValid())

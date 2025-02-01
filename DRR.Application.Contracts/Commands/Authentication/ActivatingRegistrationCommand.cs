@@ -10,4 +10,9 @@ public class ActivatingRegistrationCommand : Command
 
 public class ActivatingRegistrationCommandResponse : CommandResponse
 {
+    public string Token { get; set; }
+    public string RefreshToken { get; set; }
+    public string ExpiredAt { get; set; }
+    public string UserFullname { get; set; }
+    public int SmeprofileId { get; set; }
 }
