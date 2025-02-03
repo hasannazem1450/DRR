@@ -16,6 +16,17 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         {
         }
 
+        public async Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters()
+        {
+            var result = await _Db.DoctorTreatmentCenters
+                .Include(x=> x.Doctor)
+                .Include(x => x.Clinic)
+                .Include(x => x.Office)
+                .ToListAsync();
+
+            return result;
+        }
+
         public async Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id)
         {
             var result = await _Db.DoctorTreatmentCenters.FirstOrDefaultAsync(c => c.Id == id);

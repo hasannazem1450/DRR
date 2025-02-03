@@ -30,21 +30,7 @@ namespace DRR.Application.Services.Customer
         {
             var doctor = await _doctorRepository.ReadDoctorById(id);
 
-            var result = new DoctorDto()
-            {
-                Id = doctor.Id,
-                DoctorName = doctor.DoctorName,
-                DoctorFamily = doctor.DoctorFamily,
-                NationalId = doctor.NationalId,
-                SpecialistId = doctor.SpecialistId,
-                CodeNezam = doctor.CodeNezam,
-                DocExperiance = doctor.DocExperiance,
-                DocInstaLink = doctor.DocInstaLink,
-                Mobile = doctor.Mobile,
-                Desc = doctor.Desc,
-                SmeProfile = doctor.SmeProfile,  
-
-            };
+            var result = await ConvertToDto(doctor);
 
             return result;
         }
@@ -57,14 +43,13 @@ namespace DRR.Application.Services.Customer
                 Id = doctor.Id,
                 DoctorName = doctor.DoctorName,
                 DoctorFamily = doctor.DoctorFamily,
-                NationalId = doctor.NationalId,
-                SpecialistId = doctor.SpecialistId,
-                CodeNezam = doctor.CodeNezam,
+              
                 DocExperiance = doctor.DocExperiance,
                 DocInstaLink = doctor.DocInstaLink,
-                Mobile = doctor.Mobile,
+               
                 Desc = doctor.Desc,
                 SmeProfile = doctor.SmeProfile,
+                specialist = doctor.Specialist.Name
 
             };
 
@@ -101,8 +86,7 @@ namespace DRR.Application.Services.Customer
             if (filters.Bimeh.IsNotNullOrEmpty())
                 result = result.Where(w => w.DoctorInsurance.Insurance.Name.Contains(filters.Bimeh)).ToList();
 
-            if (filters.NationalId.IsNotNullOrEmpty())
-                result = result.Where(w => w.NationalId.Contains(filters.NationalId)).ToList();
+            
             if (filters.CityName.IsNotNullOrEmpty())
                 result = result.Where(w => w.DoctorTreatmentCenters.Clinic.City.Name.Contains(filters.CityName )||
                     w.DoctorTreatmentCenters.Office.City.Name.Contains(filters.CityName)).ToList();
@@ -129,12 +113,10 @@ namespace DRR.Application.Services.Customer
                 Id = s.Id,
                 DoctorName = s.DoctorName,
                 DoctorFamily = s.DoctorFamily,
-                NationalId = s.NationalId,
-                CodeNezam = s.CodeNezam,
-                SpecialistId = s.SpecialistId,
+               
                 DocExperiance = s.DocExperiance,
                 DocInstaLink = s.DocInstaLink,
-                Mobile = s.Mobile,
+              
                 Desc = s.Desc,
                 SmeProfile = s.SmeProfile,
                
@@ -151,12 +133,10 @@ namespace DRR.Application.Services.Customer
                 Id = doctor.Id,
                 DoctorName = doctor.DoctorName,
                 DoctorFamily = doctor.DoctorFamily,
-                NationalId = doctor.NationalId,
-                CodeNezam = doctor.CodeNezam,
-                SpecialistId = doctor.SpecialistId,
+               
                 DocExperiance = doctor.DocExperiance,
                 DocInstaLink = doctor.DocInstaLink,
-                Mobile = doctor.Mobile,
+               
                 Desc = doctor.Desc,
                 SmeProfile = doctor.SmeProfile,
             };

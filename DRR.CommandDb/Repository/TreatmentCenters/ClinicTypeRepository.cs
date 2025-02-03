@@ -3,6 +3,7 @@ using DRR.CommandDB;
 using DRR.Domain.TreatmentCenters;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -16,11 +17,14 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
         public async Task<List<ClinicType>> ReadClinicTypes()
         {
-            var q = _Db.Clinics.AsQueryable();
-            var q1 = q.ToListAsync();
-            var result = await _Db.ClinicTypes.ToListAsync();
+            var query = _Db.ClinicTypes.AsQueryable();
+            if (query != null)
+                query = query.Where(q => q.IsDeleted == false);
 
-            return result;
+
+
+            return await query.ToListAsync();
+
         }
 
         public async Task<ClinicType> ReadClinicTypeById(int id)

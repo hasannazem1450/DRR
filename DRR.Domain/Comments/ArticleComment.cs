@@ -24,7 +24,7 @@ namespace DRR.Domain.Comments
 
         public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; protected set; }
-        public Article Article { get; set; }
+        public virtual Article Article { get; set; }
 
         public void Update(string desc, int articleId, string commentDate, bool isAccept, int smeProfileId)
         {

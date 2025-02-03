@@ -11,8 +11,8 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
     public class DoctorTreatmentCenterDto
     {
         public int DoctorId { get; set; }
-        public int? ClinicId { get; set; }
-        public int? OfficeId { get; set; }
+        public Guid? ClinicId { get; set; }
+        public Guid? OfficeId { get; set; }
         public string Desc { get; set; }
         public string DoctorName { get; set; }
         public string ClinicName { get; set; }

@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
 {
     public interface IDoctorTreatmentCenterRepository : IRepository
     {
-
+        Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters();
         Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(Guid? id);

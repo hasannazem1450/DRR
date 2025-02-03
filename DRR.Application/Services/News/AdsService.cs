@@ -34,29 +34,29 @@ namespace DRR.Application.Services.News
             };
         }
 
-        //public async Task<List<NewsDto>> Read()
-        //{
-        //    var news = await _newsRepository.Read();
+        public async Task<List<AdsDto>> Read()
+        {
+            var ads = await _adsRepository.Read();
 
-        //    var result = new List<NewsDto>();
+            var result = new List<AdsDto>();
 
-        //    foreach (var item in news)
-        //    {
-        //        var dto = new NewsDto()
-        //        {
-        //            Id = item.Id,
-        //            Title = item.Title,
-        //            HeadLine = item.HeadLine,
-        //            Description = item.Description,
-        //            Photo = item.Photo,
-        //            SmeProfile = item.SmeProfile,
-        //        };
+            foreach (var item in ads)
+            {
+                var dto = new AdsDto()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    HeadLine = item.HeadLine,
+                    Description = item.Description,
+                    Photo = item.Photo,
+                    SmeProfile = item.SmeProfile,
+                };
 
-        //        result.Add(dto);
-        //    }
+                result.Add(dto);
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
 
         public async Task<List<AdsDto>> ReadAdsBySmeProfileId(int SmeProfileId)
         {

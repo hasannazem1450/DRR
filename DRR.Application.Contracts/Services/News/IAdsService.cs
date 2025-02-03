@@ -9,7 +9,7 @@ namespace DRR.Application.Contracts.Services.News
     public interface IAdsService : IService
     {
         Task<AdsDto> ReadById(int id);
-        //Task<List<NewsDto>> Read();
+        Task<List<AdsDto>> Read();
         Task<List<AdsDto>> ReadAdsBySmeProfileId(int SmeProfileId);
     }
 }

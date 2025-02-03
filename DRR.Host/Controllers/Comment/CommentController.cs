@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Threading;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DRR.Host.Controllers.Comment
 {
@@ -22,6 +23,7 @@ namespace DRR.Host.Controllers.Comment
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن تمام کامنتهای یک دکتر")]
         [HttpGet("read-doctor-Comment")]
         public async Task<IActionResult> ReadDoctorComment([FromQuery] ReadDoctorCommentQuery query, CancellationToken cancellationToken)

@@ -14,13 +14,11 @@ namespace DRR.Application.Contracts.Commands.Customer
         public int Id { get; set; }
         public string DoctorName { get; set; }
         public string DoctorFamily { get; set; }
-        public string NationalId { get; set; }
-        public int CodeNezam { get; set; }
-        public int SpecialistId { get; set; }
+        public string specialist { get; set; }
         public string DocExperiance { get; set; }
         public string DocInstaLink { get; set; }
-        public string Mobile { get; set; }
         public string Desc { get; set; }
+     
         public virtual SmeProfile SmeProfile { get; set; }
         public DoctorInsurance DoctorInsurance { get; set; }
         public DoctorTreatmentCenter DoctorTreatmentCenters { get; set; }

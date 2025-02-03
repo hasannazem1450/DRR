@@ -2,6 +2,7 @@
 using DRR.Application.Contracts.Queries.Customer;
 using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading;
@@ -15,6 +16,7 @@ namespace DRR.Host.Controllers.Customer
         {
 
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها")]
         [HttpGet("read-all-doctors")]
         public async Task<IActionResult> ReadAllDoctors([FromQuery] ReadAllDoctorsQuery query, CancellationToken cancellationToken)
@@ -22,6 +24,7 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadAllDoctorsQuery, ReadDoctorsQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن پروفایل یک دکتر ")]
         [HttpGet("read-doctor-byid")]
         public async Task<IActionResult> ReadDoctor([FromQuery] ReadDoctorQuery query, CancellationToken cancellationToken)
@@ -36,6 +39,7 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadDoctorsBySmeprofileQuery, ReadDoctorsQueryResponse> (query , cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها بر حسب تخصص")]
         [HttpGet("read-doctors-byspeciality")]
         public async Task<IActionResult> ReadDoctorsBySpeciality([FromQuery] ReadDoctorsBySpecialityQuery query, CancellationToken cancellationToken)
@@ -67,6 +71,7 @@ namespace DRR.Host.Controllers.Customer
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن بیمه های طرف قرارداد با دکتر")]
         [HttpGet("read-insurances-doctor")]
         public async Task<IActionResult> ReadInsurancesDoctors([FromQuery] ReadInsurancesDoctorQuery query, CancellationToken cancellationToken)
@@ -74,6 +79,7 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadInsurancesDoctorQuery, ReadInsurancesDoctorQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن انواع ویریت های دکتر")]
         [HttpGet("read-visittype-doctor")]
         public async Task<IActionResult> ReadVisitTypeDoctors([FromQuery] ReadVisitTypeDoctorQuery query, CancellationToken cancellationToken)
@@ -81,7 +87,7 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadVisitTypeDoctorQuery, ReadVisitTypeDoctorQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
-
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن نزدیک ترین زمان ویزیت این دکتر")]
         [HttpGet("read-nextreserves-doctor")]
         public async Task<IActionResult> ReadReservesDoctor([FromQuery] ReadNextReservesDoctorQuery query, CancellationToken cancellationToken)
@@ -103,6 +109,7 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadPatientsDoctorQuery, ReadPatientsDoctorQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "جستجو در کلیه دکترها")]
         [HttpGet("search-doctors")]
         public async Task<IActionResult> ReadSearchDoctors([FromQuery] SearchDoctorsQuery query, CancellationToken cancellationToken)

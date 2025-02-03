@@ -16,7 +16,8 @@ public class EventAttenderController : MainController
     public EventAttenderController(IDistributor distributor) : base(distributor)
     {
     }
-    [SwaggerOperation(Summary = " ویرایش یک همایش یا نمایشگاه")]
+    [AllowAnonymous]
+    [SwaggerOperation(Summary = " ثبت نام در همایش")]
     [HttpPost("create")]
     public async Task<IActionResult> Create(CreateEventAttenderCommand command, CancellationToken cancellationToken)
     {
@@ -26,7 +27,7 @@ public class EventAttenderController : MainController
 
         return OkApiResult(result);
     }
-
+    [AllowAnonymous]
     [HttpGet("read-attender-types")]
     public async Task<IActionResult> ReadAttenderTypes([FromQuery] ReadAttenderTypesQuery query,
         CancellationToken cancellationToken)

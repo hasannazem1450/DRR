@@ -24,14 +24,13 @@ namespace DRR.CommandDb.Repository.News
             return result;
         }
 
-        public async Task<List<Domain.News.Ads>> Read(AdsDto adsDto)
+        public async Task<List<Domain.News.Ads>> Read()
         {
             var query = _Db.Ads.AsQueryable();
-            if (adsDto.Title != null)
-                query = query.Where(q => q.Title == adsDto.Title);
+            if (query != null)
+                query = query.Where(q => q.IsDeleted == false);
 
-            if (!adsDto.HeadLine.IsNotNullOrEmpty())
-                query = query.Where(q => q.HeadLine == adsDto.HeadLine);
+          
 
             return await query.ToListAsync();
            

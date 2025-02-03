@@ -26,7 +26,6 @@ namespace DRR.Application.Services.TreatmentCenter
                 Geolat = s.Geolat,
                 Phone = s.Phone,
                 CityName = s.City.Name,
-                ProvinceName = s.City.Province.Name,
                 SiamCode = s.SiamCode,
                 Desc = s.Desc,
                 ClinicTypeName = s.ClinicType.Type
@@ -46,7 +45,6 @@ namespace DRR.Application.Services.TreatmentCenter
                 Geolat = clinic.Geolat,
                 Phone = clinic.Phone,
                 CityName = clinic.City.Name,
-                ProvinceName = clinic.City.Province.Name,
                 SiamCode = clinic.SiamCode,
                 Desc = clinic.Desc,
                 ClinicTypeName = clinic.ClinicType.Type
@@ -66,7 +64,7 @@ namespace DRR.Application.Services.TreatmentCenter
 
         public async Task<List<ClinicDto>> FilterByProvinceOrCity(List<ClinicDto> Clinics, string pcname)
         {
-            var result = Clinics.Where(w => w.ProvinceName == pcname || w.CityName == pcname).ToList();
+            var result = Clinics.Where(w => w.CityName == pcname).ToList();
 
             return result;
         }

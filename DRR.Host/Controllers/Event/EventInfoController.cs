@@ -43,6 +43,7 @@ public class EventInfoController : MainController
 
         return OkApiResult(result);
     }
+    [AllowAnonymous]
     [SwaggerOperation(Summary = " خواندن جزیات یک همایش یا نمایشگاه")]
     [HttpGet("read-event")]
     public async Task<IActionResult> ReadEvent([FromQuery] ReadEventInfoQuery query,

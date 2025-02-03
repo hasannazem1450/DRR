@@ -35,7 +35,6 @@ namespace DRR.Domain.TreatmentCenters
         public Office Office { get; set; }
         public Clinic Clinic { get; set; }
 
-        public ICollection<Doctor> Doctors { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
        
 

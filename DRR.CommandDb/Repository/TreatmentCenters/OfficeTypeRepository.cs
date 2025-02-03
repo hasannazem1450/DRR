@@ -18,10 +18,14 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
         public async Task<List<OfficeType>> ReadOfficeTypes()
         {
-
             var query = _Db.OfficeTypes.AsQueryable();
+            if (query != null)
+                query = query.Where(q => q.IsDeleted == false);
+
+
 
             return await query.ToListAsync();
+          
         }
         public async Task<OfficeType> ReadOfficeTypeById(int id)
         {

@@ -4,6 +4,7 @@ using DRR.Application.Contracts.Commands.News;
 using DRR.Application.Contracts.Queries.News;
 using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -30,6 +31,7 @@ namespace DRR.Host.Controllers.News
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "   تبلیغ های صفحه اول ")]
         [HttpGet("read-ads")]
         public async Task<IActionResult> Readads([FromQuery] ReadAdsQuery query, CancellationToken cancellationToken)

@@ -16,9 +16,10 @@ namespace DRR.Host.Controllers.TreatmentCenter
         {
 
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن یک مرکز درمانی ")]
         [HttpGet("read-ClinicType")]
-        public async Task<IActionResult> ReadSpecilist([FromQuery] ReadClinicTypeQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadClinicTypeById([FromQuery] ReadClinicTypeQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadClinicTypeQuery, ReadClinicTypeQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
@@ -26,14 +27,14 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-ClinicTypes")]
-        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadClinicTypesQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadClinicTypes([FromQuery] ReadClinicTypesQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadClinicTypesQuery, ReadClinicTypesQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = " ایجاد یک مرکز درمانی ")]
         [HttpPost("create-ClinicType")]
-        public async Task<IActionResult> CreateSpecilist(CreateClinicTypeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateClinicType(CreateClinicTypeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateClinicTypeCommand, CreateClinicTypeCommandResponse>(command, cancellationToken);
 
@@ -41,7 +42,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         }
         [SwaggerOperation(Summary = " ویرایش یک مرکز درمانی ")]
         [HttpPut("update-ClinicType")]
-        public async Task<IActionResult> UpdateDoctor(UpdateClinicTypeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateClinicType(UpdateClinicTypeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<UpdateClinicTypeCommand, UpdateClinicTypeCommandResponse>(command, cancellationToken);
 
@@ -49,7 +50,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         }
         [SwaggerOperation(Summary = " حذف یک مرکز درمانی ")]
         [HttpDelete("delete-ClinicType")]
-        public async Task<IActionResult> DeleteDoctor(DeleteClinicTypeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteClinicType(DeleteClinicTypeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<DeleteClinicTypeCommand, DeleteClinicTypeCommandResponse>(command, cancellationToken);
 

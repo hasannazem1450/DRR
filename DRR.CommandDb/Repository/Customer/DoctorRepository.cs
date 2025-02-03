@@ -17,7 +17,13 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<List<Doctor>> ReadAllDoctors()
         {
-            var result = await _Db.Doctors.ToListAsync();
+            var query = _Db.Doctors
+               .Include(x => x.SmeProfile)
+               .Include(x => x.Specialist)
+               .Include(x => x.DoctorTreatmentCenters)
+               .AsQueryable();
+
+            var result = await query.ToListAsync();
 
             return result;
         }

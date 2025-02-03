@@ -20,26 +20,34 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
         public async Task<List<Office>> ReadOffices()
         {
-            var query = _Db.Offices.AsQueryable();
+            var query = _Db.Offices
+                .Include(x=> x.City)
+                .Include(x=> x.OfficeType)
+                .AsQueryable();
            
             return await query.ToListAsync();
         }
         public async Task<Office> ReadOfficeById(Guid id)
         {
-            var result = await _Db.Offices.FirstOrDefaultAsync(c => c.Id == id);
+            var result = await _Db.Offices
+                .Include(x => x.City)
+                .Include(x => x.OfficeType)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
 
         public async Task<List<Office>> ReadOfficeByCityId(int id)
         {
-            var result = await _Db.Offices.Where(c => c.CityId == id).ToListAsync();
+            var result = await _Db.Offices.Include(x => x.City)
+                .Include(x => x.OfficeType).Where(c => c.CityId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<Office>> ReadOfficeByOfficeTypeId(int id)
         {
-            var result = await _Db.Offices.Where(c => c.OfficeTypeId == id).ToListAsync();
+            var result = await _Db.Offices.Include(x => x.City)
+                .Include(x => x.OfficeType).Where(c => c.OfficeTypeId == id).ToListAsync();
 
             return result;
         }

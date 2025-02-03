@@ -12,7 +12,7 @@ namespace DRR.Application.Contracts.Repository.News
     {
         Task<Domain.News.Ads> ReadById(int id); 
 
-        Task<List<Domain.News.Ads>> Read(AdsDto adsDto);
+        Task<List<Domain.News.Ads>> Read();
 
         Task Delete(int id);
 

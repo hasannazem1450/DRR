@@ -17,6 +17,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         {
 
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب های یک دکتر ")]
         [HttpGet("read-DoctorTreatmentCenterByDoctorId")]
         public async Task<IActionResult> ReadSpecilist([FromQuery] ReadDoctorTreatmentCenterQuery query, CancellationToken cancellationToken)

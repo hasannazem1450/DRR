@@ -45,7 +45,7 @@ namespace DRR.Domain.Customer
         public string Desc { get; set; }
        
 
-        public Specialist Specialist { get; set; }
+        public virtual Specialist Specialist { get; set; }
    
 
         public Guid? PersonalPhotoFileId { get; protected set; }

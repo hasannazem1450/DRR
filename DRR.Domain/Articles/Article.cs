@@ -29,9 +29,9 @@ namespace DRR.Domain.Articles
      
         public string Link { get; set; }
         public Guid? DRRFileId { get; set; }
-        public DRRFile PhotoFile { get; set; }
+        public virtual DRRFile PhotoFile { get; set; }
         public string Authors { get; set; }
-        public ArticleType ArticleType { get; set; }
+        public virtual ArticleType ArticleType { get; set; }
         public int SmeProfileId { get; set; }
         public SmeProfile SmeProfile { get; set; }
 
@@ -52,7 +52,7 @@ namespace DRR.Domain.Articles
             IsDeleted = isDeleted;
         }
 
-        public ICollection<ArticleComment> ArticleComments { get; protected set; }
+        public virtual ICollection<ArticleComment> ArticleComments { get; protected set; }
 
 
     }

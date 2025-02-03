@@ -20,7 +20,7 @@ namespace DRR.Domain.Articles
         public void Update(string type)
         { Type = type; }
 
-        public ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
 
 
     }

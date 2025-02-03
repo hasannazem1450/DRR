@@ -22,6 +22,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Threading.Tasks;
 
+
 namespace DRR.Configurations.RegisterTypes;
 
 public static class ConfigureServicesExtension
@@ -35,6 +36,7 @@ public static class ConfigureServicesExtension
                 //options.UseSqlServer(connectionString);
                 options.EnableSensitiveDataLogging();
                 options.EnableDetailedErrors();
+                //options.UseLazyLoadingProxies();
                 options.UseSqlServer(connectionString, builder =>
                 {
                     builder.EnableRetryOnFailure(

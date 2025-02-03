@@ -16,6 +16,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         {
 
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن یک نوع مطب ")]
         [HttpGet("read-OfficeType")]
         public async Task<IActionResult> ReadSpecilist([FromQuery] ReadOfficeTypeQuery query, CancellationToken cancellationToken)

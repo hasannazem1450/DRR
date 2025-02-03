@@ -111,6 +111,7 @@ public class BaseProjectContextFactory : IDesignTimeDbContextFactory<BaseProject
     public BaseProjectCommandDb CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<BaseProjectCommandDb>();
+        
         optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=DRR;User Id=sa;Password=123;TrustServerCertificate=True;");
 
         return new BaseProjectCommandDb(optionsBuilder.Options);

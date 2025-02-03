@@ -9,6 +9,7 @@ using DRR.Application.Contracts.Commands.News;
 using DRR.Application.Contracts.Commands.Jornal;
 using DRR.Application.Contracts.Commands.BaseInfo.City;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DRR.Host.Controllers.Jornal
 {
@@ -25,6 +26,7 @@ namespace DRR.Host.Controllers.Jornal
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "  نمایش کل مقالات ")]
         [HttpGet("read-all-articles")]
         public async Task<IActionResult> ReadAllArticle([FromQuery] ReadAllArticleQuery query, CancellationToken cancellationToken)

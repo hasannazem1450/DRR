@@ -32,7 +32,7 @@ namespace DRR.Host.Controllers.UserProfile
 
             return OkApiResult(result);
         }
-
+        [AllowAnonymous]
         [HttpPost("read-all-userprofiles-filter")]
         public async Task<IActionResult> ReadAllUserProfilesFilter([FromQuery] ReadAllUserProfilesFilterQuery query, CancellationToken cancellationToken)
         {
@@ -40,7 +40,7 @@ namespace DRR.Host.Controllers.UserProfile
 
             return OkApiResult(result);
         }
-
+        [AllowAnonymous]
         [HttpGet("read-userprofiles")]
         public async Task<IActionResult> ReadUserProfileByUserId([FromQuery] ReadUserProfileQuery query, CancellationToken cancellationToken)
         {
