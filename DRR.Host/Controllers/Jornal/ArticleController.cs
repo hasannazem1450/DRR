@@ -48,7 +48,7 @@ namespace DRR.Host.Controllers.Jornal
         public async Task<IActionResult> DeleteArticle(CancellationToken cancellationToken)
         {
 
-            var result = await Distributor.Push<DeleteCityCommand, DeleteCityCommandResponse>(new DeleteCityCommand(), cancellationToken);
+            var result = await Distributor.Push<DeleteArticleCommand, DeleteArticleCommandResponse>(new DeleteArticleCommand(), cancellationToken);
 
             return OkApiResult(result);
         }
@@ -57,7 +57,7 @@ namespace DRR.Host.Controllers.Jornal
         public async Task<IActionResult> UpdateArticle(CancellationToken cancellationToken)
         {
 
-            var result = await Distributor.Push<UpdateCityCommand, UpdateCityCommandResponse>(new UpdateCityCommand(), cancellationToken);
+            var result = await Distributor.Push<UpdateArticleCommand, UpdateArticleCommandResponse>(new UpdateArticleCommand(), cancellationToken);
 
             return OkApiResult(result);
         }

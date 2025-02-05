@@ -12,8 +12,6 @@ namespace DRR.Application.Contracts.Commands.Insurances
     {
         public int InsuranceTypeId { get; set; }
         public string Name { get; set; }
-
-        public InsuranceType InsuranceType { get; set; }
     }
     public class CreateInsuranceCommandResponse : CommandResponse
     {

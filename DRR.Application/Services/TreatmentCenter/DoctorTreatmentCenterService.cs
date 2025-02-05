@@ -21,8 +21,8 @@ namespace DRR.Application.Services.TreatmentCenter
                 OfficeId = s.OfficeId,
                 Desc = s.Desc,
                 DoctorName = s.Doctor.DoctorName,
-                ClinicName = s.Clinic.Name,
-                OfficeName = s.Office.Name
+                ClinicName = s.Clinic?.Name,
+                OfficeName = s.Office?.Name
             }).ToList();
 
             return result;

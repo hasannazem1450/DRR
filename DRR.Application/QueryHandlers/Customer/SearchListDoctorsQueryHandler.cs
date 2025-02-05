@@ -22,49 +22,37 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Customer
 {
-    public class SearchDoctorsQueryHandler : IQueryHandler<SearchDoctorsQuery, SearchDoctorsQueryResponse>
+    public class SearchListDoctorsQueryHandler : IQueryHandler<SearchListDoctorsQuery, SearchListDoctorsQueryResponse>
     {
         private readonly IDoctorRepository _doctorRepository;
-        private readonly IReservationRepository _reservationRepository;
-        private readonly ICommentRepository _commentRepository;
-        private readonly IDoctorInsuranceRepository _diRepository;
-
-        private readonly IDoctorTreatmentCenterRepository _dtcRepository;
         private readonly IDoctorService _doctorService;
 
-        public SearchDoctorsQueryHandler(IDoctorRepository doctorRepository,
+        public SearchListDoctorsQueryHandler(IDoctorRepository doctorRepository,
             IDoctorService doctorervice)
         {
             _doctorRepository = doctorRepository;
             _doctorService = doctorervice;
         }
 
-        public async Task<SearchDoctorsQueryResponse> Execute(SearchDoctorsQuery query,
+        public async Task<SearchListDoctorsQueryResponse> Execute(SearchListDoctorsQuery query,
             CancellationToken cancellationToken)
         {
             var doctor = await _doctorRepository.ReadAllDoctors();
-            if (query.ProvinceId != null || query.ProvinceId == 0)
-                doctor = await _doctorService.FilterBoxByProvince(doctor, query.ProvinceId ?? 0);
 
-            var cdoctordto = await _doctorService.ConvertToBoxDto(doctor.FirstOrDefault());
-
-            var doctorDto = await _doctorService.ConvertToBoxDto(doctor);
+            var doctorDto = await _doctorService.ConvertToDto(doctor);
 
             if (query.DoctorName.IsNotNullOrEmpty())
-                doctorDto = await _doctorService.FilterBoxByName(doctorDto, query.DoctorName);
+                doctorDto = await _doctorService.FilterByName(doctorDto, query.DoctorName);
 
             if (query.doctorFamily.IsNotNullOrEmpty())
-                doctorDto = await _doctorService.FilterBoxByName(doctorDto, query.doctorFamily);
-
-            
-
+                doctorDto = await _doctorService.FilterByName(doctorDto, query.doctorFamily);
 
             var totalRecords = doctorDto.Count();
-            List<DoctorBoxDto> senditems = doctorDto.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToList();
-
-            var result = new SearchDoctorsQueryResponse
+            List<DoctorDto> senditems = doctorDto.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToList();
+ 
+            var result = new SearchListDoctorsQueryResponse
             {
-                PageNumber = query.pageNumber,
+                PageNumber =query.pageNumber,
                 PageSize = query.pagesize,
                 TotalRecords = totalRecords,
                 List = senditems

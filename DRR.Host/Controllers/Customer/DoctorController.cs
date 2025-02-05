@@ -117,5 +117,13 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<SearchDoctorsQuery, SearchDoctorsQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "جستجو در کلیه دکترها لیست ادمین")]
+        [HttpGet("search-list-doctors")]
+        public async Task<IActionResult> ReadSearchListDoctors([FromQuery] SearchListDoctorsQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<SearchListDoctorsQuery, SearchListDoctorsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
     }
 }

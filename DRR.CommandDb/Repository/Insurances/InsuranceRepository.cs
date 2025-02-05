@@ -15,6 +15,14 @@ namespace DRR.CommandDb.Repository.Insurances
         public InsuranceRepository(BaseProjectCommandDb db) : base(db)
         {
         }
+        public async Task<List<Insurance>> ReadAllInsurances()
+        {
+            var result = await _Db.Insurances
+                .Include(x => x.InsuranceType)
+                .ToListAsync();
+
+            return result;
+        }
 
         public async Task<Insurance> ReadInsuranceById(int id)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +10,21 @@ using DRR.Application.Contracts.Commands.Customer;
 using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Repository.BaseInfo;
 using DRR.Application.Contracts.Repository.Customer;
+using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.Customer;
 using DRR.Application.Contracts.Services.FileManagment;
 using DRR.Domain.Customer;
 using DRR.Domain.Specialists;
+using DRR.Domain.TreatmentCenters;
 using DRR.Utilities.Extensions;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace DRR.Application.Services.Customer
 {
     public class DoctorService :IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
+        private readonly IDoctorTreatmentCenterRepository _dtcRepository;
         private readonly IDRRFileService _dRRFileService;
 
         public DoctorService(IDRRFileService dRRFileService)
@@ -64,10 +69,20 @@ namespace DRR.Application.Services.Customer
 
             return result;
         }
-        public async Task<List<DoctorDto>> FilterByProvince(List<DoctorDto> doctors, int provinceId)
+        public async Task<List<DoctorBoxDto>> FilterBoxByName(List<DoctorBoxDto> doctors, string name)
         {
-            var result = doctors.Where(w => w.DoctorTreatmentCenters.Office.City.Province.Id == provinceId ||
-            w.DoctorTreatmentCenters.Clinic.City.Province.Id == provinceId).ToList();
+            var result = doctors.Where(w => w.DoctorName.Contains(name) || w.DoctorFamily.Contains(name)).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByProvince(List<Doctor> doctors, int provinceId)
+        {
+            var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.Office?.City.ProvinceId == provinceId)).ToList();
+            return result;
+        }
+        public async Task<List<DoctorBoxDto>> FilterBoxByCity(List<DoctorBoxDto> doctors, int cityId)
+        {
+            var result = doctors.Where(w => w.CityId == cityId).ToList();
 
             return result;
         }
@@ -76,6 +91,8 @@ namespace DRR.Application.Services.Customer
 
 
             var result = doctors;
+
+
 
             if (filters.DoctorName.IsNotNullOrEmpty())
                 result = result.Where(w => w.DoctorName.Contains(filters.DoctorName)).ToList();
@@ -125,7 +142,7 @@ namespace DRR.Application.Services.Customer
 
             return result;
         }
-
+        
         public async Task<DoctorDto> ConvertToDto(Doctor doctor)
         {
             var result = new DoctorDto
@@ -139,6 +156,42 @@ namespace DRR.Application.Services.Customer
                
                 Desc = doctor.Desc,
                 SmeProfile = doctor.SmeProfile,
+            };
+
+            return result;
+        }
+        public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors)
+        {
+            var result = doctors.Select(s => new DoctorBoxDto
+            {
+                Id = s.Id,
+                DoctorName = s.DoctorName,
+                DoctorFamily = s.DoctorFamily,
+
+                DocExperiance = s.DocExperiance,
+                DocInstaLink = s.DocInstaLink,
+
+                Desc = s.Desc,
+                //DoctorTreatmentCenterList = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(s.Id),
+
+            }).ToList();
+
+            return result;
+        }
+        public async Task<DoctorBoxDto> ConvertToBoxDto(Doctor doctor)
+        {
+            var result = new DoctorBoxDto
+            {
+                Id = doctor.Id,
+                DoctorName = doctor.DoctorName,
+                DoctorFamily = doctor.DoctorFamily,
+
+                DocExperiance = doctor.DocExperiance,
+                DocInstaLink = doctor.DocInstaLink,
+
+                Desc = doctor.Desc,
+                DoctorTreatmentCenterList = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(doctor.Id),
+
             };
 
             return result;

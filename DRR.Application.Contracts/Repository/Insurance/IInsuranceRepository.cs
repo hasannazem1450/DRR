@@ -10,6 +10,7 @@ namespace DRR.Application.Contracts.Repository.Insurance
     public interface IInsuranceRepository : IRepository
     {
 
+        Task<List<Domain.Insurances.Insurance>> ReadAllInsurances();
         Task<Domain.Insurances.Insurance> ReadInsuranceById(int id);
        
 

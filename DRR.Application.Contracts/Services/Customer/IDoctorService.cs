@@ -15,9 +15,13 @@ namespace DRR.Application.Contracts.Services.Customer
         Task<DoctorDto> ReadById(int id);
         Task<List<DoctorDto>> ReadDoctorBySmeProfileId(int smeProfileId);
         Task<List<DoctorDto>> FilterByName(List<DoctorDto> doctors, string name);
-        Task<List<DoctorDto>> FilterByProvince(List<DoctorDto> doctors, int provinceId);
+        Task<List<DoctorBoxDto>> FilterBoxByName(List<DoctorBoxDto> doctors, string name);
+        Task<List<Doctor>> FilterBoxByProvince(List<Doctor> doctors, int provinceId);
+        Task<List<DoctorBoxDto>> FilterBoxByCity(List<DoctorBoxDto> doctors, int cityId);
         Task<List<DoctorDto>> FinalFilter(List<DoctorDto> doctors, ReadDoctorQueryFilters filters);
         Task<List<DoctorDto>> ConvertToDto(List<Doctor> doctors);
         Task<DoctorDto> ConvertToDto(Doctor doctor);
+        Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors);
+        Task<DoctorBoxDto> ConvertToBoxDto(Doctor doctor);
     }
 }

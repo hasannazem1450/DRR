@@ -15,6 +15,6 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
 
     public class ReadDoctorTreatmentCenterQueryResponse : QueryResponse
     {
-        public DoctorTreatmentCenterDto Data { get; set; }
+        public List<DoctorTreatmentCenterDto> List { get; set; }
     }
 }

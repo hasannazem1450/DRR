@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.TreatmentCenter
 {
-    public class ReadDoctorTreatmentCenterQueryHandler : IQueryHandler<ReadDoctorTreatmentCentersQuery, ReadDoctorTreatmentCentersQueryResponse>
+    public class ReadDoctorTreatmentCenterQueryHandler : IQueryHandler<ReadDoctorTreatmentCenterQuery, ReadDoctorTreatmentCenterQueryResponse>
     {
         private readonly IDoctorTreatmentCenterRepository _dtcRepository;
         private readonly IDoctorTreatmentCenterService _dtcService;
@@ -22,11 +22,11 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
             _dtcService = dtcService;
         }
 
-        public async Task<ReadDoctorTreatmentCentersQueryResponse> Execute(ReadDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)
+        public async Task<ReadDoctorTreatmentCenterQueryResponse> Execute(ReadDoctorTreatmentCenterQuery query, CancellationToken cancellationToken)
         {
-            var dtcs = await _dtcRepository.ReadAllDoctorTreatmentCenters();
+            var dtcs = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(query.Id);
 
-            var result = new ReadDoctorTreatmentCentersQueryResponse
+            var result = new ReadDoctorTreatmentCenterQueryResponse
             {
                 List = await _dtcService.ConvertToDto(dtcs)
             };

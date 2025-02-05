@@ -19,7 +19,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         public async Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters()
         {
             var result = await _Db.DoctorTreatmentCenters
-                .Include(x=> x.Doctor)
+                .Include(x => x.Doctor)
                 .Include(x => x.Clinic)
                 .Include(x => x.Office)
                 .ToListAsync();
@@ -36,7 +36,12 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
         public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id)
         {
-            var result = await _Db.DoctorTreatmentCenters.Where(c => c.DoctorId == id).ToListAsync();
+            var result = await _Db.DoctorTreatmentCenters.Where(c => c.DoctorId == id)
+              .Include(x => x.Doctor)
+              .Include(x => x.Clinic)
+              .Include(x => x.Office)
+              .ToListAsync();
+
 
             return result;
         }
