@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
@@ -27,9 +28,10 @@ namespace DRR.Application.Services.Customer
         private readonly IDoctorTreatmentCenterRepository _dtcRepository;
         private readonly IDRRFileService _dRRFileService;
 
-        public DoctorService(IDRRFileService dRRFileService)
+        public DoctorService(IDRRFileService dRRFileService, IDoctorTreatmentCenterRepository dtcRepository)
         {
             _dRRFileService = dRRFileService;
+            _dtcRepository = dtcRepository;
         }
         public async Task<DoctorDto> ReadById(int id)
         {
@@ -162,37 +164,45 @@ namespace DRR.Application.Services.Customer
         }
         public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors)
         {
-            var result = doctors.Select(s => new DoctorBoxDto
-            {
-                Id = s.Id,
-                DoctorName = s.DoctorName,
-                DoctorFamily = s.DoctorFamily,
-
-                DocExperiance = s.DocExperiance,
-                DocInstaLink = s.DocInstaLink,
-
-                Desc = s.Desc,
-                //DoctorTreatmentCenterList = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(s.Id),
-
-            }).ToList();
+            var result = doctors.Select(s => ConvertToBoxDto(s).Result).ToList();
 
             return result;
         }
         public async Task<DoctorBoxDto> ConvertToBoxDto(Doctor doctor)
         {
-            var result = new DoctorBoxDto
+            var dtcl = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(doctor.Id);
+            DoctorBoxDto result;
+            if (dtcl.Count > 0)
             {
-                Id = doctor.Id,
-                DoctorName = doctor.DoctorName,
-                DoctorFamily = doctor.DoctorFamily,
+                result = new DoctorBoxDto
+                {
+                    Id = doctor.Id,
+                    DoctorName = doctor.DoctorName,
+                    DoctorFamily = doctor.DoctorFamily,
 
-                DocExperiance = doctor.DocExperiance,
-                DocInstaLink = doctor.DocInstaLink,
+                    DocExperiance = doctor.DocExperiance,
+                    DocInstaLink = doctor.DocInstaLink,
 
-                Desc = doctor.Desc,
-                DoctorTreatmentCenterList = await _dtcRepository.ReadDoctorTreatmentCenterByDoctorId(doctor.Id),
+                    Desc = doctor.Desc,
 
-            };
+                    DoctorTreatmentCenterList = dtcl,
+
+                };
+            }else
+            {
+                result = new DoctorBoxDto
+                {
+                    Id = doctor.Id,
+                    DoctorName = doctor.DoctorName,
+                    DoctorFamily = doctor.DoctorFamily,
+
+                    DocExperiance = doctor.DocExperiance,
+                    DocInstaLink = doctor.DocInstaLink,
+
+                    Desc = doctor.Desc,
+
+                };
+            }
 
             return result;
         }

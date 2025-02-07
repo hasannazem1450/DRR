@@ -11,6 +11,6 @@ namespace DRR.Application.Contracts.Queries.RoleManager
         public Guid Id { get; set; }
         public string Name{ get; set; }
         public string NormalizedName { get; set; }
-        public Guid ConcurrencyStamp { get; set; }
+        
     }
 }

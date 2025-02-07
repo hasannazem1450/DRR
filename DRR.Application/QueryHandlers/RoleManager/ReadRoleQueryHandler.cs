@@ -36,7 +36,7 @@ namespace DRR.Application.QueryHandlers.RoleManager
                     Id = Guid.Parse(item.Id),
                     Name = item.Name,
                     NormalizedName = item.Name,
-                    ConcurrencyStamp = Guid.Parse(item.ConcurrencyStamp),
+                    
                 };
 
                 result.List.Add(dto);
