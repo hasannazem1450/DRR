@@ -51,6 +51,21 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "تعریف قیمت ویزیت برای رزرو یک دکتر ")]
+        [HttpDelete("create-visitcost")]
+        public async Task<IActionResult> CreateVisitCost(CreateVisitCostCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<CreateVisitCostCommand, CreateVisitCostCommandResponse>(command, cancellationToken);
 
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = "ویرایش قیمت ویزیت برای رزرو یک دکتر ")]
+        [HttpDelete("Update-visitcost")]
+        public async Task<IActionResult> UpdateVisitCost(UpdateVisitCostCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<UpdateVisitCostCommand, UpdateVisitCostCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
     }
 }

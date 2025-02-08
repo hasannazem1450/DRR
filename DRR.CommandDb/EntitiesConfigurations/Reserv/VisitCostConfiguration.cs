@@ -20,10 +20,10 @@ namespace DRR.CommandDb.EntitiesConfigurations.Reservations
             //    .HasForeignKey(x => x.DoctorId)
             //    .OnDelete(DeleteBehavior.NoAction);
 
-            //builder.HasOne(x => x.VisitType)
-            //    .WithMany(x => x.VisitCosts)
-            //    .HasForeignKey(x => x.VisitTypeId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.VisitType)
+                .WithMany(x => x.VisitCosts)
+                .HasForeignKey(x => x.VisitTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

@@ -29,12 +29,10 @@ namespace DRR.Application.Services.Reserv
 
                 Id = reservation.Id,
                 ReservationDate = reservation.ReservationDate,
-                VisitTypeId = reservation.VisitTypeId,
                 DoctorTreatmentCenterId = reservation.DoctorTreatmentCenterId,
                 CancleTimeDuration = reservation.CancleTimeDuration,
                 ReservationTime = reservation.ReservationTime,
                 VisitCostId = reservation.VisitCostId,
-                VisitType = reservation.VisitType,
                 DoctorTreatmentCenter = reservation.DoctorTreatmentCenter,
                 VisitCost = reservation.VisitCost
             };

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadVisitTypeDoctorQuery :Query
+    public class ReadOfficeTypeDoctorQuery :Query
     {
-        public int VisitTYpeId { get; set; }
+        public int OfficeTypeId { get; set; }
     }
 
-    public class ReadVisitTypeDoctorQueryResponse : QueryResponse
+    public class ReadOfficeTypeDoctorQueryResponse : QueryResponse
     {
         public List<DoctorDto> List { get; set; }
     }

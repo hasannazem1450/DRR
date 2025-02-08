@@ -82,6 +82,7 @@ public sealed class BaseProjectCommandDb : IdentityDbContext<ApplicationUser>
     public DbSet<DRRFile> DRRFiles { get; set; }
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<SiteMessageImage> SiteMessageImages { get; set; }
+    public DbSet<Turn> Turns { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

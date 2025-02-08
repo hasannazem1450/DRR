@@ -29,9 +29,9 @@ namespace DRR.CommandDb.Repository.Reserv
 
             return result;
         }
-        public async Task<List<Reservation>> ReadReservationByVisitTypeId(int id)
+        public async Task<List<Reservation>> ReadReservationByOfficeTypeId(int id)
         {
-            var result = await _Db.Reservations.Where(c => c.VisitTypeId == id).ToListAsync();
+            var result = await _Db.Reservations.Where(c => c.OfficeTypeId == id).ToListAsync();
 
             return result;
         }
@@ -52,7 +52,7 @@ namespace DRR.CommandDb.Repository.Reserv
 
             result.DoctorTreatmentCenter.DoctorId = Reservation.DoctorTreatmentCenter.DoctorId;
             result.ReservationDate = Reservation.ReservationDate;
-            result.VisitTypeId = Reservation.VisitTypeId;
+            result.OfficeTypeId = Reservation.OfficeTypeId;
             result.DoctorTreatmentCenterId = Reservation.DoctorTreatmentCenterId;
             result.CancleTimeDuration = Reservation.CancleTimeDuration;
 

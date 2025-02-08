@@ -18,14 +18,18 @@ namespace DRR.CommandDb.Repository.VisitCosts
 
         public async Task<VisitCost> ReadVisitCostById(int id)
         {
-            var result = await _Db.VisitCosts.FirstOrDefaultAsync(c => c.Id == id);
+            var result = await _Db.VisitCosts
+                .Include(ot => ot.VisitType)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
 
         public async Task<List<VisitCost>> ReadVisitCostByDoctorId(int id)
         {
-            var result = await _Db.VisitCosts.Where(c => c.DoctorId == id).ToListAsync();
+            var result = await _Db.VisitCosts
+                .Include(ot => ot.VisitType)
+                .Where(c => c.DoctorId == id).ToListAsync();
 
             return result;
         }
@@ -42,6 +46,7 @@ namespace DRR.CommandDb.Repository.VisitCosts
 
             result.DoctorId = VisitCost.DoctorId;
             result.Price = VisitCost.Price;
+            result.VisitTypeId = VisitCost.VisitTypeId;
 
             
             _Db.VisitCosts.Update(result);

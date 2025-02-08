@@ -28,7 +28,7 @@ namespace DRR.Domain.Reserv
 
 
 
-        public ICollection<VisitCost> visitCosts { get; set; }
+        public ICollection<VisitCost> VisitCosts { get; set; }
         
     }
 

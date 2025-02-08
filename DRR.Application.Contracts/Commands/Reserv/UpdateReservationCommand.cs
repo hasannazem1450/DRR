@@ -11,7 +11,6 @@ namespace DRR.Application.Contracts.Commands.Reserv
     {
         public int Id { get; set; }
         public string ReservationDate { get; set; }
-        public int VisitTypeId { get; set; }
         public int DoctorTreatmentCenterId { get; set; }
         public int CancleTimeDuration { get; set; }
         public string ReservationTime { get; set; }

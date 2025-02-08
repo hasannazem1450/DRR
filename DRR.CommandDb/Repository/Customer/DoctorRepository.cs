@@ -23,6 +23,8 @@ namespace DRR.CommandDb.Repository.Customer
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(r => r.Reservations).ThenInclude(v=> v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(r => r.Reservations).ThenInclude(v=> v.Turns)
                .AsQueryable();
 
             var result = await query.ToListAsync();

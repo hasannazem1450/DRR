@@ -11,22 +11,23 @@ namespace DRR.Domain.Reserv
     {
         public Turn (int turnNumber,string stime ,string etime ,bool isFree, int gradeIsDone ,int reservationId)
         {
-            this.ReservationId = reservationId;
+            
             this.TurnNumber = turnNumber;
             this.Stime = stime;
             this.Etime = etime;
             this.IsFree = isFree;
             this.GradeIsDone = gradeIsDone;
-
+            this.ReservationId = reservationId;
         }
         public void Update(int turnNumber, string stime, string etime, bool isFree, int gradeIsDone, int reservationId)
         {
-            this.ReservationId = reservationId;
+            
             this.TurnNumber = turnNumber;
             this.Stime = stime;
             this.Etime = etime;
             this.IsFree = isFree;
             this.GradeIsDone = gradeIsDone;
+            this.ReservationId = reservationId;
 
         }
 

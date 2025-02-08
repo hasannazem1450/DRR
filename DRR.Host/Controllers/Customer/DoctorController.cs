@@ -80,11 +80,11 @@ namespace DRR.Host.Controllers.Customer
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = "خواندن انواع ویریت های دکتر")]
+        [SwaggerOperation(Summary = "خواندن انواع ویزیت های دکتر")]
         [HttpGet("read-visittype-doctor")]
-        public async Task<IActionResult> ReadVisitTypeDoctors([FromQuery] ReadVisitTypeDoctorQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadVisitTypeDoctors([FromQuery] ReadOfficeTypeDoctorQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadVisitTypeDoctorQuery, ReadVisitTypeDoctorQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadOfficeTypeDoctorQuery, ReadOfficeTypeDoctorQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [AllowAnonymous]

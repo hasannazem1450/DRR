@@ -34,7 +34,7 @@ namespace DRR.Host.Controllers.Insurance
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = "   ایجاد یک بیمه برای یک دکتر ")]
-        [HttpPost("create-DoctorInsurances")]
+        [HttpPost("create-DoctorInsurance")]
         public async Task<IActionResult> CreateDoctorInsurance(CreateDoctorInsuranceCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateDoctorInsuranceCommand, CreateDoctorInsuranceCommandResponse>(command, cancellationToken);

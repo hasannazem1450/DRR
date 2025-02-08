@@ -21,7 +21,7 @@ namespace DRR.Application.CommandHandlers.Reservation
         {
             var reserve = await _reservationRepository.ReadReservationById(command.Id);
 
-            reserve.Update(command.ReservationDate, command.ReservationTime, command.VisitTypeId, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration,command.TotalTurnCount);
+            reserve.Update(command.ReservationDate, command.ReservationTime, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration,command.TotalTurnCount);
             await _reservationRepository.Update(reserve);
 
 

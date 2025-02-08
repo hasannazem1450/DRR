@@ -19,10 +19,6 @@ namespace DRR.Application.Contracts.Commands.Insurances
         public decimal InsurancePercent { get; set; }
         public int VisitCostId { get; set; }
         public bool IsActive { get; set; }
-
-        public Insurance Insurance { get; set; }
-        public Doctor Doctor { get; set; }
-        public VisitCost VisitCost { get; set; }
     }
     public class CreateDoctorInsuranceCommandResponse : CommandResponse
     {

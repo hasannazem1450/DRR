@@ -14,7 +14,7 @@ namespace DRR.Application.Contracts.Repository.Reserv
 
         Task<Reservation> ReadReservationById(int id);
         Task<List<Reservation>> ReadReservationByDoctorId(int id);
-        Task<List<Reservation>> ReadReservationByVisitTypeId(int id);
+        Task<List<Reservation>> ReadReservationByOfficeTypeId(int id);
         Task<List<Reservation>> ReadReservationByDoctorTreatmentCenterId(int? id);
 
         Task Delete(int id);
