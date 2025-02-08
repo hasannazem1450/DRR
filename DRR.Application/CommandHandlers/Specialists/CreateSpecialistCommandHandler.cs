@@ -29,7 +29,7 @@ namespace DRR.Application.CommandHandlers.Specialists
             var size = await _specialistService.GetFileSizeKb(command.LogoFile);
             if (size < 30)
             {
-                var sp = new Specialist(command.Name ,command.Maxa ,command.LogoFile);
+                var sp = new Specialist(command.Name ,command.Maxa, command.MaxaName ,command.LogoFile);
 
                 await _specialistRepository.Create(sp);
             }

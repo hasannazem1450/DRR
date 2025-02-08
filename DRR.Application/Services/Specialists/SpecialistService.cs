@@ -19,6 +19,7 @@ namespace DRR.Application.Services.Specialists
                 Id = s.Id,
                 Name = s.Name,
                 Maxa = s.Maxa,
+                MaxaName = s.MaxaName,
                 LogoFile = s.LogoFile,
             }).ToList();
 
@@ -32,6 +33,7 @@ namespace DRR.Application.Services.Specialists
                 Id = specialist.Id,
                 Name = specialist.Name,
                 Maxa = specialist.Maxa,
+                MaxaName = specialist.MaxaName,
                 LogoFile = specialist.LogoFile,
 
             };

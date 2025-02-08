@@ -13,6 +13,7 @@ namespace DRR.Application.Contracts.Commands.Specialists
         public int Id { get; set; }
         public string Name { get; set; }
         public string Maxa { get; set; }
+        public string MaxaName { get; set; }
         public string LogoFile { get; set; }  
     }
     public class UpdateSpecialistCommandResponse : CommandResponse

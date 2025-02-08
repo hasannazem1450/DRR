@@ -30,7 +30,7 @@ namespace DRR.Application.CommandHandlers.Specialists
             {
                 var sp = await _specialistRepository.ReadSpecialistById(command.Id);
 
-                sp.Update(command.Name,command.Maxa, command.LogoFile);
+                sp.Update(command.Name,command.Maxa,command.MaxaName, command.LogoFile);
 
                 await _specialistRepository.Update(sp);
             }
