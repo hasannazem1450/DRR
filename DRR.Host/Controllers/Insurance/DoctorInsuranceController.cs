@@ -16,6 +16,7 @@ namespace DRR.Host.Controllers.Insurance
         public DoctorInsuranceController(IDistributor distributor) : base(distributor)
         {
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "   نمایش بیمه های یک دکتر")]
         [HttpGet("read-DoctorInsurance")]
         public async Task<IActionResult> ReadDoctorInsurance([FromQuery] ReadDoctorInsuranceQuery query, CancellationToken cancellationToken)

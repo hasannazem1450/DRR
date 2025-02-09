@@ -35,8 +35,8 @@ namespace DRR.Domain.Reserv
         public string ReservationTime { get; set; }
         public int VisitCostId { get; set; }
         public int TotalTurnCount { get; set; }
-        [NotMapped]
-        public virtual int? OfficeTypeId { get; set; }
+        //[NotMapped]
+        //public virtual int? OfficeTypeId { get; set; }
         public DoctorTreatmentCenter DoctorTreatmentCenter { get; set; }
         public VisitCost VisitCost { get; set; }
         public ICollection<Turn> Turns { get; protected set; }

@@ -37,6 +37,22 @@ public static class StringExtension
         return result;
     }
 
+    public static string TrimForSlash(this string value)
+    {
+        var result = "Has Erro";
+
+        var contentOne = value[0] == '[' ? value.Remove(0, 1) : value;
+
+        var contentTwo = value[contentOne.Length - 1] == ']' ? contentOne.Remove(contentOne.Length - 1, 1) : value;
+        ;
+
+        var contentThree = contentTwo.Replace("/", "");
+
+        result = new StringBuilder(contentThree).Replace(@"/", string.Empty).ToString();
+
+        return result;
+    }
+
     public static bool IsValidBase64(this string value)
     {
         value = value.Trim();

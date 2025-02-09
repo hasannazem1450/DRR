@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Utilities.Extensions;
 
 namespace DRR.CommandDb.Repository.Reserv
 {
@@ -25,13 +26,22 @@ namespace DRR.CommandDb.Repository.Reserv
 
         public async Task<List<Reservation>> ReadReservationByDoctorId(int id)
         {
-            var result = await _Db.Reservations.Where(c => c.DoctorTreatmentCenter.DoctorId == id).ToListAsync();
+            var teststr = Convert.ToInt32(DateTime.Now.ToPersianString().TrimForSlash());
+            var query = _Db.Reservations
+               .Include(s => s.DoctorTreatmentCenter)
+               .AsQueryable();
+            var result = await query.Where(c => c.DoctorTreatmentCenter.DoctorId == id).ToListAsync();
+
 
             return result;
         }
         public async Task<List<Reservation>> ReadReservationByOfficeTypeId(int id)
         {
-            var result = await _Db.Reservations.Where(c => c.OfficeTypeId == id).ToListAsync();
+            var query = _Db.Reservations
+   .Include(s => s.DoctorTreatmentCenter).ThenInclude(o => o.Office)
+   .AsQueryable();
+            var result = await query
+                .Where(c => c.DoctorTreatmentCenter.Office.OfficeTypeId == id).ToListAsync();
 
             return result;
         }
@@ -52,7 +62,7 @@ namespace DRR.CommandDb.Repository.Reserv
 
             result.DoctorTreatmentCenter.DoctorId = Reservation.DoctorTreatmentCenter.DoctorId;
             result.ReservationDate = Reservation.ReservationDate;
-            result.OfficeTypeId = Reservation.OfficeTypeId;
+            //result.OfficeTypeId = Reservation.OfficeTypeId;
             result.DoctorTreatmentCenterId = Reservation.DoctorTreatmentCenterId;
             result.CancleTimeDuration = Reservation.CancleTimeDuration;
 

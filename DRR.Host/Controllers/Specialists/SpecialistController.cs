@@ -18,6 +18,7 @@ namespace DRR.Host.Controllers.Specialists
         {
 
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن یک تخصص ")]
         [HttpGet("read-specialist")]
         public async Task<IActionResult> ReadSpecilist([FromQuery] ReadSpecialistQuery query, CancellationToken cancellationToken)

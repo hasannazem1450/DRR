@@ -9,6 +9,7 @@ using DRR.Application.Contracts.Queries.Reservation;
 using DRR.Application.Contracts.Commands.Reserv;
 using DRR.Application.Contracts.Commands;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DRR.Host.Controllers.Reservation
 {
@@ -17,6 +18,7 @@ namespace DRR.Host.Controllers.Reservation
         public ReservationController(IDistributor distributor) : base(distributor)
         {
         }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن وقت های خالی برای ویزیت یک دکتر ")]
         [HttpGet("read-doctor-reservation")]
         public async Task<IActionResult> RereservationmeProfilereservation([FromQuery] ReadDoctorReservationQuery query, CancellationToken cancellationToken)

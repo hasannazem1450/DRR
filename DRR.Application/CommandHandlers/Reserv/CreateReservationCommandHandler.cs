@@ -35,10 +35,10 @@ namespace DRR.Application.CommandHandlers.Reserv
                 DateTime stime = DateTime.ParseExact(command.ReservationTime, "HH:mm",
                                        CultureInfo.InvariantCulture);
                 DateTime etime = stime.AddMinutes(15);
-                if (x % 3 == 0)
+                if (x % command.Numberofturnsinlimit == 0)
                 {
-                    stime = stime.AddMinutes((x / 3) * 30);
-                    etime = stime.AddMinutes(15);
+                    stime = stime.AddMinutes((x / command.Numberofturnsinlimit) * command.Timeofturnsinlimit);
+                    etime = stime.AddMinutes(command.CancleTimeDuration);
                 }
 
 
