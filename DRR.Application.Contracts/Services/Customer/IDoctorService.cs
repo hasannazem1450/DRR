@@ -17,7 +17,8 @@ namespace DRR.Application.Contracts.Services.Customer
         Task<List<DoctorDto>> FilterByName(List<DoctorDto> doctors, string name);
         Task<List<DoctorBoxDto>> FilterBoxByName(List<DoctorBoxDto> doctors, string name);
         Task<List<Doctor>> FilterBoxByProvince(List<Doctor> doctors, int provinceId);
-        Task<List<DoctorBoxDto>> FilterBoxByCity(List<DoctorBoxDto> doctors, int cityId);
+        Task<List<Doctor>> FilterBoxByCity(List<Doctor> doctors, int cityId);
+        Task<List<Doctor>> FilterBoxBySpecialist(List<Doctor> doctors, string specialistIds);
         Task<List<DoctorDto>> FinalFilter(List<DoctorDto> doctors, ReadDoctorQueryFilters filters);
         Task<List<DoctorDto>> ConvertToDto(List<Doctor> doctors);
         Task<DoctorDto> ConvertToDto(Doctor doctor);

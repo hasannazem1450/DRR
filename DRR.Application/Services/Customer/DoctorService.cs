@@ -14,6 +14,7 @@ using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.Customer;
 using DRR.Application.Contracts.Services.FileManagment;
+using DRR.Domain.BaseInfo;
 using DRR.Domain.Customer;
 using DRR.Domain.Specialists;
 using DRR.Domain.TreatmentCenters;
@@ -82,9 +83,16 @@ namespace DRR.Application.Services.Customer
             var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.Office?.City.ProvinceId == provinceId)).ToList();
             return result;
         }
-        public async Task<List<DoctorBoxDto>> FilterBoxByCity(List<DoctorBoxDto> doctors, int cityId)
+        public async Task<List<Doctor>> FilterBoxByCity(List<Doctor> doctors, int cityId)
         {
-            var result = doctors.Where(w => w.CityId == cityId).ToList();
+            var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.Office?.CityId == cityId)).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxBySpecialist(List<Doctor> doctors, string specialistIds)
+        {
+            List<int> csis = specialistIds.Split(',').Select(int.Parse).ToList() ;
+            var result = doctors.Where(x => csis.Contains(x.SpecialistId)).ToList();
 
             return result;
         }
@@ -184,7 +192,7 @@ namespace DRR.Application.Services.Customer
                     DocInstaLink = doctor.DocInstaLink,
 
                     Desc = doctor.Desc,
-
+                    specialist = doctor.Specialist.Name,
                     DoctorTreatmentCenterList = dtcl,
 
                 };

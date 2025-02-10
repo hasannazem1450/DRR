@@ -43,8 +43,14 @@ namespace DRR.Application.QueryHandlers.Customer
             CancellationToken cancellationToken)
         {
             var doctors = await _doctorRepository.ReadAllDoctors();
-            if (query.ProvinceId != null || query.ProvinceId == 0)
+            if (query.ProvinceId != null && query.ProvinceId != 0)
                 doctors = await _doctorService.FilterBoxByProvince(doctors, query.ProvinceId ?? 0);
+
+            if (query.CityId != null && query.CityId != 0)
+                doctors = await _doctorService.FilterBoxByCity(doctors, query.CityId ?? 0);
+
+            if (query.specialistIds != null && query.specialistIds != "")
+                doctors = await _doctorService.FilterBoxBySpecialist(doctors, query.specialistIds);
 
             var doctorDto = await _doctorService.ConvertToBoxDto(doctors);
 

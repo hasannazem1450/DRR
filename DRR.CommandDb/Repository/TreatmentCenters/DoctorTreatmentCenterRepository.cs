@@ -22,6 +22,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 .Include(x => x.Doctor)
                 .Include(x => x.Clinic)
                 .Include(x => x.Office)
+                .Include(x=> x.Reservations)
                 .ToListAsync();
 
             return result;
@@ -40,6 +41,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
               .Include(x => x.Doctor)
               .Include(x => x.Clinic)
               .Include(x => x.Office)
+              .Include(x => x.Reservations)
               .ToListAsync();
 
 

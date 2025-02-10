@@ -16,17 +16,12 @@ namespace DRR.Application.Contracts.Queries.Customer
         public int pageNumber { get; set; } = 1;
         public string? DoctorName { get; set; }
         public string? doctorFamily { get; set; }
-        public string? specialist { get; set; }
+        public string? specialistIds { get; set; }
         public string? docExperiance { get; set; }
         public string? docInstaLink { get; set; }
         public string? desc { get; set; }
         public int? ProvinceId { get; set; }
         public int? CityId { get; set; }
-
-        public object Skip(int v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class SearchDoctorsQueryResponse : QueryResponse
