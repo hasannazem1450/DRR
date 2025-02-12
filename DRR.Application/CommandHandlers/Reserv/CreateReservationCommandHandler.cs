@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Utilities.Extensions;
 
 namespace DRR.Application.CommandHandlers.Reserv
 {
@@ -25,16 +26,16 @@ namespace DRR.Application.CommandHandlers.Reserv
 
         public override async Task<CreateReservationCommandResponse> Executor(CreateReservationCommand command)
         {
-            var reserve = new Domain.Reserv.Reservation(command.ReservationDate, command.ReservationTime, command.DoctorTreatmentCenterId, command.CancleTimeDuration, command.VisitCostId, command.TotalTurnCount);
+            var reserve = new Domain.Reserv.Reservation(DatetimeExtension.DateToNumber(command.ReservationDate.ToString()), command.ReservationTime, command.DoctorTreatmentCenterId, command.CancleTimeDuration, command.VisitCostId, command.TotalTurnCount);
 
             await _reservationRepository.Create(reserve);
             Turn tr;
-
+            DateTime stime = DateTime.ParseExact(command.ReservationTime, "HH:mm",
+                                       CultureInfo.InvariantCulture);
+            DateTime etime = stime.AddMinutes(command.CancleTimeDuration);
             for (int x = 0; x < command.TotalTurnCount; x++)
             {
-                DateTime stime = DateTime.ParseExact(command.ReservationTime, "HH:mm",
-                                       CultureInfo.InvariantCulture);
-                DateTime etime = stime.AddMinutes(15);
+                
                 if (x % command.Numberofturnsinlimit == 0)
                 {
                     stime = stime.AddMinutes((x / command.Numberofturnsinlimit) * command.Timeofturnsinlimit);

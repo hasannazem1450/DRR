@@ -20,10 +20,11 @@ using DRR.Domain.Specialists;
 using DRR.Domain.TreatmentCenters;
 using DRR.Utilities.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DRR.Application.Services.Customer
 {
-    public class DoctorService :IDoctorService
+    public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDoctorTreatmentCenterRepository _dtcRepository;
@@ -51,10 +52,10 @@ namespace DRR.Application.Services.Customer
                 Id = doctor.Id,
                 DoctorName = doctor.DoctorName,
                 DoctorFamily = doctor.DoctorFamily,
-              
+
                 DocExperiance = doctor.DocExperiance,
                 DocInstaLink = doctor.DocInstaLink,
-               
+
                 Desc = doctor.Desc,
                 SmeProfile = doctor.SmeProfile,
                 specialist = doctor.Specialist.Name
@@ -91,9 +92,80 @@ namespace DRR.Application.Services.Customer
         }
         public async Task<List<Doctor>> FilterBoxBySpecialist(List<Doctor> doctors, string specialistIds)
         {
-            List<int> csis = specialistIds.Split(',').Select(int.Parse).ToList() ;
+            List<int> csis = specialistIds.Split(',').Select(int.Parse).ToList();
             var result = doctors.Where(x => csis.Contains(x.SpecialistId)).ToList();
 
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByBimeAsli(List<Doctor> doctors, string BimeAsli)
+        {
+            var result = doctors.Where(x => x.DoctorInsurances.Any(x => x.Insurance.Name == BimeAsli)).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByBimehTakmili(List<Doctor> doctors, string BimehTakmili)
+        {
+            var result = doctors.Where(x => x.DoctorInsurances.Any(x => x.Insurance.Name == BimehTakmili)).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByJustOnline(List<Doctor> doctors, bool JustOnline)
+        {
+            string JustOnlineCodes = "2,3,4";
+            List<int> joc = JustOnlineCodes.Split(',').Select(int.Parse).ToList();
+            var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => joc.Contains(x.Office?.OfficeTypeId??0))).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByHasTurn(List<Doctor> doctors, bool HasTurn)
+        {
+            int actdate = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            var result = doctors.Where(x => x.Reservations.Any(x => x.ReservationDate >= actdate)).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByAcceptInsurance(List<Doctor> doctors, bool AcceptInsurance)
+        {
+            var result = doctors.Where(x => x.DoctorInsurances.Any(x => x.InsuranceId >=1 )).ToList();
+            return result;
+        }
+
+        public async Task<List<Doctor>> FilterBoxByGender(List<Doctor> doctors, bool Gender)
+        {
+            var result = doctors.Where(x => x.Gender == Gender).ToList();
+
+            return result;
+        }
+        public async Task<List<Doctor>> FilterBoxByDate(List<Doctor> doctors, string Sdate, string Edate)
+        {
+            if (Sdate == null || Sdate == "")
+            {
+                Sdate = DateTime.Now.ToPersianString();
+            }
+            if (Edate == null || Edate == "")
+            {
+                Edate = "1500/01/01";
+            }
+
+            var result = doctors.Where(x => x.Reservations.Any(x => x.ReservationDate >= DatetimeExtension.DateToNumber(Sdate) && x.ReservationDate <= DatetimeExtension.DateToNumber(Edate))).ToList();
+
+            return result;
+        }
+
+        public async Task<List<Doctor>> FilterBoxByOnlineTypeId(List<Doctor> doctors, int onlineTypeId)
+        {
+            var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.Office?.OfficeTypeId == onlineTypeId)).ToList();
+
+            return result;
+        }
+
+        public async Task<List<Doctor>> FilterBoxByOfficeOrClinicHozoori(List<Doctor> doctors, bool OfficeOrClinicHozoori)
+        {
+            var result = doctors;
+            if (OfficeOrClinicHozoori)
+            result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.OfficeId == null)).ToList();
+            else
+            result = doctors.Where(x => x.DoctorTreatmentCenters.Any(x => x.ClinicId == null)).ToList();
             return result;
         }
         public async Task<List<DoctorDto>> FinalFilter(List<DoctorDto> doctors, ReadDoctorQueryFilters filters)
@@ -113,9 +185,9 @@ namespace DRR.Application.Services.Customer
             if (filters.Bimeh.IsNotNullOrEmpty())
                 result = result.Where(w => w.DoctorInsurance.Insurance.Name.Contains(filters.Bimeh)).ToList();
 
-            
+
             if (filters.CityName.IsNotNullOrEmpty())
-                result = result.Where(w => w.DoctorTreatmentCenters.Clinic.City.Name.Contains(filters.CityName )||
+                result = result.Where(w => w.DoctorTreatmentCenters.Clinic.City.Name.Contains(filters.CityName) ||
                     w.DoctorTreatmentCenters.Office.City.Name.Contains(filters.CityName)).ToList();
 
             //if (filters.BirthNumber >0)
@@ -140,19 +212,19 @@ namespace DRR.Application.Services.Customer
                 Id = s.Id,
                 DoctorName = s.DoctorName,
                 DoctorFamily = s.DoctorFamily,
-               
+
                 DocExperiance = s.DocExperiance,
                 DocInstaLink = s.DocInstaLink,
-              
+
                 Desc = s.Desc,
                 SmeProfile = s.SmeProfile,
-               
+
 
             }).ToList();
 
             return result;
         }
-        
+
         public async Task<DoctorDto> ConvertToDto(Doctor doctor)
         {
             var result = new DoctorDto
@@ -160,10 +232,10 @@ namespace DRR.Application.Services.Customer
                 Id = doctor.Id,
                 DoctorName = doctor.DoctorName,
                 DoctorFamily = doctor.DoctorFamily,
-               
+
                 DocExperiance = doctor.DocExperiance,
                 DocInstaLink = doctor.DocInstaLink,
-               
+
                 Desc = doctor.Desc,
                 SmeProfile = doctor.SmeProfile,
             };
@@ -196,7 +268,8 @@ namespace DRR.Application.Services.Customer
                     DoctorTreatmentCenterList = dtcl,
 
                 };
-            }else
+            }
+            else
             {
                 result = new DoctorBoxDto
                 {

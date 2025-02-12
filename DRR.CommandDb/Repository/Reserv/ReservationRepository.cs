@@ -62,7 +62,6 @@ namespace DRR.CommandDb.Repository.Reserv
 
             result.DoctorTreatmentCenter.DoctorId = Reservation.DoctorTreatmentCenter.DoctorId;
             result.ReservationDate = Reservation.ReservationDate;
-            //result.OfficeTypeId = Reservation.OfficeTypeId;
             result.DoctorTreatmentCenterId = Reservation.DoctorTreatmentCenterId;
             result.CancleTimeDuration = Reservation.CancleTimeDuration;
 

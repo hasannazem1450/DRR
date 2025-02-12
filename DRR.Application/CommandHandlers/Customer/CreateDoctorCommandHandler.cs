@@ -22,7 +22,7 @@ namespace DRR.Application.CommandHandlers.Customer
 
         public override async Task<CreateDoctorCommandResponse> Executor(CreateDoctorCommand command)
         {
-            var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.CodeNezam, command.SpecialistId, command.DocExperiance, command.DocInstaLink, command.Mobile, command.Desc, command.SmeProfileId); //, command.Gender);
+            var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.CodeNezam, command.SpecialistId, command.DocExperiance, command.DocInstaLink, command.Mobile, command.Desc, command.SmeProfileId, command.Gender);
            
 
             await _doctorRepository.Create(Doctor);

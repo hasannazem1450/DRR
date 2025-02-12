@@ -19,7 +19,7 @@ namespace DRR.Application.Contracts.Commands.Customer
         public string Mobile { get; set; }
         public string Desc { get; set; }
         public int SmeProfileId { get; set; }
-        //public bool? Gender { get; set; }
+        public bool? Gender { get; set; }
     }
     public class CreateDoctorCommandResponse : CommandResponse
     {

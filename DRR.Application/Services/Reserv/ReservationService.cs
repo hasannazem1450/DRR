@@ -4,6 +4,7 @@ using DRR.Application.Contracts.Services.Reserv;
 using DRR.Application.Contracts.Services.Reserv;
 using DRR.Domain.Reserv;
 using DRR.Domain.TreatmentCenters;
+using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace DRR.Application.Services.Reserv
             {
 
                 Id = reservation.Id,
-                ReservationDate = reservation.ReservationDate,
+                ReservationDate = DatetimeExtension.NumberToDate(reservation.ReservationDate),
                 DoctorTreatmentCenterId = reservation.DoctorTreatmentCenterId,
                 CancleTimeDuration = reservation.CancleTimeDuration,
                 ReservationTime = reservation.ReservationTime,

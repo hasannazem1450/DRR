@@ -20,7 +20,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن یک مرکز درمانی ")]
         [HttpGet("read-Clinic")]
-        public async Task<IActionResult> ReadClinic([FromQuery] ReadClinicQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadClinicById([FromQuery] ReadClinicQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadClinicQuery, ReadClinicQueryResponse>(query, cancellationToken);
             return OkApiResult(result);

@@ -22,6 +22,16 @@ namespace DRR.Application.Contracts.Queries.Customer
         public string? desc { get; set; }
         public int? ProvinceId { get; set; }
         public int? CityId { get; set; }
+        public string BimehTakmili {  get; set; }
+        public string BimeAsli {  get; set; }
+        public bool? JustOnline { get; set; }
+        public bool? HasTurn { get; set; }
+        public bool? AcceptInsurance { get; set; }
+        public bool? Gender { get; set; } 
+        public string Sdate { get; set; }
+        public string Edate { get; set; }
+        public int? OnlineTypeId { get; set; }
+        public bool? OfficeOrClinicHozoori { get; set; }
     }
 
     public class SearchDoctorsQueryResponse : QueryResponse

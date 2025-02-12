@@ -19,7 +19,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن یک مطب ")]
         [HttpGet("read-Office")]
-        public async Task<IActionResult> ReadSpecilist([FromQuery] ReadOfficeQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadOfficeId([FromQuery] ReadOfficeQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadOfficeQuery, ReadOfficeQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
@@ -27,14 +27,14 @@ namespace DRR.Host.Controllers.TreatmentCenter
         [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-Offices")]
-        public async Task<IActionResult> ReadSpecilists([FromQuery] ReadOfficesQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadOffices([FromQuery] ReadOfficesQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadOfficesQuery, ReadOfficesQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = " ایجاد یک مطب ")]
         [HttpPost("create-Office")]
-        public async Task<IActionResult> CreateSpecilist(CreateOfficeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateOffice(CreateOfficeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateOfficeCommand, CreateOfficeCommandResponse>(command, cancellationToken);
 
@@ -42,7 +42,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         }
         [SwaggerOperation(Summary = " ویرایش یک مطب ")]
         [HttpPut("update-Office")]
-        public async Task<IActionResult> UpdateDoctor(UpdateOfficeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateOffice(UpdateOfficeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<UpdateOfficeCommand, UpdateOfficeCommandResponse>(command, cancellationToken);
 
@@ -50,7 +50,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
         }
         [SwaggerOperation(Summary = " حذف یک مطب ")]
         [HttpDelete("delete-Office")]
-        public async Task<IActionResult> DeleteDoctor(DeleteOfficeCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteOffice(DeleteOfficeCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<DeleteOfficeCommand, DeleteOfficeCommandResponse>(command, cancellationToken);
 

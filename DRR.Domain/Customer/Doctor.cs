@@ -18,7 +18,7 @@ namespace DRR.Domain.Customer
 {
     public class Doctor : Entity<int>
     {
-        public Doctor(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc, int smeProfileId) //, bool? gender)
+        public Doctor(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc, int smeProfileId, bool? gender)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
@@ -30,7 +30,7 @@ namespace DRR.Domain.Customer
             Mobile = mobile;
             Desc = desc;
             SmeProfileId = smeProfileId;
-            //Gender = gender;
+            Gender = gender;
 
         }
 
@@ -44,7 +44,7 @@ namespace DRR.Domain.Customer
         public string DocInstaLink { get; set; }
         public string Mobile { get; set; }
         public string Desc { get; set; }
-        //public bool? Gender { get; set; }
+        public bool? Gender { get; set; }
 
         public virtual Specialist Specialist { get; set; }
 
@@ -70,7 +70,7 @@ namespace DRR.Domain.Customer
 
 
 
-        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc)
+        public void Update(string doctorName, string doctorFamily, string nationalId, int codeNezam, int specialistId, string docExperiance, string docInstaLink, string mobile, string desc, bool? gender)
         {
             DoctorName = doctorName;
             DoctorFamily = doctorFamily;
@@ -81,6 +81,7 @@ namespace DRR.Domain.Customer
             DocInstaLink = docInstaLink;
             Mobile = mobile;
             Desc = desc;
+            Gender = gender;
             //SmeProfileId = smeProfileId;
         }
         public void SetIsDeleted(bool isDeleted)

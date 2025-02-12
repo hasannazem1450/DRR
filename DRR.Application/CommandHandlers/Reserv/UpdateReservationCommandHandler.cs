@@ -1,6 +1,7 @@
 ﻿using DRR.Application.Contracts.Commands.Reserv;
 using DRR.Application.Contracts.Repository.Reserv;
 using DRR.Framework.Contracts.Abstracts;
+using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace DRR.Application.CommandHandlers.Reservation
 
             var reserve = await _reservationRepository.ReadReservationById(command.Id);
 
-            reserve.Update(command.ReservationDate, command.ReservationTime, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration,command.TotalTurnCount);
+            reserve.Update(DatetimeExtension.DateToNumber(command.ReservationDate.ToString()), command.ReservationTime, command.DoctorTreatmentCenterId, command.VisitCostId, command.CancleTimeDuration,command.TotalTurnCount);
             await _reservationRepository.Update(reserve);
 
 
