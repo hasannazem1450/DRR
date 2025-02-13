@@ -52,10 +52,10 @@ namespace DRR.Application.QueryHandlers.Customer
             if (query.specialistIds != null && query.specialistIds != "")
                 doctors = await _doctorService.FilterBoxBySpecialist(doctors, query.specialistIds);
 
-            if (query.BimeAsli != "")
+            if (query.BimeAsli != null && query.BimeAsli != "")
                 doctors = await _doctorService.FilterBoxByBimeAsli(doctors, query.BimeAsli);
 
-            if (query.BimehTakmili != "")
+            if (query.BimehTakmili != null && query.BimehTakmili != "")
                 doctors = await _doctorService.FilterBoxByBimehTakmili(doctors, query.BimehTakmili);
 
             if (query.JustOnline != null && query.JustOnline == true)

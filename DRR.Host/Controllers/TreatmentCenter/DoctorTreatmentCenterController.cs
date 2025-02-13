@@ -18,6 +18,14 @@ namespace DRR.Host.Controllers.TreatmentCenter
 
         }
         [AllowAnonymous]
+        [SwaggerOperation(Summary = " چستچو مرکزدرمانی/مطب  ")]
+        [HttpGet("search-DoctorTreatmentCenters")]
+        public async Task<IActionResult> SearchDoctorTreatmentCenters([FromQuery] SearchDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<SearchDoctorTreatmentCentersQuery, SearchDoctorTreatmentCentersQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب های یک دکتر ")]
         [HttpGet("read-DoctorTreatmentCenterByDoctorId")]
         public async Task<IActionResult> DoctorTreatmentCenterByDoctorId([FromQuery] ReadDoctorTreatmentCenterQuery query, CancellationToken cancellationToken)
@@ -26,6 +34,7 @@ namespace DRR.Host.Controllers.TreatmentCenter
             return OkApiResult(result);
         }
         [AllowAnonymous]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-DoctorTreatmentCenters")]
         public async Task<IActionResult> DoctorTreatmentCenters([FromQuery] ReadDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)

@@ -36,6 +36,8 @@ namespace DRR
             var defaultDataConfig = Configuration.GetSection("defaultData");
 
             services.AddHealthChecks();
+            //add for speed up some controlers by hasan nazem todo
+            services.AddResponseCaching();
 
             services.AddIdentity<ApplicationUser,  IdentityRole>(options =>
                 {
@@ -111,6 +113,8 @@ namespace DRR
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseResponseCaching();
 
             app.UseEndpoints(endpoints =>
             {

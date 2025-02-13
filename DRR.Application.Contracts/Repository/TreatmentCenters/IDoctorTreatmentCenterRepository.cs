@@ -1,4 +1,6 @@
-﻿using DRR.Domain.TreatmentCenters;
+﻿using DRR.Application.Contracts.Commands.TreatmentCenters;
+using DRR.Application.Contracts.Queries.TreatmentCenter;
+using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
