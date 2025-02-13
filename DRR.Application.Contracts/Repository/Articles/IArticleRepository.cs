@@ -12,8 +12,8 @@ namespace DRR.Application.Contracts.Repository.Articles
     {
         Task<Article> ReadArticleById(int id);
         Task<List<Article>> Search(string title, string ShortDesc,string desc);
-
-        Task<List<Article>> ReadArticleByArticleTypeId(int id);
+        Task<List<Article>> ReadArticleBySmeProfileId(int id);
+        Task<List<Article>> ReadArticlesByArticleTypeId(int id);
 
         Task Delete(int id);
 

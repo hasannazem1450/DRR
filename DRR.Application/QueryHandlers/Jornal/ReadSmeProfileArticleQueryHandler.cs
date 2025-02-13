@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Jornal
 {
-    public class ReadSmeProfileArticleQueryHandler : IQueryHandler<ReadAllArticleQuery, ReadAllArticleQueryResponse>
+    public class ReadSmeProfileArticleQueryHandler : IQueryHandler<ReadSmeProfileArticleQuery, ReadSmeProfileArticleQueryResponse>
     {
         private readonly IArticleRepository _articleRepository;
         private readonly IArticleService _articleService;
@@ -22,12 +22,12 @@ namespace DRR.Application.QueryHandlers.Jornal
             _articleService = articleService;
         }
 
-        public async Task<ReadAllArticleQueryResponse> Execute(ReadAllArticleQuery query,
+        public async Task<ReadSmeProfileArticleQueryResponse> Execute(ReadSmeProfileArticleQuery query,
             CancellationToken cancellationToken)
         {
-            var articleList = await _articleRepository.ReadArticleByArticleTypeId(query.ArticleTypeId);
+            var articleList = await _articleRepository.ReadArticleBySmeProfileId(query.SmeProfileId);
 
-            var result = new ReadAllArticleQueryResponse
+            var result = new ReadSmeProfileArticleQueryResponse
             {
                 List = await _articleService.OrderDesc(await _articleService.ConvertTo(articleList))
             };

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Domain.Customer;
 
 namespace DRR.CommandDb.Repository.Insurances
 {
@@ -23,17 +24,38 @@ namespace DRR.CommandDb.Repository.Insurances
             return result;
         }
 
-        public async Task<List<DoctorInsurance>> ReadDoctorInsuranceByDoctorId(int id)
+        public async Task<List<Insurance>> ReadInsurancesByDoctorId(int doctorid)
         {
-            var result = await _Db.DoctorInsurances.Where(c => c.DoctorId == id).ToListAsync();
-
+            var dil = await _Db.DoctorInsurances
+                .Include(i => i.Insurance)
+                .Where(c => c.DoctorId == doctorid).ToListAsync();
+            List<Insurance> result = new List<Insurance>();
+            foreach (var item in dil)
+            {
+                result.Add(item.Insurance);
+            }
             return result;
         }
-        public async Task<List<DoctorInsurance>> ReadDoctorInsuranceByInsuranceId(int? id)
+        public async Task<List<Doctor>> ReadDoctorsByInsuranceId(int insuranceid)
         {
-            var result = await _Db.DoctorInsurances.Where(c => c.InsuranceId == id).ToListAsync();
-
+            var dil = await _Db.DoctorInsurances
+                .Include(d => d.Doctor)
+                .Where(c => c.InsuranceId == insuranceid).ToListAsync();
+            List<Doctor> result = new List<Doctor>();
+            foreach (var item in dil)
+            {
+                result.Add(item.Doctor);
+            }
             return result;
+        }
+        public async Task<List<DoctorInsurance>> ReadDoctorsInsurances()
+        {
+            var query = _Db.DoctorInsurances
+                .Include(x => x.Doctor)
+                .Include(x => x.Insurance)
+                .AsQueryable();
+
+            return await query.ToListAsync();
         }
         public async Task Create(DoctorInsurance DoctorInsurance)
         {

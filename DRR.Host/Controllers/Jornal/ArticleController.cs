@@ -18,20 +18,39 @@ namespace DRR.Host.Controllers.Jornal
         public ArticleController(IDistributor distributor) : base(distributor)
         {
         }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "  نمایش یک مقاله")]
+        [HttpGet("read-article-byid")]
+        public async Task<IActionResult> ReadArticleById([FromQuery] ReadArticleQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadArticleQuery, ReadArticleQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "  نمایش مقالات یک کاربر")]
         [HttpGet("read-smeprofile-articles")]
         public async Task<IActionResult> ReadSmeProfileArticle([FromQuery] ReadSmeProfileArticleQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadSmeProfileArticleQuery, ReadArticleQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadSmeProfileArticleQuery, ReadSmeProfileArticleQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }
         [AllowAnonymous]
         [SwaggerOperation(Summary = "  نمایش کل مقالات ")]
         [HttpGet("read-all-articles")]
-        public async Task<IActionResult> ReadAllArticle([FromQuery] ReadAllArticleQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadAllArticles([FromQuery] ReadAllArticlesQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadAllArticleQuery, ReadAllArticleQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadAllArticlesQuery, ReadAllArticlesQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "  جستجو در کل مقالات ")]
+        [HttpGet("search-articles")]
+        public async Task<IActionResult> SearchArticles([FromQuery] SearchArticlesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<SearchArticlesQuery, SearchArticlesQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }
@@ -54,10 +73,10 @@ namespace DRR.Host.Controllers.Jornal
         }
         [SwaggerOperation(Summary = "  ویرایش یک مقالات ")]
         [HttpPut("update-articles")]
-        public async Task<IActionResult> UpdateArticle(CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateArticle(UpdateArticleCommand command, CancellationToken cancellationToken)
         {
 
-            var result = await Distributor.Push<UpdateArticleCommand, UpdateArticleCommandResponse>(new UpdateArticleCommand(), cancellationToken);
+            var result = await Distributor.Push<UpdateArticleCommand, UpdateArticleCommandResponse>(command, cancellationToken);
 
             return OkApiResult(result);
         }

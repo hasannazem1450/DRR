@@ -17,20 +17,38 @@ namespace DRR.Host.Controllers.Insurance
         {
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = "   نمایش بیمه های یک دکتر")]
-        [HttpGet("read-DoctorInsurance")]
-        public async Task<IActionResult> ReadDoctorInsurance([FromQuery] ReadDoctorInsuranceQuery query, CancellationToken cancellationToken)
+        [SwaggerOperation(Summary = "   نمایش بیمه ")]
+        [HttpGet("read-DoctorInsurance-byid")]
+        public async Task<IActionResult> ReadDoctorInsuranceById([FromQuery] ReadDoctorInsuranceQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadDoctorInsuranceQuery, ReadDoctorInsuranceQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = "  نمایش کل بیمه های دکترها ")]
-        [HttpGet("read-all-DoctorInsurances")]
-        public async Task<IActionResult> ReadAllDoctorInsurance([FromQuery] ReadDoctorInsurancesQuery query, CancellationToken cancellationToken)
+        [SwaggerOperation(Summary = "   نمایش بیمه های یک دکتر")]
+        [HttpGet("read-insurances-bydoctorid")]
+        public async Task<IActionResult> ReadDoctorInsurances([FromQuery] ReadDoctorInsurancesQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadDoctorInsurancesQuery, ReadDoctorInsurancesQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "   نمایش دکترها دارای بیمه خاص")]
+        [HttpGet("read-doctors-byinsuranceid")]
+        public async Task<IActionResult> ReadDoctorsInsurance([FromQuery] ReadDoctorsInsuranceQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorsInsuranceQuery, ReadDoctorsInsuranceQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "  نمایش کل بیمه های دکترها ")]
+        [HttpGet("read-all-DoctorInsurances")]
+        public async Task<IActionResult> ReadAllDoctorInsurance([FromQuery] ReadDoctorsInsurancesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorsInsurancesQuery, ReadDoctorsInsurancesQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }

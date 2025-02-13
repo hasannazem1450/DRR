@@ -11,23 +11,23 @@ using DRR.Framework.Contracts.Markers;
 
 namespace DRR.Application.QueryHandlers.Jornal
 {
-    public class ReadAllArticlesQueryHandler : IQueryHandler<ReadAllArticlesQuery, ReadAllArticlesQueryResponse>
+    public class SearchArticlesQueryHandler : IQueryHandler<SearchArticlesQuery, SearchArticlesQueryResponse>
     {
         private readonly IArticleRepository _articleRepository;
         private readonly IArticleService _articleService;
 
-        public ReadAllArticlesQueryHandler(IArticleRepository articleRepository, IArticleService articleService)
+        public SearchArticlesQueryHandler(IArticleRepository articleRepository, IArticleService articleService)
         {
             _articleRepository = articleRepository;
             _articleService = articleService;
         }
 
-        public async Task<ReadAllArticlesQueryResponse> Execute(ReadAllArticlesQuery query,
+        public async Task<SearchArticlesQueryResponse> Execute(SearchArticlesQuery query,
             CancellationToken cancellationToken)
         {
-            var articleList = await _articleRepository.ReadArticlesByArticleTypeId(query.ArticleTypeId);
+            var articleList = await _articleRepository.Search(query.Title ?? "", query.ShortDesc ?? "", query.Desc ?? "");
 
-            var result = new ReadAllArticlesQueryResponse
+            var result = new SearchArticlesQueryResponse
             {
                 List = await _articleService.OrderDesc(await _articleService.ConvertTo(articleList))
             };

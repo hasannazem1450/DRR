@@ -1,4 +1,5 @@
-﻿using DRR.Domain.Insurances;
+﻿using DRR.Application.Contracts.Commands.Customer;
+using DRR.Domain.Insurances;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace DRR.Application.Contracts.Repository.Insurance
     {
         
         Task<DoctorInsurance> ReadDoctorInsuranceById(int id);
-        Task<List<DoctorInsurance>> ReadDoctorInsuranceByDoctorId(int id);
-        Task<List<DoctorInsurance>> ReadDoctorInsuranceByInsuranceId(int? id);
+        Task<List<Domain.Insurances.Insurance>> ReadInsurancesByDoctorId(int doctorid);
+        Task<List<Domain.Customer.Doctor>> ReadDoctorsByInsuranceId(int insuranceid);
+        Task<List<DoctorInsurance>> ReadDoctorsInsurances();
 
         Task Delete(int id);
 

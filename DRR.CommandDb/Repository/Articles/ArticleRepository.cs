@@ -17,9 +17,14 @@ namespace DRR.CommandDb.Repository.Articles
         }
         public async Task<Article> ReadArticleById(int id)
         {
-            var result = await _Db.Articles.FirstOrDefaultAsync(c => c.Id == id);
+            var query = _Db.Articles
+            .Include(x => x.SmeProfile)
+            .Include(x => x.PhotoFile)
+            .AsQueryable();
+            if (id != 0)
+                query = query.Where(c => c.Id == id);
+            return await query.FirstOrDefaultAsync();
 
-            return result;
         }
 
         public async Task<List<Article>> Search(string title, string ShortDesc, string desc)
@@ -41,17 +46,26 @@ namespace DRR.CommandDb.Repository.Articles
             return await query.ToListAsync();
         }
 
-        //public async Task<List<Article>> ReadArticleByUserId(int id)
-        //{
-        //    var result = await _Db.Articles.Where(c => c.SmeProfileId == id).ToListAsync();
-
-        //    return result;
-        //}
-        public async Task<List<Article>> ReadArticleByArticleTypeId(int id)
+        public async Task<List<Article>> ReadArticleBySmeProfileId(int id)
         {
-            var result = await _Db.Articles.Where(c => c.ArticleTypeId == id).ToListAsync();
+            var query = _Db.Articles
+               .Include(x => x.SmeProfile)
+               .Include(x => x.PhotoFile)
+               .AsQueryable();
+            if (id != 0)
+                query = query.Where(c => c.SmeProfileId == id);
+            return await query.ToListAsync();
 
-            return result;
+        }
+        public async Task<List<Article>> ReadArticlesByArticleTypeId(int id)
+        {
+            var query = _Db.Articles
+                .Include(x => x.SmeProfile)
+                .Include(x => x.PhotoFile)
+                .AsQueryable();
+            if (id != 0)
+                query = query.Where(c => c.ArticleTypeId == id);
+            return await query.ToListAsync();
         }
 
         public async Task Create(Article Article)

@@ -13,23 +13,23 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Insurance
 {
-    public class ReadDoctorInsuranceQueryHandler : IQueryHandler<ReadDoctorInsuranceQuery, ReadDoctorInsuranceQueryResponse>
+    public class ReadDoctorsInsuranceQueryHandler : IQueryHandler<ReadDoctorsInsuranceQuery, ReadDoctorsInsuranceQueryResponse>
     {
         private readonly IDoctorInsuranceRepository _diRepository;
 
-        public ReadDoctorInsuranceQueryHandler(IDoctorInsuranceRepository diRepository)
+        public ReadDoctorsInsuranceQueryHandler(IDoctorInsuranceRepository diRepository)
         {
             _diRepository = diRepository;
            
         }
 
-        public async Task<ReadDoctorInsuranceQueryResponse> Execute(ReadDoctorInsuranceQuery query, CancellationToken cancellationToken)
+        public async Task<ReadDoctorsInsuranceQueryResponse> Execute(ReadDoctorsInsuranceQuery query, CancellationToken cancellationToken)
         {
-            var doctorinsurance = await _diRepository.ReadDoctorInsuranceById(query.Id);
+            var doctors = await _diRepository.ReadDoctorsByInsuranceId(query.InsuranceId);
 
-            var result = new ReadDoctorInsuranceQueryResponse
+            var result = new ReadDoctorsInsuranceQueryResponse
             {
-                Data = doctorinsurance
+                List = doctors
             };
 
             return result;
