@@ -46,9 +46,39 @@ namespace DRR.Host.Controllers.Jornal
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = "  جستجو در کل مقالات ")]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        [SwaggerOperation(Summary = " نمایش کل مقالات متنی ")]
+        [HttpGet("read-all-articles-text")]
+        public async Task<IActionResult> ReadAllArticlesText([FromQuery] ReadAllArticlesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllArticlesQuery, ReadAllArticlesQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        [SwaggerOperation(Summary = "  نمایش کل مقالات صوتی ")]
+        [HttpGet("read-all-articles-voice")]
+        public async Task<IActionResult> ReadAllArticlesVoice([FromQuery] ReadAllArticlesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllArticlesQuery, ReadAllArticlesQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        [SwaggerOperation(Summary = "  نمایش کل مقالات تصویری ")]
+        [HttpGet("read-all-articles-video")]
+        public async Task<IActionResult> ReadAllArticlesVideo([FromQuery] ReadAllArticlesQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllArticlesQuery, ReadAllArticlesQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " جستجو در کل مقالات تصویری ")]
         [HttpGet("search-articles")]
-        public async Task<IActionResult> SearchArticles([FromQuery] SearchArticlesQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> SearchArticlesVideo([FromQuery] SearchArticlesQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<SearchArticlesQuery, SearchArticlesQueryResponse>(query, cancellationToken);
 

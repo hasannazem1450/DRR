@@ -27,6 +27,7 @@ namespace DRR.Host.Controllers.Specialists
             return OkApiResult(result);
         }
         [AllowAnonymous]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-specialists")]
         public async Task<IActionResult> ReadSpecilists([FromQuery] ReadSpecialistsQuery query, CancellationToken cancellationToken)

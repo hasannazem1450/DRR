@@ -17,6 +17,7 @@ namespace DRR.Host.Controllers.Customer
 
         }
         [AllowAnonymous]
+        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها")]
         [HttpGet("read-all-doctors")]
         public async Task<IActionResult> ReadAllDoctors([FromQuery] ReadAllDoctorsQuery query, CancellationToken cancellationToken)
@@ -110,7 +111,6 @@ namespace DRR.Host.Controllers.Customer
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = "جستجو در کلیه دکترها")]
         [HttpGet("search-doctors")]
         public async Task<IActionResult> ReadSearchDoctors([FromQuery] SearchDoctorsQuery query, CancellationToken cancellationToken)
@@ -119,7 +119,6 @@ namespace DRR.Host.Controllers.Customer
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = "جستجو در کلیه دکترها لیست ادمین")]
         [HttpGet("search-list-doctors")]
         public async Task<IActionResult> ReadSearchListDoctors([FromQuery] SearchListDoctorsQuery query, CancellationToken cancellationToken)
