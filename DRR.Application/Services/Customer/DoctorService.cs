@@ -11,6 +11,7 @@ using DRR.Application.Contracts.Commands.Customer;
 using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Repository.BaseInfo;
 using DRR.Application.Contracts.Repository.Customer;
+using DRR.Application.Contracts.Repository.Insurance;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.Customer;
 using DRR.Application.Contracts.Services.FileManagment;
@@ -28,12 +29,14 @@ namespace DRR.Application.Services.Customer
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IDoctorTreatmentCenterRepository _dtcRepository;
+        private readonly IInsuranceRepository _insuranceRepository;
         private readonly IDRRFileService _dRRFileService;
 
-        public DoctorService(IDRRFileService dRRFileService, IDoctorTreatmentCenterRepository dtcRepository)
+        public DoctorService(IDRRFileService dRRFileService, IDoctorTreatmentCenterRepository dtcRepository , IInsuranceRepository insuranceRepository)
         {
             _dRRFileService = dRRFileService;
             _dtcRepository = dtcRepository;
+            _insuranceRepository = insuranceRepository;
         }
         public async Task<DoctorDto> ReadById(int id)
         {
@@ -99,12 +102,34 @@ namespace DRR.Application.Services.Customer
         }
         public async Task<List<Doctor>> FilterBoxByBimeAsli(List<Doctor> doctors, string BimeAsli)
         {
+            List<Domain.Insurances.Insurance> li =  await _insuranceRepository.ReadAllInsurances();
+            Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(BimeAsli);
+            int levenshteinDistance = 1000;
+            foreach (var item in li )
+            {
+                if (levenshteinDistance > lev.DistanceFrom(item.Name))
+                {
+                    levenshteinDistance = lev.DistanceFrom(item.Name);
+                    BimeAsli = item.Name;
+                }
+            }
             var result = doctors.Where(x => x.DoctorInsurances.Any(x => x.Insurance.Name == BimeAsli)).ToList();
 
             return result;
         }
         public async Task<List<Doctor>> FilterBoxByBimehTakmili(List<Doctor> doctors, string BimehTakmili)
         {
+            List<Domain.Insurances.Insurance> li = await _insuranceRepository.ReadAllInsurances();
+            Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(BimehTakmili);
+            int levenshteinDistance = 1000;
+            foreach (var item in li)
+            {
+                if (levenshteinDistance > lev.DistanceFrom(item.Name))
+                {
+                    levenshteinDistance = lev.DistanceFrom(item.Name);
+                    BimehTakmili = item.Name;
+                }
+            }
             var result = doctors.Where(x => x.DoctorInsurances.Any(x => x.Insurance.Name == BimehTakmili)).ToList();
 
             return result;
