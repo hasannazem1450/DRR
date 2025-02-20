@@ -32,19 +32,23 @@ namespace DRR.Application.CommandHandlers.Reserv
             Turn tr;
             DateTime stime = DateTime.ParseExact(command.ReservationTime, "HH:mm",
                                        CultureInfo.InvariantCulture);
-            DateTime etime = stime.AddMinutes(command.CancleTimeDuration);
+            DateTime etime = stime.AddMinutes(command.Timeofturnsinlimit);
             for (int x = 0; x < command.TotalTurnCount; x++)
             {
-                
+
                 if (x % command.Numberofturnsinlimit == 0)
                 {
-                    stime = stime.AddMinutes((x / command.Numberofturnsinlimit) * command.Timeofturnsinlimit);
-                    etime = stime.AddMinutes(command.CancleTimeDuration);
+                    if (x == 0)
+                        stime = stime.AddMinutes(0);
+                    else
+                        stime = stime.AddMinutes(command.Timeofturnsinlimit);
+
+                    etime = stime.AddMinutes(command.Timeofturnsinlimit);
                 }
 
 
 
-                tr = new Turn(x+1, command.ReservationTime, etime.ToShortTimeString(), true, 5, reserve.Id);
+                tr = new Turn(x + 1, stime.ToShortTimeString(), etime.ToShortTimeString(), true, 5, reserve.Id);
                 await _turnRepository.Create(tr);
             }
             return new CreateReservationCommandResponse();
