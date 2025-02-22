@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Application.Contracts.Commands.Customer
+namespace DRR.Application.Contracts.Commands.Reserv
 {
     public class PatientReservationDto
     {

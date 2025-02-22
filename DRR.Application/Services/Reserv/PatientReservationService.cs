@@ -1,10 +1,6 @@
-﻿using DRR.Application.Contracts.Commands.Customer;
-using DRR.Application.Contracts.Commands.Reserv;
-using DRR.Application.Contracts.Repository.Customer;
+﻿using DRR.Application.Contracts.Commands.Reserv;
 using DRR.Application.Contracts.Repository.Reserv;
-using DRR.Application.Contracts.Services.Customer;
-using DRR.Domain.Customer;
-using DRR.Domain.Finance;
+using DRR.Application.Contracts.Services.Reserv;
 using DRR.Domain.Reserv;
 using System;
 using System.Collections.Generic;
@@ -12,16 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DRR.Application.Services.Customer
+namespace DRR.Application.Services.Reserv
 {
-    public class PatientResevationService : IPatientResevationService
+    public class PatientResevationService : IPatientReservationService
     {
         private readonly IPatientReservationRepository _patientReservationRepository;
         public PatientResevationService(IPatientReservationRepository patientReservationRepository)
         {
             _patientReservationRepository = patientReservationRepository;
         }
-        public async Task<PatientReservationDto> ReadById(int id) 
+        public async Task<PatientReservationDto> ReadById(int id)
         {
             var patientReservation = await _patientReservationRepository.ReadPatientReservationById(id);
 
@@ -32,10 +28,10 @@ namespace DRR.Application.Services.Customer
                 ReservationId = patientReservation.ReservationId,
                 TurnId = patientReservation.TurnId,
                 DiscountCodeId = patientReservation.DiscountCodeId,
-              
+
             };
         }
-        public async Task<List<PatientReservationDto>> ReadPatientReservationByPatientId(int Patientd) 
+        public async Task<List<PatientReservationDto>> ReadPatientReservationByPatientId(int Patientd)
         {
             var patientReservations = await _patientReservationRepository.ReadPatientReservationByPatientId(Patientd);
             var result = new List<PatientReservationDto>();
@@ -45,7 +41,7 @@ namespace DRR.Application.Services.Customer
                 var dto = new PatientReservationDto()
                 {
                     Id = item.Id,
-                    PatientId =item.PatientId,
+                    PatientId = item.PatientId,
                     ReservationId = item.ReservationId,
                     TurnId = item.TurnId,
                     DiscountCodeId = item.DiscountCodeId,
@@ -74,7 +70,7 @@ namespace DRR.Application.Services.Customer
                 ReservationId = patientreservation.ReservationId,
                 TurnId = patientreservation.TurnId,
                 DiscountCodeId = patientreservation.DiscountCodeId,
-              
+
             };
 
             return result;

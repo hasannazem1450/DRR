@@ -10,6 +10,7 @@ namespace DRR.Application.Contracts.Commands.Comment
 {
     public class ArticleCommentDto
     {
+        public int Id { get; set; }
         public string Desc { get; set; }
         public int ArticleId { get; set; }
         public string CommentDate { get; set; }

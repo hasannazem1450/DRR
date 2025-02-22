@@ -1,5 +1,5 @@
-﻿using DRR.Domain.Customer;
-using DRR.Domain.Insurances;
+﻿using DRR.Domain.Articles;
+using DRR.Domain.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Commands.Customer
 {
-    public class PatientInsuranceDto
+    public class PatientFavoriteDto
     {
         public int Id { get; set; }
         public int PatientId { get; set; }
-        public int InsuranceId { get; set; }
-        public string Expiredate { get; set; }
+        public int? DoctorId { get; set; }
+        public int? ArticleId { get; set; }
 
-        public Insurance Insurance { get; set; }
+        public Article Article { get; set; }
+        public Doctor Doctor { get; set; }
         public Patient Patient { get; set; }
     }
 }

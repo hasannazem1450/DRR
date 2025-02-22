@@ -8,16 +8,20 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Customer
 {
-    public class ReadPatientReservationQuery : Query
+    public class ReadAllPatientFavoriteQuery : Query
+    {
+
+    }
+    public class ReadPatientFavoriteQuery : Query
     {
         public int PatientId { get; set; }
     }
-    public class ReadPatientReservationQueryResponse : QueryResponse
+    public class ReadPatientFavoriteQueryResponse : QueryResponse
     {
-        public ReadPatientReservationQueryResponse()
+        public ReadPatientFavoriteQueryResponse()
         {
-            List = new List<PatientReservationDto>();
+            List = new List<PatientFavoriteDto>();
         }
-        public List<PatientReservationDto> List { get; set; }
+        public List<PatientFavoriteDto> List { get; set; }
     }
 }

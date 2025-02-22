@@ -67,6 +67,7 @@ namespace DRR.Application.Services.TreatmentCenter
         {
             var result = doctorTreatmentCenters.Select(s => new DoctorTreatmentCenterDto
             {
+                Id = s.Id,
                 DoctorId = s.DoctorId,
                 ClinicId = s.ClinicId,
                 OfficeId = s.OfficeId,
@@ -82,6 +83,7 @@ namespace DRR.Application.Services.TreatmentCenter
         {
             var result = new DoctorTreatmentCenterDto
             {
+                Id = doctorTreatmentCenter.Id,
                 DoctorId = doctorTreatmentCenter.DoctorId,
                 ClinicId = doctorTreatmentCenter.ClinicId,
                 OfficeId = doctorTreatmentCenter.OfficeId,
