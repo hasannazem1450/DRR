@@ -172,7 +172,10 @@ namespace DRR.Application.Services.Customer
                 Edate = "1500/01/01";
             }
 
-            var result = doctors.Where(x => x.Reservations.Any(x => x.ReservationDate >= DatetimeExtension.DateToNumber(Sdate) && x.ReservationDate <= DatetimeExtension.DateToNumber(Edate))).ToList();
+            int isdate = DatetimeExtension.DateToNumber(Sdate);
+            int iedate = DatetimeExtension.DateToNumber(Edate);
+
+            var result = doctors.Where(x => x.DoctorTreatmentCenters.Any(y => y.Reservations.Any(z => z.ReservationDate >= isdate && z.ReservationDate <= iedate))).ToList();
 
             return result;
         }
