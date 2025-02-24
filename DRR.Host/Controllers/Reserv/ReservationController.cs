@@ -19,9 +19,18 @@ namespace DRR.Host.Controllers.Reservation
         {
         }
         [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن 4 وقت های خالی برای صفحه اول سایت ")]
+        [HttpGet("read-doctor-resevationtop4firstpage")]
+        public async Task<IActionResult> ReadReservationtop4firstpage([FromQuery] ReadDoctorReservationtop4Query query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorReservationtop4Query, ReadDoctorReservationQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "خواندن وقت های خالی برای ویزیت یک دکتر ")]
         [HttpGet("read-doctor-reservation")]
-        public async Task<IActionResult> RereservationmeProfilereservation([FromQuery] ReadDoctorReservationQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadReservationByDoctorId([FromQuery] ReadDoctorReservationQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadDoctorReservationQuery, ReadDoctorReservationQueryResponse>(query, cancellationToken);
 

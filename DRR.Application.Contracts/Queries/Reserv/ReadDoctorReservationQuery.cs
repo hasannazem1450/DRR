@@ -13,6 +13,9 @@ namespace DRR.Application.Contracts.Queries.Reservation
     {
         public int DoctorId {  get; set; }
     }
+    public class ReadDoctorReservationtop4Query : Query
+    {
+    }
 
     public class ReadDoctorReservationQueryResponse : QueryResponse
     {

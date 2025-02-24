@@ -16,21 +16,43 @@ namespace DRR.CommandDb.Repository.Reserv
         public ReservationRepository(BaseProjectCommandDb db) : base(db)
         {
         }
+        public async Task<List<Reservation>> ReadReservationtop4firstpage()
+        {
+            var intdatenow = Convert.ToInt32(DateTime.Now.ToPersianString().TrimForSlash());
+            var query = _Db.Reservations
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Office)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Clinic)
+               .Include(v => v.VisitCost).ThenInclude(t => t.VisitType)
+               .Include(t => t.Turns)
+               .AsQueryable();
+            var result = await query.Where(c => c.ReservationDate == intdatenow).OrderBy(x => x.ReservationDate).Take(4).ToListAsync();
 
+
+            return result;
+        }
         public async Task<Reservation> ReadReservationById(int id)
         {
-            var result = await _Db.Reservations.FirstOrDefaultAsync(c => c.Id == id);
+            var result = await _Db.Reservations
+                .Include(v => v.VisitCost)
+                .Include(t => t.Turns)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
 
         public async Task<List<Reservation>> ReadReservationByDoctorId(int id)
         {
-            var teststr = Convert.ToInt32(DateTime.Now.ToPersianString().TrimForSlash());
+            var intdatenow = Convert.ToInt32(DateTime.Now.ToPersianString().TrimForSlash());
             var query = _Db.Reservations
-               .Include(s => s.DoctorTreatmentCenter)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Office)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Clinic)
+               .Include(v => v.VisitCost).ThenInclude(t => t.VisitType)
+               .Include(t => t.Turns)
                .AsQueryable();
-            var result = await query.Where(c => c.DoctorTreatmentCenter.DoctorId == id).ToListAsync();
+            var result = await query.Where(c => c.DoctorTreatmentCenter.DoctorId == id 
+            && c.ReservationDate >= intdatenow).OrderBy(x => x.ReservationDate).ToListAsync();
 
 
             return result;

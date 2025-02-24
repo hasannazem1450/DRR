@@ -11,7 +11,7 @@ namespace DRR.Application.Contracts.Repository.Reserv
 {
     public interface IReservationRepository : IRepository
     {
-
+        Task<List<Reservation>> ReadReservationtop4firstpage();
         Task<Reservation> ReadReservationById(int id);
         Task<List<Reservation>> ReadReservationByDoctorId(int id);
         Task<List<Reservation>> ReadReservationByOfficeTypeId(int id);
