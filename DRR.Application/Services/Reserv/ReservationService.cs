@@ -7,6 +7,7 @@ using DRR.Domain.TreatmentCenters;
 using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace DRR.Application.Services.Reserv
 
                 Id = reservation.Id,
                 ReservationDate = DatetimeExtension.NumberToDate(reservation.ReservationDate),
+                ReservationDateFull = DatetimeExtension.NumberToDate(reservation.ReservationDate).ToGregorianDateTime()?.ToPersianDateStringFull(),
+                ReservationDay = Convert.ToInt32(reservation.ReservationDate.ToString().Substring(6, 2)),
+                ReservationDayOfWeek = DatetimeExtension.NumberToDate(reservation.ReservationDate).ToGregorianDateTime()?.ToPersianDateStringDay(),
+                ReservationMonth = DatetimeExtension.NumberToDate(reservation.ReservationDate).ToGregorianDateTime()?.ToPersianDateStringMonth(),
                 DoctorTreatmentCenterId = reservation.DoctorTreatmentCenterId,
                 CancleTimeDuration = reservation.CancleTimeDuration,
                 ReservationTime = reservation.ReservationTime,
