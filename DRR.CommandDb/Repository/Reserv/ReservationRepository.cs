@@ -26,7 +26,7 @@ namespace DRR.CommandDb.Repository.Reserv
                .Include(v => v.VisitCost).ThenInclude(t => t.VisitType)
                .Include(t => t.Turns)
                .AsQueryable();
-            var result = await query.Where(c => c.ReservationDate == intdatenow).OrderBy(x => x.ReservationDate).Take(4).ToListAsync();
+            var result = await query.Where(c => c.ReservationDate == intdatenow).OrderBy(x => x.ReservationDate).Take(10).ToListAsync();
 
 
             return result;
