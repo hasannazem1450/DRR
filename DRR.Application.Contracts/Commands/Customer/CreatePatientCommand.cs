@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Domain.Customer;
 using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.Customer
@@ -27,5 +28,6 @@ namespace DRR.Application.Contracts.Commands.Customer
     }
     public class CreatePatientCommandResponse : CommandResponse
     {
+        public Patient Patient { get; set; }    
     }
 }

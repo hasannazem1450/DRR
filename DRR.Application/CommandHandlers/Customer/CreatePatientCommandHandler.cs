@@ -27,7 +27,7 @@ namespace DRR.Application.CommandHandlers.Customer
 
             await _patientRepository.Create(patient);
 
-            return new CreatePatientCommandResponse();
+            return new CreatePatientCommandResponse() {Patient = patient };
         }
     }
 }
