@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Reservation
 {
-    public class ReadPatientReservationQueryHandler : IQueryHandler<ReadPatientReservationQuery, ReadPatientReservationQueryResponse>
+    public class ReadPatientReservationsQueryHandler : IQueryHandler<ReadPatientReservationsQuery, ReadPatientReservationsQueryResponse>
     {
         private IPatientReservationRepository _patientreservatioRepository;
         private IPatientReservationService _patientreservationService;
-        public ReadPatientReservationQueryHandler(IPatientReservationRepository patientreservatioRepository, IPatientReservationService patientreservationService)
+        public ReadPatientReservationsQueryHandler(IPatientReservationRepository patientreservatioRepository, IPatientReservationService patientreservationService)
         {
             _patientreservatioRepository = patientreservatioRepository;
             _patientreservationService = patientreservationService;
         }
 
-        public async Task<ReadPatientReservationQueryResponse> Execute(ReadPatientReservationQuery query, CancellationToken cancellationToken)
+        public async Task<ReadPatientReservationsQueryResponse> Execute(ReadPatientReservationsQuery query, CancellationToken cancellationToken)
         {
-            var PatientReservation = await _patientreservatioRepository.ReadPatientReservationById(query.Id);
+            var PatientReservation = await _patientreservatioRepository.ReadPatientReservationByPatientId(query.PatientId);
 
-            var result = new ReadPatientReservationQueryResponse
+            var result = new ReadPatientReservationsQueryResponse
             {
-                Data = await _patientreservationService.ConvertToDto(PatientReservation)
+                List = await _patientreservationService.ConvertToDto(PatientReservation)
             };
 
             return result;

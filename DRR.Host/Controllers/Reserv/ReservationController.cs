@@ -36,6 +36,15 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن وقت های خالی برای ویزیت یک دکتردر یک مرکز درمانی ")]
+        [HttpGet("read-doctor-treatmentcenter-reservation")]
+        public async Task<IActionResult> ReadReservationByDoctorIdByTreatmentCenterId([FromQuery] ReadDoctorTreatmentCenterReservationQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorTreatmentCenterReservationQuery, ReadDoctorReservationQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
         [SwaggerOperation(Summary = "ایجاد وقت خالی برای ویزیت یک دکتر ")]
         [HttpPost("create-reservation")]
         public async Task<IActionResult> Createreservation(CreateReservationCommand command, CancellationToken cancellationToken)

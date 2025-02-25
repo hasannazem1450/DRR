@@ -10,14 +10,14 @@ namespace DRR.Application.Contracts.Queries.Reserv
 {
     public class ReadPatientReservationQuery : Query
     {
-        public int PatientId { get; set; }
+        public int Id { get; set; }
     }
     public class ReadPatientReservationQueryResponse : QueryResponse
     {
         public ReadPatientReservationQueryResponse()
         {
-            List = new List<PatientReservationDto>();
+            Data = new PatientReservationDto();
         }
-        public List<PatientReservationDto> List { get; set; }
+        public PatientReservationDto Data { get; set; }
     }
 }

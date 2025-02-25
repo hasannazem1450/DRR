@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.Contracts.Queries.Reservation
 {
-    public class ReadDoctorReservationQuery :Query
+    public class ReadDoctorReservationQuery : Query
     {
-        public int DoctorId {  get; set; }
+        public int DoctorId { get; set; }
+
+    }
+    public class ReadDoctorTreatmentCenterReservationQuery : Query
+    {
+        public int DoctorId { get; set; }
+        public Guid TreatmentCenterId { get; set; }
     }
     public class ReadDoctorReservationtop4Query : Query
     {

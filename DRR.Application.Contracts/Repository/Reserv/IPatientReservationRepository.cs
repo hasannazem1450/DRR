@@ -12,6 +12,7 @@ namespace DRR.Application.Contracts.Repository.Reserv
     {
 
         Task<PatientReservation> ReadPatientReservationById(int id);
+        Task<List<PatientReservation>> ReadAllPatientReservations();
         Task<List<PatientReservation>> ReadPatientReservationByPatientId(int id);
         Task<List<PatientReservation>> ReadPatientReservationByReservationId(int id);
 

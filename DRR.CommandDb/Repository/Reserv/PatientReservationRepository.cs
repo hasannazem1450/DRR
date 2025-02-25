@@ -22,7 +22,12 @@ namespace DRR.CommandDb.Repository.Reserv
 
             return result;
         }
+        public async Task<List<PatientReservation>> ReadAllPatientReservations()
+        {
+            var result = await _Db.PatientReservations.ToListAsync();
 
+            return result;
+        }
         public async Task<List<PatientReservation>> ReadPatientReservationByPatientId(int id)
         {
             var result = await _Db.PatientReservations.Where(c => c.PatientId == id).ToListAsync();
