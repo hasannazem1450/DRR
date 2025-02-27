@@ -33,7 +33,20 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<Doctor> ReadDoctorById(int id)
         {
-            var result = await _Db.Doctors.FirstOrDefaultAsync(c => c.Id == id);
+            //var result = await _Db.Doctors.FirstOrDefaultAsync(c => c.Id == id);
+
+            //return result;
+            var query = _Db.Doctors
+               .Include(s => s.SmeProfile)
+               .Include(sp => sp.Specialist)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
+               .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
+               .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .AsQueryable();
+
+            var result = await query.FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }

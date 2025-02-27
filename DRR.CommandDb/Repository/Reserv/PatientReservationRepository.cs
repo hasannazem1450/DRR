@@ -18,27 +18,71 @@ namespace DRR.CommandDb.Repository.Reserv
 
         public async Task<PatientReservation> ReadPatientReservationById(int id)
         {
-            var result = await _Db.PatientReservations.FirstOrDefaultAsync(c => c.Id == id);
+            //var result = await _Db.PatientReservations.FirstOrDefaultAsync(c => c.Id == id);
+
+            //return result;
+
+            var query = _Db.PatientReservations.Where(c => c.Id == id)
+                 .Include(p => p.Patient)
+                 .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
+                 .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
+                 .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+                 .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+                 .Include(d => d.DiscountCode)
+                 .AsQueryable();
+
+            var result = await query.FirstOrDefaultAsync();
 
             return result;
         }
         public async Task<List<PatientReservation>> ReadAllPatientReservations()
         {
-            var result = await _Db.PatientReservations.ToListAsync();
+            var query = _Db.PatientReservations
+                .Include(p => p.Patient)
+                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
+                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
+                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+                .Include(d => d.DiscountCode)
+                .AsQueryable();
+
+            var result = await query.ToListAsync();
 
             return result;
+           
         }
         public async Task<List<PatientReservation>> ReadPatientReservationByPatientId(int id)
         {
-            var result = await _Db.PatientReservations.Where(c => c.PatientId == id).ToListAsync();
+
+            var query = _Db.PatientReservations
+               .Include(p => p.Patient).Where(c => c.PatientId == id)
+               .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
+               .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
+               .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+               .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(d => d.DiscountCode)
+               .AsQueryable();
+
+            var result = await query.ToListAsync();
 
             return result;
         }
         public async Task<List<PatientReservation>> ReadPatientReservationByReservationId(int id)
         {
-            var result = await _Db.PatientReservations.Where(c => c.ReservationId == id).ToListAsync();
+            var query = _Db.PatientReservations
+   .Include(p => p.Patient).Where(c => c.ReservationId == id)
+   .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
+   .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
+   .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+   .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+   .Include(d => d.DiscountCode)
+   .AsQueryable();
+
+            var result = await query.ToListAsync();
 
             return result;
+
+
         }
         public async Task Create(PatientReservation PatientReservation)
         {
