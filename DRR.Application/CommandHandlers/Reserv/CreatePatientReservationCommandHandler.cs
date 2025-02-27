@@ -16,11 +16,13 @@ namespace DRR.Application.CommandHandlers.Reserv
     public class CreatePatientReservationCommandHandler : CommandHandler<CreatePatientReservationCommand, CreatePatientReservationCommandResponse>
     {
         private readonly IPatientReservationRepository _prRepository;
+        private readonly ITurnRepository _turnRepository;
 
 
-        public CreatePatientReservationCommandHandler(IPatientReservationRepository prRepository)
+        public CreatePatientReservationCommandHandler(IPatientReservationRepository prRepository, ITurnRepository turnRepository)
         {
             _prRepository = prRepository;
+            _turnRepository = turnRepository;
         }
 
         public override async Task<CreatePatientReservationCommandResponse> Executor(CreatePatientReservationCommand command)
@@ -29,6 +31,9 @@ namespace DRR.Application.CommandHandlers.Reserv
 
 
             await _prRepository.Create(pr);
+            var turn = await _turnRepository.ReadTurnById(command.TurnId);
+            //turn.IsFree = false;
+            await _turnRepository.UpdateGet(turn);
 
             return new CreatePatientReservationCommandResponse();
         }

@@ -1,13 +1,12 @@
 ﻿using DRR.Application.Contracts.Repository.Reserv;
 using DRR.CommandDB;
 using DRR.Domain.Reserv;
-using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DRR.CommandDb.Repository.Reserv
 {
@@ -31,7 +30,10 @@ namespace DRR.CommandDb.Repository.Reserv
 
         public async Task<Turn> ReadTurnById(int id)
         {
-            var result = await _Db.Turns.FirstOrDefaultAsync(n => n.Id == id);
+            var query = _Db.Turns.AsQueryable();
+            if (query != null)
+                query = query.Where(q => q.IsDeleted == false && q.Id == id);
+            var result = await query.SingleOrDefaultAsync();
 
             return result;
 
