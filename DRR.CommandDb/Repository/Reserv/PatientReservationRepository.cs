@@ -18,11 +18,8 @@ namespace DRR.CommandDb.Repository.Reserv
 
         public async Task<PatientReservation> ReadPatientReservationById(int id)
         {
-            //var result = await _Db.PatientReservations.FirstOrDefaultAsync(c => c.Id == id);
 
-            //return result;
-
-            var query = _Db.PatientReservations.Where(c => c.Id == id)
+            var query = _Db.PatientReservations
                  .Include(p => p.Patient)
                  .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
                  .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
@@ -31,7 +28,7 @@ namespace DRR.CommandDb.Repository.Reserv
                  .Include(d => d.DiscountCode)
                  .AsQueryable();
 
-            var result = await query.FirstOrDefaultAsync();
+            var result = await query.Where(c => c.Id == id).FirstOrDefaultAsync();
 
             return result;
         }
@@ -55,7 +52,7 @@ namespace DRR.CommandDb.Repository.Reserv
         {
 
             var query = _Db.PatientReservations
-               .Include(p => p.Patient).Where(c => c.PatientId == id)
+               .Include(p => p.Patient)
                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
                .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
@@ -63,14 +60,14 @@ namespace DRR.CommandDb.Repository.Reserv
                .Include(d => d.DiscountCode)
                .AsQueryable();
 
-            var result = await query.ToListAsync();
+            var result = await query.Where(c => c.PatientId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<PatientReservation>> ReadPatientReservationByReservationId(int id)
         {
             var query = _Db.PatientReservations
-   .Include(p => p.Patient).Where(c => c.ReservationId == id)
+   .Include(p => p.Patient)
    .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(c => c.Clinic)
    .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(o => o.Office)
    .Include(t => t.Turn).ThenInclude(r => r.Reservation).ThenInclude(dtc => dtc.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
@@ -78,7 +75,7 @@ namespace DRR.CommandDb.Repository.Reserv
    .Include(d => d.DiscountCode)
    .AsQueryable();
 
-            var result = await query.ToListAsync();
+            var result = await query.Where(c => c.Turn.ReservationId == id).ToListAsync();
 
             return result;
 
@@ -95,7 +92,6 @@ namespace DRR.CommandDb.Repository.Reserv
 
 
             result.PatientId = PatientReservation.PatientId;
-            result.ReservationId = PatientReservation.ReservationId;
             result.DiscountCodeId = PatientReservation.DiscountCodeId;
 
           

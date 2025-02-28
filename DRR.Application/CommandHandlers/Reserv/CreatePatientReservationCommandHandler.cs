@@ -27,13 +27,17 @@ namespace DRR.Application.CommandHandlers.Reserv
 
         public override async Task<CreatePatientReservationCommandResponse> Executor(CreatePatientReservationCommand command)
         {
-            var pr = new PatientReservation(command.PatientId, command.ReservationId, command.DiscountCodeId , command.TurnId);
+            var pr = new PatientReservation(command.PatientId, command.DiscountCodeId , command.TurnId);
 
+
+            
+            var turn = await _turnRepository.ReadTurnById(command.TurnId);
+            if (turn.IsFree == true)
+            await _turnRepository.UpdateGet(turn);
+            else
+                throw new Exception ("این وقت گرفته شده");
 
             await _prRepository.Create(pr);
-            var turn = await _turnRepository.ReadTurnById(command.TurnId);
-            //turn.IsFree = false;
-            await _turnRepository.UpdateGet(turn);
 
             return new CreatePatientReservationCommandResponse();
         }

@@ -17,6 +17,8 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(Guid? id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByOfficeId(Guid? id);
+        Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorIdHozoori(int id);
+        Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorIdOnline(int id);
 
 
         Task Delete(int id);

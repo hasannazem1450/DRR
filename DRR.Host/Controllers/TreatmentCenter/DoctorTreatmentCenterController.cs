@@ -34,6 +34,22 @@ namespace DRR.Host.Controllers.TreatmentCenter
             return OkApiResult(result);
         }
         [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب های یک دکتر حضوری ")]
+        [HttpGet("read-DoctorTreatmentCenterByDoctorIdHozoori")]
+        public async Task<IActionResult> DoctorTreatmentCenterByDoctorIdHozoori([FromQuery] ReadDoctorTreatmentCenterHozooriQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorTreatmentCenterHozooriQuery, ReadDoctorTreatmentCenterHozooriQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب های یک دکتر انلاین ")]
+        [HttpGet("read-DoctorTreatmentCenterByDoctorIdOnline")]
+        public async Task<IActionResult> DoctorTreatmentCenterByDoctorIdOnline([FromQuery] ReadDoctorTreatmentCenterOnlineQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorTreatmentCenterOnlineQuery, ReadDoctorTreatmentCenterOnlineQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
         [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-DoctorTreatmentCenters")]

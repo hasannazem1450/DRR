@@ -1,6 +1,7 @@
 ﻿using DRR.Domain.Customer;
 using DRR.Domain.Finance;
 using DRR.Domain.Reserv;
+using DRR.Domain.TreatmentCenters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,7 @@ namespace DRR.Application.Contracts.Commands.Reserv
         public Patient Patient { get; set; }
         public Turn Turn { get; set; }
         public DiscountCode DiscountCode { get; set; }
+        public DoctorTreatmentCenter DoctorTreatmentCenter { get; set; }
+        public Doctor Doctor { get; set; }
     }
 }

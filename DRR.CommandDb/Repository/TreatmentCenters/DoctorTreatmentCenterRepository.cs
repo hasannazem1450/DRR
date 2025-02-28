@@ -18,55 +18,108 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
         public async Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters()
         {
-            var result = await _Db.DoctorTreatmentCenters
+            var query = _Db.DoctorTreatmentCenters
                 .Include(x => x.Doctor).ThenInclude(s=> s.Specialist)
                 .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                 .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Office).ThenInclude(c => c.OfficeType)
                 .Include(x=> x.Reservations)
-                .ToListAsync();
+                .AsQueryable();
+
+            var result = await query.ToListAsync(); 
 
             return result;
         }
 
         public async Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id)
         {
-            var result = await _Db.DoctorTreatmentCenters
+            var query = _Db.DoctorTreatmentCenters
                 .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
                 .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                 .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Office).ThenInclude(c => c.OfficeType)
                 .Include(x => x.Reservations)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .AsQueryable();
+
+
+            var result = await query.FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
 
         public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id)
         {
-            var result = await _Db.DoctorTreatmentCenters.Where(c => c.DoctorId == id)
-                .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
-                .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
-                .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
-                .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
-                .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-                .Include(x => x.Reservations)
-                .ToListAsync();
-
+            var query = _Db.DoctorTreatmentCenters
+               .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+               .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+               .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+               .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+               .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+               .Include(x => x.Reservations)
+               .AsQueryable();
+            var result = await query.Where(c => c.DoctorId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByOfficeId(Guid? id)
         {
-            var result = await _Db.DoctorTreatmentCenters.Where(c => c.OfficeId == id).ToListAsync();
+            var query = _Db.DoctorTreatmentCenters
+              .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+              .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+              .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+              .Include(x => x.Reservations)
+              .AsQueryable();
+
+            var result = await query.Where(c => c.OfficeId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(Guid? id)
         {
-            var result = await _Db.DoctorTreatmentCenters.Where(c => c.ClinicId == id).ToListAsync();
+            var query = _Db.DoctorTreatmentCenters
+              .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+              .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+              .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+              .Include(x => x.Reservations)
+              .AsQueryable();
+
+            var result = await query.Where(c => c.ClinicId == id).ToListAsync();
+
+            return result;
+        }
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorIdHozoori(int id)
+        {
+            var query = _Db.DoctorTreatmentCenters
+              .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+              .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+              .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+              .Include(x => x.Reservations)
+              .AsQueryable();
+
+            var result = await query.Where(c => c.Doctor.Id == id && (c.Clinic != null || c.Office.OfficeType.Id == 1)).ToListAsync();
+
+            return result;
+        }
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorIdOnline(int id)
+        {
+            var query = _Db.DoctorTreatmentCenters
+              .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+              .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+              .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+              .Include(x => x.Reservations)
+              .AsQueryable();
+
+            var result = await query.Where(c => c.Doctor.Id == id && (c.Clinic == null && c.Office.OfficeType.Id != 1)).ToListAsync();
 
             return result;
         }

@@ -9,7 +9,7 @@ namespace DRR.Domain.Reserv
 {
     public class PatientReservation : Entity<int>
     {
-        public PatientReservation(int patientId, int reservationId,int? discountCodeId,int turnId)
+        public PatientReservation(int patientId, int? discountCodeId,int turnId)
         {
             PatientId = patientId;
             DiscountCodeId = discountCodeId;
@@ -27,7 +27,6 @@ namespace DRR.Domain.Reserv
         }
 
         public int PatientId { get; set; }
-        public int ReservationId { get; set; }
         public int? DiscountCodeId { get; set; }
         public int TurnId { get; set; }
         public Turn Turn { get; set; }
