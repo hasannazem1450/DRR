@@ -24,7 +24,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                 .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-                .Include(x=> x.Reservations)
+                .Include(x=> x.Reservations).ThenInclude(t => t.Turns)
+                .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
                 .AsQueryable();
 
             var result = await query.ToListAsync(); 
@@ -40,7 +41,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                 .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-                .Include(x => x.Reservations)
+                .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+                .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
                 .AsQueryable();
 
 
@@ -57,7 +59,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-               .Include(x => x.Reservations)
+               .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+               .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
                .AsQueryable();
             var result = await query.Where(c => c.DoctorId == id).ToListAsync();
 
@@ -71,7 +74,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
               .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
               .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
               .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-              .Include(x => x.Reservations)
+              .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+              .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
               .AsQueryable();
 
             var result = await query.Where(c => c.OfficeId == id).ToListAsync();
@@ -86,7 +90,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
               .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
               .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
               .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-              .Include(x => x.Reservations)
+              .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+              .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
               .AsQueryable();
 
             var result = await query.Where(c => c.ClinicId == id).ToListAsync();
@@ -101,7 +106,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
               .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
               .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
               .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-              .Include(x => x.Reservations)
+              .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+              .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
               .AsQueryable();
 
             var result = await query.Where(c => c.Doctor.Id == id && (c.Clinic != null || c.Office.OfficeType.Id == 1)).ToListAsync();
@@ -116,7 +122,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
               .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
               .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
               .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-              .Include(x => x.Reservations)
+              .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+              .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
               .AsQueryable();
 
             var result = await query.Where(c => c.Doctor.Id == id && (c.Clinic == null && c.Office.OfficeType.Id != 1)).ToListAsync();

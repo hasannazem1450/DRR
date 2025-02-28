@@ -3,9 +3,12 @@ using DRR.Application.Contracts.Commands.TreatmentCenters;
 using DRR.Application.Contracts.Services.TraetmentCenter;
 using DRR.Domain.BaseInfo;
 using DRR.Domain.Customer;
+using DRR.Domain.Reserv;
 using DRR.Domain.TreatmentCenters;
+using DRR.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,22 +68,31 @@ namespace DRR.Application.Services.TreatmentCenter
         }
         public async Task<List<DoctorTreatmentCenterDto>> ConvertToDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
         {
-            var result = doctorTreatmentCenters.Select(s => new DoctorTreatmentCenterDto
-            {
-                Id = s.Id,
-                DoctorId = s.DoctorId,
-                ClinicId = s.ClinicId,
-                OfficeId = s.OfficeId,
-                Desc = s.Desc,
-                DoctorName = s.Doctor.DoctorName,
-                ClinicName = s.Clinic?.Name,
-                OfficeName = s.Office?.Name
-            }).ToList();
+            var result = doctorTreatmentCenters.Select(s => ConvertToDto(s).Result).ToList();
 
             return result;
         }
         public async Task<DoctorTreatmentCenterDto> ConvertToDto(DoctorTreatmentCenter doctorTreatmentCenter)
         {
+            string nearestdate = "";
+            string nearesttime = "";
+            string price = "";
+            int intdatetoday = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            if (doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).Count() > 0)
+            {
+                nearestdate = DatetimeExtension.NumberToDate(doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).OrderBy(x => x.ReservationDate).First().ReservationDate);
+                nearestdate = nearestdate.ToGregorianDateTime()?.ToPersianDateStringFull();
+                if (doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).OrderBy(x => x.ReservationDate).First().Turns.Where(x => x.IsFree == true).Count() > 0)
+                {
+                    nearesttime = doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).OrderBy(x => x.ReservationDate).First().Turns.Where(x => x.IsFree == true).First().Stime;
+
+                }
+                if (doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).OrderBy(x => x.ReservationDate).Count() > 0)
+                    price = doctorTreatmentCenter.Reservations.Where(x => x.ReservationDate >= intdatetoday).OrderBy(x => x.ReservationDate).First().VisitCost.Price.ToString();
+
+            }
+
+
             var result = new DoctorTreatmentCenterDto
             {
                 Id = doctorTreatmentCenter.Id,
@@ -88,9 +100,15 @@ namespace DRR.Application.Services.TreatmentCenter
                 ClinicId = doctorTreatmentCenter.ClinicId,
                 OfficeId = doctorTreatmentCenter.OfficeId,
                 Desc = doctorTreatmentCenter.Desc,
-                DoctorName = doctorTreatmentCenter.Doctor.DoctorName,
-                ClinicName = doctorTreatmentCenter.Clinic.Name,
-                OfficeName = doctorTreatmentCenter.Office.Name
+                DoctorName = doctorTreatmentCenter.Doctor.DoctorName + " " + doctorTreatmentCenter.Doctor.DoctorFamily,
+                ClinicName = doctorTreatmentCenter.Clinic?.Name,
+                OfficeName = doctorTreatmentCenter.Office?.Name,
+                Doctor = doctorTreatmentCenter.Doctor,
+                Clinic = doctorTreatmentCenter.Clinic ?? null,
+                Office = doctorTreatmentCenter.Office ?? null,
+                NearestDate = nearestdate,
+                NearestTime =nearesttime,
+                Price = price,
             };
 
             return result;

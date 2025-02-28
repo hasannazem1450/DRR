@@ -21,6 +21,9 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
         public Doctor Doctor { get; set; }
         public Clinic Clinic { get; set; }
         public Office Office { get; set; }  
+        public string NearestDate { get; set; }
+        public string NearestTime { get; set; }
+        public string Price { get; set; }
 
     }
 }
