@@ -356,7 +356,7 @@ namespace DRR.Application.CommandHandlers.Authentication
             }
 
 
-            return Ok();
+            return new SignUpCommandResponse();
 
         }
     }
