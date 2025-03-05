@@ -16,6 +16,12 @@ namespace DRR.CommandDb.Repository.Customer
         {
         }
 
+        public async Task<List<PatientFavorite>> ReadAllPatientFavorites()
+        {
+            var result = await _Db.PatientFavorites.ToListAsync();
+
+            return result;
+        }
         public async Task<PatientFavorite> ReadPatientFavoriteById(int id)
         {
             var result = await _Db.PatientFavorites.FirstOrDefaultAsync(c => c.Id == id);

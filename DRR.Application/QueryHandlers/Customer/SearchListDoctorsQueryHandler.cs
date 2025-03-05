@@ -38,6 +38,8 @@ namespace DRR.Application.QueryHandlers.Customer
             CancellationToken cancellationToken)
         {
             var doctor = await _doctorRepository.ReadAllDoctors();
+            if (query.specialist.IsNotNullOrEmpty())
+                doctor = await _doctorService.FilterBoxBySpecialist(doctor, query.specialist);
 
             var doctorDto = await _doctorService.ConvertToDto(doctor);
 
@@ -47,6 +49,8 @@ namespace DRR.Application.QueryHandlers.Customer
             if (query.doctorFamily.IsNotNullOrEmpty())
                 doctorDto = await _doctorService.FilterByName(doctorDto, query.doctorFamily);
 
+
+            
             var totalRecords = doctorDto.Count();
             List<DoctorDto> senditems = doctorDto.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToList();
  

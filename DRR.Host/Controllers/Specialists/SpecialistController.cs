@@ -27,12 +27,20 @@ namespace DRR.Host.Controllers.Specialists
             return OkApiResult(result);
         }
         [AllowAnonymous]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = " خواندن همه ")]
         [HttpGet("read-specialists")]
         public async Task<IActionResult> ReadSpecilists([FromQuery] ReadSpecialistsQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadSpecialistsQuery, ReadSpecialistsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [ResponseCache(Duration = 6000000, Location = ResponseCacheLocation.Any)]
+        [SwaggerOperation(Summary = " خواندن همه ")]
+        [HttpGet("read-specialists-firstpage")]
+        public async Task<IActionResult> ReadSpecilistsFirstPage([FromQuery] ReadSpecialistsFirstPageQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadSpecialistsFirstPageQuery, ReadSpecialistsFirstPageQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = " ایجاد یک تخصص ")]

@@ -270,9 +270,10 @@ namespace DRR.Application.Services.Customer
 
             return result;
         }
-        public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors)
+        public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors, SearchDoctorsQuery query)
         {
-            var result = doctors.Select(s => ConvertToBoxDto(s).Result).ToList();
+
+            var result = doctors.Select(s => ConvertToBoxDto(s).Result).Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToList();
 
             return result;
         }

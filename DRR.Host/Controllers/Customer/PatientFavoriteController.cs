@@ -14,10 +14,10 @@ namespace DRR.Host.Controllers.Customer
         {
 
         }
-        [HttpGet("read-all-patientfavorite")]
-        public async Task<IActionResult> ReadAllPatientFavorite([FromQuery] ReadAllPatientFavoriteQuery query, CancellationToken cancellationToken)
+        [HttpGet("read-all-patientfavorites")]
+        public async Task<IActionResult> ReadAllPatientFavorites([FromQuery] ReadAllPatientFavoritesQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadAllPatientFavoriteQuery, ReadPatientFavoriteQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadAllPatientFavoritesQuery, ReadPatientFavoriteQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [HttpGet("read-patientfavorite-bypatientid")]

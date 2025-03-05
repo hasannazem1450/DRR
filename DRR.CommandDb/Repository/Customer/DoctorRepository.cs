@@ -144,7 +144,15 @@ namespace DRR.CommandDb.Repository.Customer
                     q = q.Where(x => x.DoctorTreatmentCenters.Any(x => x.ClinicId == null));
             }
 
-            var result = await q.ToListAsync();
+            if (query.DoctorName.IsNotNullOrEmpty())
+                q = q.Where(w => w.DoctorName.Contains(query.DoctorName) || w.DoctorFamily.Contains(query.DoctorName));
+
+            if (query.doctorFamily.IsNotNullOrEmpty())
+                q = q.Where(w => w.DoctorName.Contains(query.doctorFamily) || w.DoctorFamily.Contains(query.doctorFamily));
+
+            query.TotalRecords = q.Count();
+
+            var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
 
             return result;
         }

@@ -32,6 +32,7 @@ namespace DRR.Application.Contracts.Queries.Customer
         public string Edate { get; set; }
         public int? OnlineTypeId { get; set; }
         public bool? OfficeOrClinicHozoori { get; set; }
+        public int TotalRecords { get; set; }
     }
 
     public class SearchDoctorsQueryResponse : QueryResponse

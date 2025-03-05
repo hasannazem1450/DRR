@@ -10,6 +10,7 @@ namespace DRR.Application.Contracts.Repository.Customer
 {
     public interface IPatientFavoriteRepository : IRepository
     {
+        Task<List<PatientFavorite>> ReadAllPatientFavorites();
         Task<PatientFavorite> ReadPatientFavoriteById(int id);
         Task<List<PatientFavorite>> ReadPatientFavoriteByPatientId(int id);
         Task<List<PatientFavorite>> ReadPatientFavoriteByDoctorId(int id);
