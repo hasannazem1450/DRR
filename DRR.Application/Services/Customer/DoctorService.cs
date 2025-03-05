@@ -64,7 +64,7 @@ namespace DRR.Application.Services.Customer
                 specialist = doctor.Specialist.Name
 
             };
-
+             
             var resualtlist = new List<DoctorDto>();
             resualtlist.Add(result);
             return (resualtlist);

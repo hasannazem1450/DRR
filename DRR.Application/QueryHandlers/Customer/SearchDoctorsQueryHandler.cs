@@ -42,7 +42,7 @@ namespace DRR.Application.QueryHandlers.Customer
         public async Task<SearchDoctorsQueryResponse> Execute(SearchDoctorsQuery query,
             CancellationToken cancellationToken)
         {
-            var doctors = await _doctorRepository.ReadAllDoctors();
+            var doctors = await _doctorRepository.Search(query);
             if (query.ProvinceId != null && query.ProvinceId != 0)
                 doctors = await _doctorService.FilterBoxByProvince(doctors, query.ProvinceId ?? 0);
 
