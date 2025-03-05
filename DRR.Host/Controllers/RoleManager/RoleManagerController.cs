@@ -5,6 +5,7 @@ using DRR.Application.Contracts.Commands.Authentication;
 using DRR.Application.Contracts.Commands.RoleManager;
 using DRR.Application.Contracts.Commands.UserManager;
 using DRR.Application.Contracts.Queries.RoleManager;
+using DRR.Application.Contracts.Queries.UserManager;
 using DRR.Controllers;
 using DRR.Framework.Contracs.Abstracts;
 using DRR.Framework.Contracts.Makers;
@@ -91,6 +92,14 @@ namespace DRR.Host.Controllers.RoleManager
 
                 return OkApiResult(result);
             }
+            //[SwaggerOperation(Summary = "خواندن همه  کاربران با نقش ")]
+            //[HttpGet("read-usersroles")]
+            //public async Task<IActionResult> ReadUsersRoles(CancellationToken cancellationToken)
+            //{
+            //    var result = await Distributor.Send<ReadUsersRolesQuery, ReadUsersRolesQueryResponse>(new ReadUsersRolesQuery(), cancellationToken);
+
+            //    return OkApiResult(result);
+            //}
         }
     }
 }

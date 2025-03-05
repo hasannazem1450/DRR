@@ -31,6 +31,21 @@ namespace DRR.CommandDb.Repository.Reserv
 
             return result;
         }
+        public async Task<List<Reservation>> ReadFirstFreeTurnsByDoctorId(int doctorId)
+        {
+            var intdatenow = Convert.ToInt32(DateTime.Now.ToPersianString().TrimForSlash());
+            var query = _Db.Reservations
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Doctor)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Office)
+               .Include(s => s.DoctorTreatmentCenter).ThenInclude(d => d.Clinic)
+               .Include(v => v.VisitCost).ThenInclude(t => t.VisitType)
+               .Include(t => t.Turns)
+               .AsQueryable();
+            var result = await query.Where(c => c.ReservationDate == intdatenow)?.OrderBy(x => x.ReservationDate).Take(10).ToListAsync();
+
+
+            return result;
+        }
         public async Task<Reservation> ReadReservationById(int id)
         {
             var result = await _Db.Reservations
