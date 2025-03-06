@@ -14,6 +14,10 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
 
     public class ReadOfficesQueryResponse : QueryResponse
     {
+        public ReadOfficesQueryResponse()
+        {
+            List = new List<OfficeDto>();
+        }
         public List<OfficeDto> List { get; set; }
     }
 }

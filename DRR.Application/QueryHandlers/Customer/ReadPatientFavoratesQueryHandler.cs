@@ -13,22 +13,22 @@ using System.Threading.Tasks;
 
 namespace DRR.Application.QueryHandlers.Customer
 {
-    public class ReadAllPatientFavoritesQueryHandler : IQueryHandler<ReadAllPatientFavoritesQuery, ReadAllPatientFavoritesQueryResponse>
+    public class ReadPatientFavoritesQueryHandler : IQueryHandler<ReadPatientFavoriteQuery, ReadPatientFavoriteQueryResponse>
     {
         private readonly IPatientFavoriteRepository _pfRepository;
         private readonly IPatientFavoriteService _pfService;
 
-        public ReadAllPatientFavoritesQueryHandler(IPatientFavoriteRepository pfRepository, IPatientFavoriteService pfService)
+        public ReadPatientFavoritesQueryHandler(IPatientFavoriteRepository pfRepository, IPatientFavoriteService pfService)
         {
             _pfRepository = pfRepository;
             _pfService = pfService;
         }
 
-        public async Task<ReadAllPatientFavoritesQueryResponse> Execute(ReadAllPatientFavoritesQuery query, CancellationToken cancellationToken)
+        public async Task<ReadPatientFavoriteQueryResponse> Execute(ReadPatientFavoriteQuery query, CancellationToken cancellationToken)
         {
             var pf = await _pfRepository.ReadAllPatientFavorites();
 
-            var result = new ReadAllPatientFavoritesQueryResponse
+            var result = new ReadPatientFavoriteQueryResponse
             {
                 List = await _pfService.ConvertToDto(pf)
             };

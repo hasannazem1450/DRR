@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DRR.Domain.Customer;
 using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.Authentication
@@ -33,6 +34,7 @@ namespace DRR.Application.Contracts.Commands.Authentication
         public string RefreshToken { get; set; }
         public string ExpiredAt { get; set; }
         public string UserFullname { get; set; }
+        
     }
 
 }

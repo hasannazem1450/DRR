@@ -22,10 +22,10 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
         public async Task<List<Clinic>> ReadClinics()
         {
             var result = await _Db.Clinics
-                .Include(x => x.City)
+                .Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.ClinicType)
                 .ToListAsync();
-
+            
             return result;
         }
         public async Task<List<Clinic>> ReadClinicByDto(ClinicDto ClinicDto)
@@ -41,23 +41,30 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
         public async Task<Clinic> ReadClinicById(Guid id)
         {
             var result = await _Db.Clinics
-                .Include(x => x.City)
+                .Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.ClinicType)
                 .FirstOrDefaultAsync(c => c.Id == id);
+
+            return result;
+        }
+        public async Task<int> ReadClinicDoctorsCountById(Guid id)
+        {
+            var result = _Db.DoctorTreatmentCenters
+                .Where(x => x.ClinicId == id).Count();
 
             return result;
         }
 
         public async Task<List<Clinic>> ReadClinicByCityId(int id)
         {
-            var result = await _Db.Clinics.Include(x => x.City)
+            var result = await _Db.Clinics.Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.ClinicType).Where(c => c.CityId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<Clinic>> ReadClinicByClinicTypeId(int id)
         {
-            var result = await _Db.Clinics.Include(x => x.City)
+            var result = await _Db.Clinics.Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.ClinicType).Where(c => c.ClinicTypeId == id).ToListAsync();
 
             return result;

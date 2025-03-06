@@ -1,6 +1,8 @@
 ﻿using DRR.Application.Contracts.Queries.TreatmentCenter;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.TraetmentCenter;
+using DRR.CommandDb.Repository.TreatmentCenters;
+using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -25,10 +27,10 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
         public async Task<ReadOfficeQueryResponse> Execute(ReadOfficeQuery query, CancellationToken cancellationToken)
         {
             var office = await _officeRepository.ReadOfficeById(query.Id);
-
+            var doctorsCount = await _officeRepository.ReadOfficeDoctorsCountById(office.Id);
             var result = new ReadOfficeQueryResponse
             {
-                Data = await _officeService.ConvertToDto(office)
+                Data = await _officeService.ConvertToDto(office, doctorsCount)
             };
 
             return result;

@@ -14,8 +14,7 @@ namespace DRR.Application.Contracts.Services.TraetmentCenter
 {
     public interface IClinicService : IService
     {
-        Task<List<ClinicDto>> ConvertToDto(List<Clinic> Clinics);
-        Task<ClinicDto> ConvertToDto(Clinic Clinic);
+        Task<ClinicDto> ConvertToDto(Clinic Clinic ,int doctorsCout);
         Task<List<ClinicDto>> FilterByName(List<ClinicDto> Clinics, string name);
         Task<List<ClinicDto>> FilterByProvinceOrCity(List<ClinicDto> Clinics, string pcname);
     }

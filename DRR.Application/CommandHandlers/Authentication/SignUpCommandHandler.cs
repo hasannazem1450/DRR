@@ -119,8 +119,10 @@ namespace DRR.Application.CommandHandlers.Authentication
                     Fullname = command.Fullname,
                     
                 };
-                var usertempExist = await _userManager.Users.FirstOrDefaultAsync(l => l.UserName == command.UserName);
-
+                var usertempExist = await _userManager.Users.FirstOrDefaultAsync(l => l.UserName == command.UserName || l.PhoneNumber == command.UserName.ConvertToValidMobile());
+                var userwithnationalcodeavailable = await _userManager.Users.FirstOrDefaultAsync(l => l.UserName != command.UserName && l.PhoneNumber == command.UserName.ConvertToValidMobile());
+                if (userwithnationalcodeavailable != null)
+                throw new Exception("نام کاربری یا شماره موبایل قبلا گرفته شده است");
                 if (usertempExist == null)
                 { //throw new UserNotExistException();
                     var usertempCreate = await _userManager.CreateAsync(usertemp, "String123456");
@@ -146,8 +148,10 @@ namespace DRR.Application.CommandHandlers.Authentication
                         return null;
 
                     }
-                }else
+                }
+                else
                 {
+
                     var activationCode = new Random().Next(10000, 99999).ToString();
                     var message = _smsSetting.ActivatingRegistrationMessage.Replace("{activationCode}", activationCode);
                     var receiverMobile = command.UserName.RemoveMobilePrefix();
@@ -223,6 +227,7 @@ namespace DRR.Application.CommandHandlers.Authentication
                         await _userManager.RemoveAuthenticationTokenAsync(userExist, userExist.Id, tokenString);
                         var newRefreshToken = await _userManager.GenerateUserTokenAsync(userExist, "Default", tokenString);
                         await _userManager.SetAuthenticationTokenAsync(userExist, userExist.UserName, "Authorization", tokenString);
+
 
                         return new SignUpCommandResponse()
                         {

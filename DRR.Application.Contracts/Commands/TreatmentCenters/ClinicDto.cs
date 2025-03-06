@@ -15,10 +15,14 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
         public double Geolon { get; set; }
         public double Geolat { get; set; }
         public string Phone { get; set; }
+        public int ProvinceId { get; set; }
         public string CityName { get; set; }
+        public int CityId { get; set; }
         public string SiamCode { get; set; }
         public string Desc { get; set; }
         public string ClinicTypeName { get; set; }
+        public int ClinicTypeId { get; set; }
+        public int DoctorsCount { get; set; }
                
     }
 }

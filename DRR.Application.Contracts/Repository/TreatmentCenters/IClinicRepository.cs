@@ -14,6 +14,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task<List<Clinic>> ReadClinics();
         Task<List<Clinic>> ReadClinicByDto(ClinicDto ClinicDto);
         Task<Clinic> ReadClinicById(Guid id);
+        Task<int> ReadClinicDoctorsCountById(Guid id);
         Task<List<Clinic>> ReadClinicByCityId(int id);
         Task<List<Clinic>> ReadClinicByClinicTypeId(int id);
 

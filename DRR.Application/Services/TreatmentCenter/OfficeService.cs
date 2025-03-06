@@ -15,25 +15,9 @@ namespace DRR.Application.Services.TreatmentCenter
 {
     public class OfficeService : IOfficeService
     {
-        public async Task<List<OfficeDto>> ConvertToDto(List<Office> Offices)
-        {
-            var result = Offices.Select(s => new OfficeDto
-            {
-                Id = s.Id,
-                Name = s.Name,
-                Address = s.Address,
-                Geolon = s.Geolon,
-                Geolat = s.Geolat,
-                CityName = s.City.Name,
-                Phone = s.Phone,
-                PostalCode = s.PostalCode,
-                OfficeTypeName = s.OfficeType.Type
-            }).ToList();
+        
 
-            return result;
-        }
-
-        public async Task<OfficeDto> ConvertToDto(Office Office)
+        public async Task<OfficeDto> ConvertToDto(Office Office, int dosctorCount)
         {
             var result = new OfficeDto
             {
@@ -42,10 +26,14 @@ namespace DRR.Application.Services.TreatmentCenter
                 Address = Office.Address,
                 Geolon = Office.Geolon,
                 Geolat = Office.Geolat,
+                ProvinceId = Office.City.ProvinceId,
+                CityId = Office.City.Id,
                 CityName = Office.City.Name,
                 Phone = Office.Phone,
                 PostalCode = Office.PostalCode,
-                OfficeTypeName = Office.OfficeType.Type
+                OfficeTypeName = Office.OfficeType.Type,
+                OfficeTypeId = Office.OfficeType.Id,
+                DoctorsCount = dosctorCount
             };
 
             return result;
@@ -65,7 +53,8 @@ namespace DRR.Application.Services.TreatmentCenter
 
             return result;
         }
-
        
+
+
     }
 }

@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DRR.Application.Contracts.Repository.Profile;
 using Microsoft.Extensions.Options;
+using DRR.Application.Contracts.Repository.Customer;
 
 namespace DRR.Application.CommandHandlers.Authentication;
 
@@ -23,18 +24,26 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
     ActivatingRegistrationCommandResponse>
 {
     private readonly SignInManager<DRR.Domain.Identity.ApplicationUser> _signInManager;
-    private readonly IUserProfileRepository _userRepository;
+    private readonly IUserProfileRepository _userProfileRepository;
+    private readonly ISmeProfileRepository _smeProfileRepository;
     private readonly ISmsInfoRepository _smsInfoRepository;
+    private readonly IPatientRepository _patientRepository;
     private readonly UserManager<DRR.Domain.Identity.ApplicationUser> _userManager;
     private readonly JwtSetting JwtSetting;
 
-    public ActivatingRegistrationCommandHandler(ISmsInfoRepository smsInfoRepository, UserManager<DRR.Domain.Identity.ApplicationUser> userManager, SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, IOptions<JwtSetting> options, IUserProfileRepository userRepository)
+    public ActivatingRegistrationCommandHandler(ISmsInfoRepository smsInfoRepository, 
+        UserManager<DRR.Domain.Identity.ApplicationUser> userManager, 
+        SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, 
+        IOptions<JwtSetting> options, IUserProfileRepository userProfileRepository, 
+        IPatientRepository patientRepository, ISmeProfileRepository smeProfileRepository)
     {
         _smsInfoRepository = smsInfoRepository;
         _userManager = userManager;
         _signInManager = signInManager;
         JwtSetting = options.Value;
-        _userRepository = userRepository;
+        _userProfileRepository = userProfileRepository;
+        _patientRepository = patientRepository;
+        _smeProfileRepository = smeProfileRepository;
     }
 
     public override async Task<ActivatingRegistrationCommandResponse> Executor(ActivatingRegistrationCommand command)
@@ -50,9 +59,8 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
             userUpdate.PhoneNumberConfirmed = true;
             await _userManager.UpdateAsync(userUpdate);
 
-            var signOn = await _signInManager.PasswordSignInAsync(userUpdate.UserName, "String123456", false , false);
-
-            if (!signOn.Succeeded) throw new IdentityUsernameOrPasswordException();
+            //var signOn = await _signInManager.PasswordSignInAsync(userUpdate.UserName, "Nn123456", false , false);
+            //if (!signOn.Succeeded) throw new IdentityUsernameOrPasswordException();
 
 
 
@@ -77,9 +85,18 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
             await _userManager.SetAuthenticationTokenAsync(userUpdate, userUpdate.UserName, "Authorization", tokenString);
 
             int smeProfileid = 0;
-            var smer = _userRepository.ReadByUserId(new Guid(userUpdate.Id));
+
+
+            var smer = _userProfileRepository.ReadByUserId(new Guid(userUpdate.Id));
             if (smer.Result.Count() > 0)
                 smeProfileid = smer.Result.FirstOrDefault().SmeProfileId;
+            else
+            {
+                var smep = new DRR.Domain.Profile.SmeProfile(userUpdate.Fullname,userUpdate.UserName,userUpdate.UserName, userUpdate.Id,
+                    "","","","","","","","","","","",1,2,true,"","","", SmeType.Business);
+                await _smeProfileRepository.Create(smep);
+                smeProfileid = smep.Id;
+            }
 
 
             return new ActivatingRegistrationCommandResponse()
@@ -89,6 +106,7 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
                 RefreshToken = $"Bearer {tokenString}",
                 UserFullname = userUpdate.Fullname ?? "",
                 SmeprofileId = smeProfileid,
+                Patients = await _patientRepository.ReadPatientBySmeProfileId(smeProfileid),
             };
         }
 

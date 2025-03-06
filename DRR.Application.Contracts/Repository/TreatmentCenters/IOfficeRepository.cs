@@ -13,6 +13,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
     {
         Task<List<Office>> ReadOffices();
         Task<Office> ReadOfficeById(Guid id);
+        Task<int> ReadOfficeDoctorsCountById(Guid id);
         Task<List<Office>> ReadOfficeByCityId(int id);
         Task<List<Office>> ReadOfficeByOfficeTypeId(int id);
 

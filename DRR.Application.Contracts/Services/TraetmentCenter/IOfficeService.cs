@@ -12,8 +12,7 @@ namespace DRR.Application.Contracts.Services.TraetmentCenter
 {
     public interface IOfficeService : IService
     {
-        Task<List<OfficeDto>> ConvertToDto(List<Office> Offices);
-        Task<OfficeDto> ConvertToDto(Office Office);
+        Task<OfficeDto> ConvertToDto(Office Office ,int doctorsCount);
         Task<List<OfficeDto>> FilterByName(List<OfficeDto> Offices, string name);
         Task<List<OfficeDto>> FilterByProvinceOrCity(List<OfficeDto> Offices, string pcname);
     }

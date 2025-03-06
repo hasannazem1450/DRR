@@ -21,7 +21,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         public async Task<List<Office>> ReadOffices()
         {
             var query = _Db.Offices
-                .Include(x=> x.City)
+                .Include(x=> x.City).ThenInclude(x=> x.Province)
                 .Include(x=> x.OfficeType)
                 .AsQueryable();
            
@@ -30,23 +30,31 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         public async Task<Office> ReadOfficeById(Guid id)
         {
             var result = await _Db.Offices
-                .Include(x => x.City)
+                .Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.OfficeType)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             return result;
         }
 
+        public async Task<int> ReadOfficeDoctorsCountById(Guid id)
+        {
+            var result = _Db.DoctorTreatmentCenters
+                .Where(x => x.OfficeId == id).Count();
+
+            return result;
+        }
+
         public async Task<List<Office>> ReadOfficeByCityId(int id)
         {
-            var result = await _Db.Offices.Include(x => x.City)
+            var result = await _Db.Offices.Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.OfficeType).Where(c => c.CityId == id).ToListAsync();
 
             return result;
         }
         public async Task<List<Office>> ReadOfficeByOfficeTypeId(int id)
         {
-            var result = await _Db.Offices.Include(x => x.City)
+            var result = await _Db.Offices.Include(x => x.City).ThenInclude(x => x.Province)
                 .Include(x => x.OfficeType).Where(c => c.OfficeTypeId == id).ToListAsync();
 
             return result;

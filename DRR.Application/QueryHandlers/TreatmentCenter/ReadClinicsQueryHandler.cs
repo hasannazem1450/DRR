@@ -1,9 +1,14 @@
-﻿using DRR.Application.Contracts.Queries.Event;
+﻿using DRR.Application.Contracts.Commands.Profile.FollowProfile;
+using DRR.Application.Contracts.Commands.TreatmentCenters;
+using DRR.Application.Contracts.Queries.Event;
+using DRR.Application.Contracts.Queries.Profile.FollowProfile;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
 using DRR.Application.Contracts.Repository.Event;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.Event;
 using DRR.Application.Contracts.Services.TraetmentCenter;
+using DRR.Domain.Profile.Follow;
+using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -28,11 +33,19 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
         public async Task<ReadClinicsQueryResponse> Execute(ReadClinicsQuery query, CancellationToken cancellationToken)
         {
             var clinics = await _clinicRepository.ReadClinics();
+            var doctorsCount = 0;
 
-            var result = new ReadClinicsQueryResponse
+
+            var result = new ReadClinicsQueryResponse();
+
+            foreach (var item in clinics)
             {
-                List = await _clinicService.ConvertToDto(clinics)
-            };
+                doctorsCount = await _clinicRepository.ReadClinicDoctorsCountById(item.Id);
+                var dto = await _clinicService.ConvertToDto(item, doctorsCount);
+
+
+                result.List.Add(dto);
+            }
 
             return result;
         }

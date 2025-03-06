@@ -4,6 +4,7 @@ using DRR.Application.Contracts.Repository.Event;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.Event;
 using DRR.Application.Contracts.Services.TraetmentCenter;
+using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,10 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
         public async Task<ReadClinicQueryResponse> Execute(ReadClinicQuery query, CancellationToken cancellationToken)
         {
             var clinic = await _clinicRepository.ReadClinicById(query.Id);
-
+            var doctorsCount = await _clinicRepository.ReadClinicDoctorsCountById(clinic.Id);
             var result = new ReadClinicQueryResponse
             {
-                Data = await _clinicService.ConvertToDto(clinic)
+                Data = await _clinicService.ConvertToDto(clinic, doctorsCount)
             };
 
             return result;

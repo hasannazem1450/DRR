@@ -23,7 +23,7 @@ public class SmeProfileRepository : BaseRepository, ISmeProfileRepository
 
         if (smeprofileforselector != null)
         {
-            var userProfile = new UserProfile(smeProfile.CreatedBy.ToString(), smeProfile.Id);
+            var userProfile = new UserProfile(smeProfile.ManagerName, smeProfile.Id);
 
             await _Db.UserProfiles.AddAsync(userProfile);
             await _Db.SaveChangesAsync();
