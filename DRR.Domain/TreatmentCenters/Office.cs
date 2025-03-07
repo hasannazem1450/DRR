@@ -24,7 +24,7 @@ namespace DRR.Domain.TreatmentCenters
             OfficeTypeId = officeTypeId;
 
         }
-        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string postalCode, int officeTypeId)
+        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string postalCode, int officeTypeId,City city , OfficeType officeType)
         {
             Name = name;
             Address = address;
@@ -34,7 +34,9 @@ namespace DRR.Domain.TreatmentCenters
             CityId = cityId;
             PostalCode = postalCode;
             OfficeTypeId = officeTypeId;
-
+            City = city;
+            OfficeType = officeType;
+            
         }
 
         public string Name { get; set; }

@@ -76,7 +76,8 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             result.CityId = Office.CityId;
             result.PostalCode = Office.PostalCode;
             result.OfficeTypeId = Office.OfficeTypeId;
-
+            result.City = Office.City;
+            result.OfficeType = Office.OfficeType;
 
             _Db.Offices.Update(result);
 

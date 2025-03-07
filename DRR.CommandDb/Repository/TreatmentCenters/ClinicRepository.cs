@@ -87,7 +87,8 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
             result.SiamCode = Clinic.SiamCode;
             result.Desc = Clinic.Desc;
             result.ClinicTypeId = Clinic.ClinicTypeId;
-
+            result.City = Clinic.City;
+            result.ClinicType = Clinic.ClinicType;
 
             _Db.Clinics.Update(result);
 

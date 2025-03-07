@@ -26,7 +26,7 @@ namespace DRR.Domain.TreatmentCenters
             Desc = desc;
             ClinicTypeId = clinicTypeId;
         }
-        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string siamCode, string desc, int clinicTypeId)
+        public void Update(string name, string address, double geolon, double geolat, string phone, int cityId, string siamCode, string desc, int clinicTypeId, City city, ClinicType clinicType)
         {
             Name = name;
             Address = address;
@@ -37,6 +37,8 @@ namespace DRR.Domain.TreatmentCenters
             SiamCode = siamCode;
             Desc = desc;
             ClinicTypeId = clinicTypeId;
+            City = city;
+            ClinicType = clinicType;
         }
 
         public string Name { get; set; }

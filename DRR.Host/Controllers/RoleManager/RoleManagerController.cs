@@ -43,7 +43,7 @@ namespace DRR.Host.Controllers.RoleManager
                 }
             }
             [SwaggerOperation(Summary = "تخصیص یک نقش به یک کاربر  ")]
-            [Authorize(Roles = RoleConstants.Admin)]
+            //[Authorize(Roles = RoleConstants.Admin)]
             [HttpPost("add-user-role")]
             public async Task<IActionResult> CreateRole(AddRoleToUserCommand query, CancellationToken cancellationToken)
             {
