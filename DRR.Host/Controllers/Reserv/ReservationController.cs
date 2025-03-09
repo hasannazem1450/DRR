@@ -63,6 +63,14 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
+        [SwaggerOperation(Summary = "ایجاد وقت خالی برای ویزیت یک دکتر به صورت بازه زمانی ")]
+        [HttpPost("create-reservationfromdatetodate")]
+        public async Task<IActionResult> Createreservationfromdatetodate(CreateReservationDateToDateCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<CreateReservationDateToDateCommand, CreateReservationCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
         [SwaggerOperation(Summary = "حذف وقت خالی برای ویزیت یک دکتر ")]
         [HttpDelete("delete-reservation")]
         public async Task<IActionResult> Deletereservation(DeleteReservationCommand command, CancellationToken cancellationToken)

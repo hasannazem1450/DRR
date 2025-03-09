@@ -88,7 +88,8 @@ namespace DRR.Application.CommandHandlers.Authentication
                 var smer = _userRepository.ReadByUserId(new Guid(userExist.Id));
                 if (smer.Result != null)
                     smeProfileid = smer.Result.FirstOrDefault().SmeProfileId;
-
+                command.Metadata.SmeProfileId = smeProfileid;
+                command.UserName = userExist.Id;
 
                 return new SignInCommandResponse()
                 {
