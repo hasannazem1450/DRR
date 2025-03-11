@@ -104,7 +104,7 @@ namespace DRR.Application.Services.Customer
         {
             List<Domain.Insurances.Insurance> li =  await _insuranceRepository.ReadAllInsurances();
             Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(BimeAsli);
-            int levenshteinDistance = 1000;
+            int levenshteinDistance = 6;
             foreach (var item in li )
             {
                 if (levenshteinDistance > lev.DistanceFrom(item.Name))
@@ -121,7 +121,7 @@ namespace DRR.Application.Services.Customer
         {
             List<Domain.Insurances.Insurance> li = await _insuranceRepository.ReadAllInsurances();
             Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(BimehTakmili);
-            int levenshteinDistance = 1000;
+            int levenshteinDistance = 6;
             foreach (var item in li)
             {
                 if (levenshteinDistance > lev.DistanceFrom(item.Name))
@@ -273,7 +273,7 @@ namespace DRR.Application.Services.Customer
         public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors, SearchDoctorsQuery query)
         {
 
-            var result = doctors.Select(s => ConvertToBoxDto(s).Result).Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToList();
+            var result = doctors.Select(s => ConvertToBoxDto(s).Result).ToList();
 
             return result;
         }

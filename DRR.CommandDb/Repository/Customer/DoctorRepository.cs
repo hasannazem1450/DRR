@@ -63,7 +63,7 @@ namespace DRR.CommandDb.Repository.Customer
             {
                 List<Domain.Insurances.Insurance> li = await _Db.Insurances.ToListAsync();
                 Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.BimeAsli);
-                int levenshteinDistance = 1000;
+                int levenshteinDistance = 6;
                 foreach (var item in li)
                 {
                     if (levenshteinDistance > lev.DistanceFrom(item.Name))
@@ -80,7 +80,7 @@ namespace DRR.CommandDb.Repository.Customer
             {
                 List<Domain.Insurances.Insurance> li = await _Db.Insurances.ToListAsync();
                 Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.BimehTakmili);
-                int levenshteinDistance = 1000;
+                int levenshteinDistance = 6;
                 foreach (var item in li)
                 {
                     if (levenshteinDistance > lev.DistanceFrom(item.Name))
