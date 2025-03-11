@@ -270,7 +270,7 @@ namespace DRR.Application.Services.Customer
 
             return result;
         }
-        public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors, SearchDoctorsQuery query)
+        public async Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors)
         {
 
             var result = doctors.Select(s => ConvertToBoxDto(s).Result).ToList();

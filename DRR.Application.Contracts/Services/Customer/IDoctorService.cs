@@ -31,7 +31,7 @@ namespace DRR.Application.Contracts.Services.Customer
         Task<List<DoctorDto>> FinalFilter(List<DoctorDto> doctors, ReadDoctorQueryFilters filters);
         Task<List<DoctorDto>> ConvertToDto(List<Doctor> doctors);
         Task<DoctorDto> ConvertToDto(Doctor doctor);
-        Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors, SearchDoctorsQuery query);
+        Task<List<DoctorBoxDto>> ConvertToBoxDto(List<Doctor> doctors);
         Task<DoctorBoxDto> ConvertToBoxDto(Doctor doctor);
     }
 }

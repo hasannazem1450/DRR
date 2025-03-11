@@ -43,57 +43,8 @@ namespace DRR.Application.QueryHandlers.Customer
             CancellationToken cancellationToken)
         {
             var doctors = await _doctorRepository.Search(query);
-            //if (query.ProvinceId != null && query.ProvinceId != 0)
-            //    doctors = await _doctorService.FilterBoxByProvince(doctors, query.ProvinceId ?? 0);
-
-            //if (query.CityId != null && query.CityId != 0)
-            //    doctors = await _doctorService.FilterBoxByCity(doctors, query.CityId ?? 0);
-
-            //if (query.specialistIds != null && query.specialistIds != "")
-            //    doctors = await _doctorService.FilterBoxBySpecialist(doctors, query.specialistIds);
-
-            //if (query.BimeAsli != null && query.BimeAsli != "")
-            //    doctors = await _doctorService.FilterBoxByBimeAsli(doctors, query.BimeAsli);
-
-            //if (query.BimehTakmili != null && query.BimehTakmili != "")
-            //    doctors = await _doctorService.FilterBoxByBimehTakmili(doctors, query.BimehTakmili);
-
-            //if (query.JustOnline != null && query.JustOnline == true)
-            //    doctors = await _doctorService.FilterBoxByJustOnline(doctors, (bool)query.JustOnline);
-
-            //if (query.HasTurn != null && query.HasTurn == true)
-            //    doctors = await _doctorService.FilterBoxByHasTurn(doctors, (bool)query.HasTurn);
-
-            //if (query.AcceptInsurance != null && query.AcceptInsurance == true)
-            //    doctors = await _doctorService.FilterBoxByAcceptInsurance(doctors, (bool)query.AcceptInsurance);
-
-
-            //if (query.Gender != null)
-            //    doctors = await _doctorService.FilterBoxByGender(doctors, (bool)query.Gender);
-
-
-            //if ((query.Sdate != null && query.Sdate != "") || (query.Edate != null && query.Edate != ""))
-            //    doctors = await _doctorService.FilterBoxByDate(doctors, query.Sdate , query.Edate);
-
-            //if (query.OnlineTypeId != null && query.OnlineTypeId != 0)
-            //    doctors = await _doctorService.FilterBoxByOnlineTypeId(doctors, query.OnlineTypeId ?? 0);
-
-            //if (query.OfficeOrClinicHozoori != null)
-            //    doctors = await _doctorService.FilterBoxByOfficeOrClinicHozoori(doctors, (bool)query.OfficeOrClinicHozoori);
-
-            //var doctorDto = await _doctorService.ConvertToBoxDto(doctors);
-
-            //if (query.DoctorName.IsNotNullOrEmpty())
-            //    doctorDto = await _doctorService.FilterBoxByName(doctorDto, query.DoctorName);
-
-            //if (query.doctorFamily.IsNotNullOrEmpty())
-            //    doctorDto = await _doctorService.FilterBoxByName(doctorDto, query.doctorFamily);
-
-
-
-
-            //var totalRecords = query.TotalRecords;
-            var doctorDto = await _doctorService.ConvertToBoxDto(doctors, query);
+        
+            var doctorDto = await _doctorService.ConvertToBoxDto(doctors);
             List<DoctorBoxDto> senditems = doctorDto.ToList();
 
             var result = new SearchDoctorsQueryResponse

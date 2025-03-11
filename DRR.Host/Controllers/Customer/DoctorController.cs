@@ -134,5 +134,13 @@ namespace DRR.Host.Controllers.Customer
             var result = await Distributor.Send<ReadFirstFreeTurnsQuery, ReadFirstFreeTurnsQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن پروفایل دکتر ها بر حسب مرکز درمانی")]
+        [HttpGet("read-doctors-bytreatmentcenterid")]
+        public async Task<IActionResult> ReadDoctorsInTreatmentCenter([FromQuery] ReadDoctorsInTreatmentCenterQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorsInTreatmentCenterQuery, ReadDoctorsInTreatmentCenterQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
     }
 }

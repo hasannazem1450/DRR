@@ -36,6 +36,23 @@ namespace DRR.CommandDb.Repository.Customer
 
             return result;
         }
+        public async Task<List<Doctor>> ReadDoctorsByTreatmentCenterId(Guid id)
+        {
+            var query = _Db.Doctors
+               .Include(s => s.SmeProfile)
+               .Include(sp => sp.Specialist)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office)
+               .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic)
+               .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .AsQueryable();
+
+            query = query.Where(x => x.DoctorTreatmentCenters.Any(o => o.OfficeId == id || o.ClinicId == id));
+            var result = await query.ToListAsync();
+
+            return result;
+        }
         public async Task<List<Doctor>> Search(SearchDoctorsQuery query)
         {
             var q = _Db.Doctors
