@@ -83,6 +83,8 @@ public sealed class BaseProjectCommandDb : IdentityDbContext<ApplicationUser>
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<SiteMessageImage> SiteMessageImages { get; set; }
     public DbSet<Turn> Turns { get; set; }
+    public DbSet<Category> Categorys { get; set; }
+    public DbSet<SpecialistCategory> SpecialistCategorys { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

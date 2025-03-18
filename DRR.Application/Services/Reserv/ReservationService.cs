@@ -27,6 +27,9 @@ namespace DRR.Application.Services.Reserv
 
         public async Task<ReservationDto> ConvertToDto(Reservation reservation)
         {
+            DateTime dt;
+            bool res = true;
+            res = DateTime.TryParse(reservation.ReservationTime, out dt);
             var result = new ReservationDto
             {
 
@@ -38,7 +41,7 @@ namespace DRR.Application.Services.Reserv
                 ReservationMonth = DatetimeExtension.NumberToDate(reservation.ReservationDate).ToGregorianDateTime()?.ToPersianDateStringMonth(),
                 DoctorTreatmentCenterId = reservation.DoctorTreatmentCenterId,
                 CancleTimeDuration = reservation.CancleTimeDuration,
-                ReservationTime = reservation.ReservationTime,
+                ReservationTime = dt.ToString("HH:mm"),
                 VisitCostId = reservation.VisitCostId,
                 DoctorTreatmentCenter = reservation.DoctorTreatmentCenter,
                 VisitCost = reservation.VisitCost
@@ -72,6 +75,10 @@ namespace DRR.Application.Services.Reserv
                 name = reservation.DoctorTreatmentCenter.Office.Name;
                 address = reservation.DoctorTreatmentCenter.Office.Address;
             }
+            DateTime dt;
+            bool res = true;
+            res = DateTime.TryParse(reservation.Turns.Where(x => x.IsFree == true).OrderBy(x => x.Stime).First().Stime, out dt);
+
             var result = new FirstFreeTurnsDto
             {
 
@@ -79,7 +86,7 @@ namespace DRR.Application.Services.Reserv
                 ReservationDate = DatetimeExtension.NumberToDate(reservation.ReservationDate),
                 ReservationDateFull = DatetimeExtension.NumberToDate(reservation.ReservationDate).ToGregorianDateTime()?.ToPersianDateStringFull(),
                 TreatmentCenterName = name,
-                ReservationTime = reservation.Turns.Where(x=> x.IsFree == true).OrderBy(x => x.Stime).First().Stime,
+                ReservationTime = dt.ToString("HH:mm"),
                 VisitCostPrice = reservation.VisitCost.Price.ToString(),
                 ReservationType = rt,
                 TreatmentCenterAddress = address,

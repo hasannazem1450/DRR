@@ -53,7 +53,7 @@ namespace DRR.Host.Controllers.Specialists
         }
         [SwaggerOperation(Summary = " ویرایش یک تخصص ")]
         [HttpPut("update-specialist")]
-        public async Task<IActionResult> UpdateDoctor(UpdateSpecialistCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateSpecialist(UpdateSpecialistCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<UpdateSpecialistCommand, UpdateSpecialistCommandResponse>(command, cancellationToken);
 
@@ -61,9 +61,66 @@ namespace DRR.Host.Controllers.Specialists
         }
         [SwaggerOperation(Summary = " حذف یک تخصص ")]
         [HttpDelete("delete-specialist")]
-        public async Task<IActionResult> DeleteDoctor(DeleteSpecialistCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteSpecialis(DeleteSpecialistCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<DeleteSpecialistCommand, DeleteSpecialistCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن دسته بندی تخصص ")]
+        [HttpGet("read-category")]
+        public async Task<IActionResult> ReadCategory([FromQuery] ReadCategoryQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadCategoryQuery, ReadCategoryQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن همه دسته بندی ها ")]
+        [HttpGet("read-categorys")]
+        public async Task<IActionResult> ReadCategorys([FromQuery] ReadCategorysQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadCategorysQuery, ReadCategorysQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = " ایجاد یک دسته بندی تخصص ")]
+        [HttpPost("create-category")]
+        public async Task<IActionResult> CreateCategory(CreateCategoryCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<CreateCategoryCommand, CreateCategoryCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = " ویرایش یک دسته بندی تخصص ")]
+        [HttpPut("update-category")]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<UpdateCategoryCommand, UpdateCategoryCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = " حذف یک دسته بندی تخصص ")]
+        [HttpDelete("delete-category")]
+        public async Task<IActionResult> DeleteCategory(DeleteCategoryCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<DeleteCategoryCommand, DeleteCategoryCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = " افزودن یک تخصص به یک دسته بندی ")]
+        [HttpPost("add-specialist-to-category")]
+        public async Task<IActionResult> CreateSpecialistCategory(AddSpecialistToCategoryCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<AddSpecialistToCategoryCommand, AddSpecialistToCategoryCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = " حذف یک تخصص از یک دسته بندی ")]
+        [HttpPost("remove-specialist-from-category")]
+        public async Task<IActionResult> RemoveSpecialistCategory(RemoveSpecialistFromCategoryCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<RemoveSpecialistFromCategoryCommand, RemoveSpecialistFromCategoryCommandResponse>(command, cancellationToken);
 
             return OkApiResult(result);
         }

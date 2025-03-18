@@ -4,6 +4,7 @@ using DRR.CommandDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DRR.CommandDb.Migrations
 {
     [DbContext(typeof(BaseProjectCommandDb))]
-    partial class BaseProjectCommandDbModelSnapshot : ModelSnapshot
+    [Migration("20250318083358_isnew")]
+    partial class isnew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1996,45 +1999,6 @@ namespace DRR.CommandDb.Migrations
                     b.ToTable("SmsInfos");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Specialists.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CategoryLogoFile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SpecialistCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SpecialistCategoryId");
-
-                    b.ToTable("Categorys");
-                });
-
             modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
                 {
                     b.Property<int>("Id")
@@ -2074,9 +2038,6 @@ namespace DRR.CommandDb.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("SpecialistCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Maxa")
@@ -2085,43 +2046,7 @@ namespace DRR.CommandDb.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("SpecialistCategoryId");
-
                     b.ToTable("Specialists");
-                });
-
-            modelBuilder.Entity("DRR.Domain.Specialists.SpecialistCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SpecialistId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SpecialistCategorys");
                 });
 
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemDataMessage", b =>
@@ -3103,20 +3028,6 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("SmeProfile");
                 });
 
-            modelBuilder.Entity("DRR.Domain.Specialists.Category", b =>
-                {
-                    b.HasOne("DRR.Domain.Specialists.SpecialistCategory", null)
-                        .WithMany("Categorys")
-                        .HasForeignKey("SpecialistCategoryId");
-                });
-
-            modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
-                {
-                    b.HasOne("DRR.Domain.Specialists.SpecialistCategory", null)
-                        .WithMany("Specialists")
-                        .HasForeignKey("SpecialistCategoryId");
-                });
-
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemDataMessage", b =>
                 {
                     b.HasOne("DRR.Domain.SystemMessages.SystemMessage", null)
@@ -3390,13 +3301,6 @@ namespace DRR.CommandDb.Migrations
             modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
                 {
                     b.Navigation("Doctors");
-                });
-
-            modelBuilder.Entity("DRR.Domain.Specialists.SpecialistCategory", b =>
-                {
-                    b.Navigation("Categorys");
-
-                    b.Navigation("Specialists");
                 });
 
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemMessage", b =>
