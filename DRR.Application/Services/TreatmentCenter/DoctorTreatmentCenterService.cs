@@ -19,13 +19,13 @@ namespace DRR.Application.Services.TreatmentCenter
     {
         public async Task<List<DoctorTreatmentCenterDto>> FilterByProvinceName(List<DoctorTreatmentCenterDto> dtc, string name)
         {
-            var result = dtc.Where(x => x.Office.City.Province.Name == name).ToList();
+            var result = dtc.Where(x => x.Office.City.Province.Name.Contains(name)).ToList();
 
             return result;
         }
         public async Task<List<DoctorTreatmentCenterDto>> FilterByCityName(List<DoctorTreatmentCenterDto> dtc, string name)
         {
-            var result = dtc.Where(x => x.Office.City.Name == name).ToList();
+            var result = dtc.Where(x => x.Office.City.Name.Contains(name)).ToList();
 
             return result;
         }
@@ -44,13 +44,13 @@ namespace DRR.Application.Services.TreatmentCenter
         }
         public async Task<List<DoctorTreatmentCenterDto>> FilterByClinicTypeName(List<DoctorTreatmentCenterDto> dtc, string name)
         {
-            var result = dtc.Where(x => x.Clinic.ClinicType.Type == name).ToList();
+            var result = dtc.Where(x => x.Clinic.ClinicType.Type.Contains(name)).ToList();
 
             return result;
         }
         public async Task<List<DoctorTreatmentCenterDto>> FilterByOfficeTypeName(List<DoctorTreatmentCenterDto> dtc, string name)
         {
-            var result = dtc.Where(x => x.Office.OfficeType.Type == name).ToList();
+            var result = dtc.Where(x => x.Office.OfficeType.Type.Contains(name)).ToList();
 
             return result;
         }

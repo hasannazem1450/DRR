@@ -6,6 +6,7 @@ using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.TraetmentCenter;
 using DRR.Domain.Customer;
 using DRR.Framework.Contracts.Markers;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,21 +32,21 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
             var dtcs = await _dtcRepository.ReadAllDoctorTreatmentCenters();
             var dtcDto = await _dtcService.ConvertToDto(dtcs);
 
-            if (query.ProvinceName != "")
+            if (!query.ProvinceName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByProvinceName(dtcDto, query.ProvinceName);
-            if (query.CityName != "")
+            if (!query.CityName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByCityName(dtcDto, query.ProvinceName);
-            if (query.SpecialistIds != "")
+            if (!query.SpecialistIds.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterBySpecialistIds(dtcDto, query.SpecialistIds);
-            if (query.SpecialistName != "")
+            if (!query.SpecialistName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterBySpecialistName(dtcDto, query.SpecialistName);
-            if (query.ClinicTypeName != "")
+            if (!query.ClinicTypeName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByClinicTypeName(dtcDto, query.ClinicTypeName);
-            if (query.OfficeTypeName != "")
+            if (!query.OfficeTypeName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByOfficeTypeName(dtcDto, query.OfficeTypeName);
-            if (query.DoctorTreatmentCenterName != "")
+            if (!query.DoctorTreatmentCenterName.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByDoctorTreatmentCenterName(dtcDto, query.DoctorTreatmentCenterName);
-            if (query.Desc != "")
+            if (!query.Desc.IsNullOrEmpty())
                 dtcDto = await _dtcService.FilterByDesc(dtcDto, query.Desc);
 
 
