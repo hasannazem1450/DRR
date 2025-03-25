@@ -12,7 +12,7 @@ namespace DRR.Application.Contracts.Queries.Customer
     public class SearchDoctorsQuery : Query
     {
         public int Id { get; set; }
-        public int pagesize { get; set; } = 20;
+        public int pagesize { get; set; } = 10;
         public int pageNumber { get; set; } = 1;
         public string? DoctorName { get; set; }
         public string? doctorFamily { get; set; }

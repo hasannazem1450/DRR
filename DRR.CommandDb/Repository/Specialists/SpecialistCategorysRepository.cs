@@ -3,10 +3,10 @@ using DRR.CommandDB;
 using DRR.Domain.Specialists;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DRR.CommandDb.Repository.Specialists
 {
@@ -17,7 +17,9 @@ namespace DRR.CommandDb.Repository.Specialists
         }
         public async Task<List<Specialist>> ReadSpecialistsByCategoryId(int id)
         {
-            var sc = await _Db.SpecialistCategorys.Where(x => x.CategoryId == id).Include(x => x.Specialists).ToListAsync();
+            var query = _Db.SpecialistCategorys.Where(x => x.CategoryId == id).Include(x => x.Specialists)
+           .AsQueryable();
+            var sc = await query.ToListAsync();
             var s = new Specialist();
             var ls = new List<Specialist>();
             if (sc == null)
