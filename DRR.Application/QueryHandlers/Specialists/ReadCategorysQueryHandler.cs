@@ -36,6 +36,7 @@ namespace DRR.Application.QueryHandlers.Specialists
                 specialists = await _specialistCategoryRepository.ReadSpecialistsByCategoryId(item.Id);
                 var scd = new SpecialistCategoryDto()
                 {
+                    Id= item.Id,
                     CategoryName = item.CategoryName,
                     Specialists = specialists
                 };

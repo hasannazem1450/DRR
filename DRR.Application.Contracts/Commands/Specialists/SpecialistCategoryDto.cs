@@ -9,6 +9,7 @@ namespace DRR.Application.Contracts.Commands.Specialists
 {
     public class SpecialistCategoryDto
     {
+        public int Id { get; set; }
         public string CategoryName { get; set; }
         public List<Specialist> Specialists { get; set; }
     }
