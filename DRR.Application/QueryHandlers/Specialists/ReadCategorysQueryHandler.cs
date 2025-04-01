@@ -38,6 +38,7 @@ namespace DRR.Application.QueryHandlers.Specialists
                 {
                     Id= item.Id,
                     CategoryName = item.CategoryName,
+                    CategoryLogoFile = item.CategoryLogoFile,
                     Specialists = specialists
                 };
                 res.Add(scd);

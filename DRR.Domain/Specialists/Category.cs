@@ -11,6 +11,11 @@ namespace DRR.Domain.Specialists
     {
         public string CategoryName { get; set; }
         public string CategoryLogoFile { get; set; }
+        public Category()
+        {
+
+
+        }
         public Category(string categoryName, string categoryLogoFile)
         {
             CategoryName = categoryName;

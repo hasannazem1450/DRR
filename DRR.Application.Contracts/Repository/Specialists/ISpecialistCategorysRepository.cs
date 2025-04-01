@@ -11,6 +11,7 @@ namespace DRR.Application.Contracts.Repository.Specialists
     public interface ISpecialistCategorysRepository : IRepository
     {
         Task<List<Specialist>> ReadSpecialistsByCategoryId(int id);
+        Task<List<Category>> ReadCategoriesBySpecialistId(int id);
         Task Delete(int id);
 
         Task Create(SpecialistCategory specialistCategory);

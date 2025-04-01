@@ -31,6 +31,7 @@ namespace DRR.Application.QueryHandlers.Specialists
         {
 
             var specialist = await _specialistRepository.ReadSpecialistById(query.SpecialistId);
+            
 
             var result = new ReadSpecialistQueryResponse
             {

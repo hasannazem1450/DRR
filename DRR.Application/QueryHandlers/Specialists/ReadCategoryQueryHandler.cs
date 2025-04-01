@@ -32,6 +32,7 @@ namespace DRR.Application.QueryHandlers.Specialists
             var scd = new SpecialistCategoryDto()
             {
                 CategoryName = category.CategoryName,
+                CategoryLogoFile = category.CategoryLogoFile,
                 Specialists = specialists
             };
             var result = new ReadCategoryQueryResponse

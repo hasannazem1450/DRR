@@ -11,6 +11,7 @@ namespace DRR.Application.Contracts.Commands.Specialists
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public string CategoryLogoFile { get; set; }
         public List<Specialist> Specialists { get; set; }
     }
 }

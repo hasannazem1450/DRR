@@ -24,7 +24,8 @@ namespace DRR.CommandDb.Repository.Specialists
             var ls = new List<Specialist>();
             if (sc == null)
             {
-                throw new Exception("تخصصی دراین دسته بندی نیست");
+                //throw new Exception("تخصصی دراین دسته بندی نیست");
+                return null;
             }
             foreach (var item in sc)
             {
@@ -33,6 +34,26 @@ namespace DRR.CommandDb.Repository.Specialists
             }
             return ls;
 
+        }
+
+        public async Task<List<Category>> ReadCategoriesBySpecialistId(int id)
+        {
+            var query = _Db.SpecialistCategorys.Where(x => x.SpecialistId == id).Include(x => x.Categorys)
+          .AsQueryable();
+            var cs = await query.ToListAsync();
+            var c = new Category();
+            var lc = new List<Category>();
+            if (cs == null)
+            {
+                //throw new Exception("این تخصص درهیچ دسته بندی نیست");
+                return null;
+            }
+            foreach (var item in cs)
+            {
+                c = await _Db.Categorys.Where(x => x.Id == item.CategoryId).FirstOrDefaultAsync();
+                lc.Add(c);
+            }
+            return lc;
         }
         public async Task Create(SpecialistCategory specialistCategory)
         {
