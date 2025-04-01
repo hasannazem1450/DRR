@@ -28,7 +28,7 @@ namespace DRR.Application.CommandHandlers.Specialists
             if (scl.Where(x => x.Id == command.SpecialistId).Count()>0 )
                 throw new Exception("تخصص قبلا به این دسته بندی تخصیص داده شده است وتکراری است");
            
-                var sc = new SpecialistCategory(command.CategoryId, command.SpecialistId);
+                var sc = new SpecialistCategory(command.SpecialistId, command.CategoryId);
 
                 await _specialistcategorysRepository.Create(sc);
           

@@ -9,8 +9,9 @@ namespace DRR.Application.Contracts.Commands.Specialists
 {
     public class AddSpecialistToCategoryCommand : Command
     {
-        public int CategoryId { get; set; }
         public int SpecialistId { get; set; }
+        public int CategoryId { get; set; }
+
     }
     public class AddSpecialistToCategoryCommandResponse : CommandResponse
     {

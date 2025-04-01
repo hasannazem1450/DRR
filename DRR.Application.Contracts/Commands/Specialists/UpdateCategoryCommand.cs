@@ -10,6 +10,7 @@ namespace DRR.Application.Contracts.Commands.Specialists
 {
     public class UpdateCategoryCommand : Command
     {
+        public int Id { get; set; }
         public string CategoryName { get; set; }
         public string CategoryLogoFile { get; set; }
     }
