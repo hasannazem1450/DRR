@@ -21,5 +21,10 @@ namespace DRR.Domain.Specialists
             CategoryName = categoryName;
             CategoryLogoFile = categoryLogoFile;
         }
+        public void Update(string categoryName, string categoryLogoFile)
+        {
+            CategoryName = categoryName;
+            CategoryLogoFile = categoryLogoFile;
+        }
     }
 }

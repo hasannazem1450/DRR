@@ -9,7 +9,8 @@ namespace DRR.Application.Contracts.Commands.Specialists
 {
     public class RemoveSpecialistFromCategoryCommand : Command
     {
-        public int Id { get; set; }
+        public int SpecialistId { get; set; }
+        public int CategoryId { get; set; }
     }
     public class RemoveSpecialistFromCategoryCommandResponse : CommandResponse
     {

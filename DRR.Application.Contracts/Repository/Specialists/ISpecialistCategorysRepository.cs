@@ -12,7 +12,7 @@ namespace DRR.Application.Contracts.Repository.Specialists
     {
         Task<List<Specialist>> ReadSpecialistsByCategoryId(int id);
         Task<List<Category>> ReadCategoriesBySpecialistId(int id);
-        Task Delete(int id);
+        Task Delete(int specialistid, int categoryid);
 
         Task Create(SpecialistCategory specialistCategory);
     }

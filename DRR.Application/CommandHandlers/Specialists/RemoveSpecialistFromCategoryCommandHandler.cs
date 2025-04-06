@@ -22,7 +22,7 @@ namespace DRR.Application.CommandHandlers.Specialists
 
         public override async Task<RemoveSpecialistFromCategoryCommandResponse> Executor(RemoveSpecialistFromCategoryCommand command)
         {
-            await _specialistCaterysRepository.Delete(command.Id);
+            await _specialistCaterysRepository.Delete(command.SpecialistId, command.CategoryId);
 
             return new RemoveSpecialistFromCategoryCommandResponse();
         }

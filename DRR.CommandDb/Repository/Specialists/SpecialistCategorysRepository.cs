@@ -61,9 +61,9 @@ namespace DRR.CommandDb.Repository.Specialists
             await _Db.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int specialistid, int categoryid)
         {
-            var result = await _Db.SpecialistCategorys.FirstOrDefaultAsync(n => n.Id == id);
+            var result = await _Db.SpecialistCategorys.FirstOrDefaultAsync(n => n.SpecialistId == specialistid && n.CategoryId == categoryid);
 
             _Db.SpecialistCategorys.Remove(result);
 
