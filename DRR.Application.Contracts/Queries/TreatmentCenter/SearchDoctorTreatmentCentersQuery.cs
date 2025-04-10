@@ -10,16 +10,31 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
 {
     public class SearchDoctorTreatmentCentersQuery: Query
     {
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
-        public string ProvinceName { get; set; }
-        public string CityName { get; set; }
-        public string SpecialistIds { get; set; }
-        public string SpecialistName { get; set; }
-        public string ClinicTypeName { get; set; }
-        public string OfficeTypeName { get; set; }
+        public int Id { get; set; }
+        public int pagesize { get; set; } = 10;
+        public int pageNumber { get; set; } = 1;
         public string DoctorTreatmentCenterName { get; set; }
-        public string Desc { get; set; }
+        public string? DoctorName { get; set; }
+        public string? doctorFamily { get; set; }
+        public string? specialistIds { get; set; }
+        public string? docExperiance { get; set; }
+        public string? docInstaLink { get; set; }
+        public string? desc { get; set; }
+        public int? ProvinceId { get; set; }
+        public int? CityId { get; set; }
+        public string BimehTakmili { get; set; }
+        public string BimeAsli { get; set; }
+        public bool? JustOnline { get; set; }
+        public bool? HasTurn { get; set; }
+        public bool? AcceptInsurance { get; set; }
+        public bool? Gender { get; set; }
+        public string Sdate { get; set; }
+        public string Edate { get; set; }
+        public int? OnlineTypeId { get; set; }
+        public bool? OfficeOrClinicHozoori { get; set; }
+        public int TotalRecords { get; set; }
+
+       
 
 
     }

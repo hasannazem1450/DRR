@@ -29,39 +29,21 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
 
         public async Task<SearchDoctorTreatmentCentersQueryResponse> Execute(SearchDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)
         {
-            var dtcs = await _dtcRepository.ReadAllDoctorTreatmentCenters();
+            var dtcs = await _dtcRepository.Search(query);
+
             var dtcDto = await _dtcService.ConvertToDto(dtcs);
-
-            if (!query.ProvinceName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByProvinceName(dtcDto, query.ProvinceName);
-            if (!query.CityName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByCityName(dtcDto, query.ProvinceName);
-            if (!query.SpecialistIds.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterBySpecialistIds(dtcDto, query.SpecialistIds);
-            if (!query.SpecialistName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterBySpecialistName(dtcDto, query.SpecialistName);
-            if (!query.ClinicTypeName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByClinicTypeName(dtcDto, query.ClinicTypeName);
-            if (!query.OfficeTypeName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByOfficeTypeName(dtcDto, query.OfficeTypeName);
-            if (!query.DoctorTreatmentCenterName.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByDoctorTreatmentCenterName(dtcDto, query.DoctorTreatmentCenterName);
-            if (!query.Desc.IsNullOrEmpty())
-                dtcDto = await _dtcService.FilterByDesc(dtcDto, query.Desc);
-
-
-            var totalRecords = dtcDto.Count();
-            List<DoctorTreatmentCenterDto> senditems = dtcDto.Skip((query.PageNumber - 1) * query.PageSize).Take(query.PageSize).ToList();
+            List<DoctorTreatmentCenterDto> senditems = dtcDto.ToList();
 
             var result = new SearchDoctorTreatmentCentersQueryResponse
             {
-                PageNumber = query.PageNumber,
-                PageSize = query.PageSize,
-                TotalRecords = totalRecords,
+                PageNumber = query.pageNumber,
+                PageSize = query.pagesize,
+                TotalRecords = query.TotalRecords,
                 List = senditems
             };
 
             return result;
+
 
         }
     }
