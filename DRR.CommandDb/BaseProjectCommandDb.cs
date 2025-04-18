@@ -8,6 +8,7 @@ using DRR.Domain.Event;
 using DRR.Domain.FileManagement;
 using DRR.Domain.Finance;
 using DRR.Domain.Identity;
+using DRR.Domain.Information;
 using DRR.Domain.Insurances;
 using DRR.Domain.News;
 using DRR.Domain.Profile;
@@ -85,6 +86,8 @@ public sealed class BaseProjectCommandDb : IdentityDbContext<ApplicationUser>
     public DbSet<Turn> Turns { get; set; }
     public DbSet<Category> Categorys { get; set; }
     public DbSet<SpecialistCategory> SpecialistCategorys { get; set; }
+    public DbSet<SearchHistory> SearchHistorys { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

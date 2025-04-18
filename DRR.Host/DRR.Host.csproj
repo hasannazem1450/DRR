@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\MainSearch\**" />
+    <Content Remove="Controllers\MainSearch\**" />
+    <EmbeddedResource Remove="Controllers\MainSearch\**" />
+    <None Remove="Controllers\MainSearch\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Properties\launchSettings.json" />
   </ItemGroup>
 

@@ -15,6 +15,7 @@ namespace DRR.Application.Contracts.Queries.Information
 
     public class MainSearchQueryResponse : QueryResponse
     {
+        public string Suggest { get; set; }
         public List<DoctorSearchDto> Doctors { get; set; }
         public List<ArticleSearchDto> Articles { get; set; }
         public List<SpecialistSearchDto> Specialists { get; set; }
@@ -22,4 +23,5 @@ namespace DRR.Application.Contracts.Queries.Information
         public List<EventSearchDto> Events { get; set; }
 
     }
+
 }

@@ -10,6 +10,7 @@ using DRR.Application.Contracts.Repository;
 using DRR.Application.Contracts.Repository.Articles;
 using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Repository.Event;
+using DRR.Application.Contracts.Repository.Information;
 using DRR.Application.Contracts.Repository.Insurance;
 using DRR.Application.Contracts.Repository.Profile;
 using DRR.Application.Contracts.Repository.Specialists;
@@ -17,6 +18,8 @@ using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.CommandDb.Repository.TreatmentCentres;
 using DRR.Framework.Contracts.Markers;
 using DRR.Utilities.Extensions;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Logging;
 
 namespace DRR.Application.QueryHandlers.Information
 {
@@ -28,11 +31,12 @@ namespace DRR.Application.QueryHandlers.Information
         private readonly IInsuranceRepository _insuranceRepository;
         private readonly ISpecialistRepository _specialistRepository;
         private readonly IDoctorTreatmentCenterRepository _doctorTreatmentCenterRepository;
+        private readonly ISearchHistoryRepository _searchHistoryRepository;
 
         public MainSearchQueryHandler(IEventInfoRepository eventInfoRepository,
         IDoctorRepository doctorRepository, IArticleRepository articleRepository,
         IInsuranceRepository insuranceRepository, ISpecialistRepository specialistRepository, 
-        IDoctorTreatmentCenterRepository doctorTreatmentCenterRepository)
+        IDoctorTreatmentCenterRepository doctorTreatmentCenterRepository, ISearchHistoryRepository searchHistoryRepository)
         {
             _eventInfoRepository = eventInfoRepository;
             _doctorRepository = doctorRepository;
@@ -40,23 +44,32 @@ namespace DRR.Application.QueryHandlers.Information
             _insuranceRepository = insuranceRepository;
             _specialistRepository = specialistRepository;
             _doctorTreatmentCenterRepository = doctorTreatmentCenterRepository;
+            _searchHistoryRepository = searchHistoryRepository;
         }
 
         public async Task<MainSearchQueryResponse> Execute(MainSearchQuery query,
         CancellationToken cancellationToken)
         {
-            if (query.Term.IsNullOrEmptyExtension() || query.Term.Length <= 2) return new MainSearchQueryResponse();
+            if (query.Term.IsNullOrEmptyExtension() || query.Term.Length <= 2) return new MainSearchQueryResponse {Suggest ="" };
+            string suggest = _searchHistoryRepository.ReadSuggestionByTerm(query.Term).ToString();
+           
 
             var searchTerms = query.Term.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
 
             var result = new MainSearchQueryResponse
             {
+                Suggest = suggest,
                 Events = await SearchEvents(searchTerms),
                 Articles = await SearchArticles(searchTerms),
                 Doctors = await SearchDoctors(searchTerms),
                 Specialists = await SearchSpecialists(searchTerms),
                 TreatMentcenters = await SearchTreatmentCenters(searchTerms)
             };
+            if (result.Events.Count() > 0 || result.Articles.Count()> 0 || result.Doctors.Count()>0 || result.Specialists.Count() > 0
+                || result.TreatMentcenters.Count() > 0 )
+            {
+                await _searchHistoryRepository.CreateUpdate(query.Term);
+            }
 
             return result;
         }
@@ -73,7 +86,7 @@ namespace DRR.Application.QueryHandlers.Information
                 ShortDesc = s.Province.Name + s.EndDate,
                 Link = "siteurl" + s.Id
             }).ToList();
-
+            
             return result;
         }
 
