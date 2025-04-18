@@ -28,7 +28,7 @@ namespace DRR.CommandDb.Repository.Information
         }
         public async Task CreateUpdate(string term)
         {
-            var result = await _Db.SearchHistorys.Where(c => c.SearchTerm == term).FirstOrDefaultAsync();
+            var result = _Db.SearchHistorys.Where(c => c.SearchTerm == term).FirstOrDefault();
 
             if (result == null)
             {
