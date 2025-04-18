@@ -16,4 +16,5 @@ public interface IEventInfoRepository : IRepository
     Task Create(EventInfo ev);
 
     Task<List<EventInfo>> ReadEventInfos();
+    Task<List<EventInfo>> Search(List<string> searchTerms);
 }

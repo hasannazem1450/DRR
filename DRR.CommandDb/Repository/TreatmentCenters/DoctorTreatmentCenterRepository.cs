@@ -7,22 +7,21 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DRR.Application.Contracts.Queries.Customer;
-using DRR.Domain.Customer;
+using DRR.Domain.Specialists;
 using DRR.Utilities.Extensions;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
-using DRR.Application.Contracts.Commands.TreatmentCenters;
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
     public class DoctorTreatmentCenterRepository : BaseRepository, IDoctorTreatmentCenterRepository
     {
-        public DoctorTreatmentCenterRepository(BaseProjectCommandDb db) : base(db) 
+        public DoctorTreatmentCenterRepository(BaseProjectCommandDb db) : base(db)
         {
         }
+
         public async Task<List<DoctorTreatmentCenter>> Search(SearchDoctorTreatmentCentersQuery query)
         {
-            var q = _Db.DoctorTreatmentCenters 
+            var q = _Db.DoctorTreatmentCenters
                .Include(d => d.Doctor).ThenInclude(sp => sp.Specialist)
                .Include(d => d.Doctor).ThenInclude(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
                .Include(o => o.Office.City)
@@ -143,6 +142,19 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
 
             return result;
+        }
+
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid) 
+        {
+            var query = _Db.DoctorTreatmentCenters
+               .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+               .AsQueryable();
+
+
+            var result = await query.Where(c => c.ClinicId == guid || c.OfficeId == guid).ToListAsync();
+
+            return result;
+
         }
         public async Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters()
         {
@@ -286,6 +298,23 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             await _Db.SaveChangesAsync();
         }
 
+        public async Task<List<DoctorTreatmentCenter>> MainSearch(List<string> searchTerms)
+        {
+            var query = _Db.DoctorTreatmentCenters
+                .Include(x=> x.Clinic).ThenInclude(c=> c.City).ThenInclude(p => p.Province)
+                .Include(x=> x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+                .Where(w => !w.IsDeleted);
+
+            foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+                query = query.Where(w =>
+                    w.Clinic.Name.Contains(searchTerm) || w.Clinic.City.Name.Contains(searchTerm) || w.Clinic.City.Province.Name.Contains(searchTerm) ||
+                    w.Clinic.Name.Contains(searchTerm) || w.Office.City.Name.Contains(searchTerm) || w.Office.City.Province.Name.Contains(searchTerm) 
+                );
+
+            var result = await query.ToListAsync();
+
+            return result;
+        }
     }
 
 }

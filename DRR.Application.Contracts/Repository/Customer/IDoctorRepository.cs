@@ -24,6 +24,7 @@ namespace DRR.Application.Contracts.Repository.Customer
         Task Update(Domain.Customer.Doctor doctor);
 
         Task Create(Domain.Customer.Doctor doctor);
+        Task<List<Doctor>> MainSearch (List<string> searchTerms);
     }
 
 }

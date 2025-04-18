@@ -22,5 +22,7 @@ namespace DRR.Application.Contracts.Services.TraetmentCenter
         Task<List<DoctorTreatmentCenterDto>> FilterByDesc(List<DoctorTreatmentCenterDto> dodtcctors, string name);
         Task<List<DoctorTreatmentCenterDto>> ConvertToDto(List<DoctorTreatmentCenter> doctorTreatmentCenters);
         Task<DoctorTreatmentCenterDto> ConvertToDto(DoctorTreatmentCenter doctorTreatmentCenter);
+        Task<DoctorTreatmentCenterPackedDto> ConvertToPackedDto(DoctorTreatmentCenter doctorTreatmentCenter);
+        Task<List<DoctorTreatmentCenterPackedDto>> ConvertToPackedDto(List<DoctorTreatmentCenter> doctorTreatmentCenters);
     }
 }

@@ -36,6 +36,7 @@ namespace DRR.CommandDb.Repository.Customer
 
             return result;
         }
+
         public async Task<List<Doctor>> ReadDoctorsByTreatmentCenterId(Guid id)
         {
             var query = _Db.Doctors
@@ -80,7 +81,7 @@ namespace DRR.CommandDb.Repository.Customer
             {
                 List<Domain.Insurances.Insurance> li = await _Db.Insurances.ToListAsync();
                 Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.BimeAsli);
-                int levenshteinDistance = 20;
+                int levenshteinDistance = 1000;
                 foreach (var item in li)
                 {
                     if (levenshteinDistance > lev.DistanceFrom(item.Name))
@@ -97,11 +98,9 @@ namespace DRR.CommandDb.Repository.Customer
             {
                 List<Domain.Insurances.Insurance> li = await _Db.Insurances.ToListAsync();
                 Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.BimehTakmili);
-                int levenshteinDistance = 20;
-                int dis = 0;
+                int levenshteinDistance = 1000;
                 foreach (var item in li)
                 {
-                    dis = lev.DistanceFrom(item.Name);
                     if (levenshteinDistance > lev.DistanceFrom(item.Name))
                     {
                         levenshteinDistance = lev.DistanceFrom(item.Name);
@@ -163,15 +162,7 @@ namespace DRR.CommandDb.Repository.Customer
                     q = q.Where(x => x.DoctorTreatmentCenters.Any(x => x.ClinicId == null));
             }
 
-            if (query.DoctorName.IsNotNullOrEmpty())
-                q = q.Where(w => w.DoctorName.Contains(query.DoctorName) || w.DoctorFamily.Contains(query.DoctorName));
-
-            if (query.doctorFamily.IsNotNullOrEmpty())
-                q = q.Where(w => w.DoctorName.Contains(query.doctorFamily) || w.DoctorFamily.Contains(query.doctorFamily));
-
-            query.TotalRecords = q.Count();
-
-            var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
+            var result = await q.ToListAsync();
 
             return result;
         }
@@ -239,6 +230,27 @@ namespace DRR.CommandDb.Repository.Customer
             _Db.Doctors.Remove(result);
 
             await _Db.SaveChangesAsync();
+        }
+
+        public async Task<List<Doctor>> MainSearch(List<string> searchTerms)
+        {
+            var query = _Db.Doctors
+                .Include(x=> x.DoctorInsurances)
+                .Include(x=> x.Specialist)
+                .Where(w => !w.IsDeleted);
+
+            foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+                query = query.Where(w =>
+                    w.DoctorName.Contains(searchTerm) ||
+                    w.DoctorFamily.Contains(searchTerm) ||
+                    w.DocExperiance.Contains(searchTerm) ||
+                    w.DoctorInsurances.Select(x => x.Insurance.Name).Contains(searchTerm) ||
+                    w.Specialist.Name.Contains(searchTerm) 
+                );
+
+            var result = await query.ToListAsync();
+
+            return result;
         }
 
     }

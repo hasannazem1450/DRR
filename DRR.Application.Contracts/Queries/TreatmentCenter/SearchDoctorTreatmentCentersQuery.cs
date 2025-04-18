@@ -43,6 +43,6 @@ namespace DRR.Application.Contracts.Queries.TreatmentCenter
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int TotalRecords { get; set; }
-        public List<DoctorTreatmentCenterDto> List { get; set; }
+        public List<DoctorTreatmentCenterPackedDto> List { get; set; }
     }
 }

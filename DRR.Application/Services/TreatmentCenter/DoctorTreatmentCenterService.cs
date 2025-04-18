@@ -1,6 +1,9 @@
 ﻿using DRR.Application.Contracts.Commands.Customer;
 using DRR.Application.Contracts.Commands.TreatmentCenters;
+using DRR.Application.Contracts.Repository.Reserv;
+using DRR.Application.Contracts.Repository.TreatmentCenters;
 using DRR.Application.Contracts.Services.TraetmentCenter;
+using DRR.CommandDb.Repository.TreatmentCentres;
 using DRR.Domain.BaseInfo;
 using DRR.Domain.Customer;
 using DRR.Domain.Reserv;
@@ -17,6 +20,11 @@ namespace DRR.Application.Services.TreatmentCenter
 {
     public class DoctorTreatmentCenterService : IDoctorTreatmentCenterService
     {
+        private readonly IDoctorTreatmentCenterRepository _doctorTreatmentCenterRepository;
+        public DoctorTreatmentCenterService(IDoctorTreatmentCenterRepository doctorTreatmentCenterRepository)
+        {
+            _doctorTreatmentCenterRepository = doctorTreatmentCenterRepository;
+        }
         public async Task<List<DoctorTreatmentCenterDto>> FilterByProvinceName(List<DoctorTreatmentCenterDto> dtc, string name)
         {
             var result = dtc.Where(x => x.Office.City.Province.Name.Contains(name)).ToList();
@@ -107,9 +115,38 @@ namespace DRR.Application.Services.TreatmentCenter
                 Clinic = doctorTreatmentCenter.Clinic ?? null,
                 Office = doctorTreatmentCenter.Office ?? null,
                 NearestDate = nearestdate,
-                NearestTime =nearesttime,
+                NearestTime = nearesttime,
                 Price = price,
             };
+
+            return result;
+        }
+
+        public async Task<DoctorTreatmentCenterPackedDto> ConvertToPackedDto(DoctorTreatmentCenter doctorTreatmentCenter)
+        {
+
+            var dtcr = _doctorTreatmentCenterRepository.ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(doctorTreatmentCenter.ClinicId ?? doctorTreatmentCenter.OfficeId ?? new Guid());
+            //dtcr.Result.Select(d => d.DoctorId).Distinct().Count();
+            //dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count();
+            var result = new DoctorTreatmentCenterPackedDto
+            {
+                Id = doctorTreatmentCenter.Id,
+                ClinicId = doctorTreatmentCenter.ClinicId,
+                OfficeId = doctorTreatmentCenter.OfficeId,
+                Desc = doctorTreatmentCenter.Desc,
+                Name = doctorTreatmentCenter.Clinic?.Name + doctorTreatmentCenter.Office?.Name,
+                Address = doctorTreatmentCenter.Clinic?.Address + doctorTreatmentCenter.Office?.Address,
+                DoctorsCount = dtcr.Result.Select(d=> d.DoctorId).Distinct().Count(),
+                SpecialistCount = dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count()
+
+            };
+
+            return result;
+        }
+
+        public async Task<List<DoctorTreatmentCenterPackedDto>> ConvertToPackedDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
+        {
+            var result = doctorTreatmentCenters.Select(s => ConvertToPackedDto(s).Result).ToList();
 
             return result;
         }

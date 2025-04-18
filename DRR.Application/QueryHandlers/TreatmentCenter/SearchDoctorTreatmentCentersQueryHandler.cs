@@ -31,8 +31,10 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
         {
             var dtcs = await _dtcRepository.Search(query);
 
-            var dtcDto = await _dtcService.ConvertToDto(dtcs);
-            List<DoctorTreatmentCenterDto> senditems = dtcDto.ToList();
+
+
+            var dtcDto = await _dtcService.ConvertToPackedDto(dtcs);
+            List<DoctorTreatmentCenterPackedDto> senditems = dtcDto.ToList();
 
             var result = new SearchDoctorTreatmentCentersQueryResponse
             {

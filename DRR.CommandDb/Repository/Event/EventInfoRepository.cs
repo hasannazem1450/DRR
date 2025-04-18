@@ -3,7 +3,9 @@ using DRR.CommandDB;
 using DRR.Domain.Event;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using DRR.Utilities.Extensions;
 
 namespace DRR.CommandDb.Repository.Event;
 
@@ -52,5 +54,21 @@ public class EventInfoRepository : BaseRepository, IEventInfoRepository
         _Db.EventInfos.Remove(result);
 
         await _Db.SaveChangesAsync();
+    }
+    public async Task<List<EventInfo>> Search(List<string> searchTerms)
+    {
+        var query = _Db.EventInfos
+            .Include(i => i.Province)
+            .Where(w => !w.IsDeleted);
+
+        foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+            query = query.Where(w =>
+                w.Province.Name.Contains(searchTerm) ||
+                w.Name.Contains(searchTerm)
+            );
+
+        var result = await query.ToListAsync();
+
+        return result;
     }
 }

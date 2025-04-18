@@ -1,5 +1,8 @@
 ﻿using DRR.Application.Contracts.Commands.TreatmentCenters;
+using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
+using DRR.Domain.Customer;
+using DRR.Domain.Specialists;
 using DRR.Domain.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using System;
@@ -13,6 +16,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
     public interface IDoctorTreatmentCenterRepository : IRepository
     {
         Task<List<DoctorTreatmentCenter>> Search(SearchDoctorTreatmentCentersQuery query);
+        Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid);
         Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters();
         Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id);
@@ -27,6 +31,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task Update(Domain.TreatmentCenters.DoctorTreatmentCenter doctorTreatmentCenter);
 
         Task Create(Domain.TreatmentCenters.DoctorTreatmentCenter doctorTreatmentCenter);
+        Task<List<DoctorTreatmentCenter>> MainSearch(List<string> searchTerms);
     }
 
 }

@@ -5,7 +5,9 @@ using DRR.Domain.Specialists;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-
+using DRR.Domain.Customer;
+using System.Linq;
+using DRR.Utilities.Extensions;
 
 
 namespace DRR.CommandDb.Repository.Specialists
@@ -56,6 +58,22 @@ namespace DRR.CommandDb.Repository.Specialists
             _Db.Specialists.Remove(result);
 
             await _Db.SaveChangesAsync();
+        }
+
+        public async Task<List<Specialist>> Search(List<string> searchTerms)
+        {
+            var query = _Db.Specialists
+                .Where(w => !w.IsDeleted);
+
+            foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+                query = query.Where(w =>
+                    w.Name.Contains(searchTerm) ||
+                    w.MaxaName.Contains(searchTerm) 
+                );
+
+            var result = await query.ToListAsync();
+
+            return result;
         }
 
     }

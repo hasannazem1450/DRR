@@ -16,6 +16,7 @@ namespace DRR.Application.Contracts.Repository.Specialists
         Task Update(Specialist specialist);
 
         Task Create(Specialist specialist);
+        Task<List<Specialist>> Search(List<string> searchTerms);
     }
 
 }

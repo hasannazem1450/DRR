@@ -98,6 +98,24 @@ namespace DRR.CommandDb.Repository.Articles
             await _Db.SaveChangesAsync();
         }
 
+
+        public async Task<List<Article>> Search(List<string> searchTerms)
+        {
+            var query = _Db.Articles
+                 .Where(w => !w.IsDeleted);
+
+            foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+                query = query.Where(w =>
+                    w.ShortDesc.Contains(searchTerm) ||
+                    w.Title.Contains(searchTerm) ||
+                    w.Desc.Contains(searchTerm) ||
+                    w.Authors.Contains(searchTerm)
+                );
+
+            var result = await query.ToListAsync();
+
+            return result;
+        }
     }
 
 }

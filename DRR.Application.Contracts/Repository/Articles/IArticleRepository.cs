@@ -20,6 +20,7 @@ namespace DRR.Application.Contracts.Repository.Articles
         Task Update(Domain.Articles.Article article);
 
         Task Create(Domain.Articles.Article article);
+        Task<List<Article>> Search(List<string> searchTerms);
     }
 
 }
