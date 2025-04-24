@@ -17,7 +17,7 @@ namespace DRR.Host.Controllers.Information
 
         }
         [AllowAnonymous]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        //[ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         [SwaggerOperation(Summary = "سرچ کلی سایت با دیپ لرن")]
         [HttpGet("searchall")]
         public async Task<IActionResult> SearchAll([FromQuery] MainSearchQuery query, CancellationToken cancellationToken)

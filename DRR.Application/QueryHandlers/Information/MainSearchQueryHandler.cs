@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DRR.Application.Contracts.Commands.Information;
 using DRR.Application.Contracts.Queries.Information;
-using DRR.Application.Contracts.Repository;
 using DRR.Application.Contracts.Repository.Articles;
 using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Repository.Event;
 using DRR.Application.Contracts.Repository.Information;
 using DRR.Application.Contracts.Repository.Insurance;
-using DRR.Application.Contracts.Repository.Profile;
 using DRR.Application.Contracts.Repository.Specialists;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
-using DRR.CommandDb.Repository.TreatmentCentres;
 using DRR.Framework.Contracts.Markers;
 using DRR.Utilities.Extensions;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.Extensions.Logging;
+
 
 namespace DRR.Application.QueryHandlers.Information
 {
@@ -50,11 +45,18 @@ namespace DRR.Application.QueryHandlers.Information
         public async Task<MainSearchQueryResponse> Execute(MainSearchQuery query,
         CancellationToken cancellationToken)
         {
-            if (query.Term.IsNullOrEmptyExtension() || query.Term.Length <= 2) return new MainSearchQueryResponse {Suggest ="" };
-            string suggest = _searchHistoryRepository.ReadSuggestionByTerm(query.Term).ToString();
+
+            if (query.Term.IsNullOrEmptyExtension() || query.Term.Length <= 2)
+            {
+                List<String> list = new List<string>();
+                return
+                    new MainSearchQueryResponse { Suggest = await _searchHistoryRepository.ReadSuggestionByTerm(list) };
+            }
+            var searchTerms = query.Term.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
+            string suggest = await _searchHistoryRepository.ReadSuggestionByTerm(searchTerms);
            
 
-            var searchTerms = query.Term.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
+            
 
             var result = new MainSearchQueryResponse
             {
@@ -93,9 +95,9 @@ namespace DRR.Application.QueryHandlers.Information
         private async Task<List<ArticleSearchDto>> SearchArticles(List<string> searchTerms)
         {
 
-            var eventInfos = await _articleRepository.Search(searchTerms);
+            var articles = await _articleRepository.Search(searchTerms);
 
-            var result = eventInfos.Select(s => new ArticleSearchDto
+            var result = articles.Select(s => new ArticleSearchDto
             {
                 Id = s.Id,
                 Result = s.Title,
@@ -109,9 +111,9 @@ namespace DRR.Application.QueryHandlers.Information
         private async Task<List<DoctorSearchDto>> SearchDoctors(List<string> searchTerms)
         {
 
-            var eventInfos = await _doctorRepository.MainSearch(searchTerms);
+            var doctors = await _doctorRepository.MainSearch(searchTerms);
 
-            var result = eventInfos.Select(s => new DoctorSearchDto
+            var result = doctors.Select(s => new DoctorSearchDto
             {
                 Id = s.Id,
                 Result = s.DoctorName + " " + s.DoctorFamily + " " + s.Specialist.Name,
@@ -125,9 +127,9 @@ namespace DRR.Application.QueryHandlers.Information
         private async Task<List<SpecialistSearchDto>> SearchSpecialists(List<string> searchTerms)
         {
 
-            var eventInfos = await _specialistRepository.Search(searchTerms);
+            var specialists = await _specialistRepository.Search(searchTerms);
 
-            var result = eventInfos.Select(s => new SpecialistSearchDto
+            var result = specialists.Select(s => new SpecialistSearchDto
             {
                 Id = s.Id,
                 Result = s.Name,
@@ -148,8 +150,8 @@ namespace DRR.Application.QueryHandlers.Information
             var result = dtc.Select(s => new TreatmentCenterSearchDto
             {
                 Id = s.Id,
-                Result = s.Office.Name ?? "" + s.Clinic.Name ?? "",
-                ShortDesc = s.Office.Phone ?? "" + s.Clinic.Phone ?? "",
+                Result = s.Office?.Name ?? "" + s.Clinic?.Name ?? "",
+                ShortDesc = s.Office?.Phone ?? "" + s.Clinic?.Phone ?? "",
                 Link = "siteurl" + s.Id
             }).ToList();
 

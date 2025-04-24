@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Repository.Information
 {
     public interface ISearchHistoryRepository : IRepository
     {
-        Task<string> ReadSuggestionByTerm(string term);
+        Task<string> ReadSuggestionByTerm(List<string> searchTerms);
         Task CreateUpdate(string term);
     }
 }
