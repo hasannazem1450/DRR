@@ -28,7 +28,7 @@ namespace DRR.Application.QueryHandlers.TreatmentCenter
 
             var result = new ReadDoctorTreatmentCenterByNameSSRQueryResponse
             {
-                Data = await _dtcService.ConvertToDto(dtcs)
+                Data = await _dtcService.ConvertToSSRDto(dtcs)
             };
 
             return result;

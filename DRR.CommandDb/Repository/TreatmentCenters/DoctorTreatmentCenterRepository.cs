@@ -145,7 +145,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             return result;
         }
 
-        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid) 
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid)
         {
             var query = _Db.DoctorTreatmentCenters
                .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
@@ -160,16 +160,16 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         public async Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters()
         {
             var query = _Db.DoctorTreatmentCenters
-                .Include(x => x.Doctor).ThenInclude(s=> s.Specialist)
+                .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
                 .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
                 .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-                .Include(x=> x.Reservations).ThenInclude(t => t.Turns)
+                .Include(x => x.Reservations).ThenInclude(t => t.Turns)
                 .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
                 .AsQueryable();
 
-            var result = await query.ToListAsync(); 
+            var result = await query.ToListAsync();
 
             return result;
         }
@@ -192,20 +192,18 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             return result;
         }
 
-        public async Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterByNameSSR(string  nameSSR)
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByNameSSR(string nameSSR)
         {
             var query = _Db.DoctorTreatmentCenters
-                .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
-                .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
-                .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
-                .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
-                .Include(x => x.Office).ThenInclude(c => c.OfficeType)
-                .Include(x => x.Reservations).ThenInclude(t => t.Turns)
-                .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
-                .AsQueryable();
+              .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+              .Include(x => x.Doctor).ThenInclude(s => s.DoctorInsurances).ThenInclude(i => i.Insurance)
+              .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+              .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+              .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+              .AsQueryable();
 
-
-            var result = await query.Where(c => c.Clinic.Name == nameSSR || c.Office.Name == nameSSR).FirstOrDefaultAsync();
+            var result = await query.Where(c => c.Clinic.Name == nameSSR || c.Office.Name == nameSSR).ToListAsync();
             return result;
         }
 
@@ -319,14 +317,14 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
         public async Task<List<DoctorTreatmentCenter>> MainSearch(List<string> searchTerms)
         {
             var query = _Db.DoctorTreatmentCenters
-                .Include(x=> x.Clinic).ThenInclude(c=> c.City).ThenInclude(p => p.Province)
-                .Include(x=> x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+                .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+                .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
                 .Where(w => !w.IsDeleted);
 
             foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
                 query = query.Where(w =>
                     w.Clinic.Name.Contains(searchTerm) || w.Clinic.City.Name.Contains(searchTerm) || w.Clinic.City.Province.Name.Contains(searchTerm) ||
-                    w.Clinic.Name.Contains(searchTerm) || w.Office.City.Name.Contains(searchTerm) || w.Office.City.Province.Name.Contains(searchTerm) 
+                    w.Clinic.Name.Contains(searchTerm) || w.Office.City.Name.Contains(searchTerm) || w.Office.City.Province.Name.Contains(searchTerm)
                 );
 
             var result = await query.ToListAsync();

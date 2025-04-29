@@ -127,7 +127,7 @@ namespace DRR.Application.Services.TreatmentCenter
 
             var dtcr = _doctorTreatmentCenterRepository.ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(doctorTreatmentCenter.ClinicId ?? doctorTreatmentCenter.OfficeId ?? new Guid());
             //dtcr.Result.Select(d => d.DoctorId).Distinct().Count();
-            //dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count();
+            //dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count(); 
             var result = new DoctorTreatmentCenterPackedDto
             {
                 Id = doctorTreatmentCenter.Id,
@@ -150,5 +150,33 @@ namespace DRR.Application.Services.TreatmentCenter
 
             return result;
         }
+
+        public async Task<DoctorTreatmentCenterSSRDto> ConvertToSSRDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
+        {
+            var doctorTreatmentCenter = doctorTreatmentCenters.First();
+           
+            var result = new DoctorTreatmentCenterSSRDto
+            {
+                Id = doctorTreatmentCenter.Id,
+                CenterId = doctorTreatmentCenter.Clinic == null ? doctorTreatmentCenter.Office.Id : doctorTreatmentCenter.Clinic.Id,
+                CenterName = doctorTreatmentCenter.Clinic?.Name + doctorTreatmentCenter.Office?.Name,
+                CenterAddress = doctorTreatmentCenter.Clinic?.Address + doctorTreatmentCenter.Office?.Address,
+                CenterLat = doctorTreatmentCenter.Clinic == null ? doctorTreatmentCenter.Office.Geolat : doctorTreatmentCenter.Clinic.Geolat,
+                CenterLon = doctorTreatmentCenter.Clinic == null ? doctorTreatmentCenter.Office.Geolon : doctorTreatmentCenter.Clinic.Geolon,
+                Doctors = doctorTreatmentCenters.Select(d => d.Doctor).Distinct().ToList(),
+                Specialists = doctorTreatmentCenters.Select(d => d.Doctor.Specialist).Distinct().ToList(),
+                DoctorInsurances = null,
+
+            };
+
+            return result;
+        }
+
+        //public async Task<List<DoctorTreatmentCenterSSRDto>> ConvertToSSRDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
+        //{
+        //    var result = doctorTreatmentCenters.Select(s => ConvertToSSRDto(s).Result).ToList();
+
+        //    return result;
+        //}
     }
 }

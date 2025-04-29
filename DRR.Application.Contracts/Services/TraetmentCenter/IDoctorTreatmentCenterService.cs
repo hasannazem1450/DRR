@@ -24,5 +24,7 @@ namespace DRR.Application.Contracts.Services.TraetmentCenter
         Task<DoctorTreatmentCenterDto> ConvertToDto(DoctorTreatmentCenter doctorTreatmentCenter);
         Task<DoctorTreatmentCenterPackedDto> ConvertToPackedDto(DoctorTreatmentCenter doctorTreatmentCenter);
         Task<List<DoctorTreatmentCenterPackedDto>> ConvertToPackedDto(List<DoctorTreatmentCenter> doctorTreatmentCenters);
+        Task<DoctorTreatmentCenterSSRDto> ConvertToSSRDto(List<DoctorTreatmentCenter> doctorTreatmentCenters);
+
     }
 }
