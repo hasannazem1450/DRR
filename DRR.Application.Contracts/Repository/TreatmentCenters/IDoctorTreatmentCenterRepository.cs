@@ -19,6 +19,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid);
         Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters();
         Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id);
+        Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterByNameSSR(string  NameSSR);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByDoctorId(int id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByClinicId(Guid? id);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterByOfficeId(Guid? id);

@@ -26,6 +26,14 @@ namespace DRR.Host.Controllers.TreatmentCenter
             return OkApiResult(result);
         }
         [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب بانام فارسی ssr ")]
+        [HttpGet("read-DoctorTreatmentCenterByNameSSR")]
+        public async Task<IActionResult> DoctorTreatmentCenterByNameSSR([FromQuery] ReadDoctorTreatmentCenterByNameSSRQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorTreatmentCenterByNameSSRQuery, ReadDoctorTreatmentCenterByNameSSRQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
         [SwaggerOperation(Summary = " خواندن مرکزدرمانی/مطب های یک دکتر ")]
         [HttpGet("read-DoctorTreatmentCenterByDoctorId")]
         public async Task<IActionResult> DoctorTreatmentCenterByDoctorId([FromQuery] ReadDoctorTreatmentCenterQuery query, CancellationToken cancellationToken)

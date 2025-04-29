@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DRR.Domain.Specialists;
 using DRR.Utilities.Extensions;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
+using System.Diagnostics.Eventing.Reader;
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
@@ -188,6 +189,23 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
 
             var result = await query.FirstOrDefaultAsync(c => c.Id == id);
 
+            return result;
+        }
+
+        public async Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterByNameSSR(string  nameSSR)
+        {
+            var query = _Db.DoctorTreatmentCenters
+                .Include(x => x.Doctor).ThenInclude(s => s.Specialist)
+                .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+                .Include(x => x.Clinic).ThenInclude(c => c.ClinicType)
+                .Include(x => x.Office).ThenInclude(c => c.City).ThenInclude(p => p.Province)
+                .Include(x => x.Office).ThenInclude(c => c.OfficeType)
+                .Include(x => x.Reservations).ThenInclude(t => t.Turns)
+                .Include(x => x.Reservations).ThenInclude(v => v.VisitCost)
+                .AsQueryable();
+
+
+            var result = await query.Where(c => c.Clinic.Name == nameSSR || c.Office.Name == nameSSR).FirstOrDefaultAsync();
             return result;
         }
 
