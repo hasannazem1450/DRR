@@ -1,5 +1,6 @@
 ﻿using DRR.Application.Contracts.Commands.Customer;
 using DRR.Application.Contracts.Queries.Customer;
+using DRR.Application.Contracts.Queries.TreatmentCenter;
 using DRR.Controllers;
 using DRR.Framework.Contracts.Makers;
 using Microsoft.AspNetCore.Authorization;
@@ -23,6 +24,14 @@ namespace DRR.Host.Controllers.Customer
         public async Task<IActionResult> ReadAllDoctors([FromQuery] ReadAllDoctorsQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<ReadAllDoctorsQuery, ReadDoctorsQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " خواندن دکتر بانام فارسی ssr ")]
+        [HttpGet("read-DoctorByNameSSR")]
+        public async Task<IActionResult> DoctorByNameSSR([FromQuery] ReadDoctorByNameSSRQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorByNameSSRQuery, ReadDoctorByNameSSRQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [AllowAnonymous]

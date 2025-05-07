@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace DRR.Application.Contracts.Queries.Customer
 {
 
-    public class ReadPatientFavoriteQuery : Query
+    public class ReadPatientFavoritesQuery : Query
     {
         public int PatientId { get; set; }
     }
-    public class ReadPatientFavoriteQueryResponse : QueryResponse
+    public class ReadPatientFavoritesQueryResponse : QueryResponse
     {
-        public ReadPatientFavoriteQueryResponse()
+        public ReadPatientFavoritesQueryResponse()
         {
             List = new List<PatientFavoriteDto>();
         }

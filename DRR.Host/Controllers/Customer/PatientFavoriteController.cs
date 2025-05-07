@@ -17,13 +17,13 @@ namespace DRR.Host.Controllers.Customer
         [HttpGet("read-all-patientfavorites")]
         public async Task<IActionResult> ReadAllPatientFavorites([FromQuery] ReadAllPatientFavoritesQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadAllPatientFavoritesQuery, ReadPatientFavoriteQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadAllPatientFavoritesQuery, ReadPatientFavoritesQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [HttpGet("read-patientfavorite-bypatientid")]
-        public async Task<IActionResult> ReadPatientFavorite([FromQuery] ReadPatientFavoriteQuery query, CancellationToken cancellationToken)
+        public async Task<IActionResult> ReadPatientFavorite([FromQuery] ReadPatientFavoritesQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadPatientFavoriteQuery, ReadPatientFavoriteQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadPatientFavoritesQuery, ReadPatientFavoritesQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [HttpPost("create-patientfavorite")]

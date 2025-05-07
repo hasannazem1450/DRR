@@ -14,6 +14,7 @@ namespace DRR.Application.Contracts.Repository.Customer
         Task<List<Doctor>> Search(SearchDoctorsQuery query);
         Task<List<Doctor>> ReadAllDoctors();
         Task<List<Doctor>> ReadDoctorsByTreatmentCenterId(Guid id);
+        Task<Doctor> ReadDoctorByNameSSR(string namefamily);
         Task<Doctor> ReadDoctorById(int id);
         Task<List<Doctor>> ReadDoctorBySmeProfileId(int id);
 

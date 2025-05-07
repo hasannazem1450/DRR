@@ -185,6 +185,23 @@ namespace DRR.CommandDb.Repository.Customer
 
             return result;
         }
+        public async Task<Doctor> ReadDoctorByNameSSR(string namefamily)
+        {
+           
+            var query = _Db.Doctors
+               .Include(s => s.SmeProfile)
+               .Include(sp => sp.Specialist)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
+               .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
+               .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .AsQueryable();
+
+            var result = await query.Where(c => (c.DoctorName + " " +  c.DoctorFamily).Trim() == namefamily.Trim()).FirstOrDefaultAsync();
+
+            return result;
+        }
         public async Task<List<Doctor>> ReadDoctorBySmeProfileId(int smeProfileId)
         {
             var result = await _Db.Doctors.Where(c => c.SmeProfileId == smeProfileId).ToListAsync();
@@ -252,6 +269,7 @@ namespace DRR.CommandDb.Repository.Customer
 
             return result;
         }
+
 
     }
 
