@@ -162,7 +162,9 @@ namespace DRR.CommandDb.Repository.Customer
                     q = q.Where(x => x.DoctorTreatmentCenters.Any(x => x.ClinicId == null));
             }
 
-            var result = await q.ToListAsync();
+            query.TotalRecords = q.Count();
+
+            var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
 
             return result;
         }
