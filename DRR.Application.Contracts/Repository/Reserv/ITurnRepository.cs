@@ -1,4 +1,5 @@
-﻿using DRR.Domain.Reserv;
+﻿using DRR.Application.Contracts.Commands.Reserv;
+using DRR.Domain.Reserv;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace DRR.Application.Contracts.Repository.Reserv
     public interface ITurnRepository : IRepository
     {
         
-        Task<List<Turn>> GetTurnsByReservationId(int reservationId);
+        Task<List<TurnDto>> GetTurnsByReservationId(int reservationId);
+        Task<TurnDto> ReadTurnByIdDto(int id);
         Task<Turn> ReadTurnById(int id);
         Task Create(Turn trun);
         Task Delete(int id);

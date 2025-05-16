@@ -22,14 +22,18 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<List<Doctor>> ReadAllDoctors()
         {
+            int starttimeforreservation = 0;
+            int endtimeforreservation = 0;
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.AddDays(7).ToPersianString());
             var query = _Db.Doctors
                .Include(s => s.SmeProfile)
                .Include(sp => sp.Specialist)
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
 
             var result = await query.ToListAsync();
@@ -39,14 +43,18 @@ namespace DRR.CommandDb.Repository.Customer
 
         public async Task<List<Doctor>> ReadDoctorsByTreatmentCenterId(Guid id)
         {
+            int starttimeforreservation = 0;
+            int endtimeforreservation = 0;
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.AddDays(7).ToPersianString());
             var query = _Db.Doctors
                .Include(s => s.SmeProfile)
                .Include(sp => sp.Specialist)
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+              .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
 
             query = query.Where(x => x.DoctorTreatmentCenters.Any(o => o.OfficeId == id || o.ClinicId == id));
@@ -56,14 +64,18 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<List<Doctor>> Search(SearchDoctorsQuery query)
         {
+            int starttimeforreservation = 0;
+            int endtimeforreservation = 0;
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.AddDays(3).ToPersianString());
             var q = _Db.Doctors
                .Include(s => s.SmeProfile)
                .Include(sp => sp.Specialist)
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
             if (query.ProvinceId != null && query.ProvinceId != 0)
                 q = q.Where(x => x.DoctorTreatmentCenters.Any(x => x.Office.City.ProvinceId == query.ProvinceId));
@@ -75,6 +87,42 @@ namespace DRR.CommandDb.Repository.Customer
             {
                 List<int> csis = query.specialistIds.Split(',').Select(int.Parse).ToList();
                 q = q.Where(x => csis.Contains(x.SpecialistId));
+            }
+
+
+            if ((query.DoctorName != null && query.DoctorName != "") || (query.doctorFamily != null && query.doctorFamily != ""))
+            {
+                List<Domain.Customer.Doctor> ld = await _Db.Doctors.ToListAsync();
+
+                if (query.DoctorName != null && query.DoctorName != "")
+                {
+                    Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.DoctorName);
+                    int levenshteinDistance = 1000;
+                    foreach (var item in ld)
+                    {
+                        if (levenshteinDistance > lev.DistanceFrom(item.DoctorName))
+                        {
+                            levenshteinDistance = lev.DistanceFrom(item.DoctorName);
+                            query.DoctorName = item.DoctorName;
+                        }
+                    }
+                    q = q.Where(x => x.DoctorName == query.DoctorName);
+                }
+                if (query.doctorFamily != null && query.doctorFamily != "")
+                {
+                    Fastenshtein.Levenshtein lev = new Fastenshtein.Levenshtein(query.doctorFamily);
+                    int levenshteinDistance = 1000;
+                    foreach (var item in ld)
+                    {
+                        if (levenshteinDistance > lev.DistanceFrom(item.DoctorFamily))
+                        {
+                            levenshteinDistance = lev.DistanceFrom(item.DoctorFamily);
+                            query.doctorFamily = item.DoctorFamily;
+                        }
+                    }
+                    q = q.Where(x => x.DoctorFamily == query.doctorFamily);
+                }
+
             }
 
             if (query.BimeAsli != null && query.BimeAsli != "")
@@ -170,17 +218,18 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<Doctor> ReadDoctorById(int id)
         {
-            //var result = await _Db.Doctors.FirstOrDefaultAsync(c => c.Id == id);
-
-            //return result;
+            int starttimeforreservation = 0;
+            int endtimeforreservation = 0;
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.AddDays(7).ToPersianString());
             var query = _Db.Doctors
                .Include(s => s.SmeProfile)
                .Include(sp => sp.Specialist)
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
 
             var result = await query.FirstOrDefaultAsync(c => c.Id == id);
@@ -189,15 +238,18 @@ namespace DRR.CommandDb.Repository.Customer
         }
         public async Task<Doctor> ReadDoctorByNameSSR(string namefamily)
         {
-           
+            int starttimeforreservation = 0;
+            int endtimeforreservation = 0;
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.ToPersianString());
+            starttimeforreservation = DatetimeExtension.DateToNumber(DateTime.Now.AddDays(7).ToPersianString());
             var query = _Db.Doctors
                .Include(s => s.SmeProfile)
                .Include(sp => sp.Specialist)
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(o => o.Office.City)
                .Include(dtc2 => dtc2.DoctorTreatmentCenters).ThenInclude(c => c.Clinic.City)
                .Include(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
-               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations).ThenInclude(v => v.Turns)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
 
             var result = await query.Where(c => (c.DoctorName + " " +  c.DoctorFamily).Trim() == namefamily.Trim()).FirstOrDefaultAsync();

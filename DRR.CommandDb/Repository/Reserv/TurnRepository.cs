@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DRR.Application.Contracts.Commands.Reserv;
+using DRR.Application.Contracts.Services.Reserv;
 
 namespace DRR.CommandDb.Repository.Reserv
 {
     internal class TurnRepository : BaseRepository, ITurnRepository
     {
-        public TurnRepository(BaseProjectCommandDb db) : base(db)
+        private ITurnService _turnService;
+        public TurnRepository(BaseProjectCommandDb db , ITurnService turnService) : base(db)
         {
+            _turnService = turnService;
         }
 
-        public async Task<List<Turn>> GetTurnsByReservationId(int reservationId)
+        public async Task<List<TurnDto>> GetTurnsByReservationId(int reservationId)
         {
             var query = _Db.Turns.AsQueryable();
             if (query != null)
@@ -24,21 +28,33 @@ namespace DRR.CommandDb.Repository.Reserv
 
 
 
-            return await query.ToListAsync();
+            var rl = await query.ToListAsync();
+            var result = await _turnService.ConvertToDto(rl);
+            return result;
 
         }
 
+        public async Task<TurnDto> ReadTurnByIdDto(int id)
+        {
+            var query = _Db.Turns.AsQueryable();
+            if (query != null)
+                query = query.Where(q => q.IsDeleted == false && q.Id == id);
+            var r = await query.SingleOrDefaultAsync();
+            var result = await _turnService.ConvertToDto(r);
+            return result;
+
+        }
         public async Task<Turn> ReadTurnById(int id)
         {
             var query = _Db.Turns.AsQueryable();
             if (query != null)
                 query = query.Where(q => q.IsDeleted == false && q.Id == id);
             var result = await query.SingleOrDefaultAsync();
-
+            
             return result;
 
         }
-       
+
         public async Task Create(Turn Turn)
         {
             await _Db.Turns.AddAsync(Turn);

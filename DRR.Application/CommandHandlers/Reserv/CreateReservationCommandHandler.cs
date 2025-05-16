@@ -48,7 +48,8 @@ namespace DRR.Application.CommandHandlers.Reserv
 
 
 
-                tr = new Turn(x + 1, stime.ToShortTimeString(), etime.ToShortTimeString(), true, 5, reserve.Id);
+                //tr = new Turn(x + 1, stime.ToShortTimeString(), etime.ToShortTimeString(), true, 5, reserve.Id);
+                tr = new Turn(x + 1, stime.ToString("HH:mm"), etime.ToShortTimeString(), true, 5, reserve.Id);
                 await _turnRepository.Create(tr);
             }
             return new CreateReservationCommandResponse();
