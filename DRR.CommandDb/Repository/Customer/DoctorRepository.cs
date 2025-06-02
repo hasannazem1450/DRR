@@ -252,7 +252,7 @@ namespace DRR.CommandDb.Repository.Customer
                .Include(dtc1 => dtc1.DoctorTreatmentCenters).ThenInclude(r => r.Reservations.Where(rr => rr.ReservationDate >= starttimeforreservation && rr.ReservationDate <= endtimeforreservation)).ThenInclude(v => v.Turns)
                .AsQueryable();
 
-            var result = await query.Where(c => (c.DoctorName + " " +  c.DoctorFamily).Trim() == namefamily.Trim()).FirstOrDefaultAsync();
+            var result = await query.Where(c => (c.UniqueSSR).Trim() == namefamily.Trim()).FirstOrDefaultAsync();
 
             return result;
         }

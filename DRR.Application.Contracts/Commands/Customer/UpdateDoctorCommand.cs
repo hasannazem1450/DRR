@@ -20,6 +20,7 @@ namespace DRR.Application.Contracts.Commands.Customer
         public string Mobile { get; set; }
         public string Desc { get; set; }
         public bool? Gender { get; set; }
+        public string UniqueSSR { get; set; }
     }
     public class UpdateDoctorCommandResponse : CommandResponse
     {

@@ -22,12 +22,18 @@ namespace DRR.Application.CommandHandlers.Customer
 
         public override async Task<CreateDoctorCommandResponse> Executor(CreateDoctorCommand command)
         {
-            var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.CodeNezam, command.SpecialistId, command.DocExperiance, command.DocInstaLink, command.Mobile, command.Desc, command.SmeProfileId, command.Gender);
-           
+            var checkSSR = _doctorRepository.ReadDoctorByNameSSR(command.UniqueSSR);
+            if (checkSSR.Result == null)
+            {
+                var Doctor = new Doctor(command.DoctorName, command.DoctorFamily, command.NationalId, command.CodeNezam, command.SpecialistId, command.DocExperiance, command.DocInstaLink, command.Mobile, command.Desc, command.SmeProfileId, command.Gender, command.UniqueSSR);
 
-            await _doctorRepository.Create(Doctor);
 
-            return new CreateDoctorCommandResponse();
+                await _doctorRepository.Create(Doctor);
+
+                return new CreateDoctorCommandResponse();
+            }
+            else
+                throw new Exception("لینک یونیک دکتر تکراری است");
         }
     }
 }

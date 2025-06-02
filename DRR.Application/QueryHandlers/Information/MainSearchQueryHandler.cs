@@ -86,7 +86,7 @@ namespace DRR.Application.QueryHandlers.Information
                 Id = s.Id,
                 Result = s.Name,
                 ShortDesc = s.Province.Name + s.EndDate,
-                Link = "siteurl" + s.Id
+                Link = s.Name + s.Province.Name
             }).ToList();
             
             return result;
@@ -102,7 +102,7 @@ namespace DRR.Application.QueryHandlers.Information
                 Id = s.Id,
                 Result = s.Title,
                 ShortDesc = s.ShortDesc,
-                Link = "siteurl" + s.Id
+                Link = s.Title
             }).ToList();
 
             return result;
@@ -118,7 +118,7 @@ namespace DRR.Application.QueryHandlers.Information
                 Id = s.Id,
                 Result = s.DoctorName + " " + s.DoctorFamily + " " + s.Specialist.Name,
                 ShortDesc = s.Desc,
-                Link = "siteurl" + s.Id
+                Link = s.UniqueSSR
             }).ToList();
 
             return result;
@@ -134,7 +134,7 @@ namespace DRR.Application.QueryHandlers.Information
                 Id = s.Id,
                 Result = s.Name,
                 ShortDesc = s.MaxaName + " " + s.Maxa,
-                Link = "siteurl" + s.Id
+                Link = s.Name
             }).ToList();
 
             return result;
@@ -152,7 +152,7 @@ namespace DRR.Application.QueryHandlers.Information
                 Id = s.Id,
                 Result = s.Office?.Name ?? "" + s.Clinic?.Name ?? "",
                 ShortDesc = s.Office?.Phone ?? "" + s.Clinic?.Phone ?? "",
-                Link = "siteurl" + s.Id
+                Link = s.Office?.Name ?? "" + s.Clinic?.Name ?? ""
             }).ToList();
 
             return result;

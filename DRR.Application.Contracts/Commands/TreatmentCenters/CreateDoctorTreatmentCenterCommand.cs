@@ -13,6 +13,7 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
         public Guid? ClinicId { get; set; }
         public Guid? OfficeId { get; set; }
         public string Desc { get; set; }
+        public int CityId { get; set; }
     }
 
     public class CreateDoctorTreatmentCenterCommandResponse : CommandResponse

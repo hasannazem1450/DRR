@@ -25,7 +25,7 @@ namespace DRR.Application.CommandHandlers.TreatmentCenter
         {
             var DoctorTreatmentCenter = await _DoctorTreatmentCenterRepository.ReadDoctorTreatmentCenterById(command.Id);
 
-            DoctorTreatmentCenter.Update(command.DoctorId, command.ClinicId, command.OfficeId, command.Desc);
+            DoctorTreatmentCenter.Update(command.DoctorId, command.ClinicId, command.OfficeId, command.Desc,command.CityId);
 
             await _DoctorTreatmentCenterRepository.Update(DoctorTreatmentCenter);
 

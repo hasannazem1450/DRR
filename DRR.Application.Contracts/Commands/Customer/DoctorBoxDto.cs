@@ -19,8 +19,7 @@ namespace DRR.Application.Contracts.Commands.Customer
         public string DocExperiance { get; set; }
         public string DocInstaLink { get; set; }
         public string Desc { get; set; }
-        public int ProvinceId { get; set; }
-        public int CityId { get; set; }
+        public string UniqueSSR { get; set; }
         public Reservation reservations { get; set; }
         public Domain.Comments.Comment comments { get; set; }
         public DoctorInsurance DoctorInsurances { get; set; }
