@@ -25,13 +25,15 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             var q = _Db.DoctorTreatmentCenters
                .Include(d => d.Doctor).ThenInclude(sp => sp.Specialist)
                .Include(d => d.Doctor).ThenInclude(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
-               .Include(o => o.Office.City)
-               .Include(c => c.Clinic.City)
+               .Include(o => o.Office).ThenInclude(oc => oc.City)
+               .Include(c => c.Clinic).ThenInclude(cc => cc.City)
                .Include(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
                .Include(r => r.Reservations).ThenInclude(v => v.Turns)
                .AsQueryable();
             if (query.DoctorTreatmentCenterName != null && query.DoctorTreatmentCenterName != "")
+            {
                 q = q.Where(x => x.Clinic.Name.Contains(query.DoctorTreatmentCenterName) || x.Office.Name.Contains(query.DoctorTreatmentCenterName));
+            }
 
             if (query.ProvinceId != null && query.ProvinceId != 0)
                 q = q.Where(x => x.Office.City.ProvinceId == query.ProvinceId);
@@ -139,7 +141,44 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 q = q.Where(w => w.Doctor.DoctorName.Contains(query.doctorFamily) || w.Doctor.DoctorFamily.Contains(query.doctorFamily));
 
             query.TotalRecords = q.Count();
+            if (query.TotalRecords == 0 )
+            {
+                if (query.DoctorTreatmentCenterName != null && query.DoctorTreatmentCenterName != "")
+                {
+                    List<DoctorTreatmentCenter> ldt = await _Db.DoctorTreatmentCenters
+                         .Include(o => o.Office)
+                         .Include(c => c.Clinic)
+                        .ToListAsync();
+                    Fastenshtein.Levenshtein levdt = new Fastenshtein.Levenshtein(query.DoctorTreatmentCenterName);
 
+                    int levenshteinDistancedt = 20;
+                    int disdto = 0;
+                    int disdtc = 0;
+                    foreach (var item in ldt)
+                    {
+                        if (item.Office != null)
+                        {
+                            disdto = levdt.DistanceFrom(item.Office.Name);
+                            if (levenshteinDistancedt > levdt.DistanceFrom(item.Office.Name))
+                            {
+                                levenshteinDistancedt = levdt.DistanceFrom(item.Office.Name);
+                                query.DoctorTreatmentCenterName = item.Office.Name;
+                            }
+                        }
+                        if (item.Clinic != null)
+                        {
+                            disdtc = levdt.DistanceFrom(item.Clinic.Name);
+                            if (levenshteinDistancedt > levdt.DistanceFrom(item.Clinic.Name))
+                            {
+                                levenshteinDistancedt = levdt.DistanceFrom(item.Clinic.Name);
+                                query.DoctorTreatmentCenterName = item.Clinic.Name;
+                            }
+                        }
+                    }
+                    q = q.Where(x => x.Clinic.Name.Contains(query.DoctorTreatmentCenterName) || x.Office.Name.Contains(query.DoctorTreatmentCenterName));
+                }
+
+            }
             var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
 
             return result;
