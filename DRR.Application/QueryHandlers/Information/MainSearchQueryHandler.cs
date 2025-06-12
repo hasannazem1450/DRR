@@ -147,13 +147,22 @@ namespace DRR.Application.QueryHandlers.Information
         {
             var dtc = await _doctorTreatmentCenterRepository.MainSearch(searchTerms);
 
+            //var result = dtc.Select(s => new TreatmentCenterSearchDto
+            //{
+            //    Id = s.Id,
+            //    Result = s.Office?.Name ?? "" + s.Clinic?.Name ?? "",
+            //    ShortDesc = s.Office?.Phone ?? "" + s.Clinic?.Phone ?? "",
+            //    Link = s.Office?.Name ?? "" + s.Clinic?.Name ?? ""
+            //}).ToList();
+
             var result = dtc.Select(s => new TreatmentCenterSearchDto
             {
                 Id = s.Id,
-                Result = s.Office?.Name ?? "" + s.Clinic?.Name ?? "",
-                ShortDesc = s.Office?.Phone ?? "" + s.Clinic?.Phone ?? "",
-                Link = s.Office?.Name ?? "" + s.Clinic?.Name ?? ""
+                Result = s.Result,
+                ShortDesc = s.ShortDesc,
+                Link = s.Link
             }).ToList();
+
 
             return result;
         }

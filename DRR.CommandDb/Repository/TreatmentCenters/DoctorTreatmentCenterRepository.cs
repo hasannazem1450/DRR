@@ -11,6 +11,7 @@ using DRR.Domain.Specialists;
 using DRR.Utilities.Extensions;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
 using System.Diagnostics.Eventing.Reader;
+using DRR.Application.Contracts.Commands.Information;
 
 namespace DRR.CommandDb.Repository.TreatmentCentres
 {
@@ -141,7 +142,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 q = q.Where(w => w.Doctor.DoctorName.Contains(query.doctorFamily) || w.Doctor.DoctorFamily.Contains(query.doctorFamily));
 
             query.TotalRecords = q.Count();
-            if (query.TotalRecords == 0 )
+            if (query.TotalRecords == 0)
             {
                 if (query.DoctorTreatmentCenterName != null && query.DoctorTreatmentCenterName != "")
                 {
@@ -353,7 +354,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             await _Db.SaveChangesAsync();
         }
 
-        public async Task<List<DoctorTreatmentCenter>> MainSearch(List<string> searchTerms)
+        public async Task<List<TreatmentCenterSearchDto>> MainSearch(List<string> searchTerms)
         {
             var query = _Db.DoctorTreatmentCenters
                 .Include(x => x.Clinic).ThenInclude(c => c.City).ThenInclude(p => p.Province)
@@ -366,9 +367,52 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                     w.Clinic.Name.Contains(searchTerm) || w.Office.City.Name.Contains(searchTerm) || w.Office.City.Province.Name.Contains(searchTerm)
                 );
 
-            var result = await query.ToListAsync();
 
-            return result;
+            if (query.Count() == 0)
+            {
+                string fullterm = "";
+                foreach (var searchTerm in searchTerms.Where(w => w.IsNotNullOrEmpty()))
+                {
+                    fullterm = searchTerm + " ";
+                }
+
+                Fastenshtein.Levenshtein levdt = new Fastenshtein.Levenshtein(fullterm);
+
+                int levenshteinDistancedt = 20;
+                int disdto = 0;
+                int disdtc = 0;
+                List<DoctorTreatmentCenter> ldt = await _Db.DoctorTreatmentCenters
+                         .Include(o => o.Office)
+                         .Include(c => c.Clinic)
+                        .ToListAsync();
+                foreach (var item in ldt)
+                {
+                    if (item.Office != null)
+                    {
+                        disdto = levdt.DistanceFrom(item.Office.Name);
+                        if (levenshteinDistancedt > levdt.DistanceFrom(item.Office.Name))
+                        {
+                            levenshteinDistancedt = levdt.DistanceFrom(item.Office.Name);
+                            fullterm = item.Office.Name;
+                        }
+                    }
+                    if (item.Clinic != null)
+                    {
+                        disdtc = levdt.DistanceFrom(item.Clinic.Name);
+                        if (levenshteinDistancedt > levdt.DistanceFrom(item.Clinic.Name))
+                        {
+                            levenshteinDistancedt = levdt.DistanceFrom(item.Clinic.Name);
+                            fullterm = item.Clinic.Name;
+                        }
+                    }
+                }
+                query = query.Where(x => x.Clinic.Name.Contains(fullterm) || x.Office.Name.Contains(fullterm));
+
+            }
+            var result1 = await query.Select(x => new TreatmentCenterSearchDto { Result= x.Clinic.Name,Link = x.Clinic.Name  }).Distinct().ToListAsync();
+            //var result = await query.ToListAsync();
+
+            return result1;
         }
     }
 

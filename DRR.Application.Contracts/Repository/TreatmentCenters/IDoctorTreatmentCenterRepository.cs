@@ -1,4 +1,5 @@
-﻿using DRR.Application.Contracts.Commands.TreatmentCenters;
+﻿using DRR.Application.Contracts.Commands.Information;
+using DRR.Application.Contracts.Commands.TreatmentCenters;
 using DRR.Application.Contracts.Queries.Customer;
 using DRR.Application.Contracts.Queries.TreatmentCenter;
 using DRR.Domain.Customer;
@@ -32,7 +33,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task Update(Domain.TreatmentCenters.DoctorTreatmentCenter doctorTreatmentCenter);
 
         Task Create(Domain.TreatmentCenters.DoctorTreatmentCenter doctorTreatmentCenter);
-        Task<List<DoctorTreatmentCenter>> MainSearch(List<string> searchTerms);
+        Task<List<TreatmentCenterSearchDto>> MainSearch(List<string> searchTerms);
     }
 
 }
