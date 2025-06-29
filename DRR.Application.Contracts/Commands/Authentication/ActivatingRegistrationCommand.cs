@@ -1,4 +1,5 @@
 ﻿using DRR.Domain.Customer;
+using DRR.Domain.Profile;
 using DRR.Framework.Contracts.Abstracts;
 using System.Collections.Generic;
 
@@ -17,5 +18,6 @@ public class ActivatingRegistrationCommandResponse : CommandResponse
     public string ExpiredAt { get; set; }
     public string UserFullname { get; set; }
     public int SmeprofileId { get; set; }
+    public SmeProfile Smeprofile { get; set; }
     public List<Patient> Patients { get; set; }
 }

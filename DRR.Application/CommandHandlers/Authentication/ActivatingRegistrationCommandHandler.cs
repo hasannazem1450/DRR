@@ -54,6 +54,7 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
             throw new ActivatingCodeIsInvalidException();
 
         var userUpdate = _userManager.Users.OrderByDescending(x => x.Id).FirstOrDefault(x => x.PhoneNumber == command.Mobile.ConvertToValidMobile());
+        DRR.Domain.Profile.SmeProfile smeprofile = null;
         if (userUpdate != null)
         {
             userUpdate.PhoneNumberConfirmed = true;
@@ -86,16 +87,20 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
 
             int smeProfileid = 0;
 
-
+            
             var smer = _userProfileRepository.ReadByUserId(new Guid(userUpdate.Id));
             if (smer.Result.Count() > 0)
+            { 
                 smeProfileid = smer.Result.FirstOrDefault().SmeProfileId;
+                smeprofile = await _smeProfileRepository.ReadById(smeProfileid);
+            }
             else
             {
-                var smep = new DRR.Domain.Profile.SmeProfile(userUpdate.Fullname,userUpdate.UserName,userUpdate.UserName, userUpdate.Id,
-                    "","","","","","","","","","","",1,2,true,"","","", SmeType.Business);
+                var smep = new DRR.Domain.Profile.SmeProfile(userUpdate.Fullname, userUpdate.UserName, userUpdate.UserName, userUpdate.Id,
+                    "", "", "", "", "", "", "", "", "", "", "", 1, 2, true, "", "", "", SmeType.Business);
                 await _smeProfileRepository.Create(smep);
                 smeProfileid = smep.Id;
+                smeprofile = smep;
             }
 
 
@@ -106,6 +111,7 @@ public class ActivatingRegistrationCommandHandler : CommandHandler<ActivatingReg
                 RefreshToken = $"Bearer {tokenString}",
                 UserFullname = userUpdate.Fullname ?? "",
                 SmeprofileId = smeProfileid,
+                Smeprofile = smeprofile,
                 Patients = await _patientRepository.ReadPatientBySmeProfileId(smeProfileid),
             };
         }
