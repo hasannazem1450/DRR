@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Domain.Customer;
+using DRR.Domain.Profile;
 using DRR.Framework.Contracts.Abstracts;
 
 namespace DRR.Application.Contracts.Commands.Authentication
@@ -24,5 +26,7 @@ namespace DRR.Application.Contracts.Commands.Authentication
         public string ExpiredAt { get; set; }
         public string UserFullname { get; set; }
         public int SmeprofileId { get; set; }
+        public SmeProfile Smeprofile { get; set; }
+        public List<Patient> Patients { get; set; }
     }
 }

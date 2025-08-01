@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DRR.Application.CommandHandlers.Authentication.Exceptions;
 using DRR.Application.CommandHandlers.Exceptions;
 using DRR.Application.Contracts.Commands.Authentication;
+using DRR.Application.Contracts.Repository.Customer;
 using DRR.Application.Contracts.Repository.Profile;
 using DRR.CommandDb.Repository.Profile;
 using DRR.Domain.Identity.Exceptions;
@@ -28,13 +29,18 @@ namespace DRR.Application.CommandHandlers.Authentication
         private readonly UserManager<DRR.Domain.Identity.ApplicationUser> _userManager;
         private readonly JwtSetting JwtSetting;
         private readonly IUserProfileRepository _userRepository;
+        private readonly IPatientRepository _patientRepository;
+        private readonly ISmeProfileRepository _smeProfileRepository;
 
-        public SignInCommandHandler(SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, UserManager<DRR.Domain.Identity.ApplicationUser> userManager, IOptions<JwtSetting> options, IUserProfileRepository userRepository)
+        public SignInCommandHandler(SignInManager<DRR.Domain.Identity.ApplicationUser> signInManager, UserManager<DRR.Domain.Identity.ApplicationUser> userManager, IOptions<JwtSetting> options, IUserProfileRepository userRepository
+            , IPatientRepository patientRepository, ISmeProfileRepository smeProfileRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             JwtSetting = options.Value;
             _userRepository = userRepository;
+            _patientRepository = patientRepository;
+            _smeProfileRepository = smeProfileRepository;
         }
 
 
@@ -90,7 +96,10 @@ namespace DRR.Application.CommandHandlers.Authentication
                     smeProfileid = smer.Result.FirstOrDefault().SmeProfileId;
                 command.Metadata.SmeProfileId = smeProfileid;
                 command.UserName = userExist.Id;
+                DRR.Domain.Profile.SmeProfile smeprofile = null;
+                smeprofile = await _smeProfileRepository.ReadById(smeProfileid);
 
+             
                 return new SignInCommandResponse()
                 {
                     Token = $"Bearer {tokenString}",
@@ -98,6 +107,8 @@ namespace DRR.Application.CommandHandlers.Authentication
                     RefreshToken = $"Bearer {tokenString}",
                     UserFullname = userExist.Fullname ?? "",
                     SmeprofileId = smeProfileid,
+                    Smeprofile = smeprofile,
+                    Patients = await _patientRepository.ReadPatientBySmeProfileId(smeProfileid),
                 };
             }
             //TODO:FindByPhoneNumber
