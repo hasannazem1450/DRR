@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DRR.Application.Contracts.Commands.TreatmentCenters;
 using DRR.Framework.Contracts.Markers;
 using DRR.Utilities.Extensions;
+using DRR.Domain.Customer;
 
 
 namespace DRR.CommandDb.Repository.TreatmentCenters
@@ -101,6 +102,23 @@ namespace DRR.CommandDb.Repository.TreatmentCenters
             _Db.Clinics.Remove(result);
 
             await _Db.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckNameForReapeat(string name)
+        {
+            var result1 = await _Db.Clinics.Where(x => x.Name == name).ToListAsync();
+            if (result1.Count() > 0)
+            {
+                return false;
+                
+            }
+            var result2 = _Db.Offices.Where(x => x.Name == name).ToList();
+            if (result2.Count() > 0)
+            {
+                return false;
+              
+            }
+            return true;
         }
 
     }

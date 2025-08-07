@@ -92,6 +92,22 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             await _Db.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckNameForReapeat(string name)
+        {
+            var result1 = await _Db.Clinics.Where(x => x.Name == name).ToListAsync();
+            if (result1.Count() > 0)
+            {
+                return false;
+
+            }
+            var result2 = _Db.Offices.Where(x => x.Name == name).ToList();
+            if (result2.Count() > 0)
+            {
+                return false;
+
+            }
+            return true;
+        }
     }
 
 }

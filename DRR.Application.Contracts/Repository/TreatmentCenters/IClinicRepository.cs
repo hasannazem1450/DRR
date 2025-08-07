@@ -24,6 +24,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task Update(Domain.TreatmentCenters.Clinic clinic);
 
         Task Create(Domain.TreatmentCenters.Clinic clinic);
+        Task<bool> CheckNameForReapeat(string name);
     }
 
 }

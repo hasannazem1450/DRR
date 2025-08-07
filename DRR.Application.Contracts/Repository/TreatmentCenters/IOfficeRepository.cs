@@ -23,6 +23,7 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
         Task Update(Domain.TreatmentCenters.Office office);
 
         Task Create(Domain.TreatmentCenters.Office office);
+        Task<bool> CheckNameForReapeat(string name);
     }
 
 }
