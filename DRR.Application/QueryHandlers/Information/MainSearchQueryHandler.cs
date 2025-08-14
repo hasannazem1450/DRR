@@ -13,7 +13,6 @@ using DRR.Application.Contracts.Repository.Information;
 using DRR.Application.Contracts.Repository.Insurance;
 using DRR.Application.Contracts.Repository.Specialists;
 using DRR.Application.Contracts.Repository.TreatmentCenters;
-using DRR.CommandDb.Migrations;
 using DRR.Framework.Contracts.Markers;
 using DRR.Utilities.Extensions;
 using static System.Net.Mime.MediaTypeNames;

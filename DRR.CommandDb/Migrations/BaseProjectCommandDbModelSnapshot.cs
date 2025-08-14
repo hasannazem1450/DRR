@@ -315,6 +315,12 @@ namespace DRR.CommandDb.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSuggest")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LikeNumber")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
@@ -451,6 +457,9 @@ namespace DRR.CommandDb.Migrations
 
                     b.Property<int>("SpecialistId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UniqueSSR")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

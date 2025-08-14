@@ -18,11 +18,27 @@ namespace DRR.Host.Controllers.TreatmentCenter
 
         }
         [AllowAnonymous]
-        [SwaggerOperation(Summary = " چستچو مرکزدرمانی/مطب  ")]
+        [SwaggerOperation(Summary = " جستجو مرکزدرمانی/مطب  ")]
         [HttpGet("search-DoctorTreatmentCenters")]
         public async Task<IActionResult> SearchDoctorTreatmentCenters([FromQuery] SearchDoctorTreatmentCentersQuery query, CancellationToken cancellationToken)
         {
             var result = await Distributor.Send<SearchDoctorTreatmentCentersQuery, SearchDoctorTreatmentCentersQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " 20 مرکزدرمانی صفحه اول  ")]
+        [HttpGet("Read-DoctorTreatmentCenters4FirstPage")]
+        public async Task<IActionResult> ReadDoctorTreatmentCenters4FirstPage([FromQuery] ReadDoctorTreatmentCenters4FirstPageQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorTreatmentCenters4FirstPageQuery, ReadDoctorTreatmentCenters4FirstPageQueryResponse>(query, cancellationToken);
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = " 20 مطب شاخص صفحه اول  ")]
+        [HttpGet("Read-DoctorOffice4FirstPage")]
+        public async Task<IActionResult> ReadDoctorOffice4FirstPage([FromQuery] ReadDoctorOffice4FirstPageQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadDoctorOffice4FirstPageQuery, ReadDoctorOffice4FirstPageQueryResponse>(query, cancellationToken);
             return OkApiResult(result);
         }
         [AllowAnonymous]

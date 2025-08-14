@@ -49,7 +49,8 @@ namespace DRR.CommandDb.Repository.Comments
             result.DoctorId = Comment.DoctorId;
             result.CommentDate = Comment.CommentDate;
             result.IsAccept = Comment.IsAccept;
-
+            result.IsSuggest = Comment.IsSuggest;
+            result.LikeNumber = Comment.LikeNumber;
 
             _Db.Comments.Update(result);
 

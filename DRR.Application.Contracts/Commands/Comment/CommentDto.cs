@@ -17,6 +17,8 @@ namespace DRR.Application.Contracts.Commands.Comment
         public string CommentDate { get; set; }
         public bool IsAccept { get; set; }
         public int SmeProfileId { get; set; }
+        public bool IsSuggest { get; set; }
+        public int LikeNumber { get; set; }
         public virtual SmeProfile SmeProfile { get; set; }
 
     }

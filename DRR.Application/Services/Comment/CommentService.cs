@@ -32,6 +32,8 @@ namespace DRR.Application.Services.Comment
                 IsAccept = Comment.IsAccept,
                 SmeProfileId = Comment.SmeProfileId,
                 SmeProfile= Comment.SmeProfile,
+                IsSuggest = Comment.IsSuggest,
+                LikeNumber = Comment.LikeNumber
             };
         }
 
@@ -53,6 +55,8 @@ namespace DRR.Application.Services.Comment
                     CommentDate = item.CommentDate,
                     IsAccept = item.IsAccept,
                     SmeProfile = item.SmeProfile,
+                    IsSuggest = item.IsSuggest,
+                    LikeNumber = item.LikeNumber
                 };
 
                 result.Add(dto);
@@ -80,6 +84,8 @@ namespace DRR.Application.Services.Comment
                     
                     IsAccept = item.IsAccept,
                     SmeProfile = item.SmeProfile,
+                    IsSuggest = item.IsSuggest,
+                    LikeNumber = item.LikeNumber
                 };
 
                 result.Add(dto);

@@ -17,6 +17,8 @@ namespace DRR.Application.Contracts.Repository.TreatmentCenters
     public interface IDoctorTreatmentCenterRepository : IRepository
     {
         Task<List<DoctorTreatmentCenter>> Search(SearchDoctorTreatmentCentersQuery query);
+        Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenters4FirstPage(ReadDoctorTreatmentCenters4FirstPageQuery query);
+        Task<List<DoctorTreatmentCenter>> ReadDoctorOffice4FirstPage(ReadDoctorOffice4FirstPageQuery query);
         Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid);
         Task<List<DoctorTreatmentCenter>> ReadAllDoctorTreatmentCenters();
         Task<DoctorTreatmentCenter> ReadDoctorTreatmentCenterById(int id);

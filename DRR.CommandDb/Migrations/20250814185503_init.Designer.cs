@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DRR.CommandDb.Migrations
 {
     [DbContext(typeof(BaseProjectCommandDb))]
-    [Migration("20250208212950_reservationchange")]
-    partial class reservationchange
+    [Migration("20250814185503_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -318,6 +318,12 @@ namespace DRR.CommandDb.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSuggest")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LikeNumber")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
@@ -424,6 +430,9 @@ namespace DRR.CommandDb.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool?>("Gender")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -451,6 +460,9 @@ namespace DRR.CommandDb.Migrations
 
                     b.Property<int>("SpecialistId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UniqueSSR")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -984,6 +996,40 @@ namespace DRR.CommandDb.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("DRR.Domain.Information.SearchHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SearchCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SearchTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SearchHistorys");
                 });
 
             modelBuilder.Entity("DRR.Domain.Insurances.DoctorInsurance", b =>
@@ -1563,9 +1609,6 @@ namespace DRR.CommandDb.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TurnId")
                         .HasColumnType("int");
 
@@ -1612,8 +1655,8 @@ namespace DRR.CommandDb.Migrations
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ReservationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ReservationDate")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReservationTime")
                         .HasColumnType("nvarchar(max)");
@@ -1999,6 +2042,45 @@ namespace DRR.CommandDb.Migrations
                     b.ToTable("SmsInfos");
                 });
 
+            modelBuilder.Entity("DRR.Domain.Specialists.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CategoryLogoFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SpecialistCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialistCategoryId");
+
+                    b.ToTable("Categorys");
+                });
+
             modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
                 {
                     b.Property<int>("Id")
@@ -2024,6 +2106,9 @@ namespace DRR.CommandDb.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("MaxaName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
@@ -2035,6 +2120,9 @@ namespace DRR.CommandDb.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("SpecialistCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Maxa")
@@ -2043,7 +2131,43 @@ namespace DRR.CommandDb.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
+                    b.HasIndex("SpecialistCategoryId");
+
                     b.ToTable("Specialists");
+                });
+
+            modelBuilder.Entity("DRR.Domain.Specialists.SpecialistCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SpecialistId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SpecialistCategorys");
                 });
 
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemDataMessage", b =>
@@ -3025,6 +3149,20 @@ namespace DRR.CommandDb.Migrations
                     b.Navigation("SmeProfile");
                 });
 
+            modelBuilder.Entity("DRR.Domain.Specialists.Category", b =>
+                {
+                    b.HasOne("DRR.Domain.Specialists.SpecialistCategory", null)
+                        .WithMany("Categorys")
+                        .HasForeignKey("SpecialistCategoryId");
+                });
+
+            modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
+                {
+                    b.HasOne("DRR.Domain.Specialists.SpecialistCategory", null)
+                        .WithMany("Specialists")
+                        .HasForeignKey("SpecialistCategoryId");
+                });
+
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemDataMessage", b =>
                 {
                     b.HasOne("DRR.Domain.SystemMessages.SystemMessage", null)
@@ -3298,6 +3436,13 @@ namespace DRR.CommandDb.Migrations
             modelBuilder.Entity("DRR.Domain.Specialists.Specialist", b =>
                 {
                     b.Navigation("Doctors");
+                });
+
+            modelBuilder.Entity("DRR.Domain.Specialists.SpecialistCategory", b =>
+                {
+                    b.Navigation("Categorys");
+
+                    b.Navigation("Specialists");
                 });
 
             modelBuilder.Entity("DRR.Domain.SystemMessages.SystemMessage", b =>

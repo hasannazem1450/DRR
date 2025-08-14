@@ -185,6 +185,36 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
             return result;
         }
 
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenters4FirstPage(ReadDoctorTreatmentCenters4FirstPageQuery query)
+        {
+            var q = _Db.DoctorTreatmentCenters
+               .Include(d => d.Doctor).ThenInclude(sp => sp.Specialist)
+               .Include(d => d.Doctor).ThenInclude(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(c => c.Clinic).ThenInclude(cc => cc.City)
+               .Include(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(r => r.Reservations).ThenInclude(v => v.Turns)
+               .AsQueryable();
+
+            var result = await q.Take(20).ToListAsync();
+
+            return result;
+        }
+
+        public async Task<List<DoctorTreatmentCenter>> ReadDoctorOffice4FirstPage(ReadDoctorOffice4FirstPageQuery query)
+        {
+            var q = _Db.DoctorTreatmentCenters
+               .Include(d => d.Doctor).ThenInclude(sp => sp.Specialist)
+               .Include(d => d.Doctor).ThenInclude(di => di.DoctorInsurances).ThenInclude(i => i.Insurance)
+               .Include(o => o.Office).ThenInclude(oc => oc.City)
+               .Include(r => r.Reservations).ThenInclude(v => v.VisitCost).ThenInclude(vt => vt.VisitType)
+               .Include(r => r.Reservations).ThenInclude(v => v.Turns)
+               .AsQueryable();
+
+            var result = await q.Take(20).ToListAsync();
+
+            return result;
+        }
+
         public async Task<List<DoctorTreatmentCenter>> ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(Guid guid)
         {
             var query = _Db.DoctorTreatmentCenters
@@ -409,7 +439,7 @@ namespace DRR.CommandDb.Repository.TreatmentCentres
                 query = query.Where(x => x.Clinic.Name.Contains(fullterm) || x.Office.Name.Contains(fullterm));
 
             }
-            var result1 = await query.Select(x => new TreatmentCenterSearchDto { Result= x.Clinic.Name,Link = x.Clinic.Name  }).Distinct().ToListAsync();
+            var result1 = await query.Select(x => new TreatmentCenterSearchDto { Result = x.Clinic.Name, Link = x.Clinic.Name }).Distinct().ToListAsync();
             //var result = await query.ToListAsync();
 
             return result1;

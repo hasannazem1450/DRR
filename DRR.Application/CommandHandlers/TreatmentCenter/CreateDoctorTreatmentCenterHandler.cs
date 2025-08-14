@@ -24,7 +24,7 @@ namespace DRR.Application.CommandHandlers.TreatmentCenter
 
         public override async Task<CreateDoctorTreatmentCenterCommandResponse> Executor(CreateDoctorTreatmentCenterCommand command)
         {
-            var ev = new DoctorTreatmentCenter(command.DoctorId, command.ClinicId, command.OfficeId, command.Desc,command.CityId);
+            var ev = new DoctorTreatmentCenter(command.DoctorId, command.ClinicId, command.OfficeId, command.Desc);
 
             await _dtcRepository.Create(ev);
 

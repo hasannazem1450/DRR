@@ -136,12 +136,63 @@ namespace DRR.Application.Services.TreatmentCenter
                 Desc = doctorTreatmentCenter.Desc,
                 Name = doctorTreatmentCenter.Clinic?.Name + doctorTreatmentCenter.Office?.Name,
                 Address = doctorTreatmentCenter.Clinic?.Address + doctorTreatmentCenter.Office?.Address,
-                DoctorsCount = dtcr.Result.Select(d=> d.DoctorId).Distinct().Count(),
+                DoctorsCount = dtcr.Result.Select(d => d.DoctorId).Distinct().Count(),
                 SpecialistCount = dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count()
 
             };
 
             return result;
+        }
+
+        public async Task<DoctorTreatmentCenterPackedDto4FirstPage> ConvertToDoctorTreatmentCenterPackedDto4FirstPage(DoctorTreatmentCenter doctorTreatmentCenter)
+        {
+            if (doctorTreatmentCenter.ClinicId != null)
+            {
+                var dtcr = _doctorTreatmentCenterRepository.ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(doctorTreatmentCenter.ClinicId ?? doctorTreatmentCenter.OfficeId ?? new Guid());
+                //dtcr.Result.Select(d => d.DoctorId).Distinct().Count();
+                //dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count(); 
+                var result = new DoctorTreatmentCenterPackedDto4FirstPage
+                {
+                    Id = doctorTreatmentCenter.Id,
+                    ClinicId = doctorTreatmentCenter.ClinicId,
+                    Desc = doctorTreatmentCenter.Desc,
+                    Name = doctorTreatmentCenter.Clinic?.Name + doctorTreatmentCenter.Office?.Name,
+                    Address = doctorTreatmentCenter.Clinic?.Address + doctorTreatmentCenter.Office?.Address,
+                    DoctorsCount = dtcr.Result.Select(d => d.DoctorId).Distinct().Count(),
+                    SpecialistCount = dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count()
+
+                };
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+                
+        }
+
+        public async Task<DoctorOfficePackedDto4FirstPage> ConvertToDoctorOfficePackedDto4FirstPage(DoctorTreatmentCenter doctorTreatmentCenter)
+        {
+            if (doctorTreatmentCenter.OfficeId != null)
+            {
+                var dtcr = _doctorTreatmentCenterRepository.ReadDoctorTreatmentCenterCountOfDoctorsAndSpecialistsByGuId(doctorTreatmentCenter.ClinicId ?? doctorTreatmentCenter.OfficeId ?? new Guid());
+
+                var result = new DoctorOfficePackedDto4FirstPage
+                {
+                    Id = doctorTreatmentCenter.Id,
+                    OfficeId = doctorTreatmentCenter.Office.Id,
+                    Desc = doctorTreatmentCenter.Desc,
+                    Name = doctorTreatmentCenter.Office.Name + doctorTreatmentCenter.Office?.Name,
+                    Address = doctorTreatmentCenter.Office.Address + doctorTreatmentCenter.Office?.Address,
+                    DoctorName = dtcr.Result.Select(d => d.Doctor.DoctorName).Distinct().FirstOrDefault(),
+                    SpecialistName = dtcr.Result.Select(d => d.Doctor.Specialist.Name).Distinct().FirstOrDefault()
+
+                };
+
+                return result;
+            }
+            else
+                return null;
         }
 
         public async Task<List<DoctorTreatmentCenterPackedDto>> ConvertToPackedDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
@@ -151,10 +202,24 @@ namespace DRR.Application.Services.TreatmentCenter
             return result;
         }
 
+        public async Task<List<DoctorTreatmentCenterPackedDto4FirstPage>> ConvertToDoctorTreatmentCenterPackedDto4FirstPage(List<DoctorTreatmentCenter> doctorTreatmentCenters)
+        {
+            var result = doctorTreatmentCenters.Select(s => ConvertToDoctorTreatmentCenterPackedDto4FirstPage(s).Result).ToList();
+
+            return result;
+        }
+
+        public async Task<List<DoctorOfficePackedDto4FirstPage>> ConvertToDoctorOfficePackedDto4FirstPage(List<DoctorTreatmentCenter> doctorTreatmentCenters)
+        {
+            var result = doctorTreatmentCenters.Select(s => ConvertToDoctorOfficePackedDto4FirstPage(s).Result).ToList();
+
+            return result;
+        }
+
         public async Task<DoctorTreatmentCenterSSRDto> ConvertToSSRDto(List<DoctorTreatmentCenter> doctorTreatmentCenters)
         {
             var doctorTreatmentCenter = doctorTreatmentCenters.First();
-           
+
             var result = new DoctorTreatmentCenterSSRDto
             {
                 Id = doctorTreatmentCenter.Id,

@@ -14,6 +14,8 @@ namespace DRR.Application.Contracts.Commands.Comment
         public int DoctorId { get; set; }
         public string CommentDate { get; set; }
         public bool IsAccept { get; set; }
+        public bool IsSuggest { get; set; }
+        public int LikeNumber { get; set; }
         public int SmeProfileId { get; set; }
     }
 

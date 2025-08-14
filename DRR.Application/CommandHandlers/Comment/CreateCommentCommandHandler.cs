@@ -20,7 +20,7 @@ namespace DRR.Application.CommandHandlers.Comment
 
         public override async Task<CreateCommentCommandResponse> Executor(CreateCommentCommand command)
         {
-            var comment = new Domain.Comments.Comment(command.Desc,command.SmeProfileId, command.DoctorId, command.CommentDate, command.IsAccept)
+            var comment = new Domain.Comments.Comment(command.Desc,command.SmeProfileId, command.DoctorId, command.CommentDate, command.IsAccept ,command.IsSuggest,command.LikeNumber)
             {
                 SmeProfileId = command.SmeProfileId
             };
