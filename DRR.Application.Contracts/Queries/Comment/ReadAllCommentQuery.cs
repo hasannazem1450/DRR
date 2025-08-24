@@ -10,14 +10,16 @@ namespace DRR.Application.Contracts.Queries.Comment
 {
     public class ReadAllCommentQuery : Query
     {
-
+        public int pagesize { get; set; } = 10;
+        public int pageNumber { get; set; } = 1;
+        public int TotalRecords { get; set; }
+        public string SearchInComment { get; set; }
     }
     public class ReadAllCommentQueryResponse : QueryResponse
     {
-        public ReadAllCommentQueryResponse()
-        {
-            List = new List<CommentDto>();
-        }
-        public List<CommentDto> List { get; set; }
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public int TotalRecords { get; set; }
+        public AllCommentDto AllCommentDto { get; set; }
     }
 }

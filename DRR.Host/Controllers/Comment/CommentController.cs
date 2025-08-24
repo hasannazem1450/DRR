@@ -15,6 +15,14 @@ namespace DRR.Host.Controllers.Comment
        public CommentController(IDistributor distributor) :base(distributor) 
         {
         }
+        [SwaggerOperation(Summary = "خواندن تمام کامنتها مدیر سیستم با جستجو")]
+        [HttpGet("read-all-Comment")]
+        public async Task<IActionResult> ReadAllComment([FromQuery] ReadAllCommentQuery query, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadAllCommentQuery, ReadAllCommentQueryResponse>(query, cancellationToken);
+
+            return OkApiResult(result);
+        }
         [SwaggerOperation(Summary = "خواندن تمام کامنتهای یک کاربر")]
         [HttpGet("read-smeprofile-Comment")]
         public async Task<IActionResult> ReadSmeProfileComment([FromQuery] ReadSmeProfileCommentQuery query, CancellationToken cancellationToken)
@@ -28,7 +36,7 @@ namespace DRR.Host.Controllers.Comment
         [HttpGet("read-doctor-Comment")]
         public async Task<IActionResult> ReadDoctorComment([FromQuery] ReadDoctorCommentQuery query, CancellationToken cancellationToken)
         {
-            var result = await Distributor.Send<ReadDoctorCommentQuery, ReadSmeProfileCommentQueryResponse>(query, cancellationToken);
+            var result = await Distributor.Send<ReadDoctorCommentQuery, ReadDoctorCommentQueryResponse>(query, cancellationToken);
 
             return OkApiResult(result);
         }

@@ -1,4 +1,5 @@
-﻿using DRR.Domain.Comments;
+﻿using DRR.Application.Contracts.Queries.Comment;
+using DRR.Domain.Comments;
 using DRR.Framework.Contracts.Markers;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace DRR.Application.Contracts.Repository.Comments
         Task Update(Domain.Comments.ArticleComment articleComment);
 
         Task Create(Domain.Comments.ArticleComment articleComment);
+        Task<List<ArticleComment>> Search(ReadAllCommentQuery query);
     }
 
 }

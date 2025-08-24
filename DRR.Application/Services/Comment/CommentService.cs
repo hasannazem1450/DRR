@@ -1,6 +1,8 @@
 ﻿using DRR.Application.Contracts.Commands.Comment;
+using DRR.Application.Contracts.Commands.Event;
 using DRR.Application.Contracts.Repository.Comments;
 using DRR.Application.Contracts.Services.Comment;
+using DRR.Domain.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +92,33 @@ namespace DRR.Application.Services.Comment
 
                 result.Add(dto);
             }
+
+            return result;
+        }
+
+        public async Task<List<CommentDto>> ConvertToDto(List<DRR.Domain.Comments.Comment> comments)
+        {
+            var result = comments.Select(s => ConvertToDto(s).Result).ToList();
+
+            return result;
+        }
+
+        public async Task<CommentDto> ConvertToDto(DRR.Domain.Comments.Comment comment)
+        {
+            var result = new CommentDto
+            {
+                Id = comment.Id,
+                Desc = comment.Desc,
+                SmeProfileId = comment.SmeProfileId,
+                DoctorId = comment.DoctorId,
+                Doctor = comment.Doctor,
+                CommentDate = comment.CommentDate,
+
+                IsAccept = comment.IsAccept,
+                SmeProfile = comment.SmeProfile,
+                IsSuggest = comment.IsSuggest,
+                LikeNumber = comment.LikeNumber
+            };
 
             return result;
         }

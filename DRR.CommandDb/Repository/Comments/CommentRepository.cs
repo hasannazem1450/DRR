@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DRR.Domain.Specialists;
+using DRR.Utilities.Extensions;
+using DRR.Application.Contracts.Queries.Comment;
 
 namespace DRR.CommandDb.Repository.Comments
 {
@@ -63,6 +66,33 @@ namespace DRR.CommandDb.Repository.Comments
             _Db.Comments.Remove(result);
 
             await _Db.SaveChangesAsync();
+        }
+        public async Task<List<Comment>> Search(ReadAllCommentQuery query)
+        {
+            var q = _Db.Comments
+               .Where(w => !w.IsDeleted);
+            if (query.SearchInComment != null && query.SearchInComment.Length > 2)
+            {
+                var searchCommentTerms = query.SearchInComment.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
+
+
+
+
+                foreach (var searchTerm in searchCommentTerms.Where(w => w.IsNotNullOrEmpty()))
+                    q = q.Where(w =>
+                        w.Desc.Contains(searchTerm) ||
+                        w.Doctor.DoctorName.Contains(searchTerm) ||
+                        w.Doctor.DoctorFamily.Contains(searchTerm)
+                    );
+            }
+            
+
+            query.TotalRecords = q.Count();
+
+            var result = await q.Skip((query.pageNumber - 1) * query.pagesize).Take(query.pagesize).ToListAsync();
+
+            return result;
+            
         }
 
     }

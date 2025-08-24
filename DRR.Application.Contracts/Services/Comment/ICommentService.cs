@@ -14,5 +14,7 @@ namespace DRR.Application.Contracts.Services.Comment
         Task<CommentDto> ReadById(int id); 
         Task<List<CommentDto>> ReadCommentBySmeProfileId(int SmeProfileId); 
         Task<List<CommentDto>> ReadCommentByDoctorId(int DoctorId);
+        Task<List<CommentDto>> ConvertToDto(List<DRR.Domain.Comments.Comment> comments);
+        Task<CommentDto> ConvertToDto(DRR.Domain.Comments.Comment comment);
     }
 }

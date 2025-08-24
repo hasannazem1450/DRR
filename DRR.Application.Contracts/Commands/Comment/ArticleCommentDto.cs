@@ -18,7 +18,7 @@ namespace DRR.Application.Contracts.Commands.Comment
 
 
         public int SmeProfileId { get; set; }
-        public SmeProfile SmeProfile { get; protected set; }
+        public SmeProfile SmeProfile { get; set; }
         public Article Article { get; set; }
     }
 }
