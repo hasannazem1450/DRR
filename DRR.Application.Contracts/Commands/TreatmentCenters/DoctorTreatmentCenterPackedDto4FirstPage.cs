@@ -1,4 +1,5 @@
 ﻿using DRR.Domain.Customer;
+using DRR.Domain.Specialists;
 using DRR.Domain.TreatmentCenters;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace DRR.Application.Contracts.Commands.TreatmentCenters
         public string Address { get; set; }
         public int DoctorsCount { get; set; }
         public int SpecialistCount { get; set; }
+        public List<Specialist> Specialists { get; set; }
     }
 }

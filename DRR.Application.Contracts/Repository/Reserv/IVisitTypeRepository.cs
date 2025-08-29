@@ -10,7 +10,7 @@ namespace DRR.Application.Contracts.Repository.Reserv
 {
     public interface IVisitTypeRepository : IRepository
     {
-
+        Task<List<VisitType>> ReadVisitTypes();
         Task<VisitType> ReadVisitTypeById(int id);
 
 

@@ -16,6 +16,15 @@ namespace DRR.CommandDb.Repository.VisitCosts
         {
         }
 
+
+        public async Task<List<VisitCost>> ReadVisitCosts()
+        {
+            var result = await _Db.VisitCosts
+                .Include(ot => ot.VisitType)
+                .ToListAsync();
+
+            return result;
+        }
         public async Task<VisitCost> ReadVisitCostById(int id)
         {
             var result = await _Db.VisitCosts

@@ -10,6 +10,7 @@ using DRR.Application.Contracts.Commands.Reserv;
 using DRR.Application.Contracts.Commands;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using DRR.Application.Contracts.Queries.Reserv;
 
 namespace DRR.Host.Controllers.Reservation
 {
@@ -79,8 +80,17 @@ namespace DRR.Host.Controllers.Reservation
 
             return OkApiResult(result);
         }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن همه قیمت های ویزیت برای رزرو یک دکتر ")]
+        [HttpGet("read-all-visitcosts")]
+        public async Task<IActionResult> ReadAllVisitCosts([FromQuery] ReadVisitCostQuery command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadVisitCostQuery, ReadVisitCostQueryResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
         [SwaggerOperation(Summary = "تعریف قیمت ویزیت برای رزرو یک دکتر ")]
-        [HttpDelete("create-visitcost")]
+        [HttpPost("create-visitcost")]
         public async Task<IActionResult> CreateVisitCost(CreateVisitCostCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<CreateVisitCostCommand, CreateVisitCostCommandResponse>(command, cancellationToken);
@@ -88,10 +98,35 @@ namespace DRR.Host.Controllers.Reservation
             return OkApiResult(result);
         }
         [SwaggerOperation(Summary = "ویرایش قیمت ویزیت برای رزرو یک دکتر ")]
-        [HttpDelete("Update-visitcost")]
+        [HttpPost("Update-visitcost")]
         public async Task<IActionResult> UpdateVisitCost(UpdateVisitCostCommand command, CancellationToken cancellationToken)
         {
             var result = await Distributor.Push<UpdateVisitCostCommand, UpdateVisitCostCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "خواندن همه انواع ویزیت برای رزرو یک دکتر ")]
+        [HttpGet("read-all-visittypes")]
+        public async Task<IActionResult> ReadAllVisitTypes([FromQuery] ReadVisitTypeQuery command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Send<ReadVisitTypeQuery, ReadVisitTypeQueryResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = "تعریف نوع ویزیت برای رزرو یک دکتر ")]
+        [HttpPost("create-visittype")]
+        public async Task<IActionResult> CreateVisitType(CreateVisitTypeCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<CreateVisitTypeCommand, CreateVisitTypeCommandResponse>(command, cancellationToken);
+
+            return OkApiResult(result);
+        }
+        [SwaggerOperation(Summary = "ویرایش نوع ویزیت برای رزرو یک دکتر ")]
+        [HttpPost("Update-visittype")]
+        public async Task<IActionResult> UpdateVisitType(UpdateVisitTypeCommand command, CancellationToken cancellationToken)
+        {
+            var result = await Distributor.Push<UpdateVisitTypeCommand, UpdateVisitTypeCommandResponse>(command, cancellationToken);
 
             return OkApiResult(result);
         }

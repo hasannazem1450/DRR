@@ -156,10 +156,12 @@ namespace DRR.Application.Services.TreatmentCenter
                     Id = doctorTreatmentCenter.Id,
                     ClinicId = doctorTreatmentCenter.ClinicId,
                     Desc = doctorTreatmentCenter.Desc,
-                    Name = doctorTreatmentCenter.Clinic?.Name + doctorTreatmentCenter.Office?.Name,
-                    Address = doctorTreatmentCenter.Clinic?.Address + doctorTreatmentCenter.Office?.Address,
+                    Name = doctorTreatmentCenter.Clinic.Name,
+                    CityName = doctorTreatmentCenter.Clinic.City.Name,
+                    Address = doctorTreatmentCenter.Clinic?.Address,
                     DoctorsCount = dtcr.Result.Select(d => d.DoctorId).Distinct().Count(),
-                    SpecialistCount = dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count()
+                    SpecialistCount = dtcr.Result.Select(d => d.Doctor.SpecialistId).Distinct().Count(),
+                    Specialists = dtcr.Result.Select(x => x.Doctor.Specialist).Distinct().ToList()
 
                 };
                 return result;
@@ -182,8 +184,9 @@ namespace DRR.Application.Services.TreatmentCenter
                     Id = doctorTreatmentCenter.Id,
                     OfficeId = doctorTreatmentCenter.Office.Id,
                     Desc = doctorTreatmentCenter.Desc,
-                    Name = doctorTreatmentCenter.Office.Name + doctorTreatmentCenter.Office?.Name,
-                    Address = doctorTreatmentCenter.Office.Address + doctorTreatmentCenter.Office?.Address,
+                    Name = doctorTreatmentCenter.Office.Name,
+                    CityName = doctorTreatmentCenter.Office.City.Name,
+                    Address = doctorTreatmentCenter.Office.Address ,
                     DoctorName = dtcr.Result.Select(d => d.Doctor.DoctorName).Distinct().FirstOrDefault(),
                     SpecialistName = dtcr.Result.Select(d => d.Doctor.Specialist.Name).Distinct().FirstOrDefault()
 

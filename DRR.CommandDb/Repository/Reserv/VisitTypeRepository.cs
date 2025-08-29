@@ -16,6 +16,13 @@ namespace DRR.CommandDb.Repository.Reservations
         {
         }
 
+        public async Task<List<VisitType>> ReadVisitTypes()
+        {
+            var result = await _Db.VisitTypes
+                .ToListAsync();
+
+            return result;
+        }
         public async Task<VisitType> ReadVisitTypeById(int id)
         {
             var result = await _Db.VisitTypes.FirstOrDefaultAsync(c => c.Id == id);

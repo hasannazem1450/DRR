@@ -11,6 +11,8 @@ namespace DRR.Application.Contracts.Repository.Reserv
     public interface IVisitCostRepository : IRepository
     {
 
+        Task<List<VisitCost>> ReadVisitCosts();
+        
         Task<VisitCost> ReadVisitCostById(int id);
         Task<List<VisitCost>> ReadVisitCostByDoctorId(int id);
         
